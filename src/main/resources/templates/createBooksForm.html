@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Books</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Add Books </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-info" href="#" th:href="@{/books/all}"> Back to All Books </a>
+            <form action="#" class="form-horizontal"
+                  th:action="@{/books/save}"
+                  th:object="${form}"
+                  method="post">
+                <fieldset>
+					<span class="pull-right">
+						    <input type="submit" id="submitButton" class="btn btn-success" th:value="Save">
+<!--
+						    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
+-->
+					</span>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th> Title</th>
+                            <th> Author</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <div id="bookList">
+                            <div class="row">
+                                <div class="col form-group d-none">id</div>
+                                <div class="col form-group">title</div>
+                                <div class="col form-group">author</div>
+                            </div>
+                            <div class="row item" th:each="book, itemStat : *{books}">
+                                <div class="col form-group d-none">
+                                    <input th:placeholder="Title + ' ' + ${itemStat.count}"
+                                           th:field="*{books[__${itemStat.index}__].title}"/>
+                                </div>
+                                <div class="col form-group">
+                                    <input th:placeholder="Author + ' ' + ${itemStat.count}"
+                                           th:field="*{books[__${itemStat.index}__].author}"
+                                    />
+                                    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--  <tr th:each="book, itemStat : *{books}">
+                              <td><input th:placeholder="Title + ' ' + ${itemStat.count}"
+                                         th:field="*{books[__${itemStat.index}__].title}" required/></td>
+                              <td><input th:placeholder="Author + ' ' + ${itemStat.count}"
+                                      th:field="*{books[__${itemStat.index}__].author}" required/></td>
+                          </tr>   -->
+                        </tbody>
+                    </table>
+                </fieldset>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-success" onclick="addRow()">Add row</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+
+    let addRow = function () {
+        let listName = 'books'; //list name in Catalog.class
+        let fieldsNames = ['id', 'title', 'author']; //field names from Movie.class
+        let rowIndex = document.querySelectorAll('.item').length; //we can add mock class to each movie-row
+
+        let row = document.createElement('div');
+        row.classList.add('row', 'item');
+
+        fieldsNames.forEach((fieldName) => {
+            let col = document.createElement('div');
+            col.classList.add('col', 'form-group');
+            if (fieldName === 'id') {
+                col.classList.add('d-none'); //field with id - hidden
+            }
+
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add('form-control');
+            input.id = listName + rowIndex + '.' + fieldName;
+            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+
+            col.appendChild(input);
+            row.appendChild(col);
+        });
+
+        document.getElementById('bookList').appendChild(row);
+    };
+
+</script>

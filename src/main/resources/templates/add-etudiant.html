@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head th:insert="fragment/header :: headerfiles">
+
+<body>
+<div th:replace="fragment/menu ::menugauche">
+
+
+</div>
+<div id="content">
+
+    <div th:replace="fragment/header ::navbar"></div>
+
+    <div class="container">
+        <div class="card border-primary mb-3" style="max-width: 50rem; ">
+
+            <h5 class="card-header info-color white-text text-center py-2">
+                <strong> CRÉER UN Etudiant
+                </strong>
+            </h5>
+
+            <!--th:object="${etudiant}" je veux chercher dans le model un objet apl etudiant -->
+            <div class="card-body px-lg-5">
+                <!--   enctype= il y a un file photo -->
+                <form action="#"
+                      th:action="@{/saveEtudiant}"
+
+                      method="post" th:object="${etudiant}" enctype="multipart/form-data">
+
+                    <div class="md-form">
+                        <label>Nom</label>
+                        <!--  th:field="*{nom} concerne l'objet etudiant
+                        ou th:field="${etudiant.nom} th:filed == mapping -->
+                        <input type="text" th:field="*{nom}" class="form-control"
+                        />
+                        <span th:errors="*{nom}" class="alert-danger">  </span>
+                    </div>
+                    <div class="md-form">
+                        <label>Date</label>
+                        <input type="date" th:field="*{dateNaissance}" class="form-control"
+                        />
+                        <span th:errors="*{dateNaissance}" class="alert-danger"> </span>
+
+                    </div>
+
+                    <div class="md-form">
+                        <label>Email</label>
+                        <input type="text" th:field="*{email}" class="form-control"
+                        />
+                        <span th:errors="*{email}" class="alert-danger"> </span>
+
+                    </div>
+
+                    <div class="md-form">
+                        <label>Photo</label>
+                        <input type="file" name="picture"  class="form-control"
+                        />
+                    </div>
+
+
+                    <button class="btn btn-secondary btn-block z-depth-0 my-4 " type="submit">Ajouter
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+</div>
+
+
+<header th:insert="fragment/header.html ::scriptFooter"></header>
+</body>
+</html>

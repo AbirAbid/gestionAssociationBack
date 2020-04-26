@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:insert="fragment/header :: headerfiles">
+
+
+<body>
+
+<div th:replace="fragment/menu ::menugauche">
+
+
+</div>
+<div id="content">
+
+    <div th:replace="fragment/header ::navbar"></div>
+    <div class="container">
+        <h2>User Registration and Login Module using Spring Boot, Spring
+            MVC, Spring Security, JPA/Hibernate and Thymeleaf</h2>
+
+         Welcome <span sec:authentication="principal.username">User</span>
+        This text is displayed for authenticated users.
+
+
+    </div>
+
+    <header th:insert="fragment/header.html ::scriptFooter"></header>
+
+
+</div>
+
+</div>
+
+</div>
+</body>
+</html>

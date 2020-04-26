@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:insert="fragment/header :: headerfiles">
+
+<body>
+<div th:replace="fragment/menu ::menugauche">
+</div>
+
+<div id="content">
+    <div th:replace="fragment/header ::navbar"></div>
+    <table class="table table-bordered">
+
+        <form th:action="@{listeMembres}" method="get">
+            <div class="md-form active-purple-2 mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
+            Aucun résultat pour <p th:text="${mc}"></p>
+        </div>
+
+        <tr>
+            <th>Nom</th>
+            <th> Prénom</th>
+            <th> Adhérent</th>
+            <th> Tel</th>
+            <th> Email</th>
+            <th> Statut</th>
+            <th>Envoyer Email</th>
+            <th>Détail</th>
+        </tr>
+
+        <tbody>
+
+        <tr th:each="membre : ${pagesMembres.content}">
+
+            <td th:text="${membre.nom}"></td>
+            <td th:text="${membre.prenom}"></td>
+            <td> adhérent</td>
+            <td th:text="${membre.telephone}"></td>
+            <td th:text="${membre.email}"></td>
+
+
+            <td>Status</td>
+            <td>
+                <center><a class="btn btn-secondary"> <i class="fas fa-envelope-square"></i></a>
+                </center>
+            </td>
+            <td>
+                <center><a class="btn btn-secondary" th:href="@{membreDetailUrl(id=${membre.email})}">
+                    <i class="fas fa-portrait"></i></a>
+                </center>
+            </td>
+
+            <!--formulaireUpdate link -->
+
+
+        </tr>
+        </tbody>
+    </table>
+
+    <center>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
+                    <!-- $ acceder model -->
+                    <a class="page-link" th:text="${p}" th:href="@{listeMembres(page=${p})}"></a>
+                </li>
+
+            </ul>
+        </nav>
+    </center>
+</div>
+</div>
+</div>
+</div>
+</div>
+<header th:insert="fragment/header.html ::scriptFooter"></header>
+
+
+</body>
+</html>

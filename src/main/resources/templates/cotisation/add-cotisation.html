@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:insert="fragment/header :: headerfiles">
+
+<body>
+<div th:replace="fragment/menu ::menugauche">
+
+
+</div>
+<div id="content">
+
+    <div th:replace="fragment/header ::navbar"></div>
+
+    <div class="container">
+
+        <div class="card border-primary mb-3" style="max-width: 50rem; ">
+
+            <h5 class="card-header info-color white-text text-center py-2">
+                <strong> Ajouter Cotisation
+                </strong>
+            </h5>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5">
+
+                <form action="#"
+                      th:action="@{/cotisations/save}"
+                      th:object="${cotisationDto}"
+                      method="post">
+
+                    <div class="md-form">
+                        <label>Nom de la cotisation </label>
+                        <input type="text" th:field="*{cotisationName}" class="form-control"
+                               />
+                        <span th:errors="*{cotisationName}" class="alert-danger">NNENEENENE </span>
+
+
+                    </div>
+                    <div class="md-form">
+                        <label>Montant </label>
+                        <input type="number" th:field="*{montant}" class="form-control"
+                        /> <span th:errors="*{montant}" class="alert-danger" > </span>
+
+                    </div>
+                    <div class="md-form">
+                        <label>Date début   </label>
+                        <input type="date" th:field="*{dateDebut}" class="form-control"
+                        />
+
+                    </div>
+                    <div class="md-form">
+                        <label>Date fin   </label>
+                        <input type="date" th:field="*{dateFin}" class="form-control"
+                        />
+
+                    </div>
+
+                    <button class="btn btn-secondary btn-block z-depth-0 my-4 " type="submit">Ajouter Cotisation
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<header th:insert="fragment/header.html ::scriptFooter"></header>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
+<head th:insert="fragment/header :: headerfiles">
+
+</head>
+<body style="background: #6d7fcc ">
+
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container">
+
+    <div class="card border-primary mb-3" style="max-width: 50rem; ">
+
+        <h5 class="card-header info-color white-text text-center py-2">
+            <strong> Page d'authentification
+            </strong>
+        </h5>
+
+        <!--Card content-->
+        <div class="card-body px-lg-5">
+
+            <!-- Form -->
+            <form class="text-center" style="color:  #000000;" th:action="@{/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Vérifiez votre login et mot de passe</div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">You have been logged out.</div>
+                </div>
+
+                <p>
+                    <a href="" target="_blank">See the last newsletter</a>
+                </p>
+
+                <!-- Name -->
+                <div class="md-form">
+                    <label for="username">Nom d'utilisateur </label>
+                    <input type="text" id="username" name="username" class="form-control"
+                           autofocus="autofocus" placeholder="Nom d'utilisateur">
+
+
+                </div>
+
+                <!-- E-mai -->
+                <div class="md-form">
+                    <label for="password">Mot de passe</label>
+
+                    <input type="password" id="password" name="password" class="form-control"
+                           placeholder="Mot de passe ">
+                </div>
+
+                <!-- Sign in button -->
+                <button class="btn btn-secondary btn-block z-depth-0 my-4 " type="submit">Se
+                    connecter
+                </button>
+
+            </form>
+            <!-- Form -->
+
+        </div>
+
+    </div>
+    <!-- Material form subscription -->
+
+</div>
+
+<header th:insert="fragment/header.html ::scriptFooter"></header>
+
+</body>
+</html>
