@@ -27,6 +27,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/evenement/")
 public class EvenementController {
+
     @Autowired
     EvenementService evenementService;
     @Autowired
@@ -160,25 +161,33 @@ public class EvenementController {
             Evenement e = evenementService.getOneEventByIdservice(id);
             EvenementDto evenementDto = new EvenementDto();
             evenementDto.affectToEventDto(e);
-            //  List<Bien> biensWithId = new ArrayList<Bien>();
+
             List<Bien> biens = bienService.findAllByEventService(id);
+            List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
             System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
             if (biens.size() != 0) {
                 for (int i = 0; i <= biens.size() - 1; i++) {
-
                     evenementDto.addBien(biens.get(i));
-                    evenementDto.addMissionBenevole(new MissionBenevole());
-
-                    System.out.println("******i******" + i);
-
                 }
-
             } else {
-                for (int i = 0; i <= 3; i++) {
-                    evenementDto.addBien(new Bien());
-                    evenementDto.addMissionBenevole(new MissionBenevole());
-                }
+
+                evenementDto.addBien(new Bien());
+
             }
+            if (missionBenevoles.size() != 0) {
+                for (int i = 0; i <= missionBenevoles.size() - 1; i++) {
+                    evenementDto.addMissionBenevole(missionBenevoles.get(i));
+                    System.out.println("missionBenevoles.get(i)*******" + missionBenevoles.get(i).getIdM());
+
+
+                }
+            } else {
+
+                evenementDto.addMissionBenevole(new MissionBenevole());
+
+            }
+
+
             model.addAttribute("evenementDto", evenementDto);
 
             return "evenement/updateEvent";
@@ -214,10 +223,11 @@ public class EvenementController {
 
                 System.out.println("bindingResult.hasErrors()******************" + bindingResult.hasErrors());
                 System.out.println("bindingResult   " + bindingResult);
-                return "evenement/add-event";
+                return "evenement/updateEvent";
             }
 
             Evenement event = new Evenement();
+            event.setId(evenementDto.getId());
             event.setTitre(evenementDto.getTitre());
             event.setDescription(evenementDto.getDescription());
             event.setAdresse(evenementDto.getAdresse());
@@ -225,19 +235,33 @@ public class EvenementController {
             event.setDateFin(evenementDto.getDateFin());
             event.setSponsors(evenementDto.getSponsors());
             event.setVille(evenementDto.getVille());
-
-
+            // System.out.println("***********************event*********************  " + event);
             Evenement e = evenementService.addEventService(event);
-            System.out.println("event " + e);
+
+            List<Bien> biens = bienService.findAllByEventService(e.getId());
 
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
-
+                if (i <= biens.size() - 1) {
+                    evenementDto.getBiens().get(i).setId(biens.get(i).getId());
+                }
                 evenementDto.getBiens().get(i).setEvenement(e);
 
+            }
+            List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(e.getId());
+            System.out.println("evenementDto.getMissionBenevoles().size() ************" + evenementDto.getMissionBenevoles().size());
+
+            for (int i = 0; i <= evenementDto.getMissionBenevoles().size() - 1; i++) {
+
+
+                if (i <= missionBenevoles.size() - 1) {
+                    evenementDto.getMissionBenevoles().get(i).setIdM(missionBenevoles.get(i).getIdM());
+                }
+
+                System.out.println("mission id ************" + evenementDto.getMissionBenevoles().get(i));
                 evenementDto.getMissionBenevoles().get(i).setEvenement(e);
 
-            }
 
+            }
             bienService.saveAllService(evenementDto.getBiens());
             missionBenevoleService.saveAllMissionService(evenementDto.getMissionBenevoles());
 

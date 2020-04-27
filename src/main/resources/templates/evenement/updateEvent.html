@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <form action="#"
-                          th:action="@{/evenement/save}"
+                          th:action="@{/evenement/update}"
                           th:object="${evenementDto}"
                           method="post">
                         <div class="setup-content" id="step-1">
@@ -168,55 +168,200 @@
                         </div>
                         <div class=" setup-content" id="step-2">
 
-                            <h3> Besoin des biens</h3>
-                            <div th:each="bien, itemStat : *{biens}">
+
+                            <!--
+                                                    <div id="bookList">
+                            <div class="row">
+                                <div class="col form-group d-none">id</div>
+                                <div class="col form-group">title</div>
+                                <div class="col form-group">author</div>
+                            </div>
+                            <div class="row item" th:each="book, itemStat : *{books}">
+                                <div class="col form-group d-none">
+                                    <input th:placeholder="Title + ' ' + ${itemStat.count}"
+                                           th:field="*{books[__${itemStat.index}__].title}"/>
+                                </div>
+                                <div class="col form-group">
+                                    <input th:placeholder="Author + ' ' + ${itemStat.count}"
+                                           th:field="*{books[__${itemStat.index}__].author}"
+                                    />
+                                    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
+
+                                </div>
+
+                            </div>
+                        </div>
+-->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3> Besoin des biens</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-secondary   float-right "
+                                            title="Ajouter un bien"
+                                            onclick="addRowBien()"><i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+
+                            <!--
+                                                        <div th:each="bien, itemStat : *{biens}">
 
 
-                                <label>Titre</label>
+                                                            <label>Titre</label>
 
 
-                                <input type="text" class="form-control"
-                                       th:placeholder="titreBien + ' ' + ${itemStat.count}"
-                                       th:field="*{biens[__${itemStat.index}__].titreBien}"/>
+                                                            <input type="text" class="form-control"
+                                                                   th:placeholder="
+                                                                   Bien + ' ' + ${itemStat.count}"
+                                                                   th:field="*{biens[__${itemStat.index}__].titreBien}"/>
 
-                                <label>Quantité</label>
+                                                            <label>Quantité</label>
 
-                                <input type="number" class="form-control"
-                                       th:placeholder="qte + ' ' + ${itemStat.count}"
-                                       th:field="*{biens[__${itemStat.index}__].qte}"/>
-                                <br>
+                                                            <input type="number" class="form-control"
+                                                                   th:placeholder="qte + ' ' + ${itemStat.count}"
+                                                                   th:field="*{biens[__${itemStat.index}__].qte}"/>
+                                                            <br>
+                                                        </div>
+                            -->
+
+                            <div class="row">
+                                <div class="col">
+
+
+                                    <div id="eventList">
+                                        <div class="row">
+                                            <div class="col form-group">Titre du bien</div>
+                                            <div class="col form-group">Quantité</div>
+                                        </div>
+                                        <div class="row item" th:each="bien, itemStat : *{biens}">
+
+
+                                            <div class="col form-group">
+                                                <!-- th:placeholder="titreBien + ' ' + ${itemStat.count}"-->
+                                                <input
+                                                        th:field="*{biens[__${itemStat.index}__].titreBien}"
+                                                        type="text"
+                                                        class="form-control">
+                                            </div>
+
+                                            <div class="col form-group">
+                                                <!--th:placeholder="qte + ' ' + ${itemStat.count}"-->
+                                                <input
+                                                        th:field="*{biens[__${itemStat.index}__].qte}" type="number"
+                                                        class="form-control">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
 
-                            <button class="btn btn-secondary prevBtn  float-left " type="button"><i
-                                    class="fas fa-arrow-left"></i> Retour
+
+                            <!--
+                                                        <div id="eventList">
+                                                            <div th:each="bien, itemStat : *{biens}">
+
+
+                                                                <label>Titre</label>
+
+
+                                                                <input type="text" class="form-control"
+                                                                       th:placeholder="titreBien + ' ' + ${itemStat.count}"
+                                                                       th:field="*{biens[__${itemStat.index}__].titreBien}"/>
+
+                                                                <label>Quantité</label>
+
+                                                                <input type="number" class="form-control"
+                                                                       th:placeholder="qte + ' ' + ${itemStat.count}"
+                                                                       th:field="*{biens[__${itemStat.index}__].qte}"/>
+                                                                <br>
+                                                            </div>
+                                                        </div>
+                            -->
+
+                            <br>
+                            <button class="btn btn-secondary prevBtn  float-left " type="button" title="Retour"><i
+                                    class="fas fa-arrow-left"></i>
                             </button>
-                            <button class="btn btn-secondary nextBtn  float-right " type="button">Continuer et
-                                ajouter
-                                des missions bénévoles <i class="fas fa-arrow-right"></i>
+                            <button class="btn btn-secondary nextBtn  float-right " type="button"
+                                    title="Continuer et ajouter des missions bénévoles"><i
+                                    class="fas fa-arrow-right"></i>
                             </button>
 
                         </div>
                         <div class=" setup-content" id="step-3">
 
-                            <h3> Besoin des bénévoles </h3>
-                            <div th:each="missionBen, itemStat2 : *{missionBenevoles}">
-
-
-                                <label>Titre de la mission</label>
-
-                                <input type="text" class="form-control"
-                                       th:placeholder="titre + ' ' + ${itemStat2.count}"
-                                       th:field="*{missionBenevoles[__${itemStat2.index}__].titre}"/>
-
-                                <label>Déscription de la mission </label>
-
-                                <textarea class="form-control"
-                                          th:placeholder="description + ' ' + ${itemStat2.count}"
-                                          th:field="*{missionBenevoles[__${itemStat2.index}__].description}"></textarea>
-                                <br>
-
-
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3> Besoin des bénévoles </h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-secondary   float-right "
+                                            title="Ajouter une mission"
+                                            onclick="addRowMission()"><i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+
+
+                                    <div id="missionList">
+                                        <div class="row">
+                                            <div class="col form-group">Titre de la mission</div>
+                                            <div class="col form-group">Déscription de la mission</div>
+                                        </div>
+                                        <div class="row item" th:each="missionBen, item : *{missionBenevoles}">
+
+
+                                            <div class="col form-group">
+                                                <input
+
+                                                        th:field="*{missionBenevoles[__${item.index}__].titre}"
+                                                        type="text"
+                                                        class="form-control">
+                                            </div>
+
+                                            <div class="col form-group">
+                                                <input
+                                                        th:field="*{missionBenevoles[__${item.index}__].description}"
+                                                        type="text"
+                                                        class="form-control">
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <!--
+                                                        <div th:each="missionBen, itemStat2 : *{missionBenevoles}">
+
+
+                                                            <label>Titre de la mission</label>
+
+                                                            <input type="text" class="form-control"
+                                                                   th:placeholder="titre + ' ' + ${itemStat2.count}"
+                                                                   th:field="*{missionBenevoles[__${itemStat2.index}__].titre}"/>
+
+                                                            <label>Déscription de la mission </label>
+
+                                                            <textarea class="form-control"
+                                                                      th:placeholder="description + ' ' + ${itemStat2.count}"
+                                                                      th:field="*{missionBenevoles[__${itemStat2.index}__].description}"></textarea>
+                                                            <br>
+
+
+                                                        </div>
+                            -->
 
                             <button class="btn btn-secondary prevBtn  float-left " type="button"><i
                                     class="fas fa-arrow-left"></i> Retour
@@ -245,5 +390,7 @@
 
 
 <header th:insert="fragment/header.html ::scriptFooter"></header>
+<script th:src="|../main.js|"></script>
+
 </body>
 </html>

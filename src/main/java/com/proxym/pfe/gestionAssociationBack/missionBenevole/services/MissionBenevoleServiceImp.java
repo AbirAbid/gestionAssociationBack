@@ -24,4 +24,9 @@ public class MissionBenevoleServiceImp implements MissionBenevoleService {
     public List<MissionBenevole> findAllMissionService() {
         return missionBenevoleDao.findAllMissionBenDao();
     }
+
+    @Override
+    public List<MissionBenevole> findAllMissionByEventService(Long id) {
+        return missionBenevoleDao.findAllMissionByEventDao(id);
+    }
 }

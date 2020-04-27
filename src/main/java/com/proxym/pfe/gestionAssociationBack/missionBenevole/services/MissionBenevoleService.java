@@ -8,6 +8,10 @@ import java.util.List;
 public interface MissionBenevoleService {
 
     void saveAllMissionService(List<MissionBenevole> missionBenevoles);
+
     List<MissionBenevole> findAllMissionService();
+
+    List<MissionBenevole> findAllMissionByEventService(Long id);
+
 
 }

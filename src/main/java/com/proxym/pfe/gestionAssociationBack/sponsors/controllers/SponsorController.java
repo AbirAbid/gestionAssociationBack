@@ -88,7 +88,7 @@ public class SponsorController {
         return sponsorService.getPhotoService(id);
     }
 
-    //*********************************Update Sponsor****************************
+    /*********************************Update Sponsor****************************/
     @RequestMapping(value = "/formulaireUpdate")
 
     public String formulaireUpdate(Model model, Long id) {
