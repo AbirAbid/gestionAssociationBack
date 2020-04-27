@@ -50,7 +50,10 @@
 
 
             <td>
-                <center><a class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
+
+                <center><a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr  de supprimer l événement?')"
+                           th:href="@{supprimer(id=${event.id})}"
+                > <i class="fas fa-trash-alt"></i></a>
                 </center>
             </td>
         </tr>

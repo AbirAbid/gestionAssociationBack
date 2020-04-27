@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.missionBenevole.entities;
 
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import lombok.Data;
+
 import javax.persistence.*;
 
 
@@ -13,7 +14,9 @@ public class MissionBenevole {
     private Long idM;
     private String titre;
     private String description;
-    @ManyToOne(cascade = CascadeType.ALL)
+    // @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
     private Evenement evenement;
 
    /* @ManyToMany(

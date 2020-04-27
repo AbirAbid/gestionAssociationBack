@@ -11,4 +11,6 @@ public interface EvenementService {
     List<Evenement> listEventService();
 
     Evenement getOneEventByIdservice(Long id);
+
+    void suuprimerEvent(Long id);
 }

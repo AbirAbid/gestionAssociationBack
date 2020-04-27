@@ -13,6 +13,7 @@ public class EvenementDaoImp implements EvenementDao {
     @Autowired
     EventRepositories eventRepositories;
 
+
     @Override
     public Evenement addEventDao(Evenement event) {
         try {
@@ -39,6 +40,12 @@ public class EvenementDaoImp implements EvenementDao {
     @Override
     public Evenement getEventDaoById(Long id) {
         return eventRepositories.getOne(id);
+    }
+
+    @Override
+    public void supprimerEventDao(Long id) {
+
+        eventRepositories.deleteById(id);
     }
 
 

@@ -53,13 +53,13 @@ public class BienDaoImp implements BienDao {
             System.out.println("biensDao" + biens);
             List<Bien> bienList = biens.stream().collect(Collectors.toList());
             System.out.println("bienList" + bienList);
-            for (int i = 0; i <= bienList.size() - 1; i++) {
-                if (!bienList.get(i).getTitreBien().isEmpty()) {
+           /* for (int i = 0; i <= bienList.size() - 1; i++) {
+             //   if (!bienList.get(i).getTitreBien().isEmpty()) {
 
                     bienRepositories.save(bienList.get(i));
-                }
-            }
-            //bienRepositories.saveAll(biens.stream().collect(Collectors.toList()));
+                //}
+            }*/
+            bienRepositories.saveAll(biens.stream().collect(Collectors.toList()));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -77,5 +77,12 @@ public class BienDaoImp implements BienDao {
         System.out.println("bienRepositories.findAllByEvenement_Id(id)*****" +
                 bienRepositories.findAllByEvenement_Id(id));
         return bienRepositories.findAllByEvenement_Id(id);
+    }
+
+    @Override
+    public void deleteBienDao(Long id) {
+        // bienRepositories.delete(bienRepositories.getOne((long) 88));
+        // bienRepositories.deleteAll(bienRepositories.findAllByEvenement_Id((long) 111));
+        bienRepositories.deleteAll(bienRepositories.findAllByEvenement_Id(id));
     }
 }

@@ -7,6 +7,12 @@ import java.util.List;
 
 public interface MissionBenevoleDao {
     void saveAllMissionBenDao(List<MissionBenevole> missionBenevoles);
+
     List<MissionBenevole> findAllMissionBenDao();
+
+    void deleteMissionDao(Long id);
+
+    List<MissionBenevole> findAllMissionByEventDao(Long id);
+
 
 }

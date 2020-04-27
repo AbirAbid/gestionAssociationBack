@@ -19,14 +19,19 @@ public class MissionBenevoleDaoImp implements MissionBenevoleDao {
     public void saveAllMissionBenDao(List<MissionBenevole> missionBenevoles) {
 
         try {
-            System.out.println("missionBenevolesDao" + missionBenevoles);
             List<MissionBenevole> missionBenevolesList = missionBenevoles.stream().collect(Collectors.toList());
-            System.out.println("missionBenevolesDaoToList" + missionBenevolesList);
-            for (int i = 0; i <= missionBenevolesList.size() - 1; i++) {
-                if (!missionBenevolesList.get(i).getTitre().isEmpty()) {
-                    missionBenevoleRepositories.save(missionBenevolesList.get(i));
-                }
-            }
+
+            /*for (int i = 0; i <= missionBenevolesList.size() - 1; i++) {
+               /* if (!(missionBenevolesList.get(i).getTitre().isEmpty() ||
+                        (missionBenevolesList.get(i).getDescription().isEmpty() && missionBenevolesList.get(i).getTitre().isEmpty())
+                )) {*/
+            // System.out.println("missionBenevolesList.get(" + i + " )" + missionBenevolesList.get(i));
+            //  missionBenevoleRepositories.save(missionBenevolesList.get(i));
+            //}
+
+            // }
+            missionBenevoleRepositories.saveAll(missionBenevoles.stream().collect(Collectors.toList()));
+
 
         } catch (Exception e) {
             System.out.println(e);
@@ -38,5 +43,18 @@ public class MissionBenevoleDaoImp implements MissionBenevoleDao {
     @Override
     public List<MissionBenevole> findAllMissionBenDao() {
         return missionBenevoleRepositories.findAll();
+    }
+
+    @Override
+    public void deleteMissionDao(Long id) {
+        // missionBenevoleRepositories.deleteById((long) 67);
+        // missionBenevoleRepositories.deleteAll(missionBenevoleRepositories.findAllByEvenement_Id((long) 111));
+
+        missionBenevoleRepositories.deleteAll(missionBenevoleRepositories.findAllByEvenement_Id(id));
+    }
+
+    @Override
+    public List<MissionBenevole> findAllMissionByEventDao(Long id) {
+        return missionBenevoleRepositories.findAllByEvenement_Id(id);
     }
 }

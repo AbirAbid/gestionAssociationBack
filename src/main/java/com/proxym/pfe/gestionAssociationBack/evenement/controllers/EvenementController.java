@@ -41,10 +41,12 @@ public class EvenementController {
         try {
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             EvenementDto evenementDto = new EvenementDto();
-            for (int i = 1; i <= 3; i++) {
-                // evenementDto.addBien(new Bien());
-                //evenementDto.addMissionBenevole(new MissionBenevole());
-            }
+            evenementDto.addBien(new Bien());
+            evenementDto.addMissionBenevole(new MissionBenevole());
+            //   for (int i = 1; i <= 3; i++) {
+            // evenementDto.addBien(new Bien());
+            //evenementDto.addMissionBenevole(new MissionBenevole());
+            //  }
             model.addAttribute("evenementDto", evenementDto);
             System.out.println("sponsors" + sponsors);
             model.addAttribute("sponsors", sponsors);
@@ -98,18 +100,27 @@ public class EvenementController {
 
             /** End Champs event form1 **/
 
-            System.out.println("event :****** " + e);
+            System.out.println("evenementDto.getBiens():****** " + evenementDto.getBiens());
 
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
 
                 evenementDto.getBiens().get(i).setEvenement(e);
 
-                //   evenementDto.getMissionBenevoles().get(i).setEvenement(e);
+                //  evenementDto.getMissionBenevoles().get(i).setEvenement(e);
+
+            }
+
+            System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());
+
+            for (int i = 0; i <= evenementDto.getMissionBenevoles().size() - 1; i++) {
+
+
+                evenementDto.getMissionBenevoles().get(i).setEvenement(e);
 
             }
 
             bienService.saveAllService(evenementDto.getBiens());
-           // missionBenevoleService.saveAllMissionService(evenementDto.getMissionBenevoles());
+            missionBenevoleService.saveAllMissionService(evenementDto.getMissionBenevoles());
 
 
             return "redirect:list";
@@ -134,7 +145,7 @@ public class EvenementController {
 
     }
 
-    //*********************************Update Event****************************
+    /*********************************Update Event****************************/
     @RequestMapping(value = "/formulaireUpdateEvent")
 
     public String formulaireUpdate(Model model, Long id) {
@@ -232,6 +243,13 @@ public class EvenementController {
         }
     }
 
+    /*********************************End Update Event****************************/
 
+    /*********************************Delete Event****************************/
+    @RequestMapping(value = "/supprimer")
+    public String supprimer(Long id) {
+        evenementService.suuprimerEvent(id);
+        return "redirect:/evenement/list";
+    }
 }
 

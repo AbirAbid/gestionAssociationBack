@@ -188,8 +188,19 @@
                             </div>
                         </div>
 -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3> Besoin des biens</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-secondary   float-right "
+                                            title="Ajouter un bien"
+                                            onclick="addRowBien()"><i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
 
-                            <h3> Besoin des biens</h3>
                             <!--
                                                         <div th:each="bien, itemStat : *{biens}">
 
@@ -198,7 +209,8 @@
 
 
                                                             <input type="text" class="form-control"
-                                                                   th:placeholder="titreBien + ' ' + ${itemStat.count}"
+                                                                   th:placeholder="
+                                                                   Bien + ' ' + ${itemStat.count}"
                                                                    th:field="*{biens[__${itemStat.index}__].titreBien}"/>
 
                                                             <label>Quantité</label>
@@ -223,29 +235,26 @@
 
 
                                             <div class="col form-group">
-                                               <input
-                                                    th:placeholder="titreBien + ' ' + ${itemStat.count}"
-                                                    th:field="*{biens[__${itemStat.index}__].titreBien}" type="text"
-                                                    class="form-control">
+                                                <!-- th:placeholder="titreBien + ' ' + ${itemStat.count}"-->
+                                                <input
+                                                        x th:field="*{biens[__${itemStat.index}__].titreBien}"
+                                                        type="text"
+                                                        class="form-control">
                                             </div>
 
                                             <div class="col form-group">
-                                                <input th:placeholder="qte + ' ' + ${itemStat.count}"
-                                                       th:field="*{biens[__${itemStat.index}__].qte}" type="number"
-                                                       class="form-control">
+                                                <!--th:placeholder="qte + ' ' + ${itemStat.count}"-->
+                                                <input
+                                                        th:field="*{biens[__${itemStat.index}__].qte}" type="number"
+                                                        class="form-control">
                                             </div>
                                         </div>
-                                       
+
 
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <button type="button" class="btn btn-success" onclick="addRow()">Add row</button>
-                                </div>
-                            </div>
 
                             <!--
                                                         <div id="eventList">
@@ -269,37 +278,86 @@
                                                         </div>
                             -->
 
-
-                            <button class="btn btn-secondary prevBtn  float-left " type="button"><i
-                                    class="fas fa-arrow-left"></i> Retour
+                            <br>
+                            <button class="btn btn-secondary prevBtn  float-left " type="button" title="Retour"><i
+                                    class="fas fa-arrow-left"></i>
                             </button>
-                            <button class="btn btn-secondary nextBtn  float-right " type="button">Continuer et
-                                ajouter
-                                des missions bénévoles <i class="fas fa-arrow-right"></i>
+                            <button class="btn btn-secondary nextBtn  float-right " type="button"
+                                    title="Continuer et ajouter des missions bénévoles"><i
+                                    class="fas fa-arrow-right"></i>
                             </button>
 
                         </div>
                         <div class=" setup-content" id="step-3">
 
-                            <h3> Besoin des bénévoles </h3>
-                            <div th:each="missionBen, itemStat2 : *{missionBenevoles}">
-
-
-                                <label>Titre de la mission</label>
-
-                                <input type="text" class="form-control"
-                                       th:placeholder="titre + ' ' + ${itemStat2.count}"
-                                       th:field="*{missionBenevoles[__${itemStat2.index}__].titre}"/>
-
-                                <label>Déscription de la mission </label>
-
-                                <textarea class="form-control"
-                                          th:placeholder="description + ' ' + ${itemStat2.count}"
-                                          th:field="*{missionBenevoles[__${itemStat2.index}__].description}"></textarea>
-                                <br>
-
-
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3> Besoin des bénévoles </h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-secondary   float-right "
+                                            title="Ajouter une mission"
+                                            onclick="addRowMission()"><i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+
+
+                                    <div id="missionList">
+                                        <div class="row">
+                                            <div class="col form-group">Titre de la mission</div>
+                                            <div class="col form-group">Déscription de la mission</div>
+                                        </div>
+                                        <div class="row item" th:each="missionBen, item : *{missionBenevoles}">
+
+
+                                            <div class="col form-group">
+                                                <input
+
+                                                        th:field="*{missionBenevoles[__${item.index}__].titre}"
+                                                        type="text"
+                                                        class="form-control">
+                                            </div>
+
+                                            <div class="col form-group">
+                                                <input
+                                                        th:field="*{missionBenevoles[__${item.index}__].description}"
+                                                        type="text"
+                                                        class="form-control">
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <!--
+                                                        <div th:each="missionBen, itemStat2 : *{missionBenevoles}">
+
+
+                                                            <label>Titre de la mission</label>
+
+                                                            <input type="text" class="form-control"
+                                                                   th:placeholder="titre + ' ' + ${itemStat2.count}"
+                                                                   th:field="*{missionBenevoles[__${itemStat2.index}__].titre}"/>
+
+                                                            <label>Déscription de la mission </label>
+
+                                                            <textarea class="form-control"
+                                                                      th:placeholder="description + ' ' + ${itemStat2.count}"
+                                                                      th:field="*{missionBenevoles[__${itemStat2.index}__].description}"></textarea>
+                                                            <br>
+
+
+                                                        </div>
+                            -->
 
                             <button class="btn btn-secondary prevBtn  float-left " type="button"><i
                                     class="fas fa-arrow-left"></i> Retour
@@ -332,20 +390,18 @@
 </html>
 <script>
 
-    let addRow = function () {
-        let listName = 'biens'; //list name in Catalog.class
-        //let fieldsNames = ['id', 'titreBien', 'qte']; //field names from Movie.class
-        let fieldsNames = ['titreBien', 'qte'];
-        let rowIndex = document.querySelectorAll('.item').length; //we can add mock class to each movie-row
+    let addRowBien = function () {
+        let listNameB = 'biens'; //list name in Catalog.class
+        let fieldsNamesB = ['titreBien', 'qte'];
+        let rowIndexB = document.querySelectorAll('.item').length;
 
-        let row = document.createElement('div');
-        row.classList.add('row', 'item');
-
+        let rowB = document.createElement('div');
+        rowB.classList.add('row', 'item');
 
 
-        fieldsNames.forEach((fieldName) => {
-            let col = document.createElement('div');
-            col.classList.add('col', 'form-group');
+        fieldsNamesB.forEach((fieldName) => {
+            let colB = document.createElement('div');
+            colB.classList.add('col', 'form-group');
 
             let input = document.createElement('input');
 
@@ -356,6 +412,33 @@
 
             }
             input.classList.add('form-control');
+            input.id = listNameB + rowIndexB + '.' + fieldName;
+            input.setAttribute('name', listNameB + '[' + rowIndexB + '].' + fieldName);
+
+            colB.appendChild(input);
+            rowB.appendChild(colB);
+        });
+
+        document.getElementById('eventList').appendChild(rowB);
+
+    };
+
+    let addRowMission = function () {
+        let listName = 'missionBenevoles';
+        let fieldsNames = ['titre', 'description'];
+        let rowIndex = document.querySelectorAll('.item').length;
+
+        let row = document.createElement('div');
+        row.classList.add('row', 'item');
+
+        fieldsNames.forEach((fieldName) => {
+            let col = document.createElement('div');
+            col.classList.add('col', 'form-group');
+
+
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add('form-control');
             input.id = listName + rowIndex + '.' + fieldName;
             input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
 
@@ -363,8 +446,12 @@
             row.appendChild(col);
         });
 
-        document.getElementById('eventList').appendChild(row);
-
+        document.getElementById('missionList').appendChild(row);
     };
 
+
+    let deleteRow = function () {
+
+    };
 </script>
+

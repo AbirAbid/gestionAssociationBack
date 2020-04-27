@@ -15,7 +15,9 @@ public class Bien {
     private String titreBien;
     private int qte;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
     private Evenement evenement;
 
 
