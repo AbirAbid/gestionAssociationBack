@@ -15,6 +15,19 @@
     <div th:replace="fragment/header ::navbar"></div>
 
     <table class="table table-bordered">
+        <form th:action="@{list}" method="get">
+            <div class="md-form active-purple-2 mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <thead>
         <tr>
             <th>ID</th>
@@ -28,7 +41,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="event : ${evnement}">
+        <tr th:each="event : ${evenements.content}">
+
+            <!--
+                    <tr th:each="event : ${evnement}">
+            -->
 
             <td th:text="${event.id}"></td>
             <td th:text="${event.titre}"></td>
@@ -59,6 +76,17 @@
         </tr>
         </tbody>
     </table>
+    <center>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
+                    <!-- $ acceder model -->
+                    <a class="page-link" th:text="${p}" th:href="@{list(page=${p})}"></a>
+                </li>
+
+            </ul>
+        </nav>
+    </center>
 </div>
 </div>
 </div>

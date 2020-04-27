@@ -3,6 +3,8 @@ package com.proxym.pfe.gestionAssociationBack.evenement.dao;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.repositories.EventRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -46,6 +48,17 @@ public class EvenementDaoImp implements EvenementDao {
     public void supprimerEventDao(Long id) {
 
         eventRepositories.deleteById(id);
+    }
+
+    @Override
+    public Page<Evenement> findAllPageEvenementDao(PageRequest pageRequest) {
+
+        return eventRepositories.findAll(pageRequest);
+    }
+
+    @Override
+    public Page<Evenement> rehercherPageEvenementDao(String mc, PageRequest pageRequest) {
+        return eventRepositories.chercherEvenement(mc, pageRequest);
     }
 
 

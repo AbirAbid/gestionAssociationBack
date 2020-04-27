@@ -10,7 +10,10 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionBen
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
 import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +38,9 @@ public class EvenementController {
     SponsorService sponsorService;
     @Autowired
     SponsorRepository sponsorRepository;
+
+    /*********************************add Event****************************/
+
 
     @GetMapping(value = "formulaire")
     public String formulaireAddEvent(Model model) {
@@ -130,7 +136,7 @@ public class EvenementController {
         }
     }
 
-    @GetMapping("/list")
+/*    @GetMapping("/list")
     public String afficherListEvent(Model model) {
         try {
 
@@ -143,7 +149,7 @@ public class EvenementController {
             return "pagesError/error";
         }
 
-    }
+    }*/
 
     /*********************************Update Event****************************/
     @RequestMapping(value = "/formulaireUpdateEvent")
@@ -243,13 +249,45 @@ public class EvenementController {
         }
     }
 
-    /*********************************End Update Event****************************/
 
-    /*********************************Delete Event****************************/
+    /*********************************Delete Event******************************/
     @RequestMapping(value = "/supprimer")
     public String supprimer(Long id) {
         evenementService.suuprimerEvent(id);
         return "redirect:/evenement/list";
     }
+
+
+    /*********************************List Page  Event****************************/
+
+    @GetMapping(value = "/list")
+    public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+                           @RequestParam(name = "motCle", defaultValue = "") String mc) {
+        try {
+            Page<Evenement> evenements = evenementService.rehercherPageEvenementService("%" + mc + "%", new PageRequest(page, 5));
+
+            int pagesCount = evenements.getTotalPages();
+            int[] pages = new int[pagesCount];
+
+            for (int i = 0; i < pagesCount; i++) {
+                pages[i] = i;
+                System.out.println(" pages[i] " + pages[i]);
+            }
+
+            model.addAttribute("pageCourante", page);
+            model.addAttribute("pageContent", evenements.getContent());
+            model.addAttribute("mc", mc);
+            model.addAttribute("pages", pages);
+            model.addAttribute("evenements", evenements);
+
+            return "evenement/list-event";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "pagesError/error";
+        }
+
+
+    }
+
 }
 

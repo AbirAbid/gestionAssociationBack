@@ -5,6 +5,8 @@ import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionBenevoleDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +46,15 @@ public class EvenementServiceImp implements EvenementService {
 
         evenementDao.supprimerEventDao(id);
 
+    }
+
+    @Override
+    public Page<Evenement> findAllPageEvenementService(PageRequest pageRequest) {
+        return evenementDao.findAllPageEvenementDao(pageRequest);
+    }
+
+    @Override
+    public Page<Evenement> rehercherPageEvenementService(String mc, PageRequest pageRequest) {
+        return evenementDao.rehercherPageEvenementDao(mc, pageRequest);
     }
 }

@@ -67,7 +67,7 @@
         <ul class="pagination">
             <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
                 <!-- $ acceder model -->
-                <a class="page-link" th:text="${p}" th:href="@{sponsor(page=${p})}"></a>
+                <a class="page-link" th:text="${p}" th:href="@{sponsors(page=${p})}"></a>
             </li>
 
         </ul>
