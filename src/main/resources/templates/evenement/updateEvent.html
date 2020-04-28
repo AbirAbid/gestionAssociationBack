@@ -66,9 +66,37 @@
                                     </div>
                                     <div class="md-form">
                                         <label>Ville</label>
-                                        <input
+                                        <select name="region" th:field="*{ville}" class="form-control">
+                                            <option th:value="Tunisie" th:text="Tunisie" selected></option>
+                                            <option th:value="Ariana" th:text="Ariana"></option>
+                                            <option th:value="Béja" th:text="Béja"></option>
+                                            <option th:value="BenArous">Ben Arous </option>
+                                            <option th:value="Bizerte" th:text="Bizerte"></option>
+                                            <option th:value="Gabès" th:text="Gabès"></option>
+                                            <option th:value="Gafsa" th:text="Gafsa"></option>
+                                            <option th:value="Jendouba" th:text="Jendouba"></option>
+                                            <option th:value="Kairouan" th:text="Kairouan"></option>
+                                            <option th:value="Kasserine" th:text="Kasserine"></option>
+                                            <option th:value="Kébili" th:text="Kébili"></option>
+                                            <option th:value="LeKef"> Le Kef</option>
+                                            <option th:value="Mahdia" th:text="Mahdia"></option>
+                                            <option th:value="LaManouba" >La Manouba</option>
+                                            <option th:value="Médenine" th:text="Médenine"></option>
+                                            <option th:value="Monastir" th:text="Monastir"></option>
+                                            <option th:value="Nabeul" th:text="Nabeul"></option>
+                                            <option th:value="Sfax" th:text="Sfax"></option>
+                                            <option th:value="SidiBouzid" >Sidi Bouzid</option>
+                                            <option th:value="Siliana" th:text="Siliana"></option>
+                                            <option th:value="Sousse" th:text="Sousse"></option>
+                                            <option th:value="Tataouine" th:text="Tataouine"></option>
+                                            <option th:value="Tozeur" th:text="Tozeur"></option>
+                                            <option th:value="Tunis" th:text="Tunis"></option>
+                                            <option th:value="Zaghouan" th:text="Zaghouan"></option>
+                                        </select>
+
+                                     <!--   <input
                                                 type="text" th:field="*{ville}" class="form-control" placeholder="Ville"
-                                        >
+                                        >-->
                                         <p th:errors="*{ville}" class="text-danger"></p>
 
                                     </div>
@@ -125,8 +153,7 @@
 
                                             </select>
                                         </div>
-                                    </div>
-                                    <br>
+                                    </div>                                    <br>
                                     <div class="md-form">
                                         <div class="row">
                                             <div class="col-sm-4">

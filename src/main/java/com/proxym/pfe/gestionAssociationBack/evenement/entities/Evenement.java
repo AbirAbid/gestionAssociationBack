@@ -1,9 +1,11 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.entities;
 
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
+import com.proxym.pfe.gestionAssociationBack.themeEvent.entities.ThemeEvent;
 import lombok.Data;
 import org.aspectj.lang.annotation.After;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.ui.context.Theme;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -48,6 +50,11 @@ public class Evenement {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_sponsor"))
     private Set<Sponsor> sponsors = new HashSet<>();
+/*
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
+    private ThemeEvent themeEvent;
+*/
 
  /*   @ManyToMany
     @JoinTable(name = "particBenevole",

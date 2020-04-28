@@ -159,8 +159,19 @@ public class EvenementController {
         try {
 
             Evenement e = evenementService.getOneEventByIdservice(id);
+
             EvenementDto evenementDto = new EvenementDto();
+            /*if (e.getSponsors().isEmpty()) {
+                List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
+             //   model.addAttribute("sponsors", sponsors);
+            }else {evenementDto.setSponsors(e.getSponsors());}*/
+            List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
+            model.addAttribute("sponsors", sponsors);
+
+            System.out.println(" e.getSponsors()    " + e.getSponsors());
+
             evenementDto.affectToEventDto(e);
+            System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
 
             List<Bien> biens = bienService.findAllByEventService(id);
             List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
