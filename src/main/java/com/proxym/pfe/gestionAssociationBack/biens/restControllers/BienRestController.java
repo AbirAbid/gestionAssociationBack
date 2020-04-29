@@ -24,8 +24,8 @@ public class BienRestController {
         }
     }
 
-    @RequestMapping(value = "/listBienEvent", method = RequestMethod.GET)
-    public List<Bien> getListBienByEvent(Long id) {
+    @RequestMapping(value = "/listBienEvent/{id}", method = RequestMethod.GET)
+    public List<Bien> getListBienByEvent(@PathVariable("id") Long id) {
         try {
             return bienService.findAllByEventService(id);
         } catch (Exception ex) {

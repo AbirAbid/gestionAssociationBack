@@ -24,8 +24,8 @@ public class MissionBenevoleRestControllers {
         }
     }
 
-    @RequestMapping(value = "/listMissionBenevoleEvent", method = RequestMethod.GET)
-    public List<MissionBenevole> getListMissionByEvent(Long id) {
+    @RequestMapping(value = "/listMissionBenevoleEvent/{id}", method = RequestMethod.GET)
+    public List<MissionBenevole> getListMissionByEvent(@PathVariable("id") Long id) {
         try {
             return missionBenevoleService.findAllMissionByEventService(id);
         } catch (Exception ex) {
