@@ -12,6 +12,7 @@ public interface MissionBenevoleService {
     List<MissionBenevole> findAllMissionService();
 
     List<MissionBenevole> findAllMissionByEventService(Long id);
+    List<MissionBenevole> findAllByEvenement_VilleService(String ville);
 
 
 }

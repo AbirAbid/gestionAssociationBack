@@ -43,4 +43,9 @@ public class BienServiceImp implements BienService {
     public List<Bien> findAllByEventService(Long id) {
         return bienDao.findAllByEventDao(id);
     }
+
+    @Override
+    public List<Bien> findAllByEvenement_VilleService(String ville) {
+        return bienDao.findAllByEvenement_VilleDao(ville);
+    }
 }

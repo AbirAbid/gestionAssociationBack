@@ -13,6 +13,8 @@ public interface BienDao {
 
     List<Bien> findAllByEventDao(Long id);
 
+    List<Bien> findAllByEvenement_VilleDao(String ville);
+
     // List<Bien> findAllByEventIdDao(Long id);
     void deleteBienDao(Long id);
 }

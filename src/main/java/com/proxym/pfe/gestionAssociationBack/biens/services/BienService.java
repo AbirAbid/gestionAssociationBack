@@ -16,4 +16,6 @@ public interface BienService {
 
     List<Bien> findAllByEventService(Long id);
 
+    List<Bien> findAllByEvenement_VilleService(String ville);
+
 }

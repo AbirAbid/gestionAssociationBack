@@ -57,4 +57,11 @@ public class MissionBenevoleDaoImp implements MissionBenevoleDao {
     public List<MissionBenevole> findAllMissionByEventDao(Long id) {
         return missionBenevoleRepositories.findAllByEvenement_Id(id);
     }
+
+    @Override
+    public List<MissionBenevole> findAllByEvenement_VilleDao(String ville) {
+        return missionBenevoleRepositories.findAllByEvenement_Ville(ville);
+    }
+
+
 }

@@ -80,6 +80,11 @@ public class BienDaoImp implements BienDao {
     }
 
     @Override
+    public List<Bien> findAllByEvenement_VilleDao(String ville) {
+        return bienRepositories.findAllByEvenement_Ville(ville);
+    }
+
+    @Override
     public void deleteBienDao(Long id) {
         // bienRepositories.delete(bienRepositories.getOne((long) 88));
         // bienRepositories.deleteAll(bienRepositories.findAllByEvenement_Id((long) 111));

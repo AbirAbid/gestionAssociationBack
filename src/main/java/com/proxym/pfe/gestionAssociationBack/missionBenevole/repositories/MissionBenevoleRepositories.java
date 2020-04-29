@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface MissionBenevoleRepositories extends JpaRepository<MissionBenevole, Long> {
     List<MissionBenevole> findAllByEvenement_Id(Long id);
+
+    List<MissionBenevole> findAllByEvenement_Ville(String ville);
 }

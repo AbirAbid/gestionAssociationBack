@@ -13,6 +13,7 @@ public interface MissionBenevoleDao {
     void deleteMissionDao(Long id);
 
     List<MissionBenevole> findAllMissionByEventDao(Long id);
+    List<MissionBenevole> findAllByEvenement_VilleDao(String ville);
 
 
 }
