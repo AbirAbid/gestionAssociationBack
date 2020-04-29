@@ -1,9 +1,13 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.entities;
 
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.themeEvent.entities.ThemeEvent;
+import com.proxym.pfe.gestionAssociationBack.user.entities.Role;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import lombok.Data;
 import org.aspectj.lang.annotation.After;
+import org.hibernate.annotations.Fetch;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.context.Theme;
 
@@ -50,24 +54,27 @@ public class Evenement {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_sponsor"))
     private Set<Sponsor> sponsors = new HashSet<>();
+
+
+
 /*
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 
     private ThemeEvent themeEvent;
 */
 
- /*   @ManyToMany
-    @JoinTable(name = "particBenevole",
+
+    //Collection des biens
+/*
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evenement", cascade = CascadeType.ALL)
+    private List<Bien> biens;
+*/
+
+  /*  @ManyToMany
+    @JoinTable(name = "donnerBien",
             joinColumns = @JoinColumn(name = "Evenement_ID", referencedColumnName = "id", updatable = false, nullable = false),
             inverseJoinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false))
     private Set<User> users = new HashSet<>();*/
-
-    //Collection des biens
-    /*@OneToMany
-            (fetch = FetchType.EAGER, mappedBy = "evenement", cascade = CascadeType.ALL)
-    @Fetch(value= FetchMode.SELECT)
-    private Set<Bien> biens;
-*/
 
 }
 

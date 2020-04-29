@@ -1,6 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.user.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
 import org.hibernate.annotations.NaturalId;
 
@@ -67,6 +68,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "donnerBien",
+            joinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "Bien_ID", referencedColumnName = "id", updatable = false, nullable = false))
+    private Set<Bien> biens = new HashSet<>();
 
     //participation
    /* @ManyToMany(fetch = FetchType.LAZY)

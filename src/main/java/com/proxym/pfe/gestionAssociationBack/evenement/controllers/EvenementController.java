@@ -113,8 +113,6 @@ public class EvenementController {
 
                 evenementDto.getBiens().get(i).setEvenement(e);
 
-                //  evenementDto.getMissionBenevoles().get(i).setEvenement(e);
-
             }
 
             System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());

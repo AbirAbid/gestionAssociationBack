@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface EvenementService {
@@ -20,5 +21,6 @@ public interface EvenementService {
 
     Page<Evenement> rehercherPageEvenementService(String mc, PageRequest pageRequest);
 
+    Optional<Evenement> findEventByIdService(Long id);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EvenementServiceImp implements EvenementService {
@@ -56,5 +57,10 @@ public class EvenementServiceImp implements EvenementService {
     @Override
     public Page<Evenement> rehercherPageEvenementService(String mc, PageRequest pageRequest) {
         return evenementDao.rehercherPageEvenementDao(mc, pageRequest);
+    }
+
+    @Override
+    public Optional<Evenement> findEventByIdService(Long id) {
+        return evenementDao.findEventDaoById(id);
     }
 }
