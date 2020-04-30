@@ -12,7 +12,7 @@ public class ParticiperBien {
     @Id
     private Long idP;
     @Column(name = "qteDonnee")
-    private Long qteDonnee;
+    private int qteDonnee;
     @ManyToOne
     private User user;
 }

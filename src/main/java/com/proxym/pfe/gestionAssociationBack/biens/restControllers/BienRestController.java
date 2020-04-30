@@ -66,6 +66,7 @@ public class BienRestController {
     public Bien donnerBien(@RequestBody ParticiperBienFormDto participerBienFormDto,
                            @PathVariable String username) {
         try {
+
             System.out.println("/donnerBien/{username}");
 
             User user = userService.findUserByUsernameService(username);
@@ -73,8 +74,9 @@ public class BienRestController {
             participerBienFormDto.getParticiperBien().setUser(user);
             setparticiperBiens.add(participerBienService.saveParticipationBienService(participerBienFormDto.getParticiperBien()));
             participerBienFormDto.getBien().setParticiperBiens(setparticiperBiens);
+            /***Calcule qte donnée ***/
 
-
+            participerBienFormDto.getBien().setQteDonnee(participerBienFormDto.getBien().getQteDonnee() + participerBienFormDto.getParticiperBien().getQteDonnee());
             return bienService.saveBienService(participerBienFormDto.getBien());
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
