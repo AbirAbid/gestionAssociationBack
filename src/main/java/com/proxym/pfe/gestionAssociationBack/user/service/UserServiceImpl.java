@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String username) {
+    public User findUserByUsernameService(String username) {
         System.out.println("************UserServiceImpl-getUser*****************");
         return userDao.findByUsernameDao(username);
     }

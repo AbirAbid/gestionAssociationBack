@@ -58,8 +58,8 @@ public class AuthRestAPIs {
     public User getUser(@Valid @RequestBody String username) {
         try {
             System.out.println("**************AuthRestAPIs-getUser*****************");
-            System.out.println("customerService.getMembre(username)" + userService.getUser(username));
-            return userService.getUser(username);
+            System.out.println("customerService.getMembre(username)" + userService.findUserByUsernameService(username));
+            return userService.findUserByUsernameService(username);
         } catch (Exception e) {
             return null;
         }

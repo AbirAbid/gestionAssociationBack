@@ -18,4 +18,7 @@ public interface BienService {
 
     List<Bien> findAllByEvenement_VilleService(String ville);
 
+    Bien saveBienService(Bien bien);
+
+
 }

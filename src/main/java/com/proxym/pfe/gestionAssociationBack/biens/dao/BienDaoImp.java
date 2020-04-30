@@ -47,6 +47,11 @@ public class BienDaoImp implements BienDao {
     }
 
     @Override
+    public Bien saveBienDao(Bien bien) {
+        return bienRepositories.save(bien);
+    }
+
+    @Override
     public void saveAllDao(List<Bien> biens) {
         try {
 

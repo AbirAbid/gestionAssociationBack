@@ -7,6 +7,8 @@ import java.util.List;
 public interface BienDao {
     List<Bien> findAllDao();
 
+    Bien saveBienDao(Bien bien);
+
     void saveAllDao(List<Bien> biens);
 
     void editAllDao(List<Bien> biens);

@@ -48,4 +48,9 @@ public class BienServiceImp implements BienService {
     public List<Bien> findAllByEvenement_VilleService(String ville) {
         return bienDao.findAllByEvenement_VilleDao(ville);
     }
+
+    @Override
+    public Bien saveBienService(Bien bien) {
+        return bienDao.saveBienDao(bien);
+    }
 }

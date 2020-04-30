@@ -10,7 +10,7 @@ public interface UserService {
     ResponseEntity<?> signup(SignUpForm signUpForm);
 
 
-    User getUser(String username);
+    User findUserByUsernameService(String username);
 
 
     SignUpForm findUserByEmail(String email);

@@ -69,12 +69,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany
+ /*   @ManyToMany
     @JoinTable(name = "donnerBien",
             joinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false),
             inverseJoinColumns = @JoinColumn(name = "Bien_ID", referencedColumnName = "id", updatable = false, nullable = false))
     private Set<Bien> biens = new HashSet<>();
-
+*/
     //participation
    /* @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "membres_association",

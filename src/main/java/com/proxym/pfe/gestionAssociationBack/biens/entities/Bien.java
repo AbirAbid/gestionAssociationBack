@@ -21,11 +21,13 @@ public class Bien {
     //@ManyToOne(cascade = CascadeType.ALL)
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;
+    @OneToMany
+    private Set<DonnerBien> donnerBiens = new HashSet<>();
 
-    @ManyToMany
+  /*  @ManyToMany
     @JoinTable(name = "donnerBien",
             joinColumns = @JoinColumn(name = "Bien_ID", referencedColumnName = "id", updatable = false, nullable = false),
             inverseJoinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false))
-    private Set<User> users = new HashSet<>();
+    private Set<User> users = new HashSet<>();*/
 
 }
