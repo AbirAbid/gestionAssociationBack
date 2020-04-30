@@ -7,10 +7,10 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class DonnerBien {
+public class ParticiperBien {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Long idP;
     @Column(name = "qteDonnee")
     private Long qteDonnee;
     @ManyToOne

@@ -63,6 +63,18 @@ public class AuthRestAPIs {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @GetMapping("/getUser/{username}")
+    public User getUserByUsername(@PathVariable String username) {
+        try {
+            System.out.println("**************AuthRestAPIs-getUser*****************");
+            System.out.println("customerService.getMembre(username)" + userService.findUserByUsernameService(username));
+            return userService.findUserByUsernameService(username);
+        } catch (Exception e) {
+            return null;
+        }
+
 
     }
 

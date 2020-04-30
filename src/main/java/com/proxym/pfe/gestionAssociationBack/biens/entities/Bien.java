@@ -22,7 +22,7 @@ public class Bien {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;
     @OneToMany
-    private Set<DonnerBien> donnerBiens = new HashSet<>();
+    private Set<ParticiperBien> participerBiens = new HashSet<>();
 
   /*  @ManyToMany
     @JoinTable(name = "donnerBien",
