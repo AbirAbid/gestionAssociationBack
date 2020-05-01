@@ -20,8 +20,8 @@ import java.util.*;
 public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-
     private Long id;
+    int active;
     @NotBlank
     @Column(name = "titre")
     private String titre;

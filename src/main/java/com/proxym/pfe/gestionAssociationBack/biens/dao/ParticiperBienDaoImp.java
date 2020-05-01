@@ -3,6 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.biens.dao;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
 import com.proxym.pfe.gestionAssociationBack.biens.repositories.ParticiperBienRepositories;
+import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,5 +45,10 @@ public class ParticiperBienDaoImp implements ParticiperBienDao {
     @Override
     public ParticiperBien findByBienAndUserDao(Bien bien, User user) {
         return participerBienRepositories.findByBienAndUser(bien, user);
+    }
+
+    @Override
+    public Boolean existParticipationEvenementDao(Evenement evenement) {
+        return participerBienRepositories.existsParticiperBienByBien_Evenement(evenement);
     }
 }

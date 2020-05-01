@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.biens.dao;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
+import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface ParticiperBienDao {
 
     Boolean existBienUserDao(Bien b, User user);
     ParticiperBien findByBienAndUserDao(Bien bien, User user);
+    Boolean existParticipationEvenementDao(Evenement evenement);
 
 
     //List<Bien> findAllByEventDao(Long id);

@@ -82,6 +82,7 @@ public class BienRestController {
             System.out.println("bien***" + bien.getId());
             System.out.println("bien.getTotaleqteDonnee()" + bien.getTotaleqteDonnee());
             bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteD);
+            bien.getEvenement().setActive(1);
             bienService.saveBienService(bien);
             /**End Update qtedonnee  bien**/
             Boolean exist = participerBienService.existBienUserService(bien, user);

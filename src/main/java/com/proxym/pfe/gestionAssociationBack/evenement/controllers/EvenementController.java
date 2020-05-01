@@ -1,7 +1,9 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.controllers;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
+import com.proxym.pfe.gestionAssociationBack.biens.services.ParticiperBienService;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
@@ -11,6 +13,7 @@ import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
 import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,6 +42,8 @@ public class EvenementController {
     SponsorService sponsorService;
     @Autowired
     SponsorRepository sponsorRepository;
+    @Autowired
+    ParticiperBienService participerBienService;
 
     /*********************************add Event****************************/
 
@@ -103,6 +108,7 @@ public class EvenementController {
             event.setDateFin(evenementDto.getDateFin());
             event.setSponsors(evenementDto.getSponsors());
             event.setVille(evenementDto.getVille());
+            event.setActive(0);
             Evenement e = evenementService.addEventService(event);
 
             /** End Champs event form1 **/
@@ -306,6 +312,7 @@ public class EvenementController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
+
 
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());

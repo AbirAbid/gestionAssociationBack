@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.biens.services;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
+import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 
 import java.util.List;
@@ -18,5 +19,8 @@ public interface ParticiperBienService {
     Boolean existBienUserService(Bien b, User user);
 
     ParticiperBien findByBienAndUserService(Bien bien, User user);
+
+    Boolean existParticipationEvenementService(Evenement evenement);
+
 
 }
