@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ParticiperBienDao {
     List<ParticiperBien> findAllParticipationBienDao();
+    List<ParticiperBien> findAllByUser_UsernameDao(String username);
 
     ParticiperBien saveParticipationBienDao(ParticiperBien participerBien);
 

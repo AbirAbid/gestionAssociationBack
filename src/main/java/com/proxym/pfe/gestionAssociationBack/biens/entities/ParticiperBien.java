@@ -4,15 +4,27 @@ import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Data
+@Table(name = "participer_bien")
+
 public class ParticiperBien {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
     @Id
+    @GeneratedValue
+
     private Long idP;
-    @Column(name = "qteDonnee")
-    private int qteDonnee;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Bien bien;
+
+    private Integer qteDonnee;
+
+
 }

@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class ParticiperBienFormDto {
     private Bien bien;
-    private ParticiperBien participerBien;
+    private Integer qteDon;// private ParticiperBien participerBien;
 }

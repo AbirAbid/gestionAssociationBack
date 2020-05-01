@@ -13,6 +13,11 @@ public class ParticiperBienServiceImp implements ParticiperBienService {
     ParticiperBienDao participerBienDao;
 
     @Override
+    public List<ParticiperBien> findAllByUser_UsernameService(String username) {
+        return participerBienDao.findAllByUser_UsernameDao(username);
+    }
+
+    @Override
     public List<ParticiperBien> findAllParticipationBienService() {
         return participerBienDao.findAllParticipationBienDao();
     }

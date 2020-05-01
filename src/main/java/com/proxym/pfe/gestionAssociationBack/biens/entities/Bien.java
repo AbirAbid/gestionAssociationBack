@@ -1,33 +1,36 @@
 package com.proxym.pfe.gestionAssociationBack.biens.entities;
 
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import lombok.Data;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalIdCache;
+import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
+@Table(name = "bien")
+
 @Data
+
 public class Bien {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+
     private Long id;
+
     private String titreBien;
-    private int qte;
-    private int qteDonnee;
+    private Integer qte;
+    private Integer totaleqteDonnee;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;
-    @OneToMany
+
+    @OneToMany(mappedBy = "bien")
+
     private Set<ParticiperBien> participerBiens = new HashSet<>();
 
-  /*  @ManyToMany
-    @JoinTable(name = "donnerBien",
-            joinColumns = @JoinColumn(name = "Bien_ID", referencedColumnName = "id", updatable = false, nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false))
-    private Set<User> users = new HashSet<>();*/
 
 }

@@ -14,14 +14,18 @@ public class ParticiperBienDaoImp implements ParticiperBienDao {
 
     @Override
     public List<ParticiperBien> findAllParticipationBienDao() {
-        return null;
+        return participerBienRepositories.findAll();
+    }
+
+    @Override
+    public List<ParticiperBien> findAllByUser_UsernameDao(String username) {
+        return participerBienRepositories.findAllByUser_Username(username);
     }
 
     @Override
     public ParticiperBien saveParticipationBienDao(ParticiperBien participerBien) {
         return participerBienRepositories.save(participerBien);
     }
-
 
 
     @Override

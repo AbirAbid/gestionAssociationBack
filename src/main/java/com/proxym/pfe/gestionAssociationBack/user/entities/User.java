@@ -2,22 +2,23 @@ package com.proxym.pfe.gestionAssociationBack.user.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
 import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
+import org.hibernate.annotations.NaturalIdCache;
 
 @Entity
 @Data
-
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
@@ -26,6 +27,7 @@ import lombok.Data;
                 "email"
         })
 })
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,28 +61,10 @@ public class User {
 
     private String genre;
     private int isAdmin;
-    //@NotBlank
-    //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+
     private Date dateNaissance;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
- /*   @ManyToMany
-    @JoinTable(name = "donnerBien",
-            joinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "Bien_ID", referencedColumnName = "id", updatable = false, nullable = false))
-    private Set<Bien> biens = new HashSet<>();
-*/
-    //participation
-   /* @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "membres_association",
-            joinColumns = @JoinColumn(name = "membre_id"),
-            inverseJoinColumns = @JoinColumn(name = "association_id"))
-    private Set<Association> associations = new HashSet<>();*/
 
 
     @NotBlank
@@ -90,12 +74,19 @@ public class User {
     @NotBlank
 
     private String occupation;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+
+    private Set<ParticiperBien> participerBiens = new HashSet<>();
 
     public User(String nom, String username, String email, String password, String prenom,
                 Date dateNaissance, String telephone, String gouvernoratRes, String occupation,
                 String genre) {
-        // public Membre(@NotBlank @Size(min = 3, max = 50) String signUpRequestNom, @NotBlank @Size(min = 3, max = 50) String signUpRequestUsername, @NotBlank @Size(max = 60) @Email String signUpRequestEmail, String gouvernoratRes, String nom, String username, String email, Date dateNaissance, String motDePasse) {
         this.nom = nom;
         this.username = username;
         this.email = email;
@@ -109,12 +100,5 @@ public class User {
 
     }
 
-/*
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            targetEntity = Evenement.class)
-    @JoinTable(name = "particBenevole",
-            joinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "Evenement_ID", referencedColumnName = "id", updatable = false, nullable = false))
-    private Set<Evenement> evenements = new HashSet<>();*/
+
 }

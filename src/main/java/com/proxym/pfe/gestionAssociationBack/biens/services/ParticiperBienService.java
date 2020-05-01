@@ -5,6 +5,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
 import java.util.List;
 
 public interface ParticiperBienService {
+    List<ParticiperBien> findAllByUser_UsernameService(String username);
 
     List<ParticiperBien> findAllParticipationBienService();
 
