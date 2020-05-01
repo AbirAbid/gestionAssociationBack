@@ -18,10 +18,13 @@ public class ParticiperBien {
 
     private Long idP;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+
     private User user;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
+    @JoinColumn(name="bien_id", nullable=false)
     private Bien bien;
 
     private Integer qteDonnee;

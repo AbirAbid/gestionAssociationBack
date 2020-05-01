@@ -84,24 +84,6 @@ public class BienRestController {
             System.out.println("after" + participerBien.getQteDonnee());
 
 
-
-          /*  System.out.println("/donnerBien/{username}");
-
-            User user = userService.findUserByUsernameService(username);
-            Set<ParticiperBien> setparticiperBiens = new HashSet<>();
-            System.out.println("participerBienFormDto.getParticiperBien(): " + participerBienFormDto.getParticiperBien());
-
-            participerBienFormDto.getParticiperBien().setUser(user);
-            ParticiperBien participerBien = participerBienService.saveParticipationBienService(participerBienFormDto.getParticiperBien());
-
-            setparticiperBiens.add(participerBien);
-            //participerBienFormDto.getBien().setParticiperBiens(setparticiperBiens);
-
-
-            /***Calcule qte donnée ***/
-
-            //participerBienFormDto.getBien().setTotaleqteDonnee(participerBienFormDto.getBien().getTotaleqteDonnee() + participerBienFormDto.getParticiperBien().getQteDonnee());
-
             return participerBien;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());

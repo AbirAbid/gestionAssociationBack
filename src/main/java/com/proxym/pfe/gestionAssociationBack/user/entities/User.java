@@ -64,7 +64,15 @@ public class User {
 
     private Date dateNaissance;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
+    @OneToMany
+
+    private Set<ParticiperBien> participerBiens;
 
 
     @NotBlank
@@ -74,15 +82,7 @@ public class User {
     @NotBlank
 
     private String occupation;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-
-    private Set<ParticiperBien> participerBiens = new HashSet<>();
 
     public User(String nom, String username, String email, String password, String prenom,
                 Date dateNaissance, String telephone, String gouvernoratRes, String occupation,

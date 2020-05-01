@@ -27,10 +27,8 @@ public class Bien {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;
-
-    @OneToMany(mappedBy = "bien")
+    @OneToMany
 
     private Set<ParticiperBien> participerBiens = new HashSet<>();
-
 
 }
