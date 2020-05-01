@@ -112,7 +112,7 @@ public class EvenementController {
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
 
                 evenementDto.getBiens().get(i).setEvenement(e);
-
+                evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
             }
 
             System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());

@@ -1,7 +1,9 @@
 package com.proxym.pfe.gestionAssociationBack.biens.services;
 
 import com.proxym.pfe.gestionAssociationBack.biens.dao.ParticiperBienDao;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,15 @@ public class ParticiperBienServiceImp implements ParticiperBienService {
     @Override
     public void deleteParticipationBienService(Long id) {
         participerBienDao.deleteParticipationBienDao(id);
+    }
+
+    @Override
+    public Boolean existBienUserService(Bien b, User user) {
+        return participerBienDao.existBienUserDao(b, user);
+    }
+
+    @Override
+    public ParticiperBien findByBienAndUserService(Bien bien, User user) {
+        return participerBienDao.findByBienAndUserDao(bien, user);
     }
 }

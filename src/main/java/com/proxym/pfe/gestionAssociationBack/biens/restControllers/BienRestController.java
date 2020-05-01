@@ -29,8 +29,7 @@ public class BienRestController {
     ParticiperBienService participerBienService;
     @Autowired
     BienRepositories bienRepositories;
-    @Autowired
-    ParticiperBienRepositories participerBienRepositories;
+
 
     /***List Biens***/
 
@@ -70,19 +69,42 @@ public class BienRestController {
     /***Donner Bien***/
 
     @RequestMapping(value = "/donnerBien/{username}", method = RequestMethod.POST)
-    // public Bien donnerBien(@RequestBody Bien bien,
     public ParticiperBien donnerBien(@RequestBody ParticiperBienFormDto participerBienFormDto,
                                      @PathVariable String username) {
         try {
+
             ParticiperBien participerBien = new ParticiperBien();
-            participerBien.setBien(participerBienFormDto.getBien());
-            participerBien.setUser(userService.findUserByUsernameService(username));
-            participerBien.setQteDonnee(participerBienFormDto.getQteDon());
+            User user = userService.findUserByUsernameService(username);
+            Bien bien = participerBienFormDto.getBien();
+            int qteD = participerBienFormDto.getQteDon();
 
-            System.out.println(participerBien.getQteDonnee());
-            System.out.println(participerBienService.saveParticipationBienService(participerBien));
-            System.out.println("after" + participerBien.getQteDonnee());
+            /**Update qtedonnee  bien **/
+            System.out.println("bien***" + bien.getId());
+            System.out.println("bien.getTotaleqteDonnee()" + bien.getTotaleqteDonnee());
+            bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteD);
+            bienService.saveBienService(bien);
+            /**End Update qtedonnee  bien**/
+            Boolean exist = participerBienService.existBienUserService(bien, user);
+            System.out.println("exist " + exist);
+            if (exist == false) {
+                participerBien.setBien(bien);
+                participerBien.setUser(user);
+                participerBien.setQteDonnee(qteD);
 
+                System.out.println("participerBien" + participerBien);
+
+                participerBienService.saveParticipationBienService(participerBien);
+
+
+            } else {
+                participerBien = participerBienService.findByBienAndUserService(bien, user);
+                participerBien.setQteDonnee(participerBien.getQteDonnee() + qteD);
+                participerBienService.saveParticipationBienService(participerBien);
+
+                System.out.println("findByBienAndUserService  " + participerBienService.findByBienAndUserService(bien, user));
+
+
+            }
 
             return participerBien;
         } catch (Exception ex) {
