@@ -28,4 +28,5 @@ public class ParticiperMissionBenevole {
     private Date dateDemande;
 
     private int affected;
+    private int enAttente;
 }

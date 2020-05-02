@@ -9,9 +9,12 @@ public interface MissionBenevoleService {
 
     void saveAllMissionService(List<MissionBenevole> missionBenevoles);
 
+    MissionBenevole saveMissionService(MissionBenevole missionBenevole);
+
     List<MissionBenevole> findAllMissionService();
 
     List<MissionBenevole> findAllMissionByEventService(Long id);
+
     List<MissionBenevole> findAllByEvenement_VilleService(String ville);
 
 

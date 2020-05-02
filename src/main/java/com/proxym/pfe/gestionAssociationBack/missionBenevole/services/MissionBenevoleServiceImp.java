@@ -21,6 +21,11 @@ public class MissionBenevoleServiceImp implements MissionBenevoleService {
     }
 
     @Override
+    public MissionBenevole saveMissionService(MissionBenevole missionBenevole) {
+        return missionBenevoleDao.saveMissionDao(missionBenevole);
+    }
+
+    @Override
     public List<MissionBenevole> findAllMissionService() {
         return missionBenevoleDao.findAllMissionBenDao();
     }

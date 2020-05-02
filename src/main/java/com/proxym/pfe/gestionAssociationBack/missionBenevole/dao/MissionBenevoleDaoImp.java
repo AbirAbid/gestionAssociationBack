@@ -63,5 +63,10 @@ public class MissionBenevoleDaoImp implements MissionBenevoleDao {
         return missionBenevoleRepositories.findAllByEvenement_Ville(ville);
     }
 
+    @Override
+    public MissionBenevole saveMissionDao(MissionBenevole missionBenevole) {
+        return missionBenevoleRepositories.save(missionBenevole);
+    }
+
 
 }

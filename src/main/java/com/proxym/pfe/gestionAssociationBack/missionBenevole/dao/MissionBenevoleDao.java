@@ -14,6 +14,6 @@ public interface MissionBenevoleDao {
 
     List<MissionBenevole> findAllMissionByEventDao(Long id);
     List<MissionBenevole> findAllByEvenement_VilleDao(String ville);
-
+    MissionBenevole saveMissionDao(MissionBenevole missionBenevole);
 
 }
