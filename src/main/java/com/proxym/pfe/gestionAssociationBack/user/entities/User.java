@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
 import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.ParticiperMissionBenevole;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
@@ -74,6 +75,8 @@ public class User {
 
     private Set<ParticiperBien> participerBiens;
 
+    @OneToMany
+    private Set<ParticiperMissionBenevole> participerMissionBenevoles = new HashSet<>();
 
     @NotBlank
 

@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.missionBenevole.restcontrollers;
 
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionBenevole;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionBenevoleService;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.ParticiperMissionBenevoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,8 @@ import java.util.List;
 public class MissionBenevoleRestControllers {
     @Autowired
     MissionBenevoleService missionBenevoleService;
-
+    @Autowired
+    ParticiperMissionBenevoleService participerMissionBenevoleService;
 
     @RequestMapping(value = "/listMissionBenevole", method = RequestMethod.GET)
     public List<MissionBenevole> getListMission() {
@@ -43,4 +45,7 @@ public class MissionBenevoleRestControllers {
             return null;
         }
     }
+
+
+
 }
