@@ -77,7 +77,6 @@ public class BienRestController {
             User user = userService.findUserByUsernameService(username);
             Bien bien = participerBienFormDto.getBien();
             int qteD = participerBienFormDto.getQteDon();
-
             /**Update qtedonnee  bien **/
             System.out.println("bien***" + bien.getId());
             System.out.println("bien.getTotaleqteDonnee()" + bien.getTotaleqteDonnee());
@@ -91,7 +90,7 @@ public class BienRestController {
                 participerBien.setBien(bien);
                 participerBien.setUser(user);
                 participerBien.setQteDonnee(qteD);
-
+                participerBien.setDateParticipation(participerBienFormDto.getDatePart());
                 System.out.println("participerBien" + participerBien);
 
                 participerBienService.saveParticipationBienService(participerBien);
@@ -100,6 +99,8 @@ public class BienRestController {
             } else {
                 participerBien = participerBienService.findByBienAndUserService(bien, user);
                 participerBien.setQteDonnee(participerBien.getQteDonnee() + qteD);
+                participerBien.setDateParticipation(participerBienFormDto.getDatePart());
+
                 participerBienService.saveParticipationBienService(participerBien);
 
                 System.out.println("findByBienAndUserService  " + participerBienService.findByBienAndUserService(bien, user));

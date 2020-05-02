@@ -1,6 +1,8 @@
 package com.proxym.pfe.gestionAssociationBack.membre.controllers;
 
 import com.proxym.pfe.gestionAssociationBack.GestionAssociationBackApplication;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
+import com.proxym.pfe.gestionAssociationBack.biens.services.ParticiperBienService;
 import com.proxym.pfe.gestionAssociationBack.cotisations.entities.Cotisation;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.user.entities.Role;
@@ -25,6 +27,8 @@ import java.util.stream.Stream;
 public class MembreController {
     @Autowired
     MembreService membreService;
+    @Autowired
+    ParticiperBienService participerBienService;
 
     @GetMapping(value = "listeMembres")
     public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
@@ -97,14 +101,18 @@ public class MembreController {
 
     @RequestMapping(value = "/membreDetailUrl")
     public String membreDetail(Model model, String id) {
-      /*  Cotisation cotisation = cotisationService.getOneServ(id);
-        model.addAttribute("cotisation", cotisation);*/
-      try {
-          User user = membreService.getOneMembreService(id);
-          System.out.println(user);
-          model.addAttribute("membre", user);
-          return "membres/membreDetail";
-      } catch (Exception e){  return "pagesError/error" ;}
+
+        try {
+            User user = membreService.getOneMembreService(id);
+            List<ParticiperBien> participerBiens = participerBienService.findAllByUser_UsernameService(user.getUsername());
+
+            model.addAttribute("participerBiens", participerBiens);
+            System.out.println("participerBiens.size()  " + participerBiens.size());
+            model.addAttribute("membre", user);
+            return "membres/membreDetail";
+        } catch (Exception e) {
+            return "pagesError/error";
+        }
 
 
     }
