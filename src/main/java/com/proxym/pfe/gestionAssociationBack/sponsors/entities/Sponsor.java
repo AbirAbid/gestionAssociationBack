@@ -21,6 +21,7 @@ public class Sponsor {
     @Email(message = "Format email est non valide ... !!")
     private String emailSponsor;
     private String photoSponsor;
+    private int affecte;
 
     public Sponsor() {
     }

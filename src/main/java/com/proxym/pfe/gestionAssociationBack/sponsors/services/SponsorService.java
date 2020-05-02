@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface SponsorService {
     void saveSponsorService(Sponsor s, MultipartFile file);
+
     List<Sponsor> findAllSponsorServ();
 
     Page<Sponsor> findAllPageSponsorServ(PageRequest pageRequest);
@@ -21,4 +22,5 @@ public interface SponsorService {
 
     Sponsor getOneService(Long id);
 
+    void updateSponsorService(Sponsor s);
 }

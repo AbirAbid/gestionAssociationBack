@@ -100,6 +100,8 @@ public class EvenementController {
                 return "evenement/add-event";
             }
             /** Champs event form1 **/
+
+
             Evenement event = new Evenement();
             event.setTitre(evenementDto.getTitre());
             event.setDescription(evenementDto.getDescription());
@@ -108,12 +110,23 @@ public class EvenementController {
             event.setDateFin(evenementDto.getDateFin());
             event.setSponsors(evenementDto.getSponsors());
             event.setVille(evenementDto.getVille());
+            event.setFrais(evenementDto.getFrais());
             event.setActive(0);
-            Evenement e = evenementService.addEventService(event);
+            System.out.println("***********************event Sponsor*********************  " + event.getSponsors());
 
+            Evenement e = evenementService.addEventService(event);
+            /** for Affect  Sponsor ***/
+            List<Sponsor> sponsors = event.getSponsors();
+
+            for (int i = 0; i <= sponsors.size() - 1; i++) {
+                Sponsor s = sponsors.get(i);
+                s.setAffecte(1);
+                sponsorService.updateSponsorService(s);
+
+            }
             /** End Champs event form1 **/
 
-            System.out.println("evenementDto.getBiens():****** " + evenementDto.getBiens());
+            //  System.out.println("evenementDto.getBiens():****** " + evenementDto.getBiens());
 
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
 
@@ -121,7 +134,7 @@ public class EvenementController {
                 evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
             }
 
-            System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());
+            // System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());
 
             for (int i = 0; i <= evenementDto.getMissionBenevoles().size() - 1; i++) {
 
@@ -141,20 +154,6 @@ public class EvenementController {
         }
     }
 
-/*    @GetMapping("/list")
-    public String afficherListEvent(Model model) {
-        try {
-
-            System.out.println("***********we are in cont evt*********" + bienService.findAllByEventService((long) 43));
-            model.addAttribute("evnement", evenementService.listEventService());
-            System.out.println("***********we are in cont evt after*********");
-            return "evenement/list-event";
-        } catch (Exception e) {
-            System.out.println(e);
-            return "pagesError/error";
-        }
-
-    }*/
 
     /*********************************Update Event****************************/
     @RequestMapping(value = "/formulaireUpdateEvent")
@@ -250,9 +249,18 @@ public class EvenementController {
             event.setDateFin(evenementDto.getDateFin());
             event.setSponsors(evenementDto.getSponsors());
             event.setVille(evenementDto.getVille());
-            // System.out.println("***********************event*********************  " + event);
+            event.setFrais(evenementDto.getFrais());
+            // System.out.println("***********************event Sponsor*********************  " + event.getSponsors());
             Evenement e = evenementService.addEventService(event);
+            /** for Affect  Sponsor ***/
+            List<Sponsor> sponsors = (List) event.getSponsors();
 
+            for (int i = 0; i <= sponsors.size() - 1; i++) {
+                Sponsor s = sponsors.get(i);
+                s.setAffecte(1);
+                sponsorService.updateSponsorService(s);
+
+            }
             List<Bien> biens = bienService.findAllByEventService(e.getId());
 
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {

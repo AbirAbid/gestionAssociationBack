@@ -53,7 +53,7 @@ public class Evenement {
     @JoinTable(name = "evenemet_sponsor",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_sponsor"))
-    private Set<Sponsor> sponsors = new HashSet<>();
+    private List<Sponsor> sponsors;
 
 
 

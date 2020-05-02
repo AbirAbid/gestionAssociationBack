@@ -16,6 +16,7 @@ import java.util.List;
 
 @Service
 public class SponsorServiceImp implements SponsorService {
+
     @Autowired
     SponsorDao sponsorDao;
     @Value("${dir.images}")
@@ -75,6 +76,11 @@ public class SponsorServiceImp implements SponsorService {
     @Override
     public Sponsor getOneService(Long id) {
         return sponsorDao.getOneDao(id);
+    }
+
+    @Override
+    public void updateSponsorService(Sponsor s) {
+        sponsorDao.modifierSponsor(s);
     }
 
 

@@ -39,12 +39,13 @@ public class SponsorController {
 
     @PostMapping(value = "/save")
     public String saveSponsor(@Valid Sponsor sponsor,
-                            BindingResult bindingResult, @RequestParam(name = "picture") MultipartFile file) {
+                              BindingResult bindingResult, @RequestParam(name = "picture") MultipartFile file) {
         try {
             if (bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
                 return "sponsor/addSponsor";
             }
+            sponsor.setAffecte(0);
             sponsorService.saveSponsorService(sponsor, file);
             return "redirect:/sponsors/sponsors";
 

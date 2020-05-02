@@ -115,17 +115,15 @@ public class BienRestController {
     }
 
     /**
-     * getAllDonByUser
+     * getAllBienByUser
      **/
 
     @RequestMapping(value = "/listDonBienUsername/{username}", method = RequestMethod.GET)
     public List<ParticiperBien> getDonBienByuser(@PathVariable("username") String username) {
         try {
-            // System.out.println(participerBienService.findAllParticipationBienService());
 
             List<ParticiperBien> participerBiens = participerBienService.findAllByUser_UsernameService(username);
             System.out.println("participerBiens**" + participerBiens);
-            //  System.out.println(bienRepositories.findByParticiperBiens((long) 5));
 
 
             return participerBiens;

@@ -43,6 +43,7 @@ public class SponsorDaoImp implements SponsorDao {
 
     @Override
     public void modifierSponsor(Sponsor sp) {
+        sponsorRepository.save(sp);
 
     }
 

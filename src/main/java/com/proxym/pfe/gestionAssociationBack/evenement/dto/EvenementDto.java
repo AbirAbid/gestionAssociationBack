@@ -38,7 +38,7 @@ public class EvenementDto {
     private Double frais;
 
 
-    private Set<Sponsor> sponsors = new HashSet<>();
+    private List<Sponsor> sponsors ;
 
 
     private List<Bien> biens;
