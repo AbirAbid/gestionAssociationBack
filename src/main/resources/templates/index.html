@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:insert="fragment/header :: headerfiles">
+    <link href="dashboard.css" rel="stylesheet">
 
 
 <body>
@@ -14,22 +15,44 @@
 
     <div th:replace="fragment/header ::navbar"></div>
     <div class="container">
-        <h2>User Registration and Login Module using Spring Boot, Spring
-            MVC, Spring Security, JPA/Hibernate and Thymeleaf</h2>
+        <div class="row">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Membres</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Événements</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
 
-         Welcome <span sec:authentication="principal.username">User</span>
-        This text is displayed for authenticated users.
+        <header th:insert="fragment/header.html ::scriptFooter"></header>
 
 
     </div>
-
-    <header th:insert="fragment/header.html ::scriptFooter"></header>
-
-
 </div>
-
-</div>
-
 </div>
 </body>
 </html>

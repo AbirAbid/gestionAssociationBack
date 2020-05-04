@@ -1,22 +1,15 @@
 package com.proxym.pfe.gestionAssociationBack.user.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.ParticiperMissionBenevole;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalId;
 
+import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.ParticiperMissionBenevole;
+import org.hibernate.annotations.NaturalId;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 import lombok.Data;
-import org.hibernate.annotations.NaturalIdCache;
 
 @Entity
 @Data
@@ -76,7 +69,7 @@ public class User {
     private Set<ParticiperBien> participerBiens;
 
     @OneToMany
-    private Set<ParticiperMissionBenevole> participerMissionBenevoles = new HashSet<>();
+    private Set<ParticiperMissionBenevole> participerMissionBenevoles ;
 
     @NotBlank
 

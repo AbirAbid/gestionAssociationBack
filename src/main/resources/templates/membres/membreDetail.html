@@ -21,11 +21,15 @@
 
                                 </div>
                                 <div class="userData ml-3">
-                                    <h2 class="d-block"
-                                        th:text="${membre.nom}"></h2>
-                                    <h2 class="d-block"
-                                        th:text="${membre.prenom}"></h2>
+                                    <div class="row">
 
+
+                                        <h2
+                                            th:text="${membre.nom}"></h2>
+                                        &#160;  &#160;<h2 class=" text-uppercase"
+                                                   th:text="${membre.prenom}"></h2>
+
+                                    </div>
 
                                 </div>
 

@@ -5,7 +5,9 @@
 <head th:insert="fragment/header :: headerfiles">
 
 </head>
-<body style="background: #6d7fcc ">
+<body style="background-image: url('https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555358985/shape/mentalfloss/istock_000039944040_small.jpg?itok=tXCUrjhO');      background-position: center;
+background-size: cover;padding: 90px 50px;">
+
 
 <br>
 <br>
@@ -31,13 +33,10 @@
                     <div class="alert alert-danger">Vérifiez votre login et mot de passe</div>
                 </div>
                 <div th:if="${param.logout}">
-                    <div class="alert alert-info">You have been logged out.</div>
+                    <div class="alert alert-info">Déconnexion!</div>
                 </div>
 
-                <p>
-                    <a href="" target="_blank">See the last newsletter</a>
-                </p>
-
+                <p></p>
                 <!-- Name -->
                 <div class="md-form">
                     <label for="username">Nom d'utilisateur </label>
@@ -68,6 +67,7 @@
     </div>
     <!-- Material form subscription -->
 
+</div>
 </div>
 
 <header th:insert="fragment/header.html ::scriptFooter"></header>

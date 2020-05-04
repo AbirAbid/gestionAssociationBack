@@ -31,11 +31,11 @@
             <th>Nom</th>
             <th> Prénom</th>
             <th> Adhérent</th>
-            <th> Tel</th>
+            <th> Téléphone</th>
             <th> Email</th>
             <th> Statut</th>
             <th>Envoyer Email</th>
-            <th>Détail</th>
+            <th>Profil</th>
         </tr>
 
         <tbody>
@@ -44,12 +44,17 @@
 
             <td th:text="${membre.nom}"></td>
             <td th:text="${membre.prenom}"></td>
-            <td> adhérent</td>
+            <td> Adhérent</td>
             <td th:text="${membre.telephone}"></td>
             <td th:text="${membre.email}"></td>
 
 
-            <td>Status</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 30%"
+                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </td>
             <td>
                 <center><a class="btn btn-secondary"> <i class="fas fa-envelope-square"></i></a>
                 </center>

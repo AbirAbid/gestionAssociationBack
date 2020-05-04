@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -16,10 +17,13 @@ public class Cotisation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    @NotBlank
+    @NotBlank(message = " Veuillez remplir ce champs ! ")
+
     private String cotisationName;
 
     private long montant;
+
+    @NotNull(message = " Veuillez remplir ce champs ! ")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebut;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

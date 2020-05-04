@@ -27,7 +27,9 @@
                 </div>
             </div>
         </form>
-
+        <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
+            Aucun résultat pour <p th:text="${mc}"></p>
+        </div>
         <thead>
         <tr>
             <th>ID</th>

@@ -17,11 +17,11 @@
         <div class="card border-primary mb-3" style="max-width: 50rem; ">
 
             <h5 class="card-header info-color white-text text-center py-2">
-                <strong> Modifier SPONSOR
+                <strong> Modifier Sponsor
                 </strong>
             </h5>
 
-            <!--Card content-->
+            <div class="card-body px-lg-5">
 
             <form action="#"
                   th:action="@{/sponsors/modifierSponsor}"
@@ -37,16 +37,17 @@
                     <label>Nom de l'entreprise </label>
                     <input type="text" th:field="*{titreSponsor}" class="form-control"
                     />
-                    <span th:errors="*{titreSponsor}" class="alert-danger"> </span>
+                    <span th:errors="*{titreSponsor}" class="text-danger"> </span>
 
                 </div>
                 <div class="md-form">
                     <label>Email de l'entreprise </label>
                     <input type="text" th:field="*{emailSponsor}" class="form-control"
                     />
-                    <span th:errors="*{emailSponsor}" class="alert-danger"> </span>
+                    <span th:errors="*{emailSponsor}" class="text-danger"> </span>
 
                 </div>
+
 
                 <div class="md-form">
                     <label>Photo</label>

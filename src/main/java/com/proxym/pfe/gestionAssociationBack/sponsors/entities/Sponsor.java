@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -13,12 +14,11 @@ public class Sponsor {
     @Id
 
     private Long idSponsor;
-
-    @NotEmpty(message = "le champs est vide... !!")
+    @NotBlank(message = " Veuillez remplir ce champs ! ")
     private String titreSponsor;
 
-    @NotEmpty(message = "Le champs est vide... !!")
-    @Email(message = "Format email est non valide ... !!")
+    @NotBlank(message = " Veuillez remplir ce champs ! ")
+    @Email(message = "Format email est invalide !")
     private String emailSponsor;
     private String photoSponsor;
     private int affecte;

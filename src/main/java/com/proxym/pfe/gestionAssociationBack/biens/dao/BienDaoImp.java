@@ -57,14 +57,19 @@ public class BienDaoImp implements BienDao {
 
             System.out.println("biensDao" + biens);
             List<Bien> bienList = biens.stream().collect(Collectors.toList());
-            System.out.println("bienList" + bienList);
-           /* for (int i = 0; i <= bienList.size() - 1; i++) {
-             //   if (!bienList.get(i).getTitreBien().isEmpty()) {
+            List<Bien> bienListToSave = new ArrayList<>();
+            // System.out.println("bienList" + bienList);
 
-                    bienRepositories.save(bienList.get(i));
-                //}
-            }*/
-            bienRepositories.saveAll(biens.stream().collect(Collectors.toList()));
+           /* for (int i = 0; i <= bienList.size() - 1; i++) {
+
+                if (!bienList.get(i).getTitreBien().isEmpty()) {
+
+
+
+                } }
+               */
+           bienRepositories.saveAll(biens.stream().collect(Collectors.toList()));
+
 
         } catch (Exception e) {
             System.out.println(e);
