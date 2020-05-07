@@ -7,14 +7,12 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMissio
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.repositories.MissionRepository;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionBenevoleService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.ParticiperMissionBenevoleService;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import sun.nio.cs.US_ASCII;
 
 import java.util.*;
 
@@ -25,8 +23,7 @@ public class MissionBenevoleRestControllers {
     MissionBenevoleService missionBenevoleService;
     @Autowired
     UserService userService;
-    @Autowired
-    ParticiperMissionBenevoleService participerMissionBenevoleService;
+
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -71,7 +68,7 @@ public class MissionBenevoleRestControllers {
 
     @RequestMapping(value = "/participerMission/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public void donnerBien(@RequestBody ParticiperMissionDto participerMissionDto,
+    public void participerMission(@RequestBody ParticiperMissionDto participerMissionDto,
                            @PathVariable String username) {
         try {
             UserMission userMission = new UserMission();

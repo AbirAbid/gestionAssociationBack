@@ -1,9 +1,5 @@
 package com.proxym.pfe.gestionAssociationBack.biens.controllers;
 
-import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
-import com.proxym.pfe.gestionAssociationBack.biens.services.ParticiperBienService;
-import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +11,12 @@ import java.util.List;
 @RequestMapping("/bien/")
 
 public class BienController {
-    @Autowired
+   /* @Autowired
     ParticiperBienService participerBienService;
 
-    /**
-     * Display List donneurs
-     **/
+
+    Display List donneurs
+
     @RequestMapping(value = "/listDonneurs")
     public String listDonneurs(Model model) {
 
@@ -35,5 +31,5 @@ public class BienController {
         }
 
 
-    }
+    } **/
 }

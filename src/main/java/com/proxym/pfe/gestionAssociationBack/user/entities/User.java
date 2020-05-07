@@ -2,15 +2,11 @@ package com.proxym.pfe.gestionAssociationBack.user.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.ParticiperMissionBenevole;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import org.hibernate.annotations.NaturalId;
 
-import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -29,7 +25,7 @@ import lombok.Data;
                 "email"
         })
 })
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 
 public class User {
     @Id
@@ -73,15 +69,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany
+   /* @OneToMany
 
-    private Set<ParticiperBien> participerBiens;
+    private Set<ParticiperBien> participerBiens;*/
 
-    /*  @OneToMany
-      private Set<ParticiperMissionBenevole> participerMissionBenevoles ;*/
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserMission> userMissions;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserBien> userBiens;
 
 
     @NotBlank

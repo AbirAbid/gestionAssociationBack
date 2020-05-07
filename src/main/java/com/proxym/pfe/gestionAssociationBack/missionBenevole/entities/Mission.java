@@ -25,7 +25,6 @@ public class Mission {
     private Evenement evenement;
 
     @OneToMany(mappedBy = "mission")
-
     private List<UserMission> userMissions;
 
     public Mission() {

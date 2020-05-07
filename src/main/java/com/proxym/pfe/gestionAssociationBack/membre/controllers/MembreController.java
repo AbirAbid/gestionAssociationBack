@@ -1,11 +1,8 @@
 package com.proxym.pfe.gestionAssociationBack.membre.controllers;
 
-import com.proxym.pfe.gestionAssociationBack.GestionAssociationBackApplication;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
-import com.proxym.pfe.gestionAssociationBack.biens.services.ParticiperBienService;
-import com.proxym.pfe.gestionAssociationBack.cotisations.entities.Cotisation;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
-import com.proxym.pfe.gestionAssociationBack.user.entities.Role;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -14,22 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.proxym.pfe.gestionAssociationBack.user.entities.RoleName;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/membres/")
 public class MembreController {
     @Autowired
     MembreService membreService;
-    @Autowired
+  /*  @Autowired
     ParticiperBienService participerBienService;
-
+*/
     @GetMapping(value = "listeMembres")
     public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "motCle", defaultValue = "") String mc) {
@@ -104,11 +97,22 @@ public class MembreController {
 
         try {
             User user = membreService.getOneMembreService(id);
-            List<ParticiperBien> participerBiens = participerBienService.findAllByUser_UsernameService(user.getUsername());
+
+           // User user = userService.findUserByUsernameService(username);
+            List<UserBien> userBiens = user.getUserBiens();
+            List<Bien> biens = new ArrayList<>();
+            for (int i = 0; i < userBiens.size(); i++) {
+                biens.add(userBiens.get(i).getBien());
+                System.out.println("biens " + biens.get(i).getTitreBien());
+
+            }
+            model.addAttribute("participerBiens", biens);
+            model.addAttribute("membre", user);
+      /*      List<ParticiperBien> participerBiens = participerBienService.findAllByUser_UsernameService(user.getUsername());
 
             model.addAttribute("participerBiens", participerBiens);
             System.out.println("participerBiens.size()  " + participerBiens.size());
-            model.addAttribute("membre", user);
+            model.addAttribute("membre", user);*/
             return "membres/membreDetail";
         } catch (Exception e) {
             return "pagesError/error";

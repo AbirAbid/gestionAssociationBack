@@ -189,7 +189,7 @@ public class GestionAssociationBackApplication implements CommandLineRunner {
     @Transactional
     public void run(String... strings) throws Exception {
         // create new
-        Book bookA = new Book("Book A");
+      /*  Book bookA = new Book("Book A");
         Publisher publisherA = new Publisher("Publisher A");
 
         BookPublisher bookPublisher = new BookPublisher();

@@ -47,8 +47,6 @@ public class MissionBenevoleDaoImp implements MissionBenevoleDao {
 
     @Override
     public void deleteMissionDao(Long id) {
-        // missionBenevoleRepositories.deleteById((long) 67);
-        // missionBenevoleRepositories.deleteAll(missionBenevoleRepositories.findAllByEvenement_Id((long) 111));
 
         missionBenevoleRepositories.deleteAll(missionBenevoleRepositories.findAllByEvenement_Id(id));
     }

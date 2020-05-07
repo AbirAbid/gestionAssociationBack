@@ -20,8 +20,6 @@ public class MissionBenevole {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;
-    @OneToMany
-    private Set<ParticiperMissionBenevole> participerMissionBenevoles = new HashSet<>();
 
   /*  @OneToMany(mappedBy = "missionBenevole", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserMission> userMissions;*/

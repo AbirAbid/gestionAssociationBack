@@ -15,12 +15,10 @@ import java.util.Date;
 public class UserMission implements Serializable {
     @Id
     @ManyToOne
-  //  @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 
     @Id
-  //  @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "mission_id")
     private Mission mission;
