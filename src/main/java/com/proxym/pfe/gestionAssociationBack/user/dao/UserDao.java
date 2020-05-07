@@ -24,6 +24,8 @@ public interface UserDao {
 
     Boolean existsByEmailDao(String email);
 
-    User saveDao(User user);
+    User saveUserDao(User user);
+    List<User> getAllDonneursDao();
+
 
 }

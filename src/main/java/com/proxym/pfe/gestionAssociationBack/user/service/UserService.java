@@ -5,6 +5,8 @@ import com.proxym.pfe.gestionAssociationBack.user.dto.request.SignUpForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface UserService {
     ResponseEntity<?> signup(SignUpForm signUpForm);
@@ -19,5 +21,7 @@ public interface UserService {
 
 
     SignUpForm changePassword(SignUpForm signUpForm, String newPassword);
+
+    List<User> getAllDonneursService();
 
 }

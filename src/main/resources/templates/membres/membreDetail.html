@@ -108,16 +108,49 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div class="tab-pane fade" id="missions" role="tabpanel">
-                                        Missions
+                                        <div th:if="${#lists.isEmpty(userMissions)}">
+                                            <div class="alert alert-danger" role="alert">
+                                                La liste des missions est vide!!
+                                            </div>
+                                        </div>
+                                        <div th:if="${not #lists.isEmpty(userMissions)}">
+                                            <table class="table table-active border">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">Titre Mission</th>
+                                                    <th scope="col">Événement</th>
+
+                                                    <th scope="col">Date Demande</th>
+                                                </tr>
+                                                </thead>
+
+
+                                                <tbody th:each="p : ${userMissions}">
+
+                                                <tr>
+                                                    <td th:text="${p.mission.titre}"></td>
+                                                    <td th:text="${p.mission.evenement.titre}"></td>
+                                                    <td th:text="${p.demandeDate}"></td>
+
+
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
+
+
                                     <div class="tab-pane fade" id="dons" role="tabpanel">
-                                        <div th:if="${#lists.isEmpty(participerBiens)}">
+                                        <div th:if="${#lists.isEmpty(userBiens)}">
                                             <div class="alert alert-danger" role="alert">
                                                 La liste des dons est vide!!
                                             </div>
                                         </div>
-                                        <div th:if="${not #lists.isEmpty(participerBiens)}">
+                                        <div th:if="${not #lists.isEmpty(userBiens)}">
                                             <table class="table table-active border">
                                                 <thead>
                                                 <tr>
@@ -130,12 +163,13 @@
                                                 </thead>
 
 
-                                                <tbody th:each="p : ${participerBiens}">
+                                                <tbody th:each="p : ${userBiens}">
 
                                                 <tr>
-                                                    <td th:text="${p.titreBien}"></td>
-                                                    <td th:text="${p.qte}"></td>
-                                                    <td th:text="${p.evenement.titre}"></td>
+                                                    <td th:text="${p.bien.titreBien}"></td>
+                                                    <td th:text="${p.qteDonnee}"></td>
+                                                    <td th:text="${p.bien.evenement.titre}"></td>
+                                                    <td th:text="${p.dateParticipation}"></td>
 
 
                                                 </tr>

@@ -3,6 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.membre.controllers;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -20,9 +21,10 @@ import java.util.List;
 public class MembreController {
     @Autowired
     MembreService membreService;
-  /*  @Autowired
-    ParticiperBienService participerBienService;
-*/
+
+    /*  @Autowired
+      ParticiperBienService participerBienService;
+  */
     @GetMapping(value = "listeMembres")
     public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "motCle", defaultValue = "") String mc) {
@@ -97,22 +99,13 @@ public class MembreController {
 
         try {
             User user = membreService.getOneMembreService(id);
-
-           // User user = userService.findUserByUsernameService(username);
             List<UserBien> userBiens = user.getUserBiens();
-            List<Bien> biens = new ArrayList<>();
-            for (int i = 0; i < userBiens.size(); i++) {
-                biens.add(userBiens.get(i).getBien());
-                System.out.println("biens " + biens.get(i).getTitreBien());
+            List<UserMission> userMissions = user.getUserMissions();
 
-            }
-            model.addAttribute("participerBiens", biens);
+            model.addAttribute("userMissions", userMissions);
+            model.addAttribute("userBiens", userBiens);
             model.addAttribute("membre", user);
-      /*      List<ParticiperBien> participerBiens = participerBienService.findAllByUser_UsernameService(user.getUsername());
 
-            model.addAttribute("participerBiens", participerBiens);
-            System.out.println("participerBiens.size()  " + participerBiens.size());
-            model.addAttribute("membre", user);*/
             return "membres/membreDetail";
         } catch (Exception e) {
             return "pagesError/error";

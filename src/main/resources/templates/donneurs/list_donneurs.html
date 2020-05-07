@@ -10,40 +10,47 @@
 <div id="content">
     <div th:replace="fragment/header ::navbar"></div>
 
-<div class="container">
-    <h1>Liste des donneurs</h1>
-    <div th:if="${#lists.isEmpty(participerBiens)}">
-        <div class="alert alert-danger" role="alert">
-            La liste des dons est vide!!
+    <div class="container">
+        <h1>Liste des donneurs</h1>
+        <div th:if="${#lists.isEmpty(userBiens)}">
+            <div class="alert alert-danger" role="alert">
+                La liste des dons est vide!!
+            </div>
+        </div>
+        <div th:if="${not #lists.isEmpty(userBiens)}">
+            <table class="table table-active border">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Titre bien</th>
+                    <th scope="col">Événement</th>
+                    <th scope="col">Quantité données </th>
+
+                    <th scope="col">Date participation</th>
+                </tr>
+                </thead>
+
+
+                <tbody th:each="p : ${userBiens}">
+
+                <tr>
+                    <td th:text="${p.user.nom}"></td>
+                    <td th:text="${p.user.prenom}"></td>
+                    <td th:text="${p.bien.titreBien}"></td>
+                    <td th:text="${p.bien.evenement.titre}"></td>
+
+                    <td th:text="${p.qteDonnee}"></td>
+                    <td th:text="${p.dateParticipation}"></td>
+
+
+
+                </tr>
+
+                </tbody>
+            </table>
         </div>
     </div>
-    <div th:if="${not #lists.isEmpty(participerBiens)}">
-        <table class="table table-active border">
-            <thead>
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
-                <th scope="col">Événement</th>
-
-                <th scope="col">Date participation</th>
-            </tr>
-            </thead>
-
-
-            <tbody th:each="p : ${participerBiens}">
-
-            <tr>
-                <td th:text="${p.user.nom}"></td>
-                <td th:text="${p.user.prenom}"></td>
-                <td th:text="${p.bien.evenement.titre}"></td>
-
-                <td th:text="${p.dateParticipation}"></td>
-            </tr>
-
-            </tbody>
-        </table>
-    </div>
-</div>
 </div>
 </div>
 </div>

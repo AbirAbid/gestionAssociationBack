@@ -9,6 +9,7 @@ import java.util.List;
 
 @Component
 public class UserDaoImp implements UserDao {
+
     @Autowired
     UserRepository userRepository;
 
@@ -40,10 +41,14 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public User saveDao(User user) {
+    public User saveUserDao(User user) {
         return userRepository.save(user);
     }
 
+    @Override
+    public List<User> getAllDonneursDao() {
+        return userRepository.findAllByUserBiensIsNotNull();
+    }
 
 
 }

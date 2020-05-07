@@ -29,4 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select  u from User u  where u.nom like :x and u.isAdmin = 0")
     Page<User> chercherUser(@Param("x") String mc, Pageable pageable);
 
+    List<User> findAllByUserBiensIsNotNull();
+
 }

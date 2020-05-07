@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService {
                 }
             });
             user.setRoles(roles);
-            userDao.saveDao(user);
+            userDao.saveUserDao(user);
 
             return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 
@@ -100,6 +101,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public SignUpForm changePassword(SignUpForm signUpForm, String newPassword) {
         return null;
+    }
+
+    @Override
+    public List<User> getAllDonneursService() {
+        return userDao.getAllDonneursDao();
     }
 
     @Override

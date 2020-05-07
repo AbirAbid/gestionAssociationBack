@@ -143,9 +143,22 @@ public class BienRestController {
     }
 
     @RequestMapping(value = "/listUserBien", method = RequestMethod.GET)
+    // public List<UserBien> getListUserBien() {
     public List<UserBien> getListUserBien() {
         try {
-            User user = userService.findUserByUsernameService("abir");
+            List<User> users = userService.getAllDonneursService();
+            List<UserBien> userBiens = new ArrayList<>();
+            for (int i = 0; i < users.size(); i++) {
+                for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
+                    userBiens.add(users.get(i).getUserBiens().get(j));
+                }
+            }
+          /*  List<User>users=userRepository.findAllByUserBiensIsNotNull();
+            for (int i = 0; i < users.size(); i++) {
+
+                System.out.println(users.get(i).getUsername());
+            }*/
+          /*  User user = userService.findUserByUsernameService("abir");
             List<UserBien> userBiens = user.getUserBiens();
             List<Long> bienUserId = new ArrayList<>();
             for (int i = 0; i < userBiens.size(); i++) {
@@ -156,13 +169,13 @@ public class BienRestController {
 
             System.out.println(b.getId() + "  bienUserId.contains(b.get()) " + bienUserId.contains(b.getId()));
 
-            return user.getUserBiens();
+            return user.getUserBiens();*/
+            return userBiens;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
         }
     }
-
 
 
 }
