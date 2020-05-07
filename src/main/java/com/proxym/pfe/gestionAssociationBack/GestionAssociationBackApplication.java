@@ -1,33 +1,36 @@
 package com.proxym.pfe.gestionAssociationBack;
 
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Etudiant.Etudiant;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Etudiant.EtudiantRepository;
-import com.sun.org.apache.xml.internal.serializer.utils.Utils;
+import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
+import com.proxym.pfe.gestionAssociationBack.bookPackage.BookRepositories;
+import com.proxym.pfe.gestionAssociationBack.bookPackage.Publisher;
+import com.proxym.pfe.gestionAssociationBack.bookPackage.manytomany.repositories.BookPublisher;
+import com.proxym.pfe.gestionAssociationBack.bookPackage.manytomany.repositories.PublisherRepository;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.repositories.MissionRepository;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
+import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.method.P;
-import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
+
+/*
 
 @SpringBootApplication
 public class GestionAssociationBackApplication {
 
-  public enum Couleur {
+    @Autowired
+    private BookRepositories bookRepository;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
+    public enum Couleur {
         MARRON("marron"),
         BLEU("bleu"),
         VERT("vert"),
@@ -115,9 +118,10 @@ public class GestionAssociationBackApplication {
     public static void main(String[] args) throws ParseException {
 
 
-
         ApplicationContext ctx = SpringApplication.run(GestionAssociationBackApplication.class, args);
-        List<Personne> listP = Arrays.asList(
+
+     */
+/*   List<Personne> listP = Arrays.asList(
                 new Personne(1.80, 70, "A", "Nicolas", Couleur.BLEU),
                 new Personne(1.56, 50, "B", "Nicole", Couleur.VERRON),
                 new Personne(1.75, 65, "C", "Germain", Couleur.VERT),
@@ -141,7 +145,9 @@ public class GestionAssociationBackApplication {
         System.out.println("ld.iterator();" + ld);
 
 
-       /* EtudiantRepository etudiantRepository = ctx.getBean(EtudiantRepository.class);
+       *//*
+ */
+/* EtudiantRepository etudiantRepository = ctx.getBean(EtudiantRepository.class);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
        /* etudiantRepository.save(new Etudiant("ikrlll", "ik@gmail.com", df.parse("2020-10-10"), "ahmed.png"));
         etudiantRepository.save(new Etudiant("llllrl", "ll@gmail.com", df.parse("2020-10-10"), "lie.png"));
@@ -150,10 +156,84 @@ public class GestionAssociationBackApplication {
         etudiantRepository.save(new Etudiant("lhhrrie", "lie@gmail.com", df.parse("2020-10-10"), "lie.png"));
         etudiantRepository.save(new Etudiant("Amirhhn", "amin@gmail.com", df.parse("2020-10-10"), "amin.png"));
        //je veux 5 etudiant de la page 5
-        */
-       /* Page<Etudiant> etudiants = etudiantRepository.chercherEtudiant("%A%", new PageRequest(0, 5));
+        *//*
+
+ */
+/* Page<Etudiant> etudiants = etudiantRepository.chercherEtudiant("%A%", new PageRequest(0, 5));
         etudiants.forEach(etudiant -> System.out.println(etudiant.getNom()
-        ));*/
+        ));*//*
+
     }
 
+}
+*/
+@SpringBootApplication
+public class GestionAssociationBackApplication implements CommandLineRunner {
+    private static final Logger logger = LoggerFactory.getLogger(GestionAssociationBackApplication.class);
+
+    @Autowired
+    private BookRepositories bookRepository;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    MissionRepository missionRepository;
+
+    public static void main(String[] args) {
+        SpringApplication.run(GestionAssociationBackApplication.class, args);
+    }
+
+    @Override
+    @Transactional
+    public void run(String... strings) throws Exception {
+        // create new
+        Book bookA = new Book("Book A");
+        Publisher publisherA = new Publisher("Publisher A");
+
+        BookPublisher bookPublisher = new BookPublisher();
+
+        bookPublisher.setBook(bookA);
+        bookPublisher.setPublisher(publisherA);
+
+        bookPublisher.setPublishedDate(new Date());
+        bookPublisher.setAffected(0);
+
+        //  user.getUserMissions().add(userMission);
+        bookA.getBookPublishers().add(bookPublisher);
+
+        publisherRepository.save(publisherA);
+        Book b = new Book();
+        System.out.println("b****" +b);
+        b = bookRepository.save(bookA);
+        System.out.println("  b" + b.getId());
+        System.out.println("  b" + b.getClass());
+
+        //Book b2 =bookRepository.getOne(b.getId());
+        Optional<Book> b2 =bookRepository.findById(b.getId());
+        System.out.println("b2****" +b2.get().getName());
+
+        System.out.println("bookA.getAffected()  " + bookA.getBookPublishers().get(0).getAffected());
+        publisherRepository.findAll();
+        System.out.println(publisherRepository.findAll().size());
+
+        /****Test2***/
+   /*     Publisher publisherB = new Publisher("Publisher B");
+
+        BookPublisher bookPublisher2 = new BookPublisher();
+
+        bookPublisher2.setBook(b);
+        bookPublisher2.setPublisher(publisherB);
+        bookPublisher2.setPublishedDate(new Date());
+        bookPublisher2.setAffected(0);
+        b.getBookPublishers().add(bookPublisher2);
+
+        publisherRepository.save(publisherB);
+        bookRepository.save(b);
+        System.out.println("b****" + b.getBookPublishers().size());
+
+        System.out.println("bookA.getAffected()  " + b.getBookPublishers().get(0).getAffected());
+*/
+    }
 }

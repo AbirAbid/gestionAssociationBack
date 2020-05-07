@@ -32,7 +32,7 @@ let addRowBien = function () {
 };
 
 let addRowMission = function () {
-    let listName = 'missionBenevoles';
+    let listName = 'missions';
     let fieldsNames = ['titre', 'description'];
     let rowIndex = document.querySelectorAll('.item').length;
 

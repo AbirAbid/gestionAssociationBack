@@ -4,28 +4,26 @@ import com.proxym.pfe.gestionAssociationBack.bookPackage.manytomany.repositories
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-@Data
 @Entity
-public class Book {
-
+@Data
+public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookPublisher> bookPublishers = new ArrayList<>();
+    @OneToMany(mappedBy = "publisher")
+    private List<BookPublisher> bookPublishers;
 
+    public Publisher() {
 
-    public Book() {
     }
 
-    public Book(String name) {
+    public Publisher(String name) {
         this.name = name;
-        //bookPublishers = new ArrayList<>();
     }
 }

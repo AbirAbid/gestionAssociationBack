@@ -1,14 +1,22 @@
 package com.proxym.pfe.gestionAssociationBack.user.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.ParticiperBien;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.ParticiperMissionBenevole;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import org.hibernate.annotations.NaturalId;
+
+import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 import lombok.Data;
 
 @Entity
@@ -21,6 +29,7 @@ import lombok.Data;
                 "email"
         })
 })
+@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 
 public class User {
     @Id
@@ -68,8 +77,12 @@ public class User {
 
     private Set<ParticiperBien> participerBiens;
 
-    @OneToMany
-    private Set<ParticiperMissionBenevole> participerMissionBenevoles ;
+    /*  @OneToMany
+      private Set<ParticiperMissionBenevole> participerMissionBenevoles ;*/
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserMission> userMissions;
+
 
     @NotBlank
 
@@ -96,5 +109,8 @@ public class User {
 
     }
 
+    public User() {
+        this.userMissions = new ArrayList<>();
+    }
 
 }

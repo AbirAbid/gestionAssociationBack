@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -22,5 +23,6 @@ public class MissionBenevole {
     @OneToMany
     private Set<ParticiperMissionBenevole> participerMissionBenevoles = new HashSet<>();
 
-
+  /*  @OneToMany(mappedBy = "missionBenevole", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserMission> userMissions;*/
 }

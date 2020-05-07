@@ -7,8 +7,10 @@ import com.proxym.pfe.gestionAssociationBack.biens.services.ParticiperBienServic
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionBenevole;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionBenevoleService;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
 import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
@@ -37,7 +39,8 @@ public class EvenementController {
     BienService bienService;
     @Autowired
     MissionBenevoleService missionBenevoleService;
-
+    @Autowired
+    MissionService missionService;
     @Autowired
     SponsorService sponsorService;
     @Autowired
@@ -54,7 +57,8 @@ public class EvenementController {
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             EvenementDto evenementDto = new EvenementDto();
             evenementDto.addBien(new Bien());
-            evenementDto.addMissionBenevole(new MissionBenevole());
+           // evenementDto.addMissionBenevole(new MissionBenevole());
+            evenementDto.addMission(new Mission());
             //   for (int i = 1; i <= 3; i++) {
             // evenementDto.addBien(new Bien());
             //evenementDto.addMissionBenevole(new MissionBenevole());
@@ -136,15 +140,15 @@ public class EvenementController {
 
             // System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());
 
-            for (int i = 0; i <= evenementDto.getMissionBenevoles().size() - 1; i++) {
+            for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
 
 
-                evenementDto.getMissionBenevoles().get(i).setEvenement(e);
+                evenementDto.getMissions().get(i).setEvenement(e);
 
             }
 
             bienService.saveAllService(evenementDto.getBiens());
-            missionBenevoleService.saveAllMissionService(evenementDto.getMissionBenevoles());
+            missionService.saveAllMissionService(evenementDto.getMissions());
 
 
             return "redirect:list";
@@ -177,7 +181,8 @@ public class EvenementController {
             System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
 
             List<Bien> biens = bienService.findAllByEventService(id);
-            List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
+           // List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
+            List<Mission> missions=missionService.findAllMissionByEventService(id);
             System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
             if (biens.size() != 0) {
                 for (int i = 0; i <= biens.size() - 1; i++) {
@@ -188,16 +193,16 @@ public class EvenementController {
                 evenementDto.addBien(new Bien());
 
             }
-            if (missionBenevoles.size() != 0) {
-                for (int i = 0; i <= missionBenevoles.size() - 1; i++) {
-                    evenementDto.addMissionBenevole(missionBenevoles.get(i));
-                    System.out.println("missionBenevoles.get(i)*******" + missionBenevoles.get(i).getIdM());
+            if (missions.size() != 0) {
+                for (int i = 0; i <= missions.size() - 1; i++) {
+                    evenementDto.addMission(missions.get(i));
+                    System.out.println("missionBenevoles.get(i)*******" + missions.get(i).getId());
 
 
                 }
             } else {
 
-                evenementDto.addMissionBenevole(new MissionBenevole());
+                evenementDto.addMission(new Mission());
 
             }
 
@@ -270,23 +275,23 @@ public class EvenementController {
                 evenementDto.getBiens().get(i).setEvenement(e);
 
             }
-            List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(e.getId());
-            System.out.println("evenementDto.getMissionBenevoles().size() ************" + evenementDto.getMissionBenevoles().size());
+            List<Mission> missions = missionService.findAllMissionByEventService(e.getId());
+            System.out.println("evenementDto.getMissionBenevoles().size() ************" + evenementDto.getMissions().size());
 
-            for (int i = 0; i <= evenementDto.getMissionBenevoles().size() - 1; i++) {
+            for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
 
 
-                if (i <= missionBenevoles.size() - 1) {
-                    evenementDto.getMissionBenevoles().get(i).setIdM(missionBenevoles.get(i).getIdM());
+                if (i <= missions.size() - 1) {
+                    evenementDto.getMissions().get(i).setId(missions.get(i).getId());
                 }
 
-                System.out.println("mission id ************" + evenementDto.getMissionBenevoles().get(i));
-                evenementDto.getMissionBenevoles().get(i).setEvenement(e);
+                System.out.println("mission id ************" + evenementDto.getMissions().get(i));
+                evenementDto.getMissions().get(i).setEvenement(e);
 
 
             }
             bienService.saveAllService(evenementDto.getBiens());
-            missionBenevoleService.saveAllMissionService(evenementDto.getMissionBenevoles());
+            missionService.saveAllMissionService(evenementDto.getMissions());
 
 
             return "redirect:list";

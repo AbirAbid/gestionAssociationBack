@@ -1,9 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.entities;
-
-import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
 

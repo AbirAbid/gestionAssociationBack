@@ -17,7 +17,7 @@
         <div class="card border-primary mb-3" style="max-width: 50rem; ">
 
             <h5 class="card-header info-color white-text text-center py-2">
-                <strong> CRÉER UN ÉVÈNEMENT
+                <strong> Modifier UN ÉVÈNEMENT
                 </strong>
             </h5>
 
@@ -341,20 +341,20 @@
                                             <div class="col form-group">Titre de la mission</div>
                                             <div class="col form-group">Déscription de la mission</div>
                                         </div>
-                                        <div class="row item" th:each="missionBen, item : *{missionBenevoles}">
+                                        <div class="row item" th:each="mission, item : *{missions}">
 
 
                                             <div class="col form-group">
                                                 <input
 
-                                                        th:field="*{missionBenevoles[__${item.index}__].titre}"
+                                                        th:field="*{missions[__${item.index}__].titre}"
                                                         type="text"
                                                         class="form-control">
                                             </div>
 
                                             <div class="col form-group">
                                                 <input
-                                                        th:field="*{missionBenevoles[__${item.index}__].description}"
+                                                        th:field="*{missions[__${item.index}__].description}"
                                                         type="text"
                                                         class="form-control">
                                             </div>
