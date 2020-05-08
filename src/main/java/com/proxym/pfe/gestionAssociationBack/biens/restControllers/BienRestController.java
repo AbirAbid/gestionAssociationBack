@@ -40,13 +40,13 @@ public class BienRestController {
             ObjectMapper mapper = new ObjectMapper();
 
             List<Bien> biens = bienService.findAllService();
-            List<Bien> biens1 =new ArrayList<>();
-            String jsonInString ;
+            List<Bien> biens1 = new ArrayList<>();
+            String jsonInString;
 
             for (int i = 0; i < biens.size(); i++) {
-                jsonInString=mapper.writeValueAsString(biens.get(i));
-               System.out.println("jsonInString"+jsonInString);
-                Bien bien= mapper.readValue(jsonInString, Bien.class);
+                jsonInString = mapper.writeValueAsString(biens.get(i));
+                System.out.println("jsonInString" + jsonInString);
+                Bien bien = mapper.readValue(jsonInString, Bien.class);
 
                 System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
                 biens1.add(bien);
@@ -61,23 +61,25 @@ public class BienRestController {
 
     /***List Biens par event id***/
 
+
     @RequestMapping(value = "/listBienEvent/{id}", method = RequestMethod.GET)
     public List<Bien> getListBienByEvent(@PathVariable("id") Long id) {
 
         try {
             List<Bien> biens = bienService.findAllByEventService(id);
             ObjectMapper mapper = new ObjectMapper();
-
-            //List<Bien> biens = bienService.findAllService();
-            List<Bien> biens1 =new ArrayList<>();
-            String jsonInString ;
+            List<Bien> biens1 = new ArrayList<>();
+            String jsonInString;
 
             for (int i = 0; i < biens.size(); i++) {
-                jsonInString=mapper.writeValueAsString(biens.get(i));
-                System.out.println("jsonInString"+jsonInString);
-                Bien bien= mapper.readValue(jsonInString, Bien.class);
+                //Convert  bien to JSON format,
+                jsonInString = mapper.writeValueAsString(biens.get(i));
 
-                System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
+                System.out.println("jsonInString" + jsonInString);
+                //get Bien sous forme json
+                Bien bien = mapper.readValue(mapper.writeValueAsString(biens.get(i)), Bien.class);
+
+                // System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
                 biens1.add(bien);
             }
             return biens1;
@@ -151,10 +153,23 @@ public class BienRestController {
     @RequestMapping(value = "/listBienByUser/{username}", method = RequestMethod.GET)
     public List<Bien> getListBienByUser(@PathVariable("username") String username) {
         try {
+
             User user = userService.findUserByUsernameService(username);
             List<UserBien> userBiens = user.getUserBiens();
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonInString;
+
             List<Bien> biens = new ArrayList<>();
             for (int i = 0; i < userBiens.size(); i++) {
+                jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
+
+                System.out.println("jsonInString" + jsonInString);
+                //get Bien sous forme json
+                Bien bien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i).getBien()), Bien.class);
+
+                // System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
+                biens.add(bien);
+
                 biens.add(userBiens.get(i).getBien());
                 System.out.println("biens " + biens.get(i).getTitreBien());
 
