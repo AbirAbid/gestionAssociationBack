@@ -23,5 +23,7 @@ public interface UserService {
     SignUpForm changePassword(SignUpForm signUpForm, String newPassword);
 
     List<User> getAllDonneursService();
+    List<User> getAllBenevolesService();
+
 
 }

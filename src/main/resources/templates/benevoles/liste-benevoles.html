@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:insert="fragment/header :: headerfiles">
+
+<body>
+<div th:replace="fragment/menu ::menugauche">
+</div>
+
+<div id="content">
+    <div th:replace="fragment/header ::navbar"></div>
+
+    <div class="container">
+        <h1>Liste des Bénévoles</h1>
+        <div th:if="${#lists.isEmpty(userMissions)}">
+            <div class="alert alert-danger" role="alert">
+                La liste des dons est vide!!
+            </div>
+        </div>
+        <div th:if="${not #lists.isEmpty(userMissions)}">
+            <table class="table table-active border">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Titre Mission</th>
+                    <th scope="col">Événement</th>
+
+                    <th scope="col">Date participation</th>
+                </tr>
+                </thead>
+
+
+                <tbody th:each="p : ${userMissions}">
+
+                <tr>
+                    <td th:text="${p.user.nom}"></td>
+                    <td th:text="${p.user.prenom}"></td>
+                    <td th:text="${p.mission.titre}"></td>
+                    <td th:text="${p.mission.evenement.titre}"></td>
+
+                    <td th:text="${p.demandeDate}"></td>
+
+
+
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<header th:insert="fragment/header.html ::scriptFooter"></header>
+
+
+</body>
+</html>

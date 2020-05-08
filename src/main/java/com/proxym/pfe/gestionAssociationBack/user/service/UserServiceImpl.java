@@ -109,6 +109,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllBenevolesService() {
+        return userDao.getAllBenevolesDao();
+    }
+
+    @Override
     public User findUserByUsernameService(String username) {
         System.out.println("************UserServiceImpl-getUser*****************");
         return userDao.findByUsernameDao(username);

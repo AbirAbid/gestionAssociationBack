@@ -30,5 +30,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> chercherUser(@Param("x") String mc, Pageable pageable);
 
     List<User> findAllByUserBiensIsNotNull();
+    List<User> findAllByUserMissionsIsNotNull();
+
 
 }

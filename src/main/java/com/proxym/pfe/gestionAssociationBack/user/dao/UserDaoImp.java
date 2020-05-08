@@ -50,5 +50,10 @@ public class UserDaoImp implements UserDao {
         return userRepository.findAllByUserBiensIsNotNull();
     }
 
+    @Override
+    public List<User> getAllBenevolesDao() {
+        return userRepository.findAllByUserMissionsIsNotNull();
+    }
+
 
 }

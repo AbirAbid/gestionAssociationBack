@@ -26,6 +26,7 @@ public interface UserDao {
 
     User saveUserDao(User user);
     List<User> getAllDonneursDao();
+    List<User> getAllBenevolesDao();
 
 
 }
