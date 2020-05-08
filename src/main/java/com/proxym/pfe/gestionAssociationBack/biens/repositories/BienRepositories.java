@@ -13,7 +13,5 @@ public interface BienRepositories extends JpaRepository<Bien, Long> {
 
     List<Bien> findAllByEvenement_Ville(String ville);
 
-    //Bien findByParticiperBiens(Long idP);
-
 
 }

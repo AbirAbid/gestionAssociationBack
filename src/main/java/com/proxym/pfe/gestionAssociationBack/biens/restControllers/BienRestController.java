@@ -1,5 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.biens.restControllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proxym.pfe.gestionAssociationBack.biens.dto.ParticiperBienFormDto;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.*;
 
 @RestController
@@ -35,8 +37,22 @@ public class BienRestController {
     @RequestMapping(value = "/listBien", method = RequestMethod.GET)
     public List<Bien> getListBien() {
         try {
-            //System.out.println(bienService.findAllService());
-            return bienService.findAllService();
+            ObjectMapper mapper = new ObjectMapper();
+
+            List<Bien> biens = bienService.findAllService();
+            List<Bien> biens1 =new ArrayList<>();
+            String jsonInString ;
+
+            for (int i = 0; i < biens.size(); i++) {
+                jsonInString=mapper.writeValueAsString(biens.get(i));
+               System.out.println("jsonInString"+jsonInString);
+                Bien bien= mapper.readValue(jsonInString, Bien.class);
+
+                System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
+                biens1.add(bien);
+            }
+
+            return biens1;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
@@ -47,8 +63,24 @@ public class BienRestController {
 
     @RequestMapping(value = "/listBienEvent/{id}", method = RequestMethod.GET)
     public List<Bien> getListBienByEvent(@PathVariable("id") Long id) {
+
         try {
-            return bienService.findAllByEventService(id);
+            List<Bien> biens = bienService.findAllByEventService(id);
+            ObjectMapper mapper = new ObjectMapper();
+
+            //List<Bien> biens = bienService.findAllService();
+            List<Bien> biens1 =new ArrayList<>();
+            String jsonInString ;
+
+            for (int i = 0; i < biens.size(); i++) {
+                jsonInString=mapper.writeValueAsString(biens.get(i));
+                System.out.println("jsonInString"+jsonInString);
+                Bien bien= mapper.readValue(jsonInString, Bien.class);
+
+                System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
+                biens1.add(bien);
+            }
+            return biens1;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
@@ -77,6 +109,8 @@ public class BienRestController {
             User user = userService.findUserByUsernameService(username);
             Bien bien = participerBienFormDto.getBien();
             UserBien userBien = new UserBien();
+            int qteDonnee = participerBienFormDto.getQteDonnee();
+            System.out.println("qteDonnee****" + qteDonnee);
 
             List<UserBien> userBiens = user.getUserBiens();
             List<Long> bienUserId = new ArrayList<>();
@@ -89,9 +123,9 @@ public class BienRestController {
             if (bienUserId.contains(bien.getId())) {
                 int index = bienUserId.indexOf(bien.getId());
                 System.out.println("index****" + index);
-                //user.getUserBiens().setQteDonnee(userBien.getQteDonnee()+5);
-                user.getUserBiens().get(index).setQteDonnee(user.getUserBiens().get(index).getQteDonnee() + 5);
-                // bienService.saveBienService(bien);
+                user.getUserBiens().get(index).setQteDonnee(user.getUserBiens().get(index).getQteDonnee() + qteDonnee);
+                bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
+                bienService.saveBienService(bien);
                 userRepository.save(user);
             } else {
                 userBien.setUser(user);
@@ -99,6 +133,8 @@ public class BienRestController {
                 userBien.setQteDonnee(5);
                 userBien.setDateParticipation(new Date());
                 user.getUserBiens().add(userBien);
+                bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
+
                 bienService.saveBienService(bien);
                 userRepository.save(user);
 

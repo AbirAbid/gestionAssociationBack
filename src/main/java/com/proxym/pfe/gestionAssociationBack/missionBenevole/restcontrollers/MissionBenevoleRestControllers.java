@@ -42,9 +42,9 @@ public class MissionBenevoleRestControllers {
     }
 
     @RequestMapping(value = "/listMissionBenevoleEvent/{id}", method = RequestMethod.GET)
-    public List<MissionBenevole> getListMissionByEvent(@PathVariable("id") Long id) {
+    public List<Mission> getListMissionByEvent(@PathVariable("id") Long id) {
         try {
-            return missionBenevoleService.findAllMissionByEventService(id);
+            return missionService.findAllMissionByEventService(id);
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
