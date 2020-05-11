@@ -3,7 +3,6 @@ package com.proxym.pfe.gestionAssociationBack.evenement.dto;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionBenevole;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

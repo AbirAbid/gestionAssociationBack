@@ -5,11 +5,8 @@ import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
@@ -19,7 +16,7 @@ public class Mission {
     private Long id;
     private String titre;
     private String description;
-
+    //private int enAtte;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;

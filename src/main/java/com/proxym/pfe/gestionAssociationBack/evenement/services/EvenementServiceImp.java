@@ -3,9 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.evenement.services;
 import com.proxym.pfe.gestionAssociationBack.biens.dao.BienDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionBenevoleDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,8 +17,7 @@ public class EvenementServiceImp implements EvenementService {
 
     @Autowired
     EvenementDao evenementDao;
-    @Autowired
-    MissionBenevoleDao missionBenevoleDao;
+
     @Autowired
     BienDao bienDao;
     @Autowired

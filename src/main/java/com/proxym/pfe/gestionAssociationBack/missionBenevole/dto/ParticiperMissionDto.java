@@ -2,9 +2,6 @@ package com.proxym.pfe.gestionAssociationBack.missionBenevole.dto;
 
 import com.fasterxml.jackson.annotation.*;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionBenevole;
-import com.proxym.pfe.gestionAssociationBack.user.entities.User;
-import lombok.Data;
 
 import java.util.Date;
 
@@ -12,9 +9,7 @@ import java.util.Date;
 
 public class ParticiperMissionDto {
 
-    //private MissionBenevole missionBenevole;
 
-    //  private User user;
     private Mission mission;
     private Date demandeDate;
 

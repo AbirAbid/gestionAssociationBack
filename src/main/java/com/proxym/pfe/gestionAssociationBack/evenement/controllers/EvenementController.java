@@ -6,7 +6,6 @@ import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionBenevoleService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
@@ -31,8 +30,7 @@ public class EvenementController {
     EvenementService evenementService;
     @Autowired
     BienService bienService;
-    @Autowired
-    MissionBenevoleService missionBenevoleService;
+
     @Autowired
     MissionService missionService;
     @Autowired

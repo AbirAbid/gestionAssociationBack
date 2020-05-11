@@ -2,9 +2,6 @@ package com.proxym.pfe.gestionAssociationBack.biens.dao;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.repositories.BienRepositories;
-import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
-import com.proxym.pfe.gestionAssociationBack.evenement.repositories.EventRepositories;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionBenevole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

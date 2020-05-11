@@ -163,14 +163,13 @@ public class BienRestController {
             for (int i = 0; i < userBiens.size(); i++) {
                 jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
 
-                System.out.println("jsonInString" + jsonInString);
+                //System.out.println("jsonInString" + jsonInString);
                 //get Bien sous forme json
                 Bien bien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i).getBien()), Bien.class);
 
                 // System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
                 biens.add(bien);
 
-                biens.add(userBiens.get(i).getBien());
                 System.out.println("biens " + biens.get(i).getTitreBien());
 
             }

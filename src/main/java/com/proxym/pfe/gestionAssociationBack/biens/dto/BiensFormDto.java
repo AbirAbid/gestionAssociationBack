@@ -1,8 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.biens.dto;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.MissionBenDto;
 import lombok.Data;
 
 import java.util.ArrayList;
