@@ -6,9 +6,14 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionSer
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,22 +27,31 @@ public class MissionController {
     UserService userService;
     @Autowired
     MissionService missionService;
-    int index = 0;
 
 
     @RequestMapping(value = "/listbenevoles")
-    public String listBenevoles(Model model) {
+    public String listBenevoles(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
 
-        try {
-            List<UserMission> userMissions = getListAllPartiMission();
+       // try {
+            Page<UserMission> userMissions = getListAllPartiMission(page);
 
+            int pagesCount = userMissions.getTotalPages();
+            int[] pages = new int[pagesCount];
 
+            for (int i = 0; i < pagesCount; i++) {
+                pages[i] = i;
+                System.out.println(" pages[i] " + pages[i]);
+            }
+            model.addAttribute("pageCourante", page);
+            model.addAttribute("pageContent", userMissions.getContent());
             model.addAttribute("userMissions", userMissions);
+            model.addAttribute("pages", pages);
+
 
             return "benevoles/liste-benevoles";
-        } catch (Exception e) {
+    /*    } catch (Exception e) {
             return "pagesError/error";
-        }
+        }*/
 
 
     }
@@ -45,7 +59,7 @@ public class MissionController {
 
     @RequestMapping(value = "/affectMission")
 
-    public String affectMission(Model model, String id, Long id2) {
+    public String affectMission(Model model, String id, Long id2, @RequestParam(name = "page", defaultValue = "0") int page){
         try {
             User user = userService.findUserByUsernameService(id);
             Mission mission = missionService.findMissionByIdService(id2);
@@ -71,7 +85,7 @@ public class MissionController {
             System.out.println("userMissions.get(index): " + userMissions.get(index).getMission());
 
             userService.saveUserService(user);
-            List<UserMission> userMissions1 = getListAllPartiMission();
+            Page<UserMission> userMissions1 = getListAllPartiMission(page);
             model.addAttribute("userMissions", userMissions1);
 
 
@@ -82,7 +96,7 @@ public class MissionController {
     }
 
 
-    List<UserMission> getListAllPartiMission() {
+    Page<UserMission> getListAllPartiMission(int page) {
         List<User> users = userService.getAllBenevolesService();
         /**eliminate duplicate value list users****/
         Set<User> set = new HashSet<>(users);
@@ -97,6 +111,8 @@ public class MissionController {
                 userMissions.add(users.get(i).getUserMissions().get(j));
             }
         }
-        return userMissions;
+         Page<UserMission> userMissions1 = new PageImpl<>(userMissions,new PageRequest(page, 2),userMissions.size());
+
+        return  userMissions1;
     }
 }
