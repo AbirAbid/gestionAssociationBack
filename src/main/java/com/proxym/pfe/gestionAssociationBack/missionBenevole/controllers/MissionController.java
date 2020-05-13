@@ -32,23 +32,23 @@ public class MissionController {
     @RequestMapping(value = "/listbenevoles")
     public String listBenevoles(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
 
-       // try {
-            Page<UserMission> userMissions = getListAllPartiMission(page);
+        // try {
+        Page<UserMission> userMissions = getListAllPartiMission(page);
 
-            int pagesCount = userMissions.getTotalPages();
-            int[] pages = new int[pagesCount];
+        int pagesCount = userMissions.getTotalPages();
+        int[] pages = new int[pagesCount];
 
-            for (int i = 0; i < pagesCount; i++) {
-                pages[i] = i;
-                System.out.println(" pages[i] " + pages[i]);
-            }
-            model.addAttribute("pageCourante", page);
-            model.addAttribute("pageContent", userMissions.getContent());
-            model.addAttribute("userMissions", userMissions);
-            model.addAttribute("pages", pages);
+        for (int i = 0; i < pagesCount; i++) {
+            pages[i] = i;
+            System.out.println(" pages[i] " + pages[i]);
+        }
+        model.addAttribute("pageCourante", page);
+        model.addAttribute("pageContent", userMissions.getContent());
+        model.addAttribute("userMissions", userMissions);
+        model.addAttribute("pages", pages);
 
 
-            return "benevoles/liste-benevoles";
+        return "benevoles/liste-benevoles";
     /*    } catch (Exception e) {
             return "pagesError/error";
         }*/
@@ -59,7 +59,7 @@ public class MissionController {
 
     @RequestMapping(value = "/affectMission")
 
-    public String affectMission(Model model, String id, Long id2, @RequestParam(name = "page", defaultValue = "0") int page){
+    public String affectMission(Model model, String id, Long id2, @RequestParam(name = "page", defaultValue = "0") int page) {
         try {
             User user = userService.findUserByUsernameService(id);
             Mission mission = missionService.findMissionByIdService(id2);
@@ -86,9 +86,19 @@ public class MissionController {
 
             userService.saveUserService(user);
             Page<UserMission> userMissions1 = getListAllPartiMission(page);
+
+            int pagesCount = userMissions1.getTotalPages();
+            int[] pages = new int[pagesCount];
+
+            for (int i = 0; i < pagesCount; i++) {
+                pages[i] = i;
+                System.out.println(" pages[i] " + pages[i]);
+            }
+            model.addAttribute("pageCourante", page);
+            model.addAttribute("pageContent", userMissions1.getContent());
+            model.addAttribute("pages", pages);
             model.addAttribute("userMissions", userMissions1);
-
-
+/**/
             return "benevoles/liste-benevoles";
         } catch (Exception e) {
             return "pagesError/error";
@@ -111,8 +121,18 @@ public class MissionController {
                 userMissions.add(users.get(i).getUserMissions().get(j));
             }
         }
-         Page<UserMission> userMissions1 = new PageImpl<>(userMissions,new PageRequest(page, 2),userMissions.size());
-
-        return  userMissions1;
+        Pageable pageable = new PageRequest(page, 5);
+        if (pageable.getOffset() >= userMissions.size()) {
+            return Page.empty();
+        }
+        int startIndex = (int)pageable.getOffset();
+        int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > userMissions.size() ?
+                userMissions.size() :
+                pageable.getOffset() + pageable.getPageSize());
+        Page<UserMission> userMissions1 = new PageImpl<>(userMissions.subList(startIndex, endIndex),pageable, userMissions.size());
+        return userMissions1;
     }
+
+
+
 }
