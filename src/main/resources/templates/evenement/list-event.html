@@ -13,7 +13,25 @@
 <div id="content">
 
     <div th:replace="fragment/header ::navbar"></div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${messageDelete}">
+        <strong th:text="${messageDelete}"></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageUpdate}">
+        <strong th:text="${messageUpdate}"></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${message}">
+        <strong th:text="${message}"></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <table class="table table-bordered">
         <form th:action="@{list}" method="get">
             <div class="md-form active-purple-2 mb-3">
@@ -27,9 +45,16 @@
                 </div>
             </div>
         </form>
-        <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
-            Aucun résultat pour <p th:text="${mc}"></p>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+             th:if="${ #lists.isEmpty(pageContent)}">
+            Aucun résultat pour <strong th:text="${mc}"></strong>
+            <a type="button" class="close" data-dismiss="alert"
+               aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </a>
         </div>
+
         <thead>
         <tr>
             <th>ID</th>

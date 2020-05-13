@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,8 +60,10 @@ public class MissionController {
 
     @RequestMapping(value = "/affectMission")
 
-    public String affectMission(Model model, String id, Long id2, @RequestParam(name = "page", defaultValue = "0") int page) {
+    public String affectMission(Model model, String id, Long id2, @RequestParam(name = "page", defaultValue = "0") int page,
+                                RedirectAttributes redirectAttributes) {
         try {
+
             User user = userService.findUserByUsernameService(id);
             Mission mission = missionService.findMissionByIdService(id2);
             System.out.println("user.nom: " + user.getNom());
@@ -85,6 +88,7 @@ public class MissionController {
             System.out.println("userMissions.get(index): " + userMissions.get(index).getMission());
 
             userService.saveUserService(user);
+
             Page<UserMission> userMissions1 = getListAllPartiMission(page);
 
             int pagesCount = userMissions1.getTotalPages();
@@ -98,8 +102,9 @@ public class MissionController {
             model.addAttribute("pageContent", userMissions1.getContent());
             model.addAttribute("pages", pages);
             model.addAttribute("userMissions", userMissions1);
-/**/
-            return "benevoles/liste-benevoles";
+            redirectAttributes.addFlashAttribute("message", "Votre affectation est fait avec succées");
+
+            return "redirect:/mission/listbenevoles";
         } catch (Exception e) {
             return "pagesError/error";
         }
@@ -125,14 +130,13 @@ public class MissionController {
         if (pageable.getOffset() >= userMissions.size()) {
             return Page.empty();
         }
-        int startIndex = (int)pageable.getOffset();
+        int startIndex = (int) pageable.getOffset();
         int endIndex = (int) ((pageable.getOffset() + pageable.getPageSize()) > userMissions.size() ?
                 userMissions.size() :
                 pageable.getOffset() + pageable.getPageSize());
-        Page<UserMission> userMissions1 = new PageImpl<>(userMissions.subList(startIndex, endIndex),pageable, userMissions.size());
+        Page<UserMission> userMissions1 = new PageImpl<>(userMissions.subList(startIndex, endIndex), pageable, userMissions.size());
         return userMissions1;
     }
-
 
 
 }

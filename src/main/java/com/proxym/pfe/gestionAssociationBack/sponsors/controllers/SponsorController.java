@@ -56,7 +56,7 @@ public class SponsorController {
 
     }
 
-    @RequestMapping(value = "/sponsors")
+    @RequestMapping(value = "/sponsors",method = RequestMethod.GET)
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "motCle", defaultValue = "") String mc) {
         //cherche moi un paam page à dispa servlet initialement page0

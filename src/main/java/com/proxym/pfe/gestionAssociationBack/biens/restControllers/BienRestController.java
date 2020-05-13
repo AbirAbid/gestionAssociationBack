@@ -6,6 +6,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.biens.repositories.BienRepositories;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
+import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.ParticiperMissionDto;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -30,7 +31,8 @@ public class BienRestController {
     UserRepository userRepository;
     @Autowired
     BienRepositories bienRepositories;
-
+    @Autowired
+    EvenementService evenementService;
 
     /***List Biens***/
 
@@ -130,13 +132,14 @@ public class BienRestController {
                 bienService.saveBienService(bien);
                 userRepository.save(user);
             } else {
+                bien.getEvenement().setActive(1);
                 userBien.setUser(user);
                 userBien.setBien(bien);
                 userBien.setQteDonnee(5);
                 userBien.setDateParticipation(new Date());
                 user.getUserBiens().add(userBien);
                 bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
-
+                evenementService.addEventService(bien.getEvenement());
                 bienService.saveBienService(bien);
                 userRepository.save(user);
 

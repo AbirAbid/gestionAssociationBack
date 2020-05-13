@@ -3,6 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.missionBenevole.restcontrollers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
+import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.ParticiperMissionDto;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -30,6 +31,8 @@ public class MissionBenevoleRestControllers {
     MissionService missionService;
     @Autowired
     MissionRepository missionRepository;
+    @Autowired
+    EvenementService evenementService;
 
 
     @RequestMapping(value = "/listMissionBenevoleEvent/{id}", method = RequestMethod.GET)
@@ -72,7 +75,7 @@ public class MissionBenevoleRestControllers {
             // System.out.println("******************** user *******************" + user);
             userMission.setUser(user);
             Mission mission = participerMissionDto.getMission();
-
+            mission.getEvenement().setActive(1);
             userMission.setMission(mission);
             userMission.setAffected(0);
             userMission.setEnAttente(1);
@@ -81,6 +84,7 @@ public class MissionBenevoleRestControllers {
             user.getUserMissions().add(userMission);
             System.out.println("**************  user.getUserMissions().size()**********" + user.getUserMissions().size());
             //missionService.saveMissionService(mission);
+            evenementService.addEventService(mission.getEvenement());
             missionRepository.save(mission);
             userRepository.save(user);
 
@@ -116,7 +120,7 @@ public class MissionBenevoleRestControllers {
                 System.out.println("userMissions" + userMissions.get(i).getMission().getTitre());
                 jsonInString = mapper.writeValueAsString(userMissions.get(i).getMission());
 
-               // System.out.println("jsonInString" + jsonInString);
+                // System.out.println("jsonInString" + jsonInString);
                 //get mission sous forme json
                 Mission mission = mapper.readValue(mapper.writeValueAsString(userMissions.get(i).getMission()), Mission.class);
 

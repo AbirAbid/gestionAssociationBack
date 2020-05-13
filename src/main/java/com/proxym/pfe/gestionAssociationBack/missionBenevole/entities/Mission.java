@@ -16,7 +16,6 @@ public class Mission {
     private Long id;
     private String titre;
     private String description;
-    //private int enAtte;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Evenement evenement;

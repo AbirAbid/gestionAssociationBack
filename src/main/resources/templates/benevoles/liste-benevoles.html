@@ -18,6 +18,12 @@
             </div>
         </div>
         <div th:if="${not #lists.isEmpty(userMissions)}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"  th:if="${message}">
+                <strong th:text="${message}"></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <table class="table table-active border">
                 <thead>
                 <tr>
@@ -58,10 +64,12 @@
 
                 </tbody>
             </table>
+
             <center>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
+                        <li class="page-item" th:each="p : ${pages}"
+                            th:class="${p==pageCourante}? 'page-item active': ''">
                             <!-- $ acceder model -->
                             <a class="page-link" th:text="${p}" th:href="@{listbenevoles(page=${p})}"></a>
                         </li>

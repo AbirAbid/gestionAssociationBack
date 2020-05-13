@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -49,7 +50,7 @@ public class EvenementController {
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             EvenementDto evenementDto = new EvenementDto();
             evenementDto.addBien(new Bien());
-           // evenementDto.addMissionBenevole(new MissionBenevole());
+            // evenementDto.addMissionBenevole(new MissionBenevole());
             evenementDto.addMission(new Mission());
             //   for (int i = 1; i <= 3; i++) {
             // evenementDto.addBien(new Bien());
@@ -71,7 +72,8 @@ public class EvenementController {
     public String AjouterEvent(@Valid EvenementDto evenementDto,
                                BindingResult bindingResult, Model model
             , @RequestParam(name = "dateDebut", defaultValue = "2020-04-22") String dateDebut
-            , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin) {
+            , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin,
+                               RedirectAttributes redirectAttributes) {
         try {
             /*****************Controle Date ***************************/
 
@@ -142,6 +144,7 @@ public class EvenementController {
             bienService.saveAllService(evenementDto.getBiens());
             missionService.saveAllMissionService(evenementDto.getMissions());
 
+            redirectAttributes.addFlashAttribute("message", " Votre événement a été ajouté avec succès ");
 
             return "redirect:list";
         } catch (Exception e) {
@@ -154,7 +157,7 @@ public class EvenementController {
     /*********************************Update Event****************************/
     @RequestMapping(value = "/formulaireUpdateEvent")
 
-    public String formulaireUpdate(Model model, Long id) {
+    public String formulaireUpdate(Model model, Long id, RedirectAttributes redirectAttributes) {
         try {
 
             Evenement e = evenementService.getOneEventByIdservice(id);
@@ -173,8 +176,8 @@ public class EvenementController {
             System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
 
             List<Bien> biens = bienService.findAllByEventService(id);
-           // List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
-            List<Mission> missions=missionService.findAllMissionByEventService(id);
+            // List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
+            List<Mission> missions = missionService.findAllMissionByEventService(id);
             System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
             if (biens.size() != 0) {
                 for (int i = 0; i <= biens.size() - 1; i++) {
@@ -212,7 +215,8 @@ public class EvenementController {
     public String updateEvent(@Valid EvenementDto evenementDto,
                               BindingResult bindingResult, Model model
             , @RequestParam(name = "dateDebut", defaultValue = "2020-04-22") String dateDebut
-            , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin) {
+            , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin,
+                              RedirectAttributes redirectAttributes) {
         try {
             /*****************Controle Date ***************************/
 
@@ -247,6 +251,7 @@ public class EvenementController {
             event.setSponsors(evenementDto.getSponsors());
             event.setVille(evenementDto.getVille());
             event.setFrais(evenementDto.getFrais());
+            event.setActive(1);
             // System.out.println("***********************event Sponsor*********************  " + event.getSponsors());
             Evenement e = evenementService.addEventService(event);
             /** for Affect  Sponsor ***/
@@ -285,6 +290,7 @@ public class EvenementController {
             bienService.saveAllService(evenementDto.getBiens());
             missionService.saveAllMissionService(evenementDto.getMissions());
 
+            redirectAttributes.addFlashAttribute("messageUpdate", " Votre événement a été modifier avec succès ");
 
             return "redirect:list";
         } catch (Exception e) {
@@ -296,8 +302,10 @@ public class EvenementController {
 
     /*********************************Delete Event******************************/
     @RequestMapping(value = "/supprimer")
-    public String supprimer(Long id) {
+    public String supprimer(Long id, RedirectAttributes redirectAttributes) {
         evenementService.suuprimerEvent(id);
+        redirectAttributes.addFlashAttribute("messageDelete", " Votre événement a été supprimer.");
+
         return "redirect:/evenement/list";
     }
 
