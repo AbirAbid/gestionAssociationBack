@@ -1,4 +1,5 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.services;
+
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class MissionServiceImp implements MissionService {
         return missionDao.findAllMissionDao();
     }
 
-   @Override
+    @Override
     public List<Mission> findAllMissionByEventService(Long id) {
         return missionDao.findAllMissionByEventDao(id);
     }
@@ -35,5 +36,10 @@ public class MissionServiceImp implements MissionService {
     public List<Mission> findAllByEvenement_VilleService(String ville) {
 
         return missionDao.findAllByEvenement_VilleDao(ville);
+    }
+
+    @Override
+    public Mission findMissionByIdService(Long id) {
+        return missionDao.findMissionByIdDao(id);
     }
 }

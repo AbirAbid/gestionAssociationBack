@@ -94,6 +94,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User saveUserService(User user) {
+        return userDao.saveUserDao(user);
+    }
+
+    @Override
     public SignUpForm findUserByEmail(String email) {
         return null;
     }

@@ -44,4 +44,9 @@ public class MissionDaoImp implements MissionDao {
     public Mission saveMissionDao(Mission mission) {
         return missionRepository.save(mission);
     }
+
+    @Override
+    public Mission findMissionByIdDao(Long id) {
+        return missionRepository.getOne(id);
+    }
 }

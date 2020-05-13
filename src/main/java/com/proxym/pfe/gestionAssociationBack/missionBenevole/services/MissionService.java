@@ -10,7 +10,10 @@ public interface MissionService {
     Mission saveMissionService(Mission mission);
 
     List<Mission> findAllMissionService();
-   List<Mission> findAllMissionByEventService(Long id);
+
+    List<Mission> findAllMissionByEventService(Long id);
 
     List<Mission> findAllByEvenement_VilleService(String ville);
+
+    Mission findMissionByIdService(Long id);
 }

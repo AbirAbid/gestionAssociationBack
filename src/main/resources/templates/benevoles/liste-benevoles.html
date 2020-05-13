@@ -23,10 +23,14 @@
                 <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
+                    <th scope="col">Tél</th>
+
                     <th scope="col">Titre Mission</th>
                     <th scope="col">Événement</th>
 
                     <th scope="col">Date participation</th>
+                    <th scope="col">Affecter</th>
+
                 </tr>
                 </thead>
 
@@ -36,11 +40,18 @@
                 <tr>
                     <td th:text="${p.user.nom}"></td>
                     <td th:text="${p.user.prenom}"></td>
+                    <td th:text="${p.user.telephone}"></td>
+
                     <td th:text="${p.mission.titre}"></td>
                     <td th:text="${p.mission.evenement.titre}"></td>
 
                     <td th:text="${p.demandeDate}"></td>
-
+                    <td>
+                        <center><a class="btn btn-secondary" title="affecter"
+                                   th:href="@{affectMission(id=${p.user.username},id2=${p.mission.id})}">
+                            <i class="far fa-check-circle"></i></a>
+                        </center>
+                    </td>
 
 
                 </tr>

@@ -11,6 +11,7 @@ import java.util.List;
 public interface UserService {
     ResponseEntity<?> signup(SignUpForm signUpForm);
 
+    User saveUserService(User user);
 
     User findUserByUsernameService(String username);
 
@@ -23,6 +24,7 @@ public interface UserService {
     SignUpForm changePassword(SignUpForm signUpForm, String newPassword);
 
     List<User> getAllDonneursService();
+
     List<User> getAllBenevolesService();
 
 
