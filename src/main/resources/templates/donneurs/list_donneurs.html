@@ -49,6 +49,18 @@
 
                 </tbody>
             </table>
+            <center>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item" th:each="p : ${pages}"
+                            th:class="${p==pageCourante}? 'page-item active': ''">
+                            <!-- $ acceder model -->
+                            <a class="page-link" th:text="${p}" th:href="@{listDonneurs(page=${p})}"></a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </center>
         </div>
     </div>
 </div>
