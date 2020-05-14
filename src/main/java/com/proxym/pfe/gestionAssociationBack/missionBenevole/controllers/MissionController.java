@@ -102,7 +102,7 @@ public class MissionController {
             model.addAttribute("pageContent", userMissions1.getContent());
             model.addAttribute("pages", pages);
             model.addAttribute("userMissions", userMissions1);
-            redirectAttributes.addFlashAttribute("message", "Votre affectation est fait avec succées");
+            redirectAttributes.addFlashAttribute("message", "Vous avez affecter "+user.getNom()+" à "+mission.getTitre());
 
             return "redirect:/mission/listbenevoles";
         } catch (Exception e) {
@@ -110,7 +110,60 @@ public class MissionController {
         }
     }
 
+    /******************************Liberer Missio *********************************************/
+    @RequestMapping(value = "/libererMission")
 
+    public String libererMission(Model model, String id, Long id2, @RequestParam(name = "page", defaultValue = "0") int page,
+                                 RedirectAttributes redirectAttributes) {
+        try {
+
+            User user = userService.findUserByUsernameService(id);
+            Mission mission = missionService.findMissionByIdService(id2);
+            System.out.println("user.nom: " + user.getNom());
+            System.out.println("mission.titre: " + mission.getTitre());
+            int index = 0;
+
+            List<UserMission> userMissions = user.getUserMissions();
+
+            while (true) {
+                if (userMissions.get(index).getMission().getId() == mission.getId() && index < userMissions.size()) {
+                    break;
+                } else {
+                    index++;
+                }
+                System.out.println(" index: " + index);
+
+            }
+
+            System.out.println(" index: after****** " + index);
+
+            userMissions.get(index).setAffected(0);
+            System.out.println("userMissions.get(index): " + userMissions.get(index).getMission());
+
+            userService.saveUserService(user);
+
+            Page<UserMission> userMissions1 = getListAllPartiMission(page);
+
+            int pagesCount = userMissions1.getTotalPages();
+            int[] pages = new int[pagesCount];
+
+            for (int i = 0; i < pagesCount; i++) {
+                pages[i] = i;
+                System.out.println(" pages[i] " + pages[i]);
+            }
+            model.addAttribute("pageCourante", page);
+            model.addAttribute("pageContent", userMissions1.getContent());
+            model.addAttribute("pages", pages);
+            model.addAttribute("userMissions", userMissions1);
+            redirectAttributes.addFlashAttribute("messageFree", "Vous avez libérer " + user.getNom());
+
+            return "redirect:/mission/listbenevoles";
+        } catch (Exception e) {
+            return "pagesError/error";
+        }
+    }
+
+    /****************************getLIstMission Methode****************************/
     Page<UserMission> getListAllPartiMission(int page) {
         List<User> users = userService.getAllBenevolesService();
         /**eliminate duplicate value list users****/

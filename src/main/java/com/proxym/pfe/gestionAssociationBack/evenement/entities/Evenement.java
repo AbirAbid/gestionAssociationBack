@@ -21,7 +21,7 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    int active;
+   private int active;
     @NotBlank
     @Column(name = "titre")
     private String titre;
@@ -57,24 +57,7 @@ public class Evenement {
 
 
 
-/*
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 
-    private ThemeEvent themeEvent;
-*/
-
-
-    //Collection des biens
-/*
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "evenement", cascade = CascadeType.ALL)
-    private List<Bien> biens;
-*/
-
-  /*  @ManyToMany
-    @JoinTable(name = "donnerBien",
-            joinColumns = @JoinColumn(name = "Evenement_ID", referencedColumnName = "id", updatable = false, nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "User_ID", referencedColumnName = "id", updatable = false, nullable = false))
-    private Set<User> users = new HashSet<>();*/
 
 }
 

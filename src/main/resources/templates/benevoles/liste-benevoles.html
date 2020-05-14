@@ -18,8 +18,14 @@
             </div>
         </div>
         <div th:if="${not #lists.isEmpty(userMissions)}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert"  th:if="${message}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${message}">
                 <strong th:text="${message}"></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${messageFree}">
+                <strong th:text="${messageFree}"></strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,6 +42,8 @@
 
                     <th scope="col">Date participation</th>
                     <th scope="col">Affecter</th>
+                    <th scope="col">Libérer</th>
+
 
                 </tr>
                 </thead>
@@ -53,12 +61,29 @@
 
                     <td th:text="${p.demandeDate}"></td>
                     <td>
-                        <center><a class="btn btn-secondary" title="affecter"
+
+                        <center><a th:if="${p.affected == 0}" class="btn btn-secondary " title="affecter"
+                                   th:href="@{affectMission(id=${p.user.username},id2=${p.mission.id})}">
+                            <i class="far fa-check-circle"></i></a>
+                        </center>
+
+
+                        <center><a th:if="${p.affected == 1}" class="btn btn-secondary disabled" title="affecter"
                                    th:href="@{affectMission(id=${p.user.username},id2=${p.mission.id})}">
                             <i class="far fa-check-circle"></i></a>
                         </center>
                     </td>
 
+                    <td>
+                        <center><a th:if="${p.affected == 1}" class="btn btn-danger" title="libérer"
+                                   th:href="@{libererMission(id=${p.user.username},id2=${p.mission.id})}"><i
+                                class="fas fa-ban"></i></a>
+                        </center>
+                        <center><a th:if="${p.affected == 0}" class="btn btn-danger disabled" title="libérer"
+                                   th:href="@{libererMission(id=${p.user.username},id2=${p.mission.id})}"><i
+                                class="fas fa-ban"></i></a>
+                        </center>
+                    </td>
 
                 </tr>
 

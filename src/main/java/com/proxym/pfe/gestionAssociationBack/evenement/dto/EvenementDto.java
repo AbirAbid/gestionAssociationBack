@@ -14,6 +14,7 @@ import java.util.*;
 @Data
 public class EvenementDto {
     Long id;
+    private int active;
 
     @NotBlank(message = " Veuillez remplir ce champs ! ")
     private String titre;

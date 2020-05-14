@@ -251,7 +251,7 @@ public class EvenementController {
             event.setSponsors(evenementDto.getSponsors());
             event.setVille(evenementDto.getVille());
             event.setFrais(evenementDto.getFrais());
-            event.setActive(1);
+            event.setActive(evenementDto.getActive());
             // System.out.println("***********************event Sponsor*********************  " + event.getSponsors());
             Evenement e = evenementService.addEventService(event);
             /** for Affect  Sponsor ***/
@@ -290,7 +290,7 @@ public class EvenementController {
             bienService.saveAllService(evenementDto.getBiens());
             missionService.saveAllMissionService(evenementDto.getMissions());
 
-            redirectAttributes.addFlashAttribute("messageUpdate", " Votre événement a été modifier avec succès ");
+            redirectAttributes.addFlashAttribute("messageUpdate", " Votre événement a été modifié avec succès ");
 
             return "redirect:list";
         } catch (Exception e) {
@@ -304,7 +304,7 @@ public class EvenementController {
     @RequestMapping(value = "/supprimer")
     public String supprimer(Long id, RedirectAttributes redirectAttributes) {
         evenementService.suuprimerEvent(id);
-        redirectAttributes.addFlashAttribute("messageDelete", " Votre événement a été supprimer.");
+        redirectAttributes.addFlashAttribute("messageDelete", " Votre événement a été supprimé avec succès .");
 
         return "redirect:/evenement/list";
     }

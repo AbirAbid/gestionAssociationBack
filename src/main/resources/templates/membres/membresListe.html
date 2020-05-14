@@ -25,7 +25,7 @@
         </form>
         <div class="alert alert-danger alert-dismissible fade show" role="alert"
              th:if="${ #lists.isEmpty(pageContent)}">
-            Aucun résultat pour <p th:text="${mc}"></p>
+            Aucun résultat pour  <strong th:text="${mc}"></strong>
             <a type="button" class="close" data-dismiss="alert"
                aria-label="Close" href="/membres/listeMembres">
                 <span aria-hidden="true">&times;</span>

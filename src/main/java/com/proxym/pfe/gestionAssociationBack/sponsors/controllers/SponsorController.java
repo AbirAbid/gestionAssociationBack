@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ public class SponsorController {
     @Autowired
     SponsorService sponsorService;
 
+    /***********************************************Add sponsor*******************************************/
 
     @GetMapping(value = "formulaire")
     public String formulaireAddSponsor(Model model) {
@@ -30,16 +32,10 @@ public class SponsorController {
     }
 
 
-    @RequestMapping(value = "/supprimer")
-    public String supprimer(Long id) {
-        sponsorService.supprimerSponsor(id);
-        return "redirect:/sponsors/sponsors";
-    }
-
-
     @PostMapping(value = "/save")
     public String saveSponsor(@Valid Sponsor sponsor,
-                              BindingResult bindingResult, @RequestParam(name = "picture") MultipartFile file) {
+                              BindingResult bindingResult, @RequestParam(name = "picture") MultipartFile file,
+                              RedirectAttributes redirectAttributes) {
         try {
             if (bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
@@ -47,6 +43,8 @@ public class SponsorController {
             }
             sponsor.setAffecte(0);
             sponsorService.saveSponsorService(sponsor, file);
+            redirectAttributes.addFlashAttribute("messageAdd", " Votre sponsor a été ajouté avec succès ");
+
             return "redirect:/sponsors/sponsors";
 
         } catch (Exception e) {
@@ -56,7 +54,20 @@ public class SponsorController {
 
     }
 
-    @RequestMapping(value = "/sponsors",method = RequestMethod.GET)
+    /***********************************************Delete sponsor*******************************************/
+
+    @RequestMapping(value = "/supprimer")
+    public String supprimer(Long id, RedirectAttributes redirectAttributes) {
+        sponsorService.supprimerSponsor(id);
+        redirectAttributes.addFlashAttribute("messageDelete", " Votre sponsor a été supprimé avec succès ");
+
+        return "redirect:/sponsors/sponsors";
+    }
+
+
+    /***********************************************List sponsors*******************************************/
+
+    @RequestMapping(value = "/sponsors", method = RequestMethod.GET)
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "motCle", defaultValue = "") String mc) {
         //cherche moi un paam page à dispa servlet initialement page0
@@ -94,14 +105,15 @@ public class SponsorController {
 
     public String formulaireUpdate(Model model, Long id) {
         Sponsor s = sponsorService.getOneService(id);
-
+        System.out.println("sponsor : " + s);
         model.addAttribute("sponsor", s);
 
         return "sponsor/modifierSponsor";
     }
 
     @PostMapping(value = "/modifierSponsor")
-    public String modifierSponsor(@Valid Sponsor sponsor, BindingResult bindingResult, @RequestParam(name = "picture") MultipartFile file
+    public String modifierSponsor(@Valid Sponsor sponsor, BindingResult bindingResult, @RequestParam(name = "picture") MultipartFile file,
+                                  RedirectAttributes redirectAttributes
     ) {
         try {
             if (bindingResult.hasErrors()) {
@@ -115,8 +127,9 @@ public class SponsorController {
             sponsorService.saveSponsorService(sponsor, file);
 
 
-            System.out.println("update sponsor");
-            //  etudiantRepository.save(et);
+            redirectAttributes.addFlashAttribute("messageUpdate", " Votre sponsor a été modifié avec succès ");
+
+
             return "redirect:/sponsors/sponsors";
 
         } catch (Exception e) {

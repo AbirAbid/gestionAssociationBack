@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,7 @@ public class CotisationController {
     @Autowired
     CotisationService cotisationService;
 
+    /*********************************add cotisation******************************/
     @GetMapping(value = "formulaire")
     public String formulaireAddCotisation(Model model) {
 
@@ -33,12 +35,12 @@ public class CotisationController {
     @PostMapping(value = "/save")
     //  public String saveCotisation(@Valid Cotisation cotisation,
     public String saveCotisation(Model model, @Valid CotisationDto cotisationDto,
-                                 BindingResult bindingResult) {
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         try {
             if (bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
                 System.out.println("bindingResult   " + bindingResult);
-               // model.addAttribute("cotisation", cotisation);
+                // model.addAttribute("cotisation", cotisation);
 
                 return "cotisation/add-cotisation";
             }
@@ -48,6 +50,8 @@ public class CotisationController {
             cotisation1.setMontant(cotisationDto.getMontant());
             cotisation1.setDateFin(cotisationDto.getDateFin());
             cotisationService.addCotisationServ(cotisation1);
+            redirectAttributes.addFlashAttribute("messageAdd", " Votre cotisation a été ajouté avec succès ");
+
             return "redirect:/cotisations/listCotisation";
 
         } catch (Exception e) {
@@ -56,6 +60,8 @@ public class CotisationController {
         }
 
     }
+
+    /*********************************list cotisations******************************/
 
     @RequestMapping(value = "/listCotisation")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
@@ -81,11 +87,17 @@ public class CotisationController {
         return "cotisation/list-cotisation";
     }
 
+    /*********************************delete cotisation******************************/
+
     @RequestMapping(value = "/supprimer")
-    public String supprimer(Long id) {
+    public String supprimer(Long id,RedirectAttributes redirectAttributes) {
         cotisationService.supprimerCotisationServ(id);
+        redirectAttributes.addFlashAttribute("messageDelete", " Votre cotisation a été supprimé avec succès ");
+
         return "redirect:/cotisations/listCotisation";
     }
+
+    /*********************************update cotisation******************************/
 
     @RequestMapping(value = "/formulaireUpdate")
 
@@ -98,7 +110,7 @@ public class CotisationController {
     }
 
     @PostMapping(value = "/modifierCotisation")
-    public String modifierSponsor(@Valid Cotisation cotisation, BindingResult bindingResult) {
+    public String modifierSponsor(@Valid Cotisation cotisation, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
         try {
             if (bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
@@ -110,7 +122,8 @@ public class CotisationController {
             cotisationService.addCotisationServ(cotisation);
 
             System.out.println("update cotisation");
-            //  etudiantRepository.save(et);
+            redirectAttributes.addFlashAttribute("messageUpdate", " Votre cotisation a été modifié avec succès ");
+
             return "redirect:/cotisations/listCotisation";
 
         } catch (Exception e) {

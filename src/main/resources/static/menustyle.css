@@ -315,3 +315,7 @@ a.article, a.article:hover {
     pointer-events: none;
     color: #aaa;
 }
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
