@@ -154,34 +154,31 @@ public class BienRestController {
     /****  Get list Bien by user *****/
 
     @RequestMapping(value = "/listBienByUser/{username}", method = RequestMethod.GET)
-    public List<Bien> getListBienByUser(@PathVariable("username") String username) {
+    public List<UserBien> getListBienByUser(@PathVariable("username") String username) {
         try {
-
             User user = userService.findUserByUsernameService(username);
             List<UserBien> userBiens = user.getUserBiens();
             ObjectMapper mapper = new ObjectMapper();
             String jsonInString;
 
-            List<Bien> biens = new ArrayList<>();
+            List<UserBien> userBiens1 = new ArrayList<>();
             for (int i = 0; i < userBiens.size(); i++) {
                 jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
 
-                //System.out.println("jsonInString" + jsonInString);
                 //get Bien sous forme json
-                Bien bien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i).getBien()), Bien.class);
+                UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
 
-                // System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
-                biens.add(bien);
+                userBiens1.add(userBien);
 
-                System.out.println("biens " + biens.get(i).getTitreBien());
 
             }
+            return userBiens1;
 
-            return biens;
-        } catch (Exception ex) {
-            System.out.println("Exception " + ex.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception " + e.getMessage());
             return null;
         }
+
     }
 
 

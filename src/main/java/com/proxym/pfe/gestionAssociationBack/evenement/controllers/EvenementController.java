@@ -50,12 +50,7 @@ public class EvenementController {
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             EvenementDto evenementDto = new EvenementDto();
             evenementDto.addBien(new Bien());
-            // evenementDto.addMissionBenevole(new MissionBenevole());
             evenementDto.addMission(new Mission());
-            //   for (int i = 1; i <= 3; i++) {
-            // evenementDto.addBien(new Bien());
-            //evenementDto.addMissionBenevole(new MissionBenevole());
-            //  }
             model.addAttribute("evenementDto", evenementDto);
             System.out.println("sponsors" + sponsors);
             model.addAttribute("sponsors", sponsors);
@@ -110,7 +105,6 @@ public class EvenementController {
             event.setVille(evenementDto.getVille());
             event.setFrais(evenementDto.getFrais());
             event.setActive(0);
-            System.out.println("***********************event Sponsor*********************  " + event.getSponsors());
 
             Evenement e = evenementService.addEventService(event);
             /** for Affect  Sponsor ***/
@@ -124,7 +118,6 @@ public class EvenementController {
             }
             /** End Champs event form1 **/
 
-            //  System.out.println("evenementDto.getBiens():****** " + evenementDto.getBiens());
 
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
 
@@ -132,7 +125,6 @@ public class EvenementController {
                 evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
             }
 
-            // System.out.println("evenementDto.getMissionBenevoles():****** " + evenementDto.getMissionBenevoles());
 
             for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
 
@@ -163,10 +155,7 @@ public class EvenementController {
             Evenement e = evenementService.getOneEventByIdservice(id);
 
             EvenementDto evenementDto = new EvenementDto();
-            /*if (e.getSponsors().isEmpty()) {
-                List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
-             //   model.addAttribute("sponsors", sponsors);
-            }else {evenementDto.setSponsors(e.getSponsors());}*/
+
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             model.addAttribute("sponsors", sponsors);
 
@@ -176,7 +165,6 @@ public class EvenementController {
             System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
 
             List<Bien> biens = bienService.findAllByEventService(id);
-            // List<MissionBenevole> missionBenevoles = missionBenevoleService.findAllMissionByEventService(id);
             List<Mission> missions = missionService.findAllMissionByEventService(id);
             System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
             if (biens.size() != 0) {
@@ -268,8 +256,12 @@ public class EvenementController {
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
                 if (i <= biens.size() - 1) {
                     evenementDto.getBiens().get(i).setId(biens.get(i).getId());
+                    evenementDto.getBiens().get(i).setTotaleqteDonnee(biens.get(i).getTotaleqteDonnee());
+
                 }
                 evenementDto.getBiens().get(i).setEvenement(e);
+                System.out.println(" biens.get(i).getTotaleqteDonnee() ************" + biens.get(i).getTotaleqteDonnee());
+
 
             }
             List<Mission> missions = missionService.findAllMissionByEventService(e.getId());
@@ -326,13 +318,11 @@ public class EvenementController {
                 System.out.println(" pages[i] " + pages[i]);
             }
 
-
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
             model.addAttribute("evenements", evenements);
-
             return "evenement/list-event";
         } catch (Exception e) {
             System.out.println(e);

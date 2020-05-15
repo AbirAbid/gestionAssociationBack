@@ -108,29 +108,41 @@ public class MissionBenevoleRestControllers {
     }
 
     @RequestMapping(value = "/listMissionByUser/{username}", method = RequestMethod.GET)
-    public List<Mission> getallMissionUser(@PathVariable String username) {
+    public List<UserMission> getallMissionUser(@PathVariable String username) {
         try {
             User user = userService.findUserByUsernameService(username);
             List<UserMission> userMissions = user.getUserMissions();
             ObjectMapper mapper = new ObjectMapper();
             String jsonInString;
+            /*  User user = userService.findUserByUsernameService(username);
+            List<UserBien> userBiens = user.getUserBiens();
 
-            List<Mission> missions = new ArrayList<>();
+            List<UserBien> userBiens1 = new ArrayList<>();
+            for (int i = 0; i < userBiens.size(); i++) {
+                jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
+
+                //get Bien sous forme json
+                UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
+
+                userBiens1.add(userBien);
+
+*/
+
+            List<UserMission> userMissions1 = new ArrayList<>();
             for (int i = 0; i < userMissions.size(); i++) {
                 System.out.println("userMissions" + userMissions.get(i).getMission().getTitre());
                 jsonInString = mapper.writeValueAsString(userMissions.get(i).getMission());
 
                 // System.out.println("jsonInString" + jsonInString);
                 //get mission sous forme json
-                Mission mission = mapper.readValue(mapper.writeValueAsString(userMissions.get(i).getMission()), Mission.class);
+                UserMission userMission = mapper.readValue(mapper.writeValueAsString(userMissions.get(i)), UserMission.class);
 
-                missions.add(mission);
+                userMissions1.add(userMission);
 
-                System.out.println(mapper.writeValueAsString(missions.get(i).getTitre()));
 
             }
 
-            return missions;
+            return userMissions1;
 
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
