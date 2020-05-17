@@ -1,104 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head_part">
 
-<head th:insert="fragment/header :: headerfiles">
-
-<body>
-<div th:replace="fragment/menu ::menugauche">
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>
 
-<div id="content">
-    <div th:replace="fragment/header ::navbar"></div>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${messageDelete}">
-        <strong th:text="${messageDelete}"></strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageUpdate}">
-        <strong th:text="${messageUpdate}"></strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+<div id="main-wrapper">
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageAdd}">
-        <strong th:text="${messageAdd}"></strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <table class="table table-bordered">
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
 
-        <form th:action="@{sponsors}" method="get">
-            <div class="md-form active-purple-2 mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
+
+    <div class="page-wrapper">
+
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Liste des événements</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item "> Événements > Liste des événements</li>
+                    </ol>
                 </div>
-
             </div>
-        </form>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                 th:if="${messageDelete}">
+                                <strong th:text="${messageDelete}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${messageUpdate}">
+                                <strong th:text="${messageUpdate}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${messageAdd}">
+                                <strong th:text="${messageAdd}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
+
+                                <form th:action="@{sponsors}" method="get">
+                                    <div class="md-form active-purple-2 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
+                                                   placeholder="Rechercher">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
 
 
-        <tr>
-            <th>Nom de l'entreprise</th>
-            <th> Email</th>
-            <th>Photo</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
-        </tr>
+                                <tr>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de l'entreprise</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Photo</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
+                                </tr>
 
-        <tbody>
+                                <tbody>
 
-        <tr th:each="sponsor : ${pagesSponsors.content}">
+                                <tr th:each="sponsor : ${pagesSponsors.content}">
 
-            <td th:text="${sponsor.titreSponsor}"></td>
-            <td th:text="${sponsor.emailSponsor}"></td>
-            <td>
-                <img th:src="@{getPhoto(id=${sponsor.idSponsor})}" width="100" height="100">
+                                    <td th:text="${sponsor.titreSponsor}"></td>
+                                    <td th:text="${sponsor.emailSponsor}"></td>
+                                    <td>
+                                        <img th:src="@{getPhoto(id=${sponsor.idSponsor})}" width="100" height="100">
 
-            </td>
-            <td>
-                <center><a class="btn btn-secondary" th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
-                        class="fas fa-edit"></i></a>
-                </center>
-            </td>
-            <td>
-                <center><a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
-                           th:href="@{supprimer(id=${sponsor.idSponsor})}" th:hidden="${sponsor.affecte == 1}"> <i
-                        class="fas fa-trash-alt"></i></a>
-                </center>
-            </td>
+                                    </td>
+                                    <td>
+                                        <center><a class="btn btn-circle btn-primary" title="Modifier"
+                                                   th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
+                                                class="fas fa-edit"></i></a>
+                                        </center>
+                                    </td>
+                                    <td>
+                                        <center><a  class="btn btn-circle btn-danger" title="supprimer"
+                                                   onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
+                                                   th:href="@{supprimer(id=${sponsor.idSponsor})}"
+                                                   th:hidden="${sponsor.affecte == 1}"> <i
+                                                class="fas fa-trash-alt"></i></a>
+                                        </center>
+                                    </td>
 
 
-        </tr>
-        </tbody>
-    </table>
-    <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
-        Aucun résultat pour <p th:text="${mc}"></p>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
+                                Aucun résultat pour <p th:text="${mc}"></p>
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item" th:each="p : ${pages}"
+                                        th:class="${p==pageCourante}? 'page-item active': ''">
+                                        <!-- $ acceder model -->
+                                        <a class="page-link" th:text="${p}" th:href="@{sponsors(page=${p})}"></a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <footer class="footer"> © 2020</footer>
+
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
-                <!-- $ acceder model -->
-                <a class="page-link" th:text="${p}" th:href="@{sponsors(page=${p})}"></a>
-            </li>
 
-        </ul>
-    </nav>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<header th:insert="fragment/header.html ::scriptFooter"></header>
-
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>
+
+
 </html>
