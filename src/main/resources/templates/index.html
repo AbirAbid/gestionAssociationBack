@@ -1,58 +1,282 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!--<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    &lt;!&ndash; Tell the browser to be responsive to screen width &ndash;&gt;
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    &lt;!&ndash; Favicon icon &ndash;&gt;
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+    <title>Monster Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/monsteradmin/"/>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    &lt;!&ndash; Custom CSS &ndash;&gt;
+    <link href="/css/style.css" rel="stylesheet">
+    &lt;!&ndash; You can change the theme colors from here &ndash;&gt;
+    <link href="/css/colors/blue.css" id="theme" rel="stylesheet">
 
-<head th:insert="fragment/header :: headerfiles">
-    <link href="dashboard.css" rel="stylesheet">
+    <link href="/webjars/jquery.steps/1.1.0/demo/css/main.css"  rel="stylesheet">
+    <link href="/webjars/jquery.steps/1.1.0/demo/css/jquery.steps.css" rel="stylesheet">
 
+    &lt;!&ndash; Popper JS &ndash;&gt;
 
-<body>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-<div th:replace="fragment/menu ::menugauche">
+</head>-->
+<head th:insert="fragments/head :: head_part">
 
-
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>
-<div id="content">
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
 
-    <div th:replace="fragment/header ::navbar"></div>
-    <div class="container">
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Membres</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
+
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
+
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Forms</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Form</li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body wizard-content">
+                            <h4 class="card-title">Step wizard</h4>
+
+                            <form action="#" class="tab-wizard wizard-circle">
+                                <!-- Step 1 -->
+                                <h6>Personal Info</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstName1">First Name :</label>
+                                                <input type="text" class="form-control" id="firstName1"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="lastName1">Last Name :</label>
+                                                <input type="text" class="form-control" id="lastName1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="emailAddress1">Email Address :</label>
+                                                <input type="email" class="form-control" id="emailAddress1"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="phoneNumber1">Phone Number :</label>
+                                                <input type="tel" class="form-control" id="phoneNumber1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="location1">Select City :</label>
+                                                <select class="custom-select form-control" id="location1"
+                                                        name="location">
+                                                    <option value="">Select City</option>
+                                                    <option value="Amsterdam">India</option>
+                                                    <option value="Berlin">USA</option>
+                                                    <option value="Frankfurt">Dubai</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="date1">Date of Birth :</label>
+                                                <input type="date" class="form-control" id="date1"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- Step 2 -->
+                                <h6>Job Status</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="jobTitle1">Job Title :</label>
+                                                <input type="text" class="form-control" id="jobTitle1"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="videoUrl1">Company Name :</label>
+                                                <input type="text" class="form-control" id="videoUrl1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="shortDescription1">Job Description :</label>
+                                                <textarea name="shortDescription" id="shortDescription1" rows="6"
+                                                          class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- Step 3 -->
+                                <h6>Interview</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="int1">Interview For :</label>
+                                                <input type="text" class="form-control" id="int1"></div>
+                                            <div class="form-group">
+                                                <label for="intType1">Interview Type :</label>
+                                                <select class="custom-select form-control" id="intType1"
+                                                        data-placeholder="Type to search cities" name="intType1">
+                                                    <option value="Banquet">Normal</option>
+                                                    <option value="Fund Raiser">Difficult</option>
+                                                    <option value="Dinner Party">Hard</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Location1">Location :</label>
+                                                <select class="custom-select form-control" id="Location12"
+                                                        name="location">
+                                                    <option value="">Select City</option>
+                                                    <option value="India">India</option>
+                                                    <option value="USA">USA</option>
+                                                    <option value="Dubai">Dubai</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="jobTitle2">Interview Date :</label>
+                                                <input type="date" class="form-control" id="jobTitle2">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Requirements :</label>
+                                                <div class="mb-2">
+                                                    <label class="custom-control custom-radio">
+                                                        <input id="radio1" name="radio" type="radio"
+                                                               class="custom-control-input">
+                                                        <span class="custom-control-label">Employee</span>
+                                                    </label>
+                                                    <label class="custom-control custom-radio">
+                                                        <input id="radio2" name="radio" type="radio"
+                                                               class="custom-control-input">
+                                                        <span class="custom-control-label">Contract</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- Step 4 -->
+                                <h6>Remark</h6>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="behName1">Behaviour :</label>
+                                                <input type="text" class="form-control" id="behName1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Confidance</label>
+                                                <input type="text" class="form-control" id="partigcipants1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Result</label>
+                                                <select class="custom-select form-control" id="particigpants1"
+                                                        name="location">
+                                                    <option value="">Select Result</option>
+                                                    <option value="Selected">Selected</option>
+                                                    <option value="Rejected">Rejected</option>
+                                                    <option value="Call Second-time">Call Second-time</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="decisions1">Comments</label>
+                                                <textarea name="decisions" id="decisions1" rows="4"
+                                                          class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Rate Interviwer :</label>
+                                                <div class="c-inputs-stacked">
+                                                    <label class="inline custom-control custom-checkbox block">
+                                                        <input type="checkbox" class="custom-control-input"><span
+                                                            class="custom-control-label ml-0">1 star</span> </label>
+                                                    <label class="inline custom-control custom-checkbox block">
+                                                        <input type="checkbox" class="custom-control-input"><span
+                                                            class="custom-control-label ml-0">2 star</span> </label>
+                                                    <label class="inline custom-control custom-checkbox block">
+                                                        <input type="checkbox" class="custom-control-input"><span
+                                                            class="custom-control-label ml-0">3 star</span> </label>
+                                                    <label class="inline custom-control custom-checkbox block">
+                                                        <input type="checkbox" class="custom-control-input"><span
+                                                            class="custom-control-label ml-0">4 star</span> </label>
+                                                    <label class="inline custom-control custom-checkbox block">
+                                                        <input type="checkbox" class="custom-control-input"><span
+                                                            class="custom-control-label ml-0">5 star</span> </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Événements</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
+
+
         </div>
-
-        <header th:insert="fragment/header.html ::scriptFooter"></header>
-
-
+        <footer class="footer">
+            © 2019 Monster Admin by wrappixel.com
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
     </div>
+
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
 </div>
-</div>
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+
+
 </body>
+
+
 </html>
+
+

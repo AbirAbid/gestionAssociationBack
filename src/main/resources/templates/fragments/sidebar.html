@@ -1,0 +1,76 @@
+<div th:fragment="left_sidebar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- User profile -->
+            <div class="user-profile">
+                <!-- User profile image -->
+                <div class="profile-img"><img src="/images/users/1.jpg" alt="user"/></div>
+                <!-- User profile text-->
+                <div class="profile-text"><a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown"
+                                             role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span
+                        class="caret"></span></a>
+                    <div class="dropdown-menu animated flipInY">
+                        <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                        <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                        <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a href="/"><i class="fa fa-home"></i> <span class="hide-menu"> Accueil</span></a></li>
+                    <li>
+                    <li><a href="/membres/listeMembres"><i class="fas fa-users"></i> <span
+                            class="hide-menu"> Ma communauté</span></a></li>
+                    <li>
+                        <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-calendar-alt"></i><span
+                                class="hide-menu"> Événements </span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="/evenement/formulaire">Organiser
+                                Événement</a></li>
+                            <li><a href="/evenement/list">Liste des Événements</a></li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="far fa-money-bill-alt"></i><span
+                                class="hide-menu"> Cotisations</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li>
+                                <a href="/cotisations/formulaire"> Ajouter Cotisation</a>
+                            </li>
+                            <li>
+                                <a href="/cotisations/listCotisation"> Consulter Cotisation</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="fas fa-hands-helping"></i><span
+                                class="hide-menu"> Sponsors</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li>
+                                <a href="/sponsors/formulaire"> Ajouter Sponsor</a>
+                            </li>
+                            <li>
+                                <a href="/sponsors/sponsors"> Consulter Sponsor</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/mission/listbenevoles"><i class="fas fa-hand-holding-heart"></i> <span
+                            class="hide-menu"> Bénévoles</span></a></li>
+                    <li>
+                    <li><a href="/bien/listDonneurs"><i class="fas fa-gift"></i> <span
+                            class="hide-menu"> Donneurs</span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </aside>
+</div>

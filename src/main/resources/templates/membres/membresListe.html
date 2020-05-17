@@ -1,103 +1,169 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head_part">
 
-<head th:insert="fragment/header :: headerfiles">
-
-<body>
-<div th:replace="fragment/menu ::menugauche">
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>
 
-<div id="content">
-    <div th:replace="fragment/header ::navbar"></div>
-    <table class="table table-bordered">
 
-        <form th:action="@{listeMembres}" method="get">
-            <div class="md-form active-purple-2 mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
+<div id="main-wrapper">
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
+
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
+
+
+    <div class="page-wrapper">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">General Form</h4>
+                            <h6 class="card-subtitle"> All with bootstrap element classies </h6>
+                                <table class="table">
+                                    <thead class="bg-inverse text-white">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Username</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="border border-dark">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Nigam</td>
+                                        <td>Eichmann</td>
+                                        <td>@Sonu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Deshmukh</td>
+                                        <td>Prohaska</td>
+                                        <td>@Genelia</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Roshan</td>
+                                        <td>Rogahn</td>
+                                        <td>@Hritik</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert"
-             th:if="${ #lists.isEmpty(pageContent)}">
-            Aucun résultat pour  <strong th:text="${mc}"></strong>
-            <a type="button" class="close" data-dismiss="alert"
-               aria-label="Close" href="/membres/listeMembres">
-                <span aria-hidden="true">&times;</span>
-            </a>
         </div>
-        <!--  <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
-              Aucun résultat pour <p th:text="${mc}"></p>
-          </div>-->
+    </div>
+</div>
+<!--
 
-        <tr>
-            <th>Nom</th>
-            <th> Prénom</th>
-            <th> Adhérent</th>
-            <th> Téléphone</th>
-            <th> Email</th>
-            <th> Statut</th>
-            <th>Envoyer Email</th>
-            <th>Profil</th>
-        </tr>
+    <div class="page-wrapper">
 
-        <tbody>
+        <div class="container-fluid">
 
-        <tr th:each="membre : ${pagesMembres.content}">
-
-            <td th:text="${membre.nom}"></td>
-            <td th:text="${membre.prenom}"></td>
-            <td> Adhérent</td>
-            <td th:text="${membre.telephone}"></td>
-            <td th:text="${membre.email}"></td>
-
-
-            <td>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 30%"
-                         aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Forms</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Form</li>
+                    </ol>
                 </div>
-            </td>
-            <td>
-                <center><a class="btn btn-secondary"> <i class="fas fa-envelope-square"></i></a>
-                </center>
-            </td>
-            <td>
-                <center><a class="btn btn-secondary" th:href="@{membreDetailUrl(id=${membre.email})}">
-                    <i class="fas fa-portrait"></i></a>
-                </center>
-            </td>
 
-            <!--formulaireUpdate link -->
+            </div>
+
+            <form th:action="@{listeMembres}" method="get">
+                <div class="md-form active-purple-2 mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                 th:if="${ #lists.isEmpty(pageContent)}">
+                Aucun résultat pour <strong th:text="${mc}"></strong>
+                <a type="button" class="close" data-dismiss="alert"
+                   aria-label="Close" href="/membres/listeMembres">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+
+            <tr>
+                <th>Nom</th>
+                <th> Prénom</th>
+                <th> Adhérent</th>
+                <th> Téléphone</th>
+                <th> Email</th>
+                <th> Statut</th>
+                <th>Envoyer Email</th>
+                <th>Profil</th>
+            </tr>
+
+            <tbody>
+
+            <tr th:each="membre : ${pagesMembres.content}">
+
+                <td th:text="${membre.nom}"></td>
+                <td th:text="${membre.prenom}"></td>
+                <td> Adhérent</td>
+                <td th:text="${membre.telephone}"></td>
+                <td th:text="${membre.email}"></td>
 
 
-        </tr>
-        </tbody>
-    </table>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 30%"
+                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </td>
+                <td>
+                    <center><a class="btn btn-secondary"> <i class="fas fa-envelope-square"></i></a>
+                    </center>
+                </td>
+                <td>
+                    <center><a class="btn btn-secondary" th:href="@{membreDetailUrl(id=${membre.email})}">
+                        <i class="fas fa-portrait"></i></a>
+                    </center>
+                </td>
 
-    <center>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
-                    <!-- $ acceder model -->
-                    <a class="page-link" th:text="${p}" th:href="@{listeMembres(page=${p})}"></a>
-                </li>
+                &lt;!&ndash;formulaireUpdate link &ndash;&gt;
 
-            </ul>
-        </nav>
-    </center>
-</div>
-</div>
-</div>
-</div>
-</div>
-<header th:insert="fragment/header.html ::scriptFooter"></header>
 
+            </tr>
+            </tbody>
+            </table>
+
+            <center>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item" th:each="p : ${pages}"
+                            th:class="${p==pageCourante}? 'page-item active': ''">
+                            &lt;!&ndash; $ acceder model &ndash;&gt;
+                            <a class="page-link" th:text="${p}" th:href="@{listeMembres(page=${p})}"></a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </center>
+        </div>
+    </div>-->
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>
+
+
 </html>
+
+
