@@ -27,46 +27,45 @@
                 <div class="col-md-6 col-8 align-self-center">
                     <h3 class="text-themecolor mb-0 mt-0">Liste des événements</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item "> Événements  >  Liste des événements</li>
+                        <li class="breadcrumb-item "> Événements > Liste des événements</li>
                     </ol>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${messageDelete}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                 th:if="${messageDelete}">
                                 <strong th:text="${messageDelete}"></strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${messageUpdate}">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${messageUpdate}">
                                 <strong th:text="${messageUpdate}"></strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
 
-                            <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${message}">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${message}">
                                 <strong th:text="${message}"></strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <table class="table table-bordered">
+                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
                                 <form th:action="@{list}" method="get">
                                     <div class="md-form active-purple-2 mb-3">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
+                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
+                                                   placeholder="Rechercher">
                                             <div class="input-group-append">
-                                                <button class="btn btn-secondary" type="submit">
+                                                <button class="btn btn-primary" type="submit">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -85,20 +84,18 @@
 
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Titre</th>
-                                    <th>Date début</th>
-                                    <th>Date fin</th>
-                                    <th>Detail</th>
-                                    <th>Modifier</th>
-                                    <th>Supprimer</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">ID</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Titre</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Date début</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Date fin</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Detail</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="event : ${evenements.content}">
-
-
 
                                     <td th:text="${event.id}"></td>
                                     <td th:text="${event.titre}"></td>
@@ -106,14 +103,15 @@
                                     <td th:text="${event.dateDebut}"></td>
                                     <td th:text="${event.dateFin}"></td>
                                     <td>
-                                        <center><a class="btn btn-secondary">
+                                        <center><a class="btn btn-circle btn-outline-info" title="Détail">
                                             <i class="fas fa-info"></i></a>
                                         </center>
                                     </td>
 
 
                                     <td>
-                                        <center><a class="btn btn-secondary" th:href="@{formulaireUpdateEvent(id=${event.id})}"> <i
+                                        <center><a class="btn btn-circle btn-outline-primary" title="modifier"
+                                                   th:href="@{formulaireUpdateEvent(id=${event.id})}"> <i
                                                 class="fas fa-edit"></i></a>
                                         </center>
                                     </td>
@@ -121,7 +119,8 @@
 
                                     <td>
 
-                                        <center><a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr  de supprimer l événement?')"
+                                        <center><a class="btn btn-circle btn-outline-danger" title="supprimer"
+                                                   onclick="return confirm('Êtes-vous sûr  de supprimer l événement?')"
                                                    th:href="@{supprimer(id=${event.id})}"
                                                    th:hidden="${event.active == 1}"
                                         > <i class="fas fa-trash-alt"></i></a>
@@ -135,7 +134,8 @@
                             <center>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination">
-                                        <li class="page-item" th:each="p : ${pages}" th:class="${p==pageCourante}? 'page-item active': ''">
+                                        <li class="page-item" th:each="p : ${pages}"
+                                            th:class="${p==pageCourante}? 'page-item active': ''">
                                             <!-- $ acceder model -->
                                             <a class="page-link" th:text="${p}" th:href="@{list(page=${p})}"></a>
                                         </li>
@@ -157,7 +157,7 @@
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
-        <footer class="footer"> © 2020 </footer>
+        <footer class="footer"> © 2020</footer>
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->

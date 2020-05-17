@@ -9,161 +9,132 @@
     </svg>
 </div>
 
-
 <div id="main-wrapper">
+
     <div th:insert="fragments/top_bar.html :: topbar"></div>
 
     <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
 
-
     <div class="page-wrapper">
-
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
         <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Ma communauté</h3>
+
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">General Form</h4>
-                            <h6 class="card-subtitle"> All with bootstrap element classies </h6>
-                                <table class="table">
-                                    <thead class="bg-inverse text-white">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="border border-dark">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Nigam</td>
-                                        <td>Eichmann</td>
-                                        <td>@Sonu</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Deshmukh</td>
-                                        <td>Prohaska</td>
-                                        <td>@Genelia</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Roshan</td>
-                                        <td>Rogahn</td>
-                                        <td>@Hritik</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--
+                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
+                                <form th:action="@{listeMembres}" method="get">
+                                    <div class="md-form active-purple-2 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
+                                                   placeholder="Rechercher">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
 
-    <div class="page-wrapper">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                     th:if="${ #lists.isEmpty(pageContent)}">
+                                    Aucun résultat pour <strong th:text="${mc}"></strong>
+                                    <a type="button" class="close" data-dismiss="alert"
+                                       aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </a>
+                                </div>
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th> Prénom</th>
+                                    <th> Adhérent</th>
+                                    <th> Téléphone</th>
+                                    <th> Email</th>
+                                    <th> Statut</th>
+                                    <th>Envoyer Email</th>
+                                    <th>Profil</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="membre : ${pagesMembres.content}">
+                                    <td th:text="${membre.nom}"></td>
+                                    <td th:text="${membre.prenom}"></td>
+                                    <td> Adhérent</td>
+                                    <td th:text="${membre.telephone}"></td>
+                                    <td th:text="${membre.email}"></td>
+                                    <td>
+                                        <div class="progress mt-3">
+                                            <div class="progress-bar  bg-danger" style="width: 75%; height:15px;"
+                                                 role="progressbar">75%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <center><a class="btn btn-circle btn-outline-primary"> <i
+                                                class="far fa-envelope"></i></a>
+                                        </center>
+                                    </td>
+                                    <td>
+                                        <center><a class="btn btn-circle btn-outline-info"
+                                                   th:href="@{membreDetailUrl(id=${membre.email})}">
+                                            <i class="fas fa-portrait"></i></a>
+                                        </center>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <center>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item" th:each="p : ${pages}"
+                                            th:class="${p==pageCourante}? 'page-item active': ''">
+                                            <!-- $ acceder model -->
+                                            <a class="page-link" th:text="${p}"
+                                               th:href="@{listeMembres(page=${p})}"></a>
+                                        </li>
 
-        <div class="container-fluid">
-
-            <div class="row page-titles">
-                <div class="col-md-6 col-8 align-self-center">
-                    <h3 class="text-themecolor mb-0 mt-0">Forms</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Form</li>
-                    </ol>
-                </div>
-
-            </div>
-
-            <form th:action="@{listeMembres}" method="get">
-                <div class="md-form active-purple-2 mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="motCle" th:value="${mc}" placeholder="Rechercher">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
+                                    </ul>
+                                </nav>
+                            </center>
                         </div>
                     </div>
+
                 </div>
-            </form>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                 th:if="${ #lists.isEmpty(pageContent)}">
-                Aucun résultat pour <strong th:text="${mc}"></strong>
-                <a type="button" class="close" data-dismiss="alert"
-                   aria-label="Close" href="/membres/listeMembres">
-                    <span aria-hidden="true">&times;</span>
-                </a>
             </div>
 
-            <tr>
-                <th>Nom</th>
-                <th> Prénom</th>
-                <th> Adhérent</th>
-                <th> Téléphone</th>
-                <th> Email</th>
-                <th> Statut</th>
-                <th>Envoyer Email</th>
-                <th>Profil</th>
-            </tr>
 
-            <tbody>
-
-            <tr th:each="membre : ${pagesMembres.content}">
-
-                <td th:text="${membre.nom}"></td>
-                <td th:text="${membre.prenom}"></td>
-                <td> Adhérent</td>
-                <td th:text="${membre.telephone}"></td>
-                <td th:text="${membre.email}"></td>
-
-
-                <td>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 30%"
-                             aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </td>
-                <td>
-                    <center><a class="btn btn-secondary"> <i class="fas fa-envelope-square"></i></a>
-                    </center>
-                </td>
-                <td>
-                    <center><a class="btn btn-secondary" th:href="@{membreDetailUrl(id=${membre.email})}">
-                        <i class="fas fa-portrait"></i></a>
-                    </center>
-                </td>
-
-                &lt;!&ndash;formulaireUpdate link &ndash;&gt;
-
-
-            </tr>
-            </tbody>
-            </table>
-
-            <center>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item" th:each="p : ${pages}"
-                            th:class="${p==pageCourante}? 'page-item active': ''">
-                            &lt;!&ndash; $ acceder model &ndash;&gt;
-                            <a class="page-link" th:text="${p}" th:href="@{listeMembres(page=${p})}"></a>
-                        </li>
-
-                    </ul>
-                </nav>
-            </center>
         </div>
-    </div>-->
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer"> © 2020</footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>
 
 
 </html>
-
-

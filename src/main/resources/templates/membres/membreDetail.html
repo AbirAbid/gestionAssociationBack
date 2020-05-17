@@ -1,83 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://thymeleaf.org">
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head_part">
 
-<head th:insert="fragment/header :: headerfiles">
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
 
-<body>
-<div th:replace="fragment/menu ::menugauche"></div>
+<div id="main-wrapper">
 
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
 
-<div id="content">
-    <div th:replace="fragment/header ::navbar"></div>
-    <div class="container" th:object="${membre}">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
 
-                    <div class="card-body">
-                        <div class="card-title mb-4">
-                            <div class="d-flex justify-content-start">
-                                <div class="image-container">
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Ma communauté</h3>
 
-                                </div>
-                                <div class="userData ml-3">
-                                    <div class="row">
+                </div>
+            </div>
 
-
-                                        <h2
-                                                th:text="${membre.nom}"></h2>
-                                        &#160; &#160;<h2 class=" text-uppercase"
-                                                         th:text="${membre.prenom}"></h2>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab"
-                                           href="#basicInfo" aria-selected="true">coordonnés
-                                            membre</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="missions-tab" data-toggle="tab"
-                                           href="#missions" aria-selected="false">Mission Bénévoles</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " id="dons-tab" data-toggle="tab"
-                                           href="#dons" role="tab" aria-selected="true">Dons</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content ml-1" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-body" th:object="${membre}">
+                            <h2
+                                    th:text="${membre.nom}"></h2>
+                            <h2 class=" text-uppercase"
+                                th:text="${membre.prenom}"></h2>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile"
+                                                        role="tab"><span class="hidden-sm-up"></span> <span
+                                        class="hidden-xs-down"><i
+                                        class="far fa-id-card"></i> Coordonnés
+                                                                    membre</span></a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mission"
+                                                        role="tab"><span class="hidden-sm-up"></span> <span
+                                        class="hidden-xs-down"><i
+                                        class="far fa-heart"></i> Mission
+                                                                    Bénévoles</span></a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#biens"
+                                                        role="tab"><span class="hidden-sm-up"></span> <span
+                                        class="hidden-xs-down"><i
+                                        class=" fas fa-gift"></i> Mission
+                                                                    Bénévoles</span></a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabcontent-border">
+                                <div class="tab-pane active" id="profile" role="tabpanel">
+                                    <div class="p-3">
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">Email</label>
                                             </div>
-                                            <div class="col-md-8 col-6" th:text="${membre.email}">
+                                            <div class="col-md-8 col-6"
+                                                 th:text="${membre.email}">
 
                                             </div>
                                         </div>
                                         <hr/>
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Date de naissance </label>
+                                                <label style="font-weight:bold;">Date de
+                                                    naissance </label>
                                             </div>
-                                            <div class="col-md-8 col-6" th:text="${membre.dateNaissance}">
+                                            <div class="col-md-8 col-6"
+                                                 th:text="${membre.dateNaissance}">
 
                                             </div>
                                         </div>
                                         <hr/>
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Gouvernerat de residance</label>
+                                                <label style="font-weight:bold;">Gouvernerat de
+                                                    residance</label>
                                             </div>
-                                            <div class="col-md-8 col-6" th:text="${membre.gouvernoratRes}">
+                                            <div class="col-md-8 col-6"
+                                                 th:text="${membre.gouvernoratRes}">
                                             </div>
                                         </div>
                                         <hr/>
@@ -85,7 +95,8 @@
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">Occupation</label>
                                             </div>
-                                            <div class="col-md-8 col-6" th:text="${membre.occupation}">
+                                            <div class="col-md-8 col-6"
+                                                 th:text="${membre.occupation}">
 
                                             </div>
                                         </div>
@@ -94,7 +105,8 @@
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">Genre</label>
                                             </div>
-                                            <div class="col-md-8 col-6" th:text="${membre.genre} ">
+                                            <div class="col-md-8 col-6"
+                                                 th:text="${membre.genre} ">
 
                                             </div>
                                         </div>
@@ -103,112 +115,111 @@
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">Télèphone</label>
                                             </div>
-                                            <div class="col-md-8 col-6" th:text="${membre.telephone} ">
+                                            <div class="col-md-8 col-6"
+                                                 th:text="${membre.telephone} ">
 
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <div class="tab-pane fade" id="missions" role="tabpanel">
-                                        <div th:if="${#lists.isEmpty(userMissions)}">
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                La liste des missions est vide!!
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-
-
+                                </div>
+                                <div class="tab-pane  p-3" id="mission" role="tabpanel">
+                                    <div th:if="${#lists.isEmpty(userMissions)}">
+                                        <div class="alert alert-danger alert-dismissible fade show"
+                                             role="alert">
+                                            La liste des missions est vide!!
+                                            <button type="button" class="close"
+                                                    data-dismiss="alert"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                        <div th:if="${not #lists.isEmpty(userMissions)}">
-                                            <table class="table table-active border">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Titre Mission</th>
-                                                    <th scope="col">Événement</th>
-
-                                                    <th scope="col">Date Demande</th>
-                                                </tr>
-                                                </thead>
 
 
-                                                <tbody th:each="p : ${userMissions}">
-
-                                                <tr>
-                                                    <td th:text="${p.mission.titre}"></td>
-                                                    <td th:text="${p.mission.evenement.titre}"></td>
-                                                    <td th:text="${p.demandeDate}"></td>
-
-
-                                                </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
+                                    <div th:if="${not #lists.isEmpty(userMissions)}">
+                                        <table class="table table-active border">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Titre Mission</th>
+                                                <th scope="col">Événement</th>
+
+                                                <th scope="col">Date Demande</th>
+                                            </tr>
+                                            </thead>
 
 
-                                    <div class="tab-pane fade" id="dons" role="tabpanel">
-                                        <div th:if="${#lists.isEmpty(userBiens)}">
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                La liste des dons est vide!!
+                                            <tbody th:each="p : ${userMissions}">
 
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                        <div th:if="${not #lists.isEmpty(userBiens)}">
-                                            <table class="table table-active border">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Titre Bien</th>
-                                                    <th scope="col">Quantité données</th>
-                                                    <th scope="col">Événement</th>
-
-                                                    <th scope="col">Date participation</th>
-                                                </tr>
-                                                </thead>
+                                            <tr>
+                                                <td th:text="${p.mission.titre}"></td>
+                                                <td th:text="${p.mission.evenement.titre}"></td>
+                                                <td th:text="${p.demandeDate}"></td>
 
 
-                                                <tbody th:each="p : ${userBiens}">
+                                            </tr>
 
-                                                <tr>
-                                                    <td th:text="${p.bien.titreBien}"></td>
-                                                    <td th:text="${p.qteDonnee}"></td>
-                                                    <td th:text="${p.bien.evenement.titre}"></td>
-                                                    <td th:text="${p.dateParticipation}"></td>
-
-
-                                                </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
+                                </div>
+                                <div class="tab-pane p-3" id="biens" role="tabpanel">
+                                    <div th:if="${#lists.isEmpty(userBiens)}">
+                                        <div class="alert alert-danger alert-dismissible fade show"
+                                             role="alert">
+                                            La liste des dons est vide!!
 
+                                            <button type="button" class="close"
+                                                    data-dismiss="alert"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div th:if="${not #lists.isEmpty(userBiens)}">
+                                        <table class="table table-active border">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Titre Bien</th>
+                                                <th scope="col">Quantité données</th>
+                                                <th scope="col">Événement</th>
+
+                                                <th scope="col">Date participation</th>
+                                            </tr>
+                                            </thead>
+
+
+                                            <tbody th:each="p : ${userBiens}">
+
+                                            <tr>
+                                                <td th:text="${p.bien.titreBien}"></td>
+                                                <td th:text="${p.qteDonnee}"></td>
+                                                <td th:text="${p.bien.evenement.titre}"></td>
+                                                <td th:text="${p.dateParticipation}"></td>
+
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
+
         </div>
+
+        <footer class="footer"> © 2020</footer>
+
     </div>
-</div>
-
 
 </div>
-</div>
-</div>
-<header th:insert="fragment/header.html ::scriptFooter"></header>
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>
+
+
 </html>
