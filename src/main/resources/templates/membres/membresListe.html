@@ -40,7 +40,7 @@
                                             <input type="text" class="form-control" name="motCle" th:value="${mc}"
                                                    placeholder="Rechercher">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit">
+                                                <button class="btn btn-secondary" type="submit">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -83,32 +83,29 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-outline-primary"> <i
+                                        <center><a class="btn btn-circle btn-info"> <i
                                                 class="far fa-envelope"></i></a>
                                         </center>
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-outline-info"
+                                        <center><a class="btn btn-circle btn-secondary"
                                                    th:href="@{membreDetailUrl(id=${membre.email})}">
-                                            <i class="fas fa-portrait"></i></a>
-                                        </center>
+                                            <i class="fas fa-portrait"></i></a></center>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <center>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item" th:each="p : ${pages}"
-                                            th:class="${p==pageCourante}? 'page-item active': ''">
-                                            <!-- $ acceder model -->
-                                            <a class="page-link" th:text="${p}"
-                                               th:href="@{listeMembres(page=${p})}"></a>
-                                        </li>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item" th:each="p : ${pages}"
+                                        th:class="${p==pageCourante}? 'page-item active': ''">
+                                        <!-- $ acceder model -->
+                                        <a class="page-link" th:text="${p}"
+                                           th:href="@{listeMembres(page=${p})}"></a>
+                                    </li>
 
-                                    </ul>
-                                </nav>
-                            </center>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
 

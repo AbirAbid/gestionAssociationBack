@@ -65,7 +65,7 @@
                                             <input type="text" class="form-control" name="motCle" th:value="${mc}"
                                                    placeholder="Rechercher">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit">
+                                                <button class="btn btn-secondary" type="submit">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -103,30 +103,31 @@
                                     <td th:text="${event.dateDebut}"></td>
                                     <td th:text="${event.dateFin}"></td>
                                     <td>
-                                    <a class="btn btn-circle btn-info" title="Détail">
+                                        <a class="btn btn-circle btn-secondary" title="Détail">
                                             <i class="fas fa-info"></i></a>
 
                                     </td>
 
 
                                     <td>
-                                        <center><a class="btn btn-circle btn-primary" title="modifier"
+                                        <center><a class="btn btn-circle btn-info" title="modifier"
                                                    th:href="@{formulaireUpdateEvent(id=${event.id})}"> <i
-                                                class="fas fa-edit"></i></a>
-                                        </center>
+                                                class="fas fa-edit"></i></a></center>
+
                                     </td>
 
 
                                     <td>
 
-                                        <center><a class="btn btn-circle btn-danger" title="supprimer"
-                                                   onclick="return confirm('Êtes-vous sûr  de supprimer l événement?')"
-                                                   th:href="@{supprimer(id=${event.id})}"
-                                                   th:hidden="${event.active == 1}"
+                                  <center>    <a class="btn btn-circle btn-danger" title="supprimer"
+                                           onclick="return confirm('Êtes-vous sûr  de supprimer l événement?')"
+                                           th:href="@{supprimer(id=${event.id})}"
+                                           th:if="${event.active == 0}"
                                         > <i class="fas fa-trash-alt"></i></a>
-                                        </center>
-
-
+                                  </center>
+                                      <center > <a th:if="${event.active == 1}" class="btn btn-circle btn-danger disabled"
+                                        ><i
+                                            class="fas fa-trash-alt"></i></a></center>
                                     </td>
                                 </tr>
                                 </tbody>

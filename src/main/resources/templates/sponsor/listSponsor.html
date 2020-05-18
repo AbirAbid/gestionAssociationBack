@@ -21,9 +21,9 @@
 
             <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
-                    <h3 class="text-themecolor mb-0 mt-0">Liste des événements</h3>
+                    <h3 class="text-themecolor mb-0 mt-0">Liste des sponsors</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item "> Événements > Liste des événements</li>
+                        <li class="breadcrumb-item "> Sponsors > Consulter sponsors</li>
                     </ol>
                 </div>
             </div>
@@ -91,7 +91,7 @@
 
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-primary" title="Modifier"
+                                        <center><a class="btn btn-circle btn-info" title="Modifier"
                                                    th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
                                                 class="fas fa-edit"></i></a>
                                         </center>
@@ -100,8 +100,14 @@
                                         <center><a  class="btn btn-circle btn-danger" title="supprimer"
                                                    onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
                                                    th:href="@{supprimer(id=${sponsor.idSponsor})}"
-                                                   th:hidden="${sponsor.affecte == 1}"> <i
+                                                    th:if="${sponsor.affecte == 0}"> <i
                                                 class="fas fa-trash-alt"></i></a>
+                                        </center>
+
+
+                                            <a th:if="${sponsor.affecte == 1}" class="btn btn-circle btn-danger disabled"
+                                            ><i
+                                                    class="fas fa-trash-alt"></i></a>
                                         </center>
                                     </td>
 

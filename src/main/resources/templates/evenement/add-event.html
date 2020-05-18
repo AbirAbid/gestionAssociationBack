@@ -236,7 +236,7 @@
                                             </div>
                                         </div>
                                         <button type="button"
-                                                class="btn btn-rounded btn-primary nextBtn  float-right ">
+                                                class="btn btn-rounded btn-success nextBtn  float-right ">
                                             Continuer
                                             et ajouter des biens
                                             <i class="fas fa-arrow-right"></i></button>
@@ -250,7 +250,7 @@
                                                 <h3> Besoin des biens</h3>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button" class="btn btn-rounded btn-primary   float-right "
+                                                <button type="button" class="btn btn-rounded btn-secondary   float-right "
                                                         title="Ajouter un bien"
                                                         onclick="addRowBien()"><i class="fas fa-plus"></i>
                                                 </button>
@@ -276,16 +276,14 @@
 
 
                                                         <div class="col form-group">
-                                                            <!-- th:placeholder="titreBien + ' ' + ${itemStat.count}"-->
                                                             <input
-                                                                    x
+
                                                                     th:field="*{biens[__${itemStat.index}__].titreBien}"
                                                                     type="text"
                                                                     class="form-control">
                                                         </div>
 
                                                         <div class="col form-group">
-                                                            <!--th:placeholder="qte + ' ' + ${itemStat.count}"-->
                                                             <input
                                                                     th:field="*{biens[__${itemStat.index}__].qte}"
                                                                     type="number"
@@ -300,12 +298,12 @@
 
 
                                         <br>
-                                        <button class="btn btn-rounded btn-primary prevBtn  float-left " type="button"
+                                        <button class="btn btn-rounded btn-success prevBtn  float-left " type="button"
                                                 title="Retour">
                                             <i
                                                     class="fas fa-arrow-left"></i>
                                         </button>
-                                        <button class="btn btn-rounded btn-primary nextBtn  float-right " type="button"
+                                        <button class="btn btn-rounded btn-success nextBtn  float-right " type="button"
                                                 title="Continuer et ajouter des missions bénévoles"><i
                                                 class="fas fa-arrow-right"></i>
                                         </button>
@@ -318,7 +316,7 @@
                                                 <h3> Besoin des bénévoles </h3>
                                             </div>
                                             <div class="col-sm-6">
-                                                <button type="button" class="btn btn-rounded btn-primary   float-right "
+                                                <button type="button" class="btn btn-rounded btn-secondary   float-right "
                                                         title="Ajouter une mission"
                                                         onclick="addRowMission()"><i class="fas fa-plus"></i>
                                                 </button>
@@ -366,7 +364,7 @@
                                         </div>
 
 
-                                        <button class="btn btn-rounded btn-primary  prevBtn  float-left " type="button">
+                                        <button class="btn btn-rounded btn-success  prevBtn  float-left " type="button">
                                             <i
                                                     class="fas fa-arrow-left"></i> Retour
                                         </button>

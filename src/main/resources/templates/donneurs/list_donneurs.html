@@ -1,75 +1,107 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head_part">
 
-<head th:insert="fragment/header :: headerfiles">
-
-<body>
-<div th:replace="fragment/menu ::menugauche">
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>
 
-<div id="content">
-    <div th:replace="fragment/header ::navbar"></div>
+<div id="main-wrapper">
 
-    <div class="container">
-        <h1>Liste des donneurs</h1>
-        <div th:if="${#lists.isEmpty(userBiens)}">
-            <div class="alert alert-danger" role="alert">
-                La liste des dons est vide!!
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
+
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
+
+    <div class="page-wrapper">
+
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Liste des donneurs</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item "> Donneurs</li>
+                    </ol>
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div th:if="${#lists.isEmpty(userBiens)}">
+                                <div class="alert alert-danger" role="alert">
+                                    La liste des dons est vide!!
+                                </div>
+                            </div>
+                            <div th:if="${not #lists.isEmpty(userBiens)}">
+                                <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Titre bien</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Quantité
+                                            données
+                                        </th>
+
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date
+                                            participation
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+
+                                    <tbody th:each="p : ${userBiens}">
+
+                                    <tr>
+                                        <td th:text="${p.user.nom}"></td>
+                                        <td th:text="${p.user.prenom}"></td>
+                                        <td th:text="${p.bien.titreBien}"></td>
+                                        <td th:text="${p.bien.evenement.titre}"></td>
+
+                                        <td th:text="${p.qteDonnee}"></td>
+                                        <td th:text="${p.dateParticipation}"></td>
+
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item" th:each="p : ${pages}"
+                                            th:class="${p==pageCourante}? 'page-item active': ''">
+                                            <!-- $ acceder model -->
+                                            <a class="page-link" th:text="${p}"
+                                               th:href="@{listDonneurs(page=${p})}"></a>
+                                        </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <footer class="footer"> © 2020</footer>
+
         </div>
-        <div th:if="${not #lists.isEmpty(userBiens)}">
-            <table class="table table-active border">
-                <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Titre bien</th>
-                    <th scope="col">Événement</th>
-                    <th scope="col">Quantité données </th>
 
-                    <th scope="col">Date participation</th>
-                </tr>
-                </thead>
-
-
-                <tbody th:each="p : ${userBiens}">
-
-                <tr>
-                    <td th:text="${p.user.nom}"></td>
-                    <td th:text="${p.user.prenom}"></td>
-                    <td th:text="${p.bien.titreBien}"></td>
-                    <td th:text="${p.bien.evenement.titre}"></td>
-
-                    <td th:text="${p.qteDonnee}"></td>
-                    <td th:text="${p.dateParticipation}"></td>
-
-
-
-                </tr>
-
-                </tbody>
-            </table>
-            <center>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item" th:each="p : ${pages}"
-                            th:class="${p==pageCourante}? 'page-item active': ''">
-                            <!-- $ acceder model -->
-                            <a class="page-link" th:text="${p}" th:href="@{listDonneurs(page=${p})}"></a>
-                        </li>
-
-                    </ul>
-                </nav>
-            </center>
-        </div>
     </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<header th:insert="fragment/header.html ::scriptFooter"></header>
-
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>
+
+
 </html>

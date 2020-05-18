@@ -21,9 +21,9 @@
 
             <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
-                    <h3 class="text-themecolor mb-0 mt-0">Liste des événements</h3>
+                    <h3 class="text-themecolor mb-0 mt-0">Liste des cotisations</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item "> Événements > Liste des événements</li>
+                        <li class="breadcrumb-item "> Cotisations > Consulter cotisation</li>
                     </ol>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                                     <td th:text="${cotisation.dateFin}"></td>
 
                                     <td>
-                                        <a class="btn btn-circle btn-primary" title="Modifier"
+                                        <a class="btn btn-circle btn-secondary" title="Modifier"
                                            th:href="@{formulaireUpdate(id=${cotisation.id})}"><i
                                                 class="fas fa-edit"></i></a>
 
