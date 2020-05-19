@@ -71,8 +71,6 @@ public class SponsorController {
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "motCle", defaultValue = "") String mc) {
         //cherche moi un paam page à dispa servlet initialement page0
-        // Page<Etudiant> pagesetudiants = etudiantRepository.findAll(new PageRequest(page, 5));
-        //pour connaitre page
         Page<Sponsor> pagesSponsors = sponsorService.rehercherPageSponsorSrv("%" + mc + "%", new PageRequest(page, 5));
         System.out.println("pagesSponsors" + pagesSponsors.getContent());
         //  Page<Sponsor> pagesSponsors = sponsorService.findAllSponsorServ(new PageRequest(page, 5));

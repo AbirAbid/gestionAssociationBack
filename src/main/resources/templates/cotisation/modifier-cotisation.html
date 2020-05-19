@@ -35,47 +35,46 @@
                     <div class="card card-outline-info">
 
                         <div class=" ribbon-wrapper card-body ">
-                            <div class="ribbon ribbon-bookmark ribbon-right  ribbon-danger">Modifier Cotisation </div>
+                            <div class="ribbon ribbon-bookmark ribbon-right ribbon-info">Modifier Cotisation</div>
                             <div class="form-body ribbon-content">
-                                    <form action="#"
-                                          th:action="@{/cotisations/modifierCotisation}"
-                                          th:object="${cotisation}"
-                                          method="post">
-                                        <input type="hidden" th:field="*{id}" class="form-control"
+                                <form action="#"
+                                      th:action="@{/cotisations/modifierCotisation}"
+                                      th:object="${cotisation}"
+                                      method="post">
+                                    <input type="hidden" th:field="*{id}" class="form-control"
+                                    />
+
+                                    <div class="form-group">
+                                        <label>Nom de la cotisation</label>
+                                        <input type="text" th:field="*{cotisationName}" class="form-control"
+                                        />
+                                        <span th:errors="*{cotisationName}" class="text-danger"> </span>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Montant</label> <label>Montant </label>
+                                        <input type="number" th:field="*{montant}" class="form-control"
+                                        /> <span th:errors="*{montant}" class="text-danger"> </span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date début</label>
+                                        <input type="date" th:field="*{dateDebut}" class="form-control"
+                                        />
+                                        <span th:errors="*{dateDebut}" class="text-danger"> </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date fin</label>
+                                        <input type="date" th:field="*{dateFin}" class="form-control"
                                         />
 
-                                        <div class="form-group">
-                                            <label>Nom de la cotisation</label>
-                                            <input type="text" th:field="*{cotisationName}" class="form-control"
-                                            />
-                                            <span th:errors="*{cotisationName}" class="text-danger"> </span>
+                                    </div>
 
 
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Montant</label> <label>Montant </label>
-                                            <input type="number" th:field="*{montant}" class="form-control"
-                                            /> <span th:errors="*{montant}" class="text-danger"> </span>
-
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Date début</label>
-                                            <input type="date" th:field="*{dateDebut}" class="form-control"
-                                            />
-                                            <span th:errors="*{dateDebut}" class="text-danger"> </span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Date fin</label>
-                                            <input type="date" th:field="*{dateFin}" class="form-control"
-                                            />
-
-                                        </div>
-
-
-                                        <button type="submit" class="btn btn-rounded btn-success">Modifier cotisation</button>
-                                    </form>
-                                    </form>
-                                </div>
+                                    <button type="submit" class="btn btn-rounded btn-info">Modifier cotisation</button>
+                                </form>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -83,6 +82,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <footer class="footer">
