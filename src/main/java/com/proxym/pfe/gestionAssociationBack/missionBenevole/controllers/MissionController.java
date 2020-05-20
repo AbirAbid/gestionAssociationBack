@@ -179,7 +179,7 @@ public class MissionController {
                 userMissions.add(users.get(i).getUserMissions().get(j));
             }
         }
-        Pageable pageable = new PageRequest(page, 5);
+        Pageable pageable = new PageRequest(page, 10);
         if (pageable.getOffset() >= userMissions.size()) {
             return Page.empty();
         }

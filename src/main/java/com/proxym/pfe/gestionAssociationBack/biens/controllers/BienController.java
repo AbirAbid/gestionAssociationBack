@@ -83,7 +83,7 @@ public class BienController {
                 userBiens.add(users.get(i).getUserBiens().get(j));
             }
         }
-        Pageable pageable = new PageRequest(page, 5);
+        Pageable pageable = new PageRequest(page, 10);
         if (pageable.getOffset() >= userBiens.size()) {
             return Page.empty();
         }

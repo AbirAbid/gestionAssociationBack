@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="fragments/head :: head_part">
 
-<body class="fix-header card-no-border fix-sidebar">
+<body class="logo-center card-no-border fix-sidebar">
 <div class="preloader">
     <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
@@ -26,16 +26,18 @@
             <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
                     <h3 class="text-themecolor mb-0 mt-0">Liste des événements</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item "> Événements > Liste des événements</li>
-                    </ol>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
+                <div class="col-lg-12">
+
+                    <!-- Card -->
+                    <div class="card ">
+                        <div class="card-header text-center">
+                            <h4 class="card-title"><span class=" far fa-calendar-alt"></span> Liste des événements</h4>
+                        </div>
+                        <div class="card-body  text-black">
 
                             <div class="alert alert-danger alert-dismissible fade show" role="alert"
                                  th:if="${messageDelete}">
@@ -134,7 +136,14 @@
                                                    th:if="${event.active == 0}"
                                         > <i class="fas fa-trash-alt"></i></a>
                                         </center>
-                                        <center></center>
+                                        <center>
+                                            <center>
+                                                <a th:if="${event.active == 1}" class="btn btn-circle btn-danger disabled"
+                                                ><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            </center>
+
+                                        </center>
                                     </td>
                                 </tr>
                                 </tbody>

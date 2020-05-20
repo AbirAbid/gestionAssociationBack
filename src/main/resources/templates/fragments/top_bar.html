@@ -1,16 +1,8 @@
 <div th:fragment="topbar" xmlns:th="http://www.w3.org/1999/xhtml">
-    <header class="topbar">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">
-                    <!-- Logo icon --><b>
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
-                    <img src="/images/logo-icon.png" alt="homepage" class="dark-logo"/>
+    <header class="topbar" data-toggle="sticky-onscroll">
 
-                </b>
-                </a>
-            </div>
+        <nav class="navbar top-navbar navbar-expand-md navbar-light"  >
+
             <div class="navbar-collapse">
                 <!-- ============================================================== -->
                 <!-- toggle and nav items -->
@@ -55,4 +47,39 @@
             </div>
         </nav>
     </header>
+
+    <script>
+        $(document).ready(function() {
+            // Custom
+            var stickyToggle = function(sticky, stickyWrapper, scrollElement) {
+                var stickyHeight = sticky.outerHeight();
+                var stickyTop = stickyWrapper.offset().top;
+                if (scrollElement.scrollTop() >= stickyTop){
+                    stickyWrapper.height(stickyHeight);
+                    sticky.addClass("is-sticky");
+                }
+                else{
+                    sticky.removeClass("is-sticky");
+                    stickyWrapper.height('auto');
+                }
+            };
+
+            // Find all data-toggle="sticky-onscroll" elements
+            $('[data-toggle="sticky-onscroll"]').each(function() {
+                var sticky = $(this);
+                var stickyWrapper = $('<div>').addClass('sticky-wrapper'); // insert hidden element to maintain actual top offset on page
+                sticky.before(stickyWrapper);
+                sticky.addClass('sticky');
+
+                // Scroll & resize events
+                $(window).on('scroll.sticky-onscroll resize.sticky-onscroll', function() {
+                    stickyToggle(sticky, stickyWrapper, $(this));
+                });
+
+                // On page load
+                stickyToggle(sticky, stickyWrapper, $(window));
+            });
+        });
+    </script>
+
 </div>
