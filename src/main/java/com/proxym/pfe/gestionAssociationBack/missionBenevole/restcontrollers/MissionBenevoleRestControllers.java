@@ -114,27 +114,13 @@ public class MissionBenevoleRestControllers {
             List<UserMission> userMissions = user.getUserMissions();
             ObjectMapper mapper = new ObjectMapper();
             String jsonInString;
-            /*  User user = userService.findUserByUsernameService(username);
-            List<UserBien> userBiens = user.getUserBiens();
 
-            List<UserBien> userBiens1 = new ArrayList<>();
-            for (int i = 0; i < userBiens.size(); i++) {
-                jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
-
-                //get Bien sous forme json
-                UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
-
-                userBiens1.add(userBien);
-
-*/
 
             List<UserMission> userMissions1 = new ArrayList<>();
             for (int i = 0; i < userMissions.size(); i++) {
                 System.out.println("userMissions" + userMissions.get(i).getMission().getTitre());
                 jsonInString = mapper.writeValueAsString(userMissions.get(i).getMission());
 
-                // System.out.println("jsonInString" + jsonInString);
-                //get mission sous forme json
                 UserMission userMission = mapper.readValue(mapper.writeValueAsString(userMissions.get(i)), UserMission.class);
 
                 userMissions1.add(userMission);

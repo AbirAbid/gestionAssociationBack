@@ -203,23 +203,11 @@ public class BienRestController {
                     userBiens.add(users.get(i).getUserBiens().get(j));
                 }
             }
-          /*  List<User>users=userRepository.findAllByUserBiensIsNotNull();
-            for (int i = 0; i < users.size(); i++) {
-
-                System.out.println(users.get(i).getUsername());
-            }*/
-          /*  User user = userService.findUserByUsernameService("abir");
-            List<UserBien> userBiens = user.getUserBiens();
-            List<Long> bienUserId = new ArrayList<>();
             for (int i = 0; i < userBiens.size(); i++) {
-                bienUserId.add(userBiens.get(i).getBien().getId());
-                System.out.println(userBiens.get(i).getBien());
+                System.out.println(" userBiens.get(i).getBien()  " + userBiens.get(i).getBien());
             }
-            Bien b = bienRepositories.getOne((long) 76);
 
-            System.out.println(b.getId() + "  bienUserId.contains(b.get()) " + bienUserId.contains(b.getId()));
 
-            return user.getUserBiens();*/
             return userBiens;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());

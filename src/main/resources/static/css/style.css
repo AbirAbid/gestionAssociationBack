@@ -92,7 +92,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #2c2b2e;
+  color: #000000;
   font-family: "Rubik", sans-serif;
   font-weight: 400; }
 
@@ -6516,4 +6516,7 @@ File: scss
   display: table-cell;
   text-align: center;
   position: relative;
+}
+.text-black{
+  color: black;
 }

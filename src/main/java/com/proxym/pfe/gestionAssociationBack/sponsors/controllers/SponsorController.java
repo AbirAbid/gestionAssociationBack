@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/sponsors/")
@@ -68,12 +69,12 @@ public class SponsorController {
     /***********************************************List sponsors*******************************************/
 
     @RequestMapping(value = "/sponsors", method = RequestMethod.GET)
-    public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String listsponsor(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "motCle", defaultValue = "") String mc) {
+        List<Sponsor>  sponsorList=sponsorService.findAllSponsorServ();
         //cherche moi un paam page à dispa servlet initialement page0
-        Page<Sponsor> pagesSponsors = sponsorService.rehercherPageSponsorSrv("%" + mc + "%", new PageRequest(page, 5));
+       /* Page<Sponsor> pagesSponsors = sponsorService.rehercherPageSponsorSrv("%" + mc + "%", new PageRequest(page, 5));
         System.out.println("pagesSponsors" + pagesSponsors.getContent());
-        //  Page<Sponsor> pagesSponsors = sponsorService.findAllSponsorServ(new PageRequest(page, 5));
 
         int pagesCount = pagesSponsors.getTotalPages();
         int[] pages = new int[pagesCount];
@@ -86,8 +87,9 @@ public class SponsorController {
         model.addAttribute("pagesSponsors", pagesSponsors);
         model.addAttribute("pageCourante", page);
         model.addAttribute("pageContent", pagesSponsors.getContent());
-        model.addAttribute("mc", mc);
-        //model.addAttribute("motCle", mc);
+        model.addAttribute("mc", mc);*/
+        model.addAttribute("sponsorlist", sponsorList);
+
         return "sponsor/listSponsor";
     }
 

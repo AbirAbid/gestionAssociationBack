@@ -1,10 +1,399 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head_part">
 
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
+
+<div id="main-wrapper">
+
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
+
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
+
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Détail événement</h3>
+                    <ol class="breadcrumb">
+                        <li><a href="/evenement/list">Liste des événements <span class=" fas fa-angle-right"></span>
+                        </a></li>
+                        <li> &nbsp; Détail événement</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Détail événement</h4>
+                            <div id="accordian-part">
+                                <div id="accordian-3">
+                                    <div class="card mb-0 border-0">
+                                        <div class="card-header pl-0">
+                                            <h5 class="mb-0">
+                                                <a href="#" class="link p-2" id="headingOne" data-toggle="collapse"
+                                                   data-target="#collapse1" aria-expanded="true"
+                                                   aria-controls="collapse1">
+                                                    <span class=" fas fa-calendar-alt"></span> Information générales
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne"
+                                             data-parent="#accordian-3">
+                                            <div class="card-body pl-0">
+                                                <div class="tab-pane active" id="profile" role="tabpanel">
+                                                    <div class="p-3 " th:object="${evenement}">
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-2 col-5">
+                                                                <label style="font-weight:bold;" class=" text-black">Titre </label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6 text-black"
+                                                                 th:text="${evenement.titre}">
+
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-2 col-5">
+                                                                <label style="font-weight:bold;" class=" text-black">Déscription </label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6"
+                                                                 th:text="${evenement.description}">
+
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-2 col-5">
+                                                                <label style="font-weight:bold;" class=" text-black">Date
+                                                                    début</label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6"
+                                                                 th:text="${evenement.dateDebut}">
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-2 col-5">
+                                                                <label style="font-weight:bold;" class=" text-black">Date
+                                                                    Fin </label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6"
+                                                                 th:text="${evenement.dateFin}">
+
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-2 col-5">
+                                                                <label style="font-weight:bold;" class=" text-black">Ville</label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6"
+                                                                 th:text="${evenement.ville}">
+
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-2 col-5">
+                                                                <label style="font-weight:bold;">Adresse</label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6"
+                                                                 th:text="${evenement.adresse}">
+
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row text-black">
+                                                            <div class="col-sm-4 col-md-3 col-5 ">
+                                                                <label style="font-weight:bold;">Frais
+                                                                    d'inscription</label>
+                                                            </div>
+                                                            <div class="col-md-8 col-6 "
+                                                                 th:if="${evenement.frais != null}"
+                                                                 th:text="${evenement.frais}">
+
+                                                            </div>
+
+                                                            <div class="col-md-8 col-6 "
+                                                                 th:if="${evenement.frais == null}">
+                                                                <span class="badge badge-pill badge-danger">
+                                                                    Événement gratuit </span>
+
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <hr/>
+                                                        <div class="row">
+                                                            <div class="col-sm-4 col-md-3 col-5 text-black">
+                                                                <label style="font-weight:bold;">Sponsors</label>
+                                                            </div>
+
+                                                            <div class="col-md-8 col-6">
+                                                                <span th:each="sponsor : ${evenement.sponsors}">
+                                                                <span class="badge badge-pill badge-success"
+                                                                      th:text="${sponsor.titreSponsor}"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card mb-0 border-0">
+                                        <div class="card-header pl-0">
+                                            <h5 class="mb-0">
+                                                <a href="#" class="collapsed link p-2" id="headingTwo"
+                                                   data-toggle="collapse" data-target="#collapse2" aria-expanded="false"
+                                                   aria-controls="collapse2">
+                                                    <span class="  fas fa-gift"></span> Liste des biens ? </a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordian-3">
+                                            <div class="card-body pl-0">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       data-tablesaw-mode="stack">
+
+
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="text-align:center" scope="col"
+                                                            data-tablesaw-priority="persist" class="border">
+                                                            Titre Bien
+
+                                                        </th>
+                                                        <th style="text-align:center" scope="col"
+                                                            data-tablesaw-priority="persist" class="border">
+                                                            Quantié demandé
+                                                        </th>
+                                                        <th style="text-align:center" scope="col"
+                                                            data-tablesaw-priority="persist" class="border">
+                                                            Totale quantité données
+                                                        </th>
+                                                        <th style="text-align:center" scope="col"
+                                                            data-tablesaw-priority="persist" class="border">
+                                                            Reste
+                                                        </th>
+
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="bien : ${biens}">
+
+                                                        <td style="text-align:center" th:text="${bien.titreBien}">
+
+                                                        </td>
+                                                        <td style="text-align:center" th:text="${bien.qte}">
+
+                                                        </td>
+
+                                                        <td style="text-align:center">
+                                                            <span class="badge badge-info"
+                                                                  th:text="${bien.totaleqteDonnee}"></span>
+
+                                                        </td>
+                                                        <td style="text-align:center">
+                                                            <th:block th:with=" var = ${bien.qte - bien.totaleqteDonnee}">
+
+                                                                <span class="badge badge-danger"
+                                                                      th:text="${var}"></span>
+                                                             </th:block>
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card mb-0 border-0">
+                                        <div class="card-header pl-0">
+                                            <h5 class="mb-0">
+                                                <a href="#" class="collapsed link p-2" id="headingThree"
+                                                   data-toggle="collapse" data-target="#collapse3" aria-expanded="false"
+                                                   aria-controls="collapse3">
+                                                    <span class=" fas fa-hands"></span> Liste des missions ? </a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse3" class="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordian-3">
+                                            <div class="card-body pl-0">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       data-tablesaw-mode="stack">
+
+
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Titre Mission
+
+                                                        </th>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Déscription
+                                                        </th>
+
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="mission : ${missions}">
+
+                                                        <td th:text="${mission.titre}">
+
+                                                        </td>
+                                                        <td th:text="${mission.description}">
+
+                                                        </td>
+
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-0 border-0">
+                                        <div class="card-header pl-0">
+                                            <h5 class="mb-0">
+                                                <a href="#" class="collapsed link p-2" id="headingFour"
+                                                   data-toggle="collapse" data-target="#collapse4" aria-expanded="false"
+                                                   aria-controls="collapse4">
+
+                                                    <span class="fas fa-hand-holding-heart"></span> Liste des donneurs ?
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse4" class="collapse" aria-labelledby="headingFour"
+                                             data-parent="#accordian-3">
+                                            <div class="card-body pl-0">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       data-tablesaw-mode="stack">
+
+
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                           Nom du donneur
+
+                                                        </th>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Bien
+                                                        </th>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Quantités données
+                                                        </th>
+
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="userbien : ${userBiens}">
+
+                                                        <td th:text="${userbien.user.nom}">
+
+                                                        </td>
+                                                        <td th:text="${userbien.bien.titreBien}">
+
+                                                        </td>
+                                                        <td th:text="${userbien.qteDonnee}">
+
+                                                        </td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-0 border-0">
+                                        <div class="card-header pl-0">
+                                            <h5 class="mb-0">
+                                                <a href="#" class="collapsed link p-2" id="headingFive"
+                                                   data-toggle="collapse" data-target="#collapse5" aria-expanded="false"
+                                                   aria-controls="collapse5">
+                                                    <span class=" fas fa-hands"></span> Liste des bénévoles ? </a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapse5" class="collapse" aria-labelledby="headingFive"
+                                             data-parent="#accordian-3">
+                                            <div class="card-body pl-0">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       data-tablesaw-mode="stack">
+
+
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Nom Bénévole
+                                                        </th>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Titre de la mission
+                                                        </th>
+
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="usermission : ${userMission}">
+
+                                                        <td th:text="${usermission.user.nom}">
+
+                                                        </td>
+                                                        <td th:text="${usermission.mission.titre}">
+
+                                                        </td>
+
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer"> © 2020</footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+
+
+</div>
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 </body>
+
+
 </html>

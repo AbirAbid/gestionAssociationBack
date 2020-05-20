@@ -87,14 +87,6 @@
                                 <tr>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">ID</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Titre
-                                        <input id="myInput" type="text" placeholder="Search..">
-                                        <ul id="myList">
-                                            <li>First item</li>
-                                            <li>Second item</li>
-                                            <li>Third item</li>
-                                            <li>Fourth</li>
-                                        </ul>
-
 
                                     </th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date début</th>
@@ -118,7 +110,9 @@
                                     <td th:text="${event.dateDebut}"></td>
                                     <td th:text="${event.dateFin}"></td>
                                     <td>
-                                        <a class="btn btn-circle btn-secondary" title="Détail">
+                                        <a class="btn btn-circle btn-secondary" title="Détail"
+                                           th:href="@{eventDetail(id=${event.id})}"
+                                        >
                                             <i class="fas fa-info"></i></a>
 
                                     </td>
@@ -172,17 +166,7 @@
 
 </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#myList li").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
+
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>

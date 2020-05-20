@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" >
                             <div class="alert alert-danger alert-dismissible fade show" role="alert"
                                  th:if="${messageDelete}">
                                 <strong th:text="${messageDelete}"></strong>
@@ -46,7 +46,6 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-
                             <div class="alert alert-success alert-dismissible fade show" role="alert"
                                  th:if="${messageAdd}">
                                 <strong th:text="${messageAdd}"></strong>
@@ -54,80 +53,78 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
 
-                                <form th:action="@{sponsors}" method="get">
-                                    <div class="md-form active-purple-2 mb-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
-                                                   placeholder="Rechercher">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary" type="submit">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </form>
+                                <table name="item" id="item" class="display tablesaw  table-bordered table-hover table "
+                                       data-tablesaw-mode="stack" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom de l'entreprise</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Photo</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
 
 
-                                <tr>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de l'entreprise</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Photo</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
-                                </tr>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom de l'entreprise</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
 
-                                <tbody>
+                                    </tr>
 
-                                <tr th:each="sponsor : ${pagesSponsors.content}">
+                                    </tfoot>
+                                    <tbody>
+                                    <tr th:each="sponsor : ${sponsorlist}">
 
-                                    <td th:text="${sponsor.titreSponsor}"></td>
-                                    <td th:text="${sponsor.emailSponsor}"></td>
-                                    <td>
-                                        <img th:src="@{getPhoto(id=${sponsor.idSponsor})}" width="100" height="100">
+                                        <td th:text="${sponsor.titreSponsor}"></td>
+                                        <td th:text="${sponsor.emailSponsor}"></td>
+                                        <td>
+                                            <img th:src="@{getPhoto(id=${sponsor.idSponsor})}" width="100" height="100">
 
-                                    </td>
-                                    <td>
-                                        <center><a class="btn btn-circle btn-info" title="Modifier"
-                                                   th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
-                                                class="fas fa-edit"></i></a>
-                                        </center>
-                                    </td>
-                                    <td>
-                                        <center><a  class="btn btn-circle btn-danger" title="supprimer"
-                                                   onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
-                                                   th:href="@{supprimer(id=${sponsor.idSponsor})}"
-                                                    th:if="${sponsor.affecte == 0}"> <i
-                                                class="fas fa-trash-alt"></i></a>
-                                        </center>
+                                        </td>
+                                        <td>
+                                            <center><a class="btn btn-circle btn-info" title="Modifier"
+                                                       th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
+                                                    class="fas fa-edit"></i></a>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center><a  class="btn btn-circle btn-danger" title="supprimer"
+                                                        onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
+                                                        th:href="@{supprimer(id=${sponsor.idSponsor})}"
+                                                        th:if="${sponsor.affecte == 0}"> <i
+                                                    class="fas fa-trash-alt"></i></a>
+                                            </center>
 
-
+                                            <center>
                                             <a th:if="${sponsor.affecte == 1}" class="btn btn-circle btn-danger disabled"
                                             ><i
                                                     class="fas fa-trash-alt"></i></a>
-                                        </center>
-                                    </td>
+                                            </center>
+                                        </td>
 
 
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
-                                Aucun résultat pour <p th:text="${mc}"></p>
-                            </div>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item" th:each="p : ${pages}"
-                                        th:class="${p==pageCourante}? 'page-item active': ''">
-                                        <!-- $ acceder model -->
-                                        <a class="page-link" th:text="${p}" th:href="@{sponsors(page=${p})}"></a>
-                                    </li>
+                                    </tr>
 
-                                </ul>
-                            </nav>
+                                    </tbody>
+                                </table>
+
+
+                            <!--   <div class="alert alert-danger" th:if="${ #lists.isEmpty(pageContent)}">
+                                   Aucun résultat pour <p th:text="${mc}"></p>
+                               </div>
+                               <nav aria-label="Page navigation example">
+                                   <ul class="pagination">
+                                       <li class="page-item" th:each="p : ${pages}"
+                                           th:class="${p==pageCourante}? 'page-item active': ''">
+                                           &lt;!&ndash; $ acceder model &ndash;&gt;
+                                           <a class="page-link" th:text="${p}" th:href="@{sponsors(page=${p})}"></a>
+                                       </li>
+
+                                   </ul>
+                               </nav>-->
                         </div>
                     </div>
 
@@ -142,7 +139,38 @@
     </div>
 
 </div>
-</div>
+<script>
+
+    $(document).ready(function () {
+
+        $('#item tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+
+        // DataTables est un plug-in jQuery open-source permettant de dynamiser un tableau HTML
+        var otable = $('#item').DataTable();
+
+        // Apply the search
+        otable.columns().every(function () {
+
+            var that = this;
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+    });
+
+</script>
+
+
+<style>   tfoot {
+    display: table-header-group;
+}</style>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 
 </body>

@@ -1,15 +1,19 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.controllers;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
 import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
+import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,7 +35,8 @@ public class EvenementController {
     EvenementService evenementService;
     @Autowired
     BienService bienService;
-
+    @Autowired
+    UserService userService;
     @Autowired
     MissionService missionService;
     @Autowired
@@ -332,5 +337,74 @@ public class EvenementController {
 
     }
 
+
+    /*********************************Event Detail ****************************/
+
+    @GetMapping(value = "/eventDetail")
+
+    public String eventDetail(Model model, Long id, RedirectAttributes redirectAttributes) {
+        try {
+
+            Evenement e = evenementService.getOneEventByIdservice(id);
+            List<Bien> biens = bienService.findAllByEventService(id);
+            List<Mission> missions = missionService.findAllMissionByEventService(id);
+
+            /*************** pour avoir liste donneurs**********/
+            List<User> users = userService.getAllDonneursService();
+            List<UserBien> userBiens = new ArrayList<>();
+            for (int i = 0; i < users.size(); i++) {
+                for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
+                    userBiens.add(users.get(i).getUserBiens().get(j));
+                }
+            }
+            List<UserBien> userBiensEvent = new ArrayList<>();
+            for (int i = 0; i < userBiens.size(); i++) {
+                if (userBiens.get(i).getBien().getEvenement() == e) {
+                    userBiensEvent.add(userBiens.get(i));
+                }
+            }
+            /** pour éliminer redondance ***/
+            Set<UserBien> mySet = new HashSet<>(userBiensEvent);
+            userBiensEvent = new ArrayList<>(mySet);
+
+            /*************** pour avoir liste missions**********/
+
+            List<User> usersBenevole = userService.getAllBenevolesService();
+            List<UserMission> userMissions = new ArrayList<>();
+
+            for (int i = 0; i < usersBenevole.size(); i++) {
+                for (int j = 0; j < usersBenevole.get(i).getUserMissions().size(); j++) {
+
+                    userMissions.add(usersBenevole.get(i).getUserMissions().get(j));
+
+                }
+
+            }
+
+           List<UserMission> userMissionsEvent = new ArrayList<>();
+            for (int i = 0; i < userMissions.size(); i++) {
+                if (userMissions.get(i).getMission().getEvenement() == e) {
+                    userMissionsEvent.add(userMissions.get(i));
+                }
+            }
+            /** pour éliminer redondance ***/
+            Set<UserMission> mySet1 = new HashSet<>(userMissionsEvent);
+            userMissionsEvent = new ArrayList<>(mySet1);
+
+
+
+            model.addAttribute("evenement", e);
+            model.addAttribute("biens", biens);
+            model.addAttribute("userBiens", userBiensEvent);
+            model.addAttribute("missions", missions);
+            model.addAttribute("userMission", userMissionsEvent);
+
+
+            return "evenement/evenementDetail";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "pagesError/error";
+        }
+    }
 }
 
