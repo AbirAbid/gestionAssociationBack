@@ -1,10 +1,10 @@
 let addRowBien = function () {
     let listNameB = 'biens'; //list name in Catalog.class
     let fieldsNamesB = ['titreBien', 'qte'];
-    let rowIndexB = document.querySelectorAll('.itemStat').length;
-console.log('rowIndexB',rowIndexB);
+    let rowIndexB = document.querySelectorAll('.b').length;
+    console.log('rowIndexB',rowIndexB);
     let rowB = document.createElement('div');
-    rowB.classList.add('row', 'itemStat');
+    rowB.classList.add('row', 'b');
 
 
     fieldsNamesB.forEach((fieldName) => {
@@ -34,11 +34,11 @@ console.log('rowIndexB',rowIndexB);
 let addRowMission = function () {
     let listName = 'missions';
     let fieldsNames = ['titre', 'description'];
-    let rowIndex = document.querySelectorAll('.item').length;
+    let rowIndex = document.querySelectorAll('.m').length;
     console.log('rowIndex',rowIndex);
 
     let row = document.createElement('div');
-    row.classList.add('row', 'item');
+    row.classList.add('row', 'm');
 
     fieldsNames.forEach((fieldName) => {
         let col = document.createElement('div');
