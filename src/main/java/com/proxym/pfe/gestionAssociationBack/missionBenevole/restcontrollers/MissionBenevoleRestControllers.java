@@ -136,6 +136,29 @@ public class MissionBenevoleRestControllers {
     }
 
 
+    @RequestMapping(value = "/annulerDemande/{username}", method = RequestMethod.POST)
+    public void libererMission(@PathVariable String username, @RequestBody Long id) {
+
+        User user = userService.findUserByUsernameService(username);
+        Mission mission = missionService.findMissionByIdService(id);
+        List<UserMission> userMissions = user.getUserMissions();
+        int index = 0;
+
+        while (true) {
+            if (userMissions.get(index).getMission().getId() == mission.getId() && index < userMissions.size()) {
+                break;
+            } else {
+                index++;
+            }
+
+        }
+
+        userMissions.remove(index);
+        userService.saveUserService(user);
+
+    }
+
+
     /***methode get allParicipation By user****/
     List<UserMission> getListMissionUser(String username) throws IOException {
 
@@ -190,7 +213,6 @@ public class MissionBenevoleRestControllers {
 
             }
             missionUserDisplays.add(missionUserDisplay);
-
 
 
         }
