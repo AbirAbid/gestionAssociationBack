@@ -178,10 +178,13 @@ public class MissionBenevoleRestControllers {
 
 
                     missionUserDisplay.setExist(1);
+                    missionUserDisplay.setAffected(userMissions.get(j).getAffected());
+
                     break;
 
                 } else {
                     missionUserDisplay.setExist(0);
+                    missionUserDisplay.setAffected(0);
 
                 }
 
