@@ -168,36 +168,31 @@ public class MissionBenevoleRestControllers {
 
         List<MissionUserDisplay> missionUserDisplays = new ArrayList<>();
 
-
+//pour éliminer redondance
         for (int i = 0; i < missions.size(); i++) {
-            int index = 0;
-            boolean exist = userMissions.get(index).getMission().getId() == missions.get(i).getId();
-
-            while (exist && index < userMissions.size() + 1) {
-                System.out.println("cdt outside if" + exist);
-                index++;
-            }
-            if (index > userMissions.size()) {
+            MissionUserDisplay missionUserDisplay = new MissionUserDisplay();
+            missionUserDisplay.setMission(missions.get(i));
+            for (int j = 0; j < userMissions.size(); j++) {
+                boolean exist = userMissions.get(j).getMission().getId() == missions.get(i).getId();
+                if (exist) {
 
 
-                MissionUserDisplay missionUserDisplay = new MissionUserDisplay();
-                missionUserDisplay.setMission(missions.get(i));
-                missionUserDisplay.setExist(0);
-                // missionUserDisplay.setAffected(0);
+                    missionUserDisplay.setExist(1);
+                    break;
 
-                missionUserDisplays.add(missionUserDisplay);
-            } else {
-                MissionUserDisplay missionUserDisplay = new MissionUserDisplay();
-                missionUserDisplay.setMission(missions.get(i));
-                missionUserDisplay.setExist(1);
-                // missionUserDisplay.setAffected();
+                } else {
+                    missionUserDisplay.setExist(0);
 
-                missionUserDisplays.add(missionUserDisplay);
+                }
 
             }
+            missionUserDisplays.add(missionUserDisplay);
+
 
 
         }
+
+
         List<MissionUserDisplay> missionUserDisplays2 = new ArrayList<>();
         for (int i = 0; i < missionUserDisplays.size(); i++) {
 
