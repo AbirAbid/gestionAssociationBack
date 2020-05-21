@@ -342,14 +342,14 @@ public class EvenementController {
 
     @GetMapping(value = "/eventDetail")
 
-    public String eventDetail(Model model, Long id, RedirectAttributes redirectAttributes) {
+    public String eventDetail(Model model, Long id) {
         try {
 
             Evenement e = evenementService.getOneEventByIdservice(id);
             List<Bien> biens = bienService.findAllByEventService(id);
             List<Mission> missions = missionService.findAllMissionByEventService(id);
 
-            /*************** pour avoir liste donneurs**********/
+            /*************** pour avoir liste donneurs************************/
             List<User> users = userService.getAllDonneursService();
             List<UserBien> userBiens = new ArrayList<>();
             for (int i = 0; i < users.size(); i++) {
@@ -367,7 +367,7 @@ public class EvenementController {
             Set<UserBien> mySet = new HashSet<>(userBiensEvent);
             userBiensEvent = new ArrayList<>(mySet);
 
-            /*************** pour avoir liste missions**********/
+            /*************** pour avoir liste missions*************************/
 
             List<User> usersBenevole = userService.getAllBenevolesService();
             List<UserMission> userMissions = new ArrayList<>();
