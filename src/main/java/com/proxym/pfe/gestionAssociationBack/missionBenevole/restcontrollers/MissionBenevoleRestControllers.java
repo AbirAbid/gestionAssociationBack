@@ -103,7 +103,18 @@ public class MissionBenevoleRestControllers {
     @RequestMapping(value = "/listMission", method = RequestMethod.GET)
     public List<Mission> getallMission() {
         try {
-            return missionService.findAllMissionService();
+            List<Mission> missions= missionService.findAllMissionService();
+            ObjectMapper mapper = new ObjectMapper();
+            List<Mission> missions2 = new ArrayList<>();
+            for (int i = 0; i < missions.size(); i++) {
+
+                Mission missionUserDisplay = mapper.readValue(mapper.writeValueAsString(missions.get(i)), Mission.class);
+
+                missions2.add(missionUserDisplay);
+
+
+            }
+            return missions2;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
