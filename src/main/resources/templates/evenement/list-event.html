@@ -101,20 +101,29 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="event : ${evenements.content}">
+                                    <td th:text="${event.id}"></td>
+                                    <td>
+                                        <th:block>
 
-                                    <td th:text="${event.id}">
+
+                                            <p th:text="${event.titre}" style="display: inline"></p>
+                                            <div th:if="${event.dateFin.before(dateJour)}" style="display: inline">
+                                                                <span class="badge badge-dark">Passé
+                                                                </span>
+                                            </div>
+
+
+                                        </th:block>
+                                    </td>
+
+
+                                    <td th:text="${event.dateDebut}">
 
                                     </td>
-                                    <td th:text="${event.titre}">
-
-                                    </td>
-
-                                    <td th:text="${event.dateDebut}"></td>
                                     <td th:text="${event.dateFin}"></td>
                                     <td>
                                         <a class="btn btn-circle btn-secondary" title="Détail"
-                                           th:href="@{eventDetail(id=${event.id})}"
-                                        >
+                                           th:href="@{eventDetail(id=${event.id})}">
                                             <i class="fas fa-info"></i></a>
 
                                     </td>
@@ -138,7 +147,8 @@
                                         </center>
                                         <center>
                                             <center>
-                                                <a th:if="${event.active == 1}" class="btn btn-circle btn-danger disabled"
+                                                <a th:if="${event.active == 1}"
+                                                   class="btn btn-circle btn-danger disabled"
                                                 ><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </center>

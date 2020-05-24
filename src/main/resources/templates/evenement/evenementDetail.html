@@ -17,13 +17,8 @@
 
 
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
                     <h3 class="text-themecolor mb-0 mt-0">Détail événement</h3>
@@ -213,11 +208,18 @@
 
                                                         </td>
                                                         <td style="text-align:center">
-                                                            <th:block th:with=" var = ${bien.qte - bien.totaleqteDonnee}">
-
+                                                            <th:block
+                                                                    th:with=" var = ${bien.qte - bien.totaleqteDonnee}">
+                                                                <div th:if="${var > 0}">
                                                                 <span class="badge badge-danger"
                                                                       th:text="${var}"></span>
-                                                             </th:block>
+                                                                </div>
+
+                                                                <div th:if="${var == 0}">
+                                                                    <span class="badge badge-success"> <span
+                                                                            class="fas fa-check"></span>  Objectif est atteint</span>
+                                                                </div>
+                                                            </th:block>
                                                         </td>
 
                                                     </tr>
@@ -275,6 +277,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="card mb-0 border-0">
                                         <div class="card-header pl-0">
                                             <h5 class="mb-0">
@@ -296,7 +299,7 @@
                                                     <thead>
                                                     <tr>
                                                         <th scope="col" data-tablesaw-priority="persist" class="border">
-                                                           Nom du donneur
+                                                            Nom du donneur
 
                                                         </th>
                                                         <th scope="col" data-tablesaw-priority="persist" class="border">
@@ -329,6 +332,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="card mb-0 border-0">
                                         <div class="card-header pl-0">
                                             <h5 class="mb-0">
@@ -385,9 +389,7 @@
         </div>
 
         <footer class="footer"> © 2020</footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
+
     </div>
 
 

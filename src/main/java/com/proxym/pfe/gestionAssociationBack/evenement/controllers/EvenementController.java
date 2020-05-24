@@ -43,8 +43,7 @@ public class EvenementController {
     SponsorService sponsorService;
     @Autowired
     SponsorRepository sponsorRepository;
-    /*@Autowired
-    ParticiperBienService participerBienService;*/
+
 
     /*********************************add Event****************************/
 
@@ -327,6 +326,7 @@ public class EvenementController {
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
+            model.addAttribute("dateJour", new Date());
             model.addAttribute("evenements", evenements);
             return "evenement/list-event";
         } catch (Exception e) {
