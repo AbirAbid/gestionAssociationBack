@@ -7,9 +7,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.biens.repositories.BienRepositories;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.ParticiperMissionDto;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
+
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
@@ -39,7 +37,7 @@ public class BienRestController {
     @RequestMapping(value = "/listBien", method = RequestMethod.GET)
     public List<Bien> getListBien() {
         try {
-            ObjectMapper mapper = new ObjectMapper();
+          /*  ObjectMapper mapper = new ObjectMapper();
 
             List<Bien> biens = bienService.findAllService();
             List<Bien> biens1 = new ArrayList<>();
@@ -51,10 +49,10 @@ public class BienRestController {
                 Bien bien = mapper.readValue(jsonInString, Bien.class);
 
                 System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
-                biens1.add(bien);
-            }
+                biens1.add(bien);*/
 
-            return biens1;
+
+            return bienService.getListBien();
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;

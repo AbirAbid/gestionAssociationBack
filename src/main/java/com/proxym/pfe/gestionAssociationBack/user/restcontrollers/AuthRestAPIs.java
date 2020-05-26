@@ -78,6 +78,15 @@ public class AuthRestAPIs {
 
     }
 
+    @PutMapping ("/updateProfile")
+    public User updateprofile(@Valid @RequestBody User user) {
+        try {
+            return userService.saveUserService(user);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 }
 

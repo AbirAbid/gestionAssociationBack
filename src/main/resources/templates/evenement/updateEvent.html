@@ -277,7 +277,7 @@
                                                         <div class="col form-group"><label class="control-label">Quantité</label>
                                                         </div>
                                                     </div>
-                                                    <div class="row item" th:each="bien, itemStat : *{biens}">
+                                                    <div class="row item" th:each="bien, itemStat : *{biens}" id="r0">
 
 
                                                         <div class="col form-group">
@@ -294,6 +294,12 @@
                                                                     type="number"
                                                                     class="form-control">
                                                         </div>
+                                                        <div class="col form-group">
+                                                            <input
+                                                                    type="button" value="Effacer" id="0"
+                                                                    onclick="removeRowBien(this)" class="btn btn-danger">
+                                                        </div>
+
                                                     </div>
 
 
@@ -341,7 +347,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="row item" th:each="mission, item : *{missions}">
+                                                    <div class="row item" th:each="mission, item : *{missions}"  id="idm0">
 
 
                                                         <div class="col form-group">
@@ -357,6 +363,11 @@
                                                                     th:field="*{missions[__${item.index}__].description}"
                                                                     type="text"
                                                                     class="form-control">
+                                                        </div>
+                                                        <div class="col form-group">
+                                                            <input
+                                                                    type="button" value="Effacer" id="m0"
+                                                                    onclick="removeRowMission(this)" class="btn btn-danger">
                                                         </div>
 
                                                     </div>

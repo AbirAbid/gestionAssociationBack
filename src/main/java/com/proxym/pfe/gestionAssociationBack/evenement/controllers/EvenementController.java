@@ -83,7 +83,7 @@ public class EvenementController {
                 /*****************Controle Date ***************************/
                 if (dateD.compareTo(dateF) > 0) {
 
-                    System.out.println("dateD  après dateF");
+                    System.out.println("dateD  apres dateF");
 
                     model.addAttribute("errorDate", "Verifier vos dates");
                 }
@@ -92,8 +92,6 @@ public class EvenementController {
                 List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
                 model.addAttribute("sponsors", sponsors);
 
-                System.out.println("bindingResult.hasErrors()******************" + bindingResult.hasErrors());
-                System.out.println("bindingResult   " + bindingResult);
                 return "evenement/add-event";
             }
             /** Champs event form1 **/
