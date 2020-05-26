@@ -37,20 +37,6 @@ public class BienRestController {
     @RequestMapping(value = "/listBien", method = RequestMethod.GET)
     public List<Bien> getListBien() {
         try {
-          /*  ObjectMapper mapper = new ObjectMapper();
-
-            List<Bien> biens = bienService.findAllService();
-            List<Bien> biens1 = new ArrayList<>();
-            String jsonInString;
-
-            for (int i = 0; i < biens.size(); i++) {
-                jsonInString = mapper.writeValueAsString(biens.get(i));
-                System.out.println("jsonInString" + jsonInString);
-                Bien bien = mapper.readValue(jsonInString, Bien.class);
-
-                System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
-                biens1.add(bien);*/
-
 
             return bienService.getListBien();
         } catch (Exception ex) {
@@ -66,23 +52,7 @@ public class BienRestController {
     public List<Bien> getListBienByEvent(@PathVariable("id") Long id) {
 
         try {
-            List<Bien> biens = bienService.findAllByEventService(id);
-            ObjectMapper mapper = new ObjectMapper();
-            List<Bien> biens1 = new ArrayList<>();
-            String jsonInString;
-
-            for (int i = 0; i < biens.size(); i++) {
-                //Convert  bien to JSON format,
-                jsonInString = mapper.writeValueAsString(biens.get(i));
-
-                System.out.println("jsonInString" + jsonInString);
-                //get Bien sous forme json
-                Bien bien = mapper.readValue(mapper.writeValueAsString(biens.get(i)), Bien.class);
-
-                // System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
-                biens1.add(bien);
-            }
-            return biens1;
+            return bienService.findAllByEventService(id);
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
@@ -108,42 +78,7 @@ public class BienRestController {
     public void donnerBien(@RequestBody ParticiperBienFormDto participerBienFormDto,
                            @PathVariable String username) {
         try {
-            User user = userService.findUserByUsernameService(username);
-            Bien bien = participerBienFormDto.getBien();
-            UserBien userBien = new UserBien();
-            int qteDonnee = participerBienFormDto.getQteDonnee();
-            System.out.println("qteDonnee****" + qteDonnee);
-
-            List<UserBien> userBiens = user.getUserBiens();
-            List<Long> bienUserId = new ArrayList<>();
-
-            for (int i = 0; i < userBiens.size(); i++) {
-                bienUserId.add(userBiens.get(i).getBien().getId());
-                System.out.println(userBiens.get(i).getBien());
-            }
-            /** IF  exist USER AND BIEN***/
-            if (bienUserId.contains(bien.getId())) {
-                int index = bienUserId.indexOf(bien.getId());
-                System.out.println("index****" + index);
-                user.getUserBiens().get(index).setQteDonnee(user.getUserBiens().get(index).getQteDonnee() + qteDonnee);
-                bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
-                bienService.saveBienService(bien);
-                userRepository.save(user);
-            } else {
-                bien.getEvenement().setActive(1);
-                userBien.setUser(user);
-                userBien.setBien(bien);
-                userBien.setQteDonnee(5);
-                userBien.setDateParticipation(new Date());
-                user.getUserBiens().add(userBien);
-                bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
-                evenementService.addEventService(bien.getEvenement());
-                bienService.saveBienService(bien);
-                userRepository.save(user);
-
-
-                System.out.println("***** user.getUserBiens().get(0).getAffected()********" + user.getUserBiens().get(0).getQteDonnee());
-            }
+            bienService.donnerBienSerice(participerBienFormDto, username);
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
         }
@@ -191,7 +126,6 @@ public class BienRestController {
     }
 
     @RequestMapping(value = "/listUserBien", method = RequestMethod.GET)
-    // public List<UserBien> getListUserBien() {
     public List<UserBien> getListUserBien() {
         try {
             List<User> users = userService.getAllDonneursService();

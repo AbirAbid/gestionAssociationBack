@@ -1,5 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.biens.services;
 
+import com.proxym.pfe.gestionAssociationBack.biens.dto.ParticiperBienFormDto;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
 
@@ -15,13 +16,14 @@ public interface BienService {
 
     void editAllService(List<Bien> biens);
 
-    List<Bien> findAllByEventService(Long id);
+    List<Bien> findAllByEventService(Long id)throws IOException ;
 
     List<Bien> findAllByEvenement_VilleService(String ville);
 
     Bien saveBienService(Bien bien);
 
     List<Bien> getListBien()throws IOException;
+    void donnerBienSerice(ParticiperBienFormDto participerBienFormDto,String username);
 
 
 }

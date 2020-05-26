@@ -2,19 +2,30 @@ package com.proxym.pfe.gestionAssociationBack.biens.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proxym.pfe.gestionAssociationBack.biens.dao.BienDao;
+import com.proxym.pfe.gestionAssociationBack.biens.dto.ParticiperBienFormDto;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
+import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
+import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class BienServiceImp implements BienService {
     @Autowired
     BienDao bienDao;
+    @Autowired
+    UserDao userDao;
+    @Autowired
+    EvenementDao evenementDao;
+
 
     @Override
     public List<Bien> findAllService() {
@@ -44,8 +55,11 @@ public class BienServiceImp implements BienService {
     }
 
     @Override
-    public List<Bien> findAllByEventService(Long id) {
-        return bienDao.findAllByEventDao(id);
+    public List<Bien> findAllByEventService(Long id) throws IOException {
+        List<Bien> biens = bienDao.findAllByEventDao(id);
+
+        return ConvertListBienToJson(biens);
+
     }
 
     @Override
@@ -60,9 +74,57 @@ public class BienServiceImp implements BienService {
 
     @Override
     public List<Bien> getListBien() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
 
         List<Bien> biens = bienDao.findAllDao();
+
+
+        return ConvertListBienToJson(biens);
+    }
+
+    @Override
+    public void donnerBienSerice(ParticiperBienFormDto participerBienFormDto, String username) {
+        User user = userDao.findByUsernameDao(username);
+        Bien bien = participerBienFormDto.getBien();
+        UserBien userBien = new UserBien();
+        int qteDonnee = participerBienFormDto.getQteDonnee();
+        System.out.println("qteDonnee****" + qteDonnee);
+
+        List<UserBien> userBiens = user.getUserBiens();
+        List<Long> bienUserId = new ArrayList<>();
+
+        for (int i = 0; i < userBiens.size(); i++) {
+            bienUserId.add(userBiens.get(i).getBien().getId());
+            System.out.println(userBiens.get(i).getBien());
+        }
+        /** IF  exist USER AND BIEN***/
+        if (bienUserId.contains(bien.getId())) {
+            int index = bienUserId.indexOf(bien.getId());
+            System.out.println("index****" + index);
+            user.getUserBiens().get(index).setQteDonnee(user.getUserBiens().get(index).getQteDonnee() + qteDonnee);
+            bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
+            bienDao.saveBienDao(bien);
+            userDao.saveUserDao(user);
+        } else {
+            bien.getEvenement().setActive(1);
+            userBien.setUser(user);
+            userBien.setBien(bien);
+            userBien.setQteDonnee(5);
+            userBien.setDateParticipation(new Date());
+            user.getUserBiens().add(userBien);
+            bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
+            evenementDao.addEventDao(bien.getEvenement());
+            bienDao.saveBienDao(bien);
+            userDao.saveUserDao(user);
+
+
+            System.out.println("***** user.getUserBiens().get(0).getAffected()********" + user.getUserBiens().get(0).getQteDonnee());
+        }
+    }
+
+
+    public List<Bien> ConvertListBienToJson(List<Bien> biens) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
         List<Bien> biens1 = new ArrayList<>();
         String jsonInString;
 
@@ -74,7 +136,6 @@ public class BienServiceImp implements BienService {
             System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
             biens1.add(bien);
         }
-
         return biens1;
     }
 }

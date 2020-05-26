@@ -1,6 +1,8 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.services;
 
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 
 import java.util.List;
 
@@ -16,4 +18,8 @@ public interface MissionService {
     List<Mission> findAllByEvenement_VilleService(String ville);
 
     Mission findMissionByIdService(Long id);
+
+    void affecterMission(User user, Mission mission );
+    void libererMission(User user, Mission mission );
+
 }

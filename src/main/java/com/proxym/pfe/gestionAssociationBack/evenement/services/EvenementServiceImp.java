@@ -1,14 +1,20 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.services;
 
 import com.proxym.pfe.gestionAssociationBack.biens.dao.BienDao;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
+import com.proxym.pfe.gestionAssociationBack.sponsors.dao.SponsorDao;
+import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +28,8 @@ public class EvenementServiceImp implements EvenementService {
     BienDao bienDao;
     @Autowired
     MissionDao missionDao;
+    @Autowired
+    SponsorDao sponsorDao;
 
 
     @Override
@@ -62,5 +70,93 @@ public class EvenementServiceImp implements EvenementService {
     @Override
     public Optional<Evenement> findEventByIdService(Long id) {
         return evenementDao.findEventDaoById(id);
+    }
+
+    @Override
+    public void AjouterEvent(@Valid EvenementDto evenementDto) {
+
+        Evenement event = new Evenement();
+        event.setId(evenementDto.getId());
+
+        event.setTitre(evenementDto.getTitre());
+        event.setDescription(evenementDto.getDescription());
+        event.setAdresse(evenementDto.getAdresse());
+        event.setDateDebut(evenementDto.getDateDebut());
+        event.setDateFin(evenementDto.getDateFin());
+        event.setSponsors(evenementDto.getSponsors());
+        event.setVille(evenementDto.getVille());
+        event.setFrais(evenementDto.getFrais());
+        event.setActive(0);
+
+        Evenement e = evenementDao.addEventDao(event);
+        /** for Affect  Sponsor ***/
+        List<Sponsor> sponsors = event.getSponsors();
+
+        for (int i = 0; i <= sponsors.size() - 1; i++) {
+            Sponsor s = sponsors.get(i);
+            s.setAffecte(1);
+            sponsorDao.modifierSponsor(s);
+
+        }
+        /** End Champs event form1 **/
+
+
+        for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
+
+            evenementDto.getBiens().get(i).setEvenement(e);
+            evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
+        }
+
+
+        for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
+
+
+            evenementDto.getMissions().get(i).setEvenement(e);
+
+        }
+
+        bienDao.saveAllDao(evenementDto.getBiens());
+        missionDao.saveAllMissionDao(evenementDto.getMissions());
+
+    }
+
+    @Override
+    public EvenementDto formulaireUpdate(Long id) {
+        Evenement e = evenementDao.getEventDaoById(id);
+
+        EvenementDto evenementDto = new EvenementDto();
+
+        System.out.println(" e.getSponsors()    " + e.getSponsors());
+
+        evenementDto.affectToEventDto(e);
+        System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
+
+        List<Bien> biens = bienDao.findAllByEventDao(id);
+        List<Mission> missions = missionDao.findAllMissionByEventDao(id);
+        System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
+        if (biens.size() != 0) {
+            for (int i = 0; i <= biens.size() - 1; i++) {
+                evenementDto.addBien(biens.get(i));
+            }
+        } else {
+
+            evenementDto.addBien(new Bien());
+
+        }
+        if (missions.size() != 0) {
+            for (int i = 0; i <= missions.size() - 1; i++) {
+                evenementDto.addMission(missions.get(i));
+                System.out.println("missionBenevoles.get(i)*******" + missions.get(i).getId());
+
+
+            }
+        } else {
+
+            evenementDto.addMission(new Mission());
+
+        }
+
+
+        return evenementDto;
     }
 }

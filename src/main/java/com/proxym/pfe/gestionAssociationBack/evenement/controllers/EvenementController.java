@@ -56,7 +56,6 @@ public class EvenementController {
             evenementDto.addBien(new Bien());
             evenementDto.addMission(new Mission());
             model.addAttribute("evenementDto", evenementDto);
-            System.out.println("sponsors" + sponsors);
             model.addAttribute("sponsors", sponsors);
             return "evenement/add-event";
         } catch (Exception e) {
@@ -96,47 +95,8 @@ public class EvenementController {
             }
             /** Champs event form1 **/
 
+            evenementService.AjouterEvent(evenementDto);
 
-            Evenement event = new Evenement();
-            event.setTitre(evenementDto.getTitre());
-            event.setDescription(evenementDto.getDescription());
-            event.setAdresse(evenementDto.getAdresse());
-            event.setDateDebut(evenementDto.getDateDebut());
-            event.setDateFin(evenementDto.getDateFin());
-            event.setSponsors(evenementDto.getSponsors());
-            event.setVille(evenementDto.getVille());
-            event.setFrais(evenementDto.getFrais());
-            event.setActive(0);
-
-            Evenement e = evenementService.addEventService(event);
-            /** for Affect  Sponsor ***/
-            List<Sponsor> sponsors = event.getSponsors();
-
-            for (int i = 0; i <= sponsors.size() - 1; i++) {
-                Sponsor s = sponsors.get(i);
-                s.setAffecte(1);
-                sponsorService.updateSponsorService(s);
-
-            }
-            /** End Champs event form1 **/
-
-
-            for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
-
-                evenementDto.getBiens().get(i).setEvenement(e);
-                evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
-            }
-
-
-            for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
-
-
-                evenementDto.getMissions().get(i).setEvenement(e);
-
-            }
-
-            bienService.saveAllService(evenementDto.getBiens());
-            missionService.saveAllMissionService(evenementDto.getMissions());
 
             redirectAttributes.addFlashAttribute("message", " Votre événement a été ajouté avec succès ");
 
@@ -151,48 +111,14 @@ public class EvenementController {
     /*********************************Update Event****************************/
     @RequestMapping(value = "/formulaireUpdateEvent")
 
-    public String formulaireUpdate(Model model, Long id, RedirectAttributes redirectAttributes) {
+    public String formulaireUpdate(Model model, Long id) {
         try {
 
-            Evenement e = evenementService.getOneEventByIdservice(id);
-
-            EvenementDto evenementDto = new EvenementDto();
 
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             model.addAttribute("sponsors", sponsors);
 
-            System.out.println(" e.getSponsors()    " + e.getSponsors());
-
-            evenementDto.affectToEventDto(e);
-            System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
-
-            List<Bien> biens = bienService.findAllByEventService(id);
-            List<Mission> missions = missionService.findAllMissionByEventService(id);
-            System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
-            if (biens.size() != 0) {
-                for (int i = 0; i <= biens.size() - 1; i++) {
-                    evenementDto.addBien(biens.get(i));
-                }
-            } else {
-
-                evenementDto.addBien(new Bien());
-
-            }
-            if (missions.size() != 0) {
-                for (int i = 0; i <= missions.size() - 1; i++) {
-                    evenementDto.addMission(missions.get(i));
-                    System.out.println("missionBenevoles.get(i)*******" + missions.get(i).getId());
-
-
-                }
-            } else {
-
-                evenementDto.addMission(new Mission());
-
-            }
-
-
-            model.addAttribute("evenementDto", evenementDto);
+            model.addAttribute("evenementDto", evenementService.formulaireUpdate(id));
 
             return "evenement/updateEvent";
         } catch (Exception e) {
@@ -231,58 +157,8 @@ public class EvenementController {
                 return "evenement/updateEvent";
             }
 
-            Evenement event = new Evenement();
-            event.setId(evenementDto.getId());
-            event.setTitre(evenementDto.getTitre());
-            event.setDescription(evenementDto.getDescription());
-            event.setAdresse(evenementDto.getAdresse());
-            event.setDateDebut(evenementDto.getDateDebut());
-            event.setDateFin(evenementDto.getDateFin());
-            event.setSponsors(evenementDto.getSponsors());
-            event.setVille(evenementDto.getVille());
-            event.setFrais(evenementDto.getFrais());
-            event.setActive(evenementDto.getActive());
-            // System.out.println("***********************event Sponsor*********************  " + event.getSponsors());
-            Evenement e = evenementService.addEventService(event);
-            /** for Affect  Sponsor ***/
-            List<Sponsor> sponsors = (List) event.getSponsors();
+            evenementService.AjouterEvent(evenementDto);
 
-            for (int i = 0; i <= sponsors.size() - 1; i++) {
-                Sponsor s = sponsors.get(i);
-                s.setAffecte(1);
-                sponsorService.updateSponsorService(s);
-
-            }
-            List<Bien> biens = bienService.findAllByEventService(e.getId());
-
-            for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
-                if (i <= biens.size() - 1) {
-                    evenementDto.getBiens().get(i).setId(biens.get(i).getId());
-                    evenementDto.getBiens().get(i).setTotaleqteDonnee(biens.get(i).getTotaleqteDonnee());
-
-                }
-                evenementDto.getBiens().get(i).setEvenement(e);
-                System.out.println(" biens.get(i).getTotaleqteDonnee() ************" + biens.get(i).getTotaleqteDonnee());
-
-
-            }
-            List<Mission> missions = missionService.findAllMissionByEventService(e.getId());
-            System.out.println("evenementDto.getMissionBenevoles().size() ************" + evenementDto.getMissions().size());
-
-            for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
-
-
-                if (i <= missions.size() - 1) {
-                    evenementDto.getMissions().get(i).setId(missions.get(i).getId());
-                }
-
-                System.out.println("mission id ************" + evenementDto.getMissions().get(i));
-                evenementDto.getMissions().get(i).setEvenement(e);
-
-
-            }
-            bienService.saveAllService(evenementDto.getBiens());
-            missionService.saveAllMissionService(evenementDto.getMissions());
 
             redirectAttributes.addFlashAttribute("messageUpdate", " Votre événement a été modifié avec succès ");
 
@@ -379,7 +255,7 @@ public class EvenementController {
 
             }
 
-           List<UserMission> userMissionsEvent = new ArrayList<>();
+            List<UserMission> userMissionsEvent = new ArrayList<>();
             for (int i = 0; i < userMissions.size(); i++) {
                 if (userMissions.get(i).getMission().getEvenement() == e) {
                     userMissionsEvent.add(userMissions.get(i));
@@ -388,7 +264,6 @@ public class EvenementController {
             /** pour éliminer redondance ***/
             Set<UserMission> mySet1 = new HashSet<>(userMissionsEvent);
             userMissionsEvent = new ArrayList<>(mySet1);
-
 
 
             model.addAttribute("evenement", e);

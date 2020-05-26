@@ -40,12 +40,6 @@ public class BienController {
             /**End eliminate duplicate value list users****/
 
             Page<UserBien> userBiens = getListAllDonneurs(page);
-            /* for (int i = 0; i < users.size(); i++) {
-             *//**** to get All UserBien ****//*
-                for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
-                    userBiens.add(users.get(i).getUserBiens().get(j));
-                }
-            }*/
 
             int pagesCount = userBiens.getTotalPages();
             int[] pages = new int[pagesCount];
