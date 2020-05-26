@@ -55,7 +55,12 @@ public class BienServiceImp implements BienService {
     }
 
     @Override
-    public List<Bien> findAllByEventService(Long id) throws IOException {
+    public List<Bien> findAllByEventService(Long id) {
+        return  bienDao.findAllByEventDao(id);
+    }
+
+    @Override
+    public List<Bien> findAllByEventServiceRest(Long id) throws IOException {
         List<Bien> biens = bienDao.findAllByEventDao(id);
 
         return ConvertListBienToJson(biens);
@@ -119,6 +124,45 @@ public class BienServiceImp implements BienService {
 
             System.out.println("***** user.getUserBiens().get(0).getAffected()********" + user.getUserBiens().get(0).getQteDonnee());
         }
+    }
+
+    @Override
+    public List<Bien> getBienByRegionRest(String ville) throws IOException {
+
+        List<Bien> biens = bienDao.findAllByEvenement_VilleDao(ville);
+        return ConvertListBienToJson(biens);
+    }
+
+    @Override
+    public List<UserBien> getListBienByUserRest(String username) throws IOException {
+        User user = userDao.findByUsernameDao(username);
+        List<UserBien> userBiens = user.getUserBiens();
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonInString;
+
+        List<UserBien> userBiens1 = new ArrayList<>();
+        for (int i = 0; i < userBiens.size(); i++) {
+            jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
+
+            //get Bien sous forme json
+            UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
+
+            userBiens1.add(userBien);
+        }
+        return userBiens1;
+
+    }
+
+    @Override
+    public List<UserBien> getListUserBienRest() {
+        List<User> users = userDao.getAllDonneursDao();
+        List<UserBien> userBiens = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
+                userBiens.add(users.get(i).getUserBiens().get(j));
+            }
+        }
+        return userBiens;
     }
 
 

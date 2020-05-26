@@ -22,9 +22,6 @@ public class MembreController {
     @Autowired
     MembreService membreService;
 
-    /*  @Autowired
-      ParticiperBienService participerBienService;
-  */
     @GetMapping(value = "listeMembres")
     public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "motCle", defaultValue = "") String mc) {
@@ -39,45 +36,7 @@ public class MembreController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
-            /*List<User> MembresList = membreService.getAllMembreService();
-            System.out.println("MembresList****** " + MembresList);
-            List<User> MembresListUser = new ArrayList<>();
-            for (int i = 0; i < MembresList.size(); i++) {
-                Stream<Role> roleStream = MembresList.get(i).getRoles().stream();
-                List<String> collect = roleStream.map(x -> x.getName().name()).collect(Collectors.toList());
-                System.out.println("collect***" + i + "* *****" + collect.get(0).equals("ROLE_USER"));
-                if (collect.get(0).equals("ROLE_USER")) {
-                    MembresListUser.add(MembresList.get(i));
-                }
-            }
-            //  Page<User> pagess = new PageImpl(MembresListUser);
-            int count = 5;
-            String sortOrder = "desc";
-            String sortBy = "id";
-            Sort sort = new Sort(Sort.Direction.fromString(sortOrder), sortBy);
-            PageRequest pageable = new PageRequest(page, count, sort);
-            /*if (a > b) {max = a;}else {max = b;}*/
-            /*max = (a > b) ? a : b;*/
-           /* int max = (count * (page + 1) > MembresListUser.size()) ? MembresListUser.size() : count * (page + 1);
-            Page<User> pagess = new PageImpl<User>(MembresListUser.subList(page * count, max),pageable, MembresListUser.size());
-            //Page<User> pagess = new PageImpl(MembresListUser, new PageRequest(page, 5,sort), MembresListUser.size());
 
-            int pagesCount = pagess.getTotalPages();
-            int[] pages = new int[pagesCount];
-            for (int i = 0; i < pagesCount; i++) {
-                pages[i] = i;
-                System.out.println(" pages[i] " + pages[i]);
-            }*/
-            /*System.out.println("pagess.getSize()");
-            Set<Role> roles = pagesMembresRech.getContent().get(pagesMembresRech.getContent().size() - 1).getRoles();
-            Stream<Role> sp = pagesMembresRech.getContent().get(pagesMembresRech.getContent().size() - 1).getRoles().stream();
-            List<String> ld = sp.map(x -> x.getName().name()).collect(Collectors.toList());
-            System.out.println("ld***" + ld);
-            System.out.println("pagesMembresRech.getContent().get(2).getRoles().iterator() "
-                    + pagesMembresRech.getContent().get(1).getRoles().toArray().getClass());
-            System.out.println("pagesMembresRech.getContent().get(2).getRoles().toArray() "
-                    + pagesMembresRech.getContent());
-*/
             //**********************
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", pagesMembresRech.getContent());

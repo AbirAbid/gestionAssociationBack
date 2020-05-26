@@ -1,13 +1,11 @@
 package com.proxym.pfe.gestionAssociationBack.biens.restControllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proxym.pfe.gestionAssociationBack.biens.dto.ParticiperBienFormDto;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.biens.repositories.BienRepositories;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
-
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.util.*;
 
 @RestController
@@ -37,7 +34,6 @@ public class BienRestController {
     @RequestMapping(value = "/listBien", method = RequestMethod.GET)
     public List<Bien> getListBien() {
         try {
-
             return bienService.getListBien();
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
@@ -52,7 +48,7 @@ public class BienRestController {
     public List<Bien> getListBienByEvent(@PathVariable("id") Long id) {
 
         try {
-            return bienService.findAllByEventService(id);
+            return bienService.findAllByEventServiceRest(id);
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
@@ -63,7 +59,7 @@ public class BienRestController {
     @RequestMapping(value = "/listBienRegion/{ville}", method = RequestMethod.GET)
     public List<Bien> getBienByRegion(@PathVariable("ville") String ville) {
         try {
-            return bienService.findAllByEvenement_VilleService(ville);
+            return bienService.getBienByRegionRest(ville);
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
@@ -89,23 +85,9 @@ public class BienRestController {
     @RequestMapping(value = "/listBienByUser/{username}", method = RequestMethod.GET)
     public List<UserBien> getListBienByUser(@PathVariable("username") String username) {
         try {
-            User user = userService.findUserByUsernameService(username);
-            List<UserBien> userBiens = user.getUserBiens();
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonInString;
-
-            List<UserBien> userBiens1 = new ArrayList<>();
-            for (int i = 0; i < userBiens.size(); i++) {
-                jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
-
-                //get Bien sous forme json
-                UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
-
-                userBiens1.add(userBien);
 
 
-            }
-            return userBiens1;
+            return bienService.getListBienByUserRest(username);
 
         } catch (Exception e) {
             System.out.println("Exception " + e.getMessage());
@@ -128,19 +110,7 @@ public class BienRestController {
     @RequestMapping(value = "/listUserBien", method = RequestMethod.GET)
     public List<UserBien> getListUserBien() {
         try {
-            List<User> users = userService.getAllDonneursService();
-            List<UserBien> userBiens = new ArrayList<>();
-            for (int i = 0; i < users.size(); i++) {
-                for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
-                    userBiens.add(users.get(i).getUserBiens().get(j));
-                }
-            }
-            for (int i = 0; i < userBiens.size(); i++) {
-                System.out.println(" userBiens.get(i).getBien()  " + userBiens.get(i).getBien());
-            }
-
-
-            return userBiens;
+            return bienService.getListUserBienRest();
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
