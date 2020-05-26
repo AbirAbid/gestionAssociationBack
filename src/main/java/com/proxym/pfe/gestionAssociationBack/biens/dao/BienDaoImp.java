@@ -14,24 +14,6 @@ public class BienDaoImp implements BienDao {
     @Autowired
     BienRepositories bienRepositories;
 
-    /*  @Autowired
-      EventRepositories eventRepositories;
-
-      @Override
-      public List<Bien> findAllByEventIdDao(Long id) {
-          List<Bien> biensWithId = new ArrayList<Bien>();
-          List<Bien> biens = bienRepositories.findAll();
-
-          for (int i = 1; i <= biens.size()-1; i++) {
-              if (biens.get(i).getEvenement() == eventRepositories.getOne(id)) {
-                  biensWithId.add(biens.get(i));
-              }
-
-          }
-          return biensWithId;
-
-      }
-  */
     @Override
     public List<Bien> findAllDao() {
         try {

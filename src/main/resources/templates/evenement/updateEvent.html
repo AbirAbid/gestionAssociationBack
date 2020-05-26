@@ -66,7 +66,7 @@
                                   th:action="@{/evenement/update}"
                                   th:object="${evenementDto}"
                                   method="post">
-                                <input type="text" th:field="*{id}" class="form-control">
+                                <input type="hidden" th:field="*{id}" class="form-control">
 
                                 <div class="setup-content text-black" id="step-1">
                                     <div class="row">

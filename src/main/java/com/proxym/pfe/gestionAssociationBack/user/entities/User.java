@@ -28,7 +28,7 @@ import lombok.Data;
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 
-public class User  {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -70,10 +70,6 @@ public class User  {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-   /* @OneToMany
-
-    private Set<ParticiperBien> participerBiens;*/
-
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserMission> userMissions;
@@ -90,6 +86,8 @@ public class User  {
     @NotBlank
 
     private String occupation;
+
+    private float tauxEchange;
 
 
     public User(String nom, String username, String email, String password, String prenom,

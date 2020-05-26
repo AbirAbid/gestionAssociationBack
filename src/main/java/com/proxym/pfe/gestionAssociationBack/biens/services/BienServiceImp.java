@@ -56,7 +56,7 @@ public class BienServiceImp implements BienService {
 
     @Override
     public List<Bien> findAllByEventService(Long id) {
-        return  bienDao.findAllByEventDao(id);
+        return bienDao.findAllByEventDao(id);
     }
 
     @Override
@@ -182,4 +182,6 @@ public class BienServiceImp implements BienService {
         }
         return biens1;
     }
+
+
 }

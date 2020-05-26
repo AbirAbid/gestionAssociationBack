@@ -1,17 +1,25 @@
 package com.proxym.pfe.gestionAssociationBack.user.dao;
 
+import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
+import com.proxym.pfe.gestionAssociationBack.evenement.repositories.EventRepositories;
+import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class UserDaoImp implements UserDao {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    EventRepositories eventRepositories;
 
     @Override
     public User signinDao(String username) {
@@ -42,6 +50,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User saveUserDao(User user) {
+        user.setTauxEchange(calculTauxParticipation(user) * 100);
+        System.out.println(user.getTauxEchange());
         return userRepository.save(user);
     }
 
@@ -55,5 +65,31 @@ public class UserDaoImp implements UserDao {
         return userRepository.findAllByUserMissionsIsNotNull();
     }
 
+    /******calcul taux de participaion**********/
 
+    float calculTauxParticipation(User user) {
+
+        List<Evenement> evenements = new ArrayList<>();
+        //getEventByDesDons
+
+        for (int i = 0; i < user.getUserMissions().size(); i++) {
+            evenements.add(user.getUserMissions().get(i).getMission().getEvenement());
+        }
+        //getEventByDesMissions
+
+        for (int i = 0; i < user.getUserBiens().size(); i++) {
+            evenements.add(user.getUserBiens().get(i).getBien().getEvenement());
+        }
+        /*supprimer les doublons*/
+        // Créer une liste de contenu unique basée sur les éléments de ArrayList
+        Set<Evenement> mySet = new HashSet<Evenement>(evenements);
+
+        // Créer une Nouvelle ArrayList à partir de Set
+        List<Evenement> UserlistEvent = new ArrayList<>(mySet);
+        List<Evenement> allListEvent = eventRepositories.findAll();
+        System.out.println("UserlistEvent.size()  " + UserlistEvent.size());
+        System.out.println("allListEvent.size()  " + allListEvent.size());
+
+        return ((float) UserlistEvent.size() / (float) allListEvent.size());
+    }
 }

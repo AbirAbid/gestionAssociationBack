@@ -82,8 +82,11 @@
                                     <td th:text="${membre.email}"></td>
                                     <td>
                                         <div class="progress mt-3">
-                                            <div class="progress-bar  bg-danger" style="width: 75%; height:15px;"
-                                                 role="progressbar">75%
+
+                                            <div class="progress-bar  bg-danger"
+                                                 th:style="'width:'+@{${membre.tauxEchange}}+'%; height:15px;'"
+                                                 role="progressbar">
+                                                <span th:text="${{membre.tauxEchange}}"></span>
                                             </div>
                                         </div>
                                     </td>
