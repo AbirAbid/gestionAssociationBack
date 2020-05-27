@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
     @GetMapping("/")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String root() {
         System.out.println("index sans Auth");
         return "index";
