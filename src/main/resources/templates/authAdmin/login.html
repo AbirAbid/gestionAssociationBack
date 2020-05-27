@@ -13,17 +13,33 @@
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
 <section id="wrapper">
     <div class="login-register" style="background-image:url(/images/background/login-register.jpg);">
+
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" th:action="@{/login}" method="post">
                     <h3 class="box-title mb-3">Page d'Authentification</h3>
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">Vérifiez votre login et mot de passe</div>
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                         th:if="${param.error}">
+                        <strong > Vérifiez votre login et mot de passe</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div th:if="${param.logout}">
-                        <div class="alert alert-info">Déconnexion!</div>
+
+                    <div class="alert alert-info alert-dismissible fade show" role="alert"
+                         th:if="${param.logout}">
+                        <strong > Déconnexion !</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
 
                     <div class="form-group ">

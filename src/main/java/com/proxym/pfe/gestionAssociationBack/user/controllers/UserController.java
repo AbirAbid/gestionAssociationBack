@@ -1,5 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.user.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
+    // @PreAuthorize("hasRole('ADMIN')")
+
     public String login(Model model) {
         try {
 
