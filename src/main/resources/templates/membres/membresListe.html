@@ -91,8 +91,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-info"> <i
-                                                class="far fa-envelope"></i></a>
+                                        <center><a class="btn btn-circle btn-info"
+                                                   th:href="@{sendmailUrL(id=${membre.email})}">
+                                            <i class="far fa-envelope"></i></a>
                                         </center>
                                     </td>
                                     <td>

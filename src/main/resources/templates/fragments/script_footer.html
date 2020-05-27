@@ -1,7 +1,7 @@
 <div th:fragment="scriptFooter" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<!--
-    <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
--->
+    <!--
+        <script src="/webjars/jquery/3.2.0/jquery.min.js"></script>
+    -->
 
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -16,6 +16,19 @@
     <!--Custom JavaScript -->
     <script src="/js/custom.min.js"></script>
 
+    <!--Script Email -->
+    <script src="/webjars/bootstrap3-wysihtml5-bower/0.3.0/dist/bootstrap3-wysihtml5.js"></script>
 
+    <script src="/webjars/wysihtml5/0.3.0/dist/wysihtml5-0.3.0.js"></script>
+
+    <script src="/webjars/bootstrap3-wysihtml5-bower/0.3.0/dist/bootstrap3-wysihtml5.all.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.textarea_editor').wysihtml5();
+
+        });
+    </script>
 
 </div>

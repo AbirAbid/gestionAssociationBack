@@ -58,7 +58,7 @@ public class MissionController {
     }
 
 
-    @RequestMapping(value = "/affectMission")
+    @RequestMapping(value = "/affectMissionUrl")
 
     public String affectMission(Model model, String username, Long id, @RequestParam(name = "page", defaultValue = "0") int page,
                                 RedirectAttributes redirectAttributes) {
@@ -89,7 +89,7 @@ public class MissionController {
     }
 
     /******************************Liberer Missio *********************************************/
-    @RequestMapping(value = "/libererMission")
+    @RequestMapping(value = "/libererMissionUrl")
 
     public String libererMission(Model model, String username, Long id, @RequestParam(name = "page", defaultValue = "0") int page,
                                  RedirectAttributes redirectAttributes) {
