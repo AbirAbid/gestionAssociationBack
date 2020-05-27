@@ -132,10 +132,14 @@
                                                     <label style="font-weight:bold;">Taux d'engagement </label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    <div class="progress-bar  bg-danger"
-                                                         th:style="'width:'+@{${membre.tauxEchange}}+'%; height:15px;'"
-                                                         role="progressbar">
-                                                        <span th:text="${{membre.tauxEchange}}"></span>
+                                                    <div class="progress ">
+
+                                                        <div class="progress-bar bg-danger wow animated progress-animated"
+                                                             th:style="'width:'+@{${membre.tauxEchange}}+'%; height:15px;'"
+                                                             role="progressbar">
+                                                            <span style="color: #000000"
+                                                                  th:text="${{membre.tauxEchange}}"></span>
+                                                        </div>
                                                     </div>
 
                                                 </div>

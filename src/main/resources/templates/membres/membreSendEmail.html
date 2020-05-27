@@ -33,41 +33,36 @@
                 <div class="col-lg-12">
 
                     <!-- Card -->
-                    <form  th:action="@{/membres/sendHtmlEmailUrl}"
-                           th:object="${mailSend}"
+                    <form th:action="@{/membres/sendHtmlEmailUrl}"
+                          th:object="${mailSend}"
                           method="post">
 
-                    <div class="card ">
-                        <div class="card-header text-center">
-                            <h4 class="card-title"><span class="fas fa-users"></span> Liste des membres</h4>
-                        </div>
+                        <div class="card ">
+                            <div class="card-header text-center">
+                                <h4 class="card-title"><span class="fas fa-users"></span> Liste des membres</h4>
+                            </div>
 
-                        <div class="card-body">
-                            <h3 class="card-title">Compose New Message</h3>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="À:" th:field="*{receiver}">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Objet:" th:field="*{object}">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="textarea_editor form-control" rows="15"  th:field="*{textToSend}"
-                                          placeholder="Enter text ..."></textarea>
-                            </div>
-                            <h4><i class="ti-link"></i> Attachment</h4>
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple/>
+                            <div class="card-body">
+                                <h3 class="card-title">Nouveau message</h3>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="À:" th:field="*{receiver}">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Objet:" th:field="*{object}">
+                                </div>
+                                <div class="form-group">
+                                <textarea class="textarea_editor form-control" rows="15" th:field="*{textToSend}"
+                                          placeholder="Entrer text ..."></textarea>
                                 </div>
 
 
+                                <button type="submit" class="btn btn-rounded btn-info">Envoyer
 
-                            <button type="submit" class="btn btn-rounded btn-info">Envoyer
-                                sponsor
-                            </button>
+                                </button>
+
+                            </div>
 
                         </div>
-
-                    </div>
                     </form>
                 </div>
             </div>
@@ -89,6 +84,17 @@
     <!-- ============================================================== -->
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+
+<script src="/webjars/wysihtml5/0.3.0/dist/wysihtml5-0.3.0.js"></script>
+<script th:src="|../js_files/bootstrap_wysihtml5.js|"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('.textarea_editor').wysihtml5();
+
+    });
+</script>
 
 </body>
 

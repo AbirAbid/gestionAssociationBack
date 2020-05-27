@@ -8,7 +8,6 @@ public class MyConstants {
     // Replace password!!
     public static final String MY_PASSWORD = "Mot2passe";
 
-    // And receiver!
-    public static final String FRIEND_EMAIL = "ing-abid@hotmail.com";
+
 
 }

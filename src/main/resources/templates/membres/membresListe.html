@@ -38,6 +38,13 @@
                             <h4 class="card-title"><span class="fas fa-users"></span> Liste des membres</h4>
                         </div>
                         <div class="card-body ">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${sendMailMessage}">
+                                <strong th:text="${sendMailMessage}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
                                 <form th:action="@{listeMembres}" method="get">
                                     <div class="md-form active-purple-2 mb-3">
@@ -82,11 +89,13 @@
                                     <td th:text="${membre.email}"></td>
                                     <td>
                                         <div class="progress mt-3">
+                                            <div class="progress ">
 
-                                            <div class="progress-bar  bg-danger"
-                                                 th:style="'width:'+@{${membre.tauxEchange}}+'%; height:15px;'"
-                                                 role="progressbar">
-                                                <span th:text="${{membre.tauxEchange}}"></span>
+                                                <div class="progress-bar bg-danger wow animated progress-animated"
+                                                     th:style="'width:'+@{${membre.tauxEchange}}+'%; height:15px;'"
+                                                     role="progressbar">
+                                                    <span style="color: #000000" th:text="${{membre.tauxEchange}}"></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>

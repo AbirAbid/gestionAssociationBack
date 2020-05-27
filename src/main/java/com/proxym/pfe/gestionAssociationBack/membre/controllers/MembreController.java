@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -105,45 +106,35 @@ public class MembreController {
     }
 
 
-    @ResponseBody
-    @RequestMapping("/sendHtmlEmailUrl")
-    public String sendHtmlEmail(MailToSend mailToSend) throws MessagingException {
-        System.out.println("mailToSend  " + mailToSend);
-        MimeMessage message = emailSender.createMimeMessage();
+   // @ResponseBody
+    @RequestMapping(value = "/sendHtmlEmailUrl")
+    public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) throws MessagingException {
+        try {
+            System.out.println("mailToSend  " + mailToSend);
+            MimeMessage message = emailSender.createMimeMessage();
 
-        boolean multipart = true;
+            boolean multipart = true;
 
-        MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+            MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
 
-        String htmlMsg = mailToSend.getTextToSend();
+            String htmlMsg = mailToSend.getTextToSend();
 
-        message.setContent(htmlMsg, "text/html");
-        message.setSubject(mailToSend.getObject());
+            message.setContent(htmlMsg, "text/html");
+            message.setSubject(mailToSend.getObject());
 
-        helper.setTo(mailToSend.getReceiver());
+            helper.setTo(mailToSend.getReceiver());
 
 
-        this.emailSender.send(message);
+            this.emailSender.send(message);
+            redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
 
-        return "Email Sent!";
+            return "redirect:/membres/listeMembres";
+        } catch (Exception e) {
+            System.out.println("Exception  " + e);
+            return "pagesError/error";
+        }
+
     }
 
-
-    @ResponseBody
-    @RequestMapping("/sendSimpleEmail")
-    public String sendSimpleEmail() {
-
-        // Create a Simple MailMessage.
-        SimpleMailMessage message = new SimpleMailMessage();
-
-        message.setTo(MyConstants.FRIEND_EMAIL);
-        message.setSubject("Test Simple Email");
-        message.setText("Hello, Im testing Simple Email");
-
-        // Send Message!
-        this.emailSender.send(message);
-
-        return "Email Sent!";
-    }
 
 }

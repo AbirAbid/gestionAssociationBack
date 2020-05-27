@@ -7,4 +7,5 @@ public class MailToSend {
     String receiver;
     String object;
     String textToSend;
+
 }
