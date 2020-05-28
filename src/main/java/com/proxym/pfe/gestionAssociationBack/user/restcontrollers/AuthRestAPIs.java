@@ -47,7 +47,7 @@ public class AuthRestAPIs {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
         try {
-            System.out.println("***************************AuthRestAPIs-signup***************************");
+            System.out.println("************signUpRequest*****" + signUpRequest);
             return userService.signup(signUpRequest);
         } catch (Exception e) {
             return null;
@@ -78,7 +78,7 @@ public class AuthRestAPIs {
 
     }
 
-    @PutMapping ("/updateProfile")
+    @PutMapping("/updateProfile")
     public User updateprofile(@Valid @RequestBody User user) {
         try {
             return userService.saveUserService(user);

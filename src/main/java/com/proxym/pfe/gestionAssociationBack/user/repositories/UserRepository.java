@@ -18,11 +18,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 
-    User findByEmail(String username);
+   // User findByEmail(String username);
 
     Boolean existsByUsername(String username);
 
-    Boolean existsByEmail(String email);
+   // Boolean existsByEmail(String email);
 
     /*@Query("select  u from User u  where u.nom like :x")
     Page<User> chercherUser(@Param("x") String mc, Pageable pageable);*/

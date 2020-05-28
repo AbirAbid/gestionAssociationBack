@@ -33,25 +33,28 @@ public class UserDaoImp implements UserDao {
         return userRepository.findByUsername(username);
     }
 
-    @Override
+   /* @Override
     public User findByEmailDao(String email) {
         return userRepository.findByEmail(email);
-    }
+    }*/
 
     @Override
     public Boolean existsByUsernameDao(String username) {
         return userRepository.existsByUsername(username);
     }
 
-    @Override
+  /*  @Override
     public Boolean existsByEmailDao(String email) {
         return userRepository.existsByEmail(email);
     }
-
+*/
     @Override
     public User saveUserDao(User user) {
         user.setTauxEchange(calculTauxParticipation(user) * 100);
-        System.out.println(user.getTauxEchange());
+        return userRepository.save(user);
+    }
+    @Override
+    public User saveUserDaoSinUp(User user) {
         return userRepository.save(user);
     }
 

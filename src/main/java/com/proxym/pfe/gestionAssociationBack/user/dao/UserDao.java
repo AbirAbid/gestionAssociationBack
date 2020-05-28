@@ -18,13 +18,14 @@ public interface UserDao {
 
     User findByUsernameDao(String username);
 
-    User findByEmailDao(String username);
+   // User findByEmailDao(String username);
 
     Boolean existsByUsernameDao(String username);
 
-    Boolean existsByEmailDao(String email);
+  //  Boolean existsByEmailDao(String email);
 
     User saveUserDao(User user);
+    User saveUserDaoSinUp(User user);
     List<User> getAllDonneursDao();
     List<User> getAllBenevolesDao();
 

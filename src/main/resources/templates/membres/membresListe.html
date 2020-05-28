@@ -74,7 +74,7 @@
                                     <th> Prénom</th>
                                     <th> Adhérent</th>
                                     <th> Téléphone</th>
-                                    <th> Email</th>
+                                <th> Email</th>
                                     <th> Statut</th>
                                     <th>Envoyer Email</th>
                                     <th>Profil</th>
@@ -86,7 +86,7 @@
                                     <td th:text="${membre.prenom}"></td>
                                     <td> Adhérent</td>
                                     <td th:text="${membre.telephone}"></td>
-                                    <td th:text="${membre.email}"></td>
+                                    <td th:text="${membre.username}"></td>
                                     <td>
                                         <div class="progress mt-3">
                                             <div class="progress ">
@@ -101,13 +101,13 @@
                                     </td>
                                     <td>
                                         <center><a class="btn btn-circle btn-info"
-                                                   th:href="@{sendmailUrL(id=${membre.email})}">
+                                                   th:href="@{sendmailUrL(id=${membre.username})}">
                                             <i class="far fa-envelope"></i></a>
                                         </center>
                                     </td>
                                     <td>
                                         <center><a class="btn btn-circle btn-secondary"
-                                                   th:href="@{membreDetailUrl(id=${membre.email})}">
+                                                   th:href="@{membreDetailUrl(id=${membre.username})}">
                                             <i class="fas fa-portrait"></i></a></center>
                                     </td>
                                 </tr>

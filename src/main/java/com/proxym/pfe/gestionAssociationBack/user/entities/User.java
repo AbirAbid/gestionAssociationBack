@@ -21,10 +21,10 @@ import lombok.Data;
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
-        }),
+        })/*,
         @UniqueConstraint(columnNames = {
                 "email"
-        })
+        })*/
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 
@@ -39,13 +39,15 @@ public class User {
 
     @NotBlank
     @Size(min = 3, max = 50)
+    @Email
+
     private String username;
 
-    @NaturalId
+  /*  @NaturalId
     @NotBlank
     @Size(max = 50)
     @Email
-    private String email;
+    private String email;*/
 
     @NotBlank
     @Size(min = 6, max = 100)
@@ -90,12 +92,12 @@ public class User {
     private float tauxEchange;
 
 
-    public User(String nom, String username, String email, String password, String prenom,
+    public User(String nom, String username,  String password, String prenom,
                 Date dateNaissance, String telephone, String gouvernoratRes, String occupation,
                 String genre) {
         this.nom = nom;
         this.username = username;
-        this.email = email;
+     //   this.email = email;
         this.password = password;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;

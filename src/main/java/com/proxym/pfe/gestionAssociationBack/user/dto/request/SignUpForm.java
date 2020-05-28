@@ -16,13 +16,15 @@ public class SignUpForm {
     private String nom;
 
     @NotBlank
-    @Size(min = 3, max = 50)
+    @Size( max = 50)
+    @Email
+
     private String username;
 
-    @NotBlank
+   /* @NotBlank
     @Size(max = 60)
     @Email
-    private String email;
+    private String email;*/
 
 
     private Set<String> role;

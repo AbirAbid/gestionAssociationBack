@@ -43,21 +43,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<?> signup(SignUpForm signUpRequest) {
-        System.out.println("****************signup***************");
+        System.out.println("****************signup***************"+signUpRequest);
         try {
             if (userDao.existsByUsernameDao(signUpRequest.getUsername())) {
-                return new ResponseEntity<>(new ResponseMessage("Probléme -> Ce nom d'utilisateur existe déjà"),
+                return new ResponseEntity<>(new ResponseMessage("Probléme -> Ce mail d'utilisateur existe déjà"),
                         HttpStatus.BAD_REQUEST);
             }
 
-            if (userDao.existsByEmailDao(signUpRequest.getEmail())) {
+           /* if (userDao.existsByEmailDao(signUpRequest.getEmail())) {
                 return new ResponseEntity<String>("Probléme -> Ce mail d'utilisateur existe déjà", HttpStatus.BAD_REQUEST);
             }
-
+*/
             // Creating user's account
             User user = new User(signUpRequest.getNom(),
                     signUpRequest.getUsername(),
-                    signUpRequest.getEmail(),
+                  //  signUpRequest.getEmail(),
                     encoder.encode(signUpRequest.getPassword()),
                     signUpRequest.getPrenom(),
                     signUpRequest.getDateNaissance(),
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
             Set<String> strRoles = signUpRequest.getRole();
             Set<Role> roles = new HashSet<>();
-            System.out.println(strRoles + "***" + signUpRequest.getEmail() + "****" + signUpRequest.getUsername() + "*****");
+            System.out.println(strRoles + "*******" + signUpRequest.getUsername() + "*****");
 
             strRoles.forEach(role -> {
                 switch (role) {
@@ -87,7 +87,9 @@ public class UserServiceImpl implements UserService {
                 }
             });
             user.setRoles(roles);
-            userDao.saveUserDao(user);
+            System.out.println("****************signup*****user**********"+user);
+            userDao.saveUserDaoSinUp(user);
+            System.out.println("********User registered successfully!");
 
             return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 

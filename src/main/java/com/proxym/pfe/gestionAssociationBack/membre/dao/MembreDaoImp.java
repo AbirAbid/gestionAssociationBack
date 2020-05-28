@@ -45,7 +45,8 @@ public class MembreDaoImp implements MembreDao {
         return userRepository.getOne(id);
     }*/
     public User getOneMembreDao(String id) {
-        return userRepository.findByEmail(id);
+      //  return userRepository.findByEmail(id);
+        return userRepository.findByUsername(id);
     }
 
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 public class LoginForm {
     @NotBlank
     @Size(min = 3, max = 60)
+    @Email
     private String username;
 
     @NotBlank
