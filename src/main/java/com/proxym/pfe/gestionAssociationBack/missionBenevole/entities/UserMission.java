@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.missionBenevole.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class UserMission implements Serializable {
     @Id
@@ -23,6 +25,7 @@ public class UserMission implements Serializable {
     @JoinColumn(name = "mission_id")
     private Mission mission;
 
+    private Date dateDiponibilite;
 
     private Date demandeDate;
     private int affected;

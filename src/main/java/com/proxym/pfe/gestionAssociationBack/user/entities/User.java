@@ -3,6 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.user.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -27,6 +28,7 @@ import lombok.Data;
         })*/
 })
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 public class User {
     @Id
@@ -92,12 +94,12 @@ public class User {
     private float tauxEchange;
 
 
-    public User(String nom, String username,  String password, String prenom,
+    public User(String nom, String username, String password, String prenom,
                 Date dateNaissance, String telephone, String gouvernoratRes, String occupation,
                 String genre) {
         this.nom = nom;
         this.username = username;
-     //   this.email = email;
+        //   this.email = email;
         this.password = password;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;

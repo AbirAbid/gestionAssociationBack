@@ -81,9 +81,9 @@ public class UserServiceImpl implements UserService {
                         break;
 
                     default:
-                        Role ActeurCivileRole = roleDao.findByNameDao(RoleName.ROLE_USER)
+                        Role userRole = roleDao.findByNameDao(RoleName.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                        roles.add(ActeurCivileRole);
+                        roles.add(userRole);
                 }
             });
             user.setRoles(roles);

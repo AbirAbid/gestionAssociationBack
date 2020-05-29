@@ -1,5 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.biens.entities;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import javax.persistence.Entity;
@@ -12,10 +13,11 @@ import java.util.Date;
 @Entity
 // @JsonIdentityInfo est utilisé pour indiquer que l'identité de l'objet sera utilisée pendant la sérialisation / dé-sérialisation
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 //sérializer un objet consiste à le convertir en un tableau d'octets,
 // que l'on peut ensuite écrire dans un fichier, envoyer sur un réseau au travers d'une socket(interface de connexion)
-
-public class UserBien implements Serializable {
+public class UserBien implements Serializable  {
     @Id
     @ManyToOne
     @JoinColumn(name = "user_id")
