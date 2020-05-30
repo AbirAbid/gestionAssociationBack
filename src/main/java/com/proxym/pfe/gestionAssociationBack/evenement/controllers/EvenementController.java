@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -55,6 +56,12 @@ public class EvenementController {
             EvenementDto evenementDto = new EvenementDto();
             evenementDto.addBien(new Bien());
             evenementDto.addMission(new Mission());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+
+            String dateMin = format.format( new Date()   );
+
+            model.addAttribute("now", dateMin);
+
             model.addAttribute("evenementDto", evenementDto);
             model.addAttribute("sponsors", sponsors);
             return "evenement/add-event";
@@ -73,28 +80,26 @@ public class EvenementController {
             , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin,
                                RedirectAttributes redirectAttributes) {
         try {
-            /*****************Controle Date ***************************/
 
-            Date dateD = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
+       /*  Date dateD = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
             Date dateF = new SimpleDateFormat("yyyy-MM-dd").parse(dateFin);
 
             if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
-                /*****************Controle Date ***************************/
                 if (dateD.compareTo(dateF) > 0) {
 
                     System.out.println("dateD  apres dateF");
 
                     model.addAttribute("errorDate", "Verifier vos dates");
                 }
-                /** End Controle Date **/
 
                 List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
                 model.addAttribute("sponsors", sponsors);
 
                 return "evenement/add-event";
-            }
+            }*/
             /** Champs event form1 **/
-
+            List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
+            model.addAttribute("sponsors", sponsors);
             evenementService.AjouterEvent(evenementDto);
 
 
@@ -119,6 +124,11 @@ public class EvenementController {
             model.addAttribute("sponsors", sponsors);
 
             model.addAttribute("evenementDto", evenementService.formulaireUpdate(id));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+
+            String dateMin = format.format( new Date()   );
+
+            model.addAttribute("now", dateMin);
 
             return "evenement/updateEvent";
         } catch (Exception e) {
@@ -195,12 +205,15 @@ public class EvenementController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 
+            String dateMin = format.format( new Date() );
+            Date date1=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateMin);
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
-            model.addAttribute("dateJour", new Date());
+            model.addAttribute("dateJour", date1);
             model.addAttribute("evenements", evenements);
             return "evenement/list-event";
         } catch (Exception e) {

@@ -30,12 +30,12 @@ public class Evenement {
     private String description;
 
     @Column(name = "dateDebut")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+   @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
 
     private Date dateDebut;
 
     @Column(name = "dateFin")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private Date dateFin;
 
     @NotBlank

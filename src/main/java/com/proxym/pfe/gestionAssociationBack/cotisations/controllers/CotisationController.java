@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/cotisations/")
@@ -26,6 +28,11 @@ public class CotisationController {
     /*********************************add cotisation******************************/
     @GetMapping(value = "formulaire")
     public String formulaireAddCotisation(Model model) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateMin = format.format( new Date()   );
+
+        model.addAttribute("now", dateMin);
 
         model.addAttribute("cotisationDto", new CotisationDto());
 
@@ -103,6 +110,11 @@ public class CotisationController {
 
     public String formulaireUpdate(Model model, Long id) {
         Cotisation cotisation = cotisationService.getOneServ(id);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateMin = format.format( new Date()   );
+
+        model.addAttribute("now", dateMin);
         model.addAttribute("cotisation", cotisation);
 
 

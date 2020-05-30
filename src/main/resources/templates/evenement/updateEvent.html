@@ -168,8 +168,9 @@
                                                     <label class="col-2 col-form-label">Date Début</label>
                                                     <div class="col-10">
 
-                                                        <input type="date" class="form-control" name="dateDebut"
-                                                               th:field="*{dateDebut}" th:value="${dateDebut}"/>
+                                                        <input type="datetime-local" class="form-control" name="dateDebut"
+                                                               th:field="*{dateDebut}" th:value="${dateDebut}"
+                                                               th:min="${now}"/>
                                                         <p th:errors="*{dateDebut}" class="text-danger"></p>
 
                                                     </div>
@@ -177,8 +178,8 @@
                                                 <div class="form-group mt-5 row">
                                                     <label class="col-2 col-form-label">Date Fin</label>
                                                     <div class="col-10">
-                                                        <input type="date" class="form-control" name="dateFin"
-                                                               th:field="*{dateFin}" th:value="${dateFin}"/>
+                                                        <input type="datetime-local" class="form-control" name="dateFin"
+                                                               th:field="*{dateFin}" th:value="${dateFin}"  th:min="${now}"/>
                                                         <p th:errors="*{dateFin}" class="text-danger"></p>
 
                                                     </div>

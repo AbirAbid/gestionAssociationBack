@@ -73,7 +73,7 @@
                                                     <label class="col-2 col-form-label">Titre</label>
                                                     <div class="col-10">
                                                         <input type="text" th:field="*{titre}"
-                                                               class="form-control"
+                                                               class="form-control" placeholder="Titre"
                                                         />
                                                         <p th:errors="*{titre}" class="text-danger"></p>
                                                     </div>
@@ -144,7 +144,7 @@
                                                     <label class="col-2 col-form-label">Déscription</label>
                                                     <div class="col-10">
                                                         <textarea th:field="*{description}" class="form-control"
-                                                                  rows="5">
+                                                                  rows="5" placeholder="Déscription">
                                                         </textarea>
                                                         <p th:errors="*{description}" class="text-danger"></p>
 
@@ -160,8 +160,10 @@
                                                     <label class="col-2 col-form-label">Date Début</label>
                                                     <div class="col-10">
 
-                                                        <input type="date" class="form-control" name="dateDebut"
-                                                               th:field="*{dateDebut}" th:value="${dateDebut}"/>
+                                                        <input type="datetime-local" class="form-control" name="dateDebut"
+                                                               th:field="*{dateDebut}" th:value="${dateDebut}"
+                                                               th:min="${now}"
+                                                        />
                                                         <p th:errors="*{dateDebut}" class="text-danger"></p>
 
                                                     </div>
@@ -169,8 +171,8 @@
                                                 <div class="form-group mt-5 row">
                                                     <label class="col-2 col-form-label">Date Fin</label>
                                                     <div class="col-10">
-                                                        <input type="date" class="form-control" name="dateFin"
-                                                               th:field="*{dateFin}" th:value="${dateFin}"/>
+                                                        <input type="datetime-local" class="form-control" name="dateFin"
+                                                               th:field="*{dateFin}" th:value="${dateFin}"  th:min="${now}"/>
                                                         <p th:errors="*{dateFin}" class="text-danger"></p>
 
                                                     </div>
@@ -182,7 +184,7 @@
                                                         <div class="selectRow">
                                                             <select class="select2 mb-2 select2-multiple"
                                                                     style="width: 100%"
-                                                                    multiple="multiple" data-placeholder="Choose"
+                                                                    multiple="multiple" data-placeholder="Choisir"
                                                                     th:field="*{sponsors}">
 
                                                                 <option th:each="sponsor : ${sponsors}"
@@ -358,7 +360,7 @@
                                                         <input
                                                                 th:field="*{missions[__${item.index}__].description}"
                                                                 type="text"
-                                                                class="form-control" required="required" >
+                                                                class="form-control" required="required">
                                                     </div>
                                                     <div class="col form-group">
                                                         <input

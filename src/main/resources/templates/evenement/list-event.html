@@ -107,7 +107,7 @@
 
 
                                             <p th:text="${event.titre}" style="display: inline"></p>
-                                            <div th:if="${event.dateFin.before(dateJour)}" style="display: inline">
+                                           <div th:if="${event.dateFin.before(dateJour)}" style="display: inline">
                                                                 <span class="badge badge-dark">Passé
                                                                 </span>
                                             </div>
