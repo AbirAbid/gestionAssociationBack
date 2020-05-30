@@ -52,6 +52,7 @@ public class BienController {
             model.addAttribute("pageContent", userBiens.getContent());
             model.addAttribute("userBiens", userBiens);
             model.addAttribute("pages", pages);
+            model.addAttribute("nb", userBiens.getSize());
 
 
             return "donneurs/list_donneurs";

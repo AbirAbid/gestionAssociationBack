@@ -152,14 +152,15 @@ public class EvenementServiceImp implements EvenementService {
         if (biens.size() > 0) {
             for (int i = 0; i <= biens.size() - 1; i++) {
                 evenementDto.getBiens().get(i).setEvenement(e);
+                evenementDto.getBiens().get(i).setTotaleqteDonnee(biens.get(i).getTotaleqteDonnee());
 
                 evenementDto.getBiens().get(i).setId(biens.get(i).getId());
             }
             bienDao.saveAllDao(evenementDto.getBiens());
-            if (evenementDto.getBiens().size() > biens.size() || biens.size() == 0) {
+            if (evenementDto.getBiens().size() > biens.size() ) {
                 for (int i = biens.size(); i <= evenementDto.getBiens().size() - 1; i++) {
                     evenementDto.getBiens().get(i).setEvenement(e);
-                    evenementDto.getBiens().get(i).setTotaleqteDonnee(biens.get(i).getTotaleqteDonnee());
+                    evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
                 }
                 bienDao.saveAllDao(evenementDto.getBiens());
 
@@ -182,7 +183,7 @@ public class EvenementServiceImp implements EvenementService {
                 evenementDto.getMissions().get(i).setId(missions.get(i).getId());
             }
             missionDao.saveAllMissionDao(evenementDto.getMissions());
-            if (evenementDto.getMissions().size() > missions.size() || missions.size() == 0) {
+            if (evenementDto.getMissions().size() > missions.size() ) {
                 for (int i = missions.size(); i <= evenementDto.getMissions().size() - 1; i++) {
 
                     evenementDto.getMissions().get(i).setEvenement(e);

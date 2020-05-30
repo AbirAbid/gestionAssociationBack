@@ -35,10 +35,11 @@
                             <h4 class="card-title"><span class="fas fa-hand-holding-heart"></span> Liste des bénévoles
                             </h4>
                         </div>
+
                         <div class="card-body  text-black">
-                            <div th:if="${#lists.isEmpty(userMissions)}">
+                            <div th:if="${nb==0}">
                                 <div class="alert alert-danger" role="alert">
-                                    La liste des dons est vide!!
+                                    La liste des bénévoles est vide!!
                                 </div>
                             </div>
                             <div th:if="${not #lists.isEmpty(userMissions)}">

@@ -42,10 +42,14 @@ public class MissionController {
         for (int i = 0; i < pagesCount; i++) {
             pages[i] = i;
             System.out.println(" pages[i] " + pages[i]);
+            System.out.println(" userMissions.getSize() " +userMissions.getSize());
+
         }
         model.addAttribute("pageCourante", page);
         model.addAttribute("pageContent", userMissions.getContent());
         model.addAttribute("userMissions", userMissions);
+        model.addAttribute("nb", userMissions.getSize());
+
         model.addAttribute("pages", pages);
 
 

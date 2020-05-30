@@ -34,7 +34,8 @@
                             <h4 class="card-title"><span class="fas fa-gift"></span> Liste des donneurs</h4>
                         </div>
                         <div class="card-body  text-black">
-                            <div th:if="${#lists.isEmpty(userBiens)}">
+
+                            <div th:if="${nb==0}">
                                 <div class="alert alert-danger" role="alert">
                                     La liste des dons est vide!!
                                 </div>
