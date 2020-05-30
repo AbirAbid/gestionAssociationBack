@@ -21,7 +21,7 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-   private int active;
+    private int active;
     @NotBlank
     @Column(name = "titre")
     private String titre;
@@ -30,7 +30,7 @@ public class Evenement {
     private String description;
 
     @Column(name = "dateDebut")
-   @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
 
     private Date dateDebut;
 
@@ -55,8 +55,7 @@ public class Evenement {
             inverseJoinColumns = @JoinColumn(name = "id_sponsor"))
     private List<Sponsor> sponsors;
 
-
-
+    private String categorie;
 
 
 }

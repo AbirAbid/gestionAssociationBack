@@ -17,7 +17,7 @@ public interface EvenementService {
 
     Evenement getOneEventByIdservice(Long id);
 
-    void suuprimerEvent(Long id);
+    void supprimerEvent(Long id);
 
     Page<Evenement> findAllPageEvenementService(PageRequest pageRequest);
 
@@ -26,5 +26,7 @@ public interface EvenementService {
     Optional<Evenement> findEventByIdService(Long id);
     void AjouterEvent(@Valid EvenementDto evenementDto);
     EvenementDto formulaireUpdate(Long id);
+    void ModifierEvent(@Valid EvenementDto evenementDto);
+
 
 }

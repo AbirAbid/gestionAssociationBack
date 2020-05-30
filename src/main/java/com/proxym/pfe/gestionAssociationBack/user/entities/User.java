@@ -9,6 +9,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import org.hibernate.annotations.NaturalId;
 
+import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -30,7 +31,7 @@ import lombok.Data;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
-public class User {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

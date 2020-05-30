@@ -40,7 +40,7 @@ public class EvenementDto {
 
 
     private List<Sponsor> sponsors;
-
+    private String categorie;
 
     private List<Bien> biens;
     //   private List<MissionBenevole> missionBenevoles;
@@ -81,6 +81,8 @@ public class EvenementDto {
         adresse = e.getAdresse();
         frais = e.getFrais();
         sponsors = e.getSponsors();
+        active=e.getActive();
+        categorie = e.getCategorie();
     }
 
 }

@@ -58,6 +58,7 @@ public class BienDaoImp implements BienDao {
 
     @Override
     public void editAllDao(List<Bien> biens) {
+        bienRepositories.saveAll(biens.stream().collect(Collectors.toList()));
 
     }
 
@@ -75,8 +76,6 @@ public class BienDaoImp implements BienDao {
 
     @Override
     public void deleteBienDao(Long id) {
-        // bienRepositories.delete(bienRepositories.getOne((long) 88));
-        // bienRepositories.deleteAll(bienRepositories.findAllByEvenement_Id((long) 111));
         bienRepositories.deleteAll(bienRepositories.findAllByEvenement_Id(id));
     }
 }

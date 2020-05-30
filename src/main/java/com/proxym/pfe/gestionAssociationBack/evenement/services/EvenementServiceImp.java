@@ -15,8 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class EvenementServiceImp implements EvenementService {
@@ -50,7 +49,7 @@ public class EvenementServiceImp implements EvenementService {
     }
 
     @Override
-    public void suuprimerEvent(Long id) {
+    public void supprimerEvent(Long id) {
         bienDao.deleteBienDao(id);
         missionDao.deleteMissionDao(id);
         evenementDao.supprimerEventDao(id);
@@ -86,7 +85,7 @@ public class EvenementServiceImp implements EvenementService {
         event.setSponsors(evenementDto.getSponsors());
         event.setVille(evenementDto.getVille());
         event.setFrais(evenementDto.getFrais());
-        event.setActive(0);
+        event.setActive(evenementDto.getActive());
 
         Evenement e = evenementDao.addEventDao(event);
         /** for Affect  Sponsor ***/
@@ -107,7 +106,6 @@ public class EvenementServiceImp implements EvenementService {
             evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
         }
 
-
         for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
 
 
@@ -115,8 +113,99 @@ public class EvenementServiceImp implements EvenementService {
 
         }
 
+
         bienDao.saveAllDao(evenementDto.getBiens());
         missionDao.saveAllMissionDao(evenementDto.getMissions());
+
+    }
+
+    @Override
+    public void ModifierEvent(@Valid EvenementDto evenementDto) {
+
+        Evenement event = new Evenement();
+        event.setId(evenementDto.getId());
+
+        event.setTitre(evenementDto.getTitre());
+        event.setDescription(evenementDto.getDescription());
+        event.setAdresse(evenementDto.getAdresse());
+        event.setDateDebut(evenementDto.getDateDebut());
+        event.setDateFin(evenementDto.getDateFin());
+        event.setSponsors(evenementDto.getSponsors());
+        event.setVille(evenementDto.getVille());
+        event.setFrais(evenementDto.getFrais());
+        event.setActive(evenementDto.getActive());
+
+        Evenement e = evenementDao.addEventDao(event);
+/** for Affect  Sponsor ***/
+        List<Sponsor> sponsors = event.getSponsors();
+
+        for (int i = 0; i <= sponsors.size() - 1; i++) {
+            Sponsor s = sponsors.get(i);
+            s.setAffecte(1);
+            sponsorDao.modifierSponsor(s);
+
+        }
+        /** End Champs event form1 **/
+
+
+        List<Bien> biens = bienDao.findAllByEventDao(e.getId());
+        if (biens.size() > 0) {
+            for (int i = 0; i <= biens.size() - 1; i++) {
+                evenementDto.getBiens().get(i).setEvenement(e);
+
+                evenementDto.getBiens().get(i).setId(biens.get(i).getId());
+            }
+            bienDao.saveAllDao(evenementDto.getBiens());
+            if (evenementDto.getBiens().size() > biens.size() || biens.size() == 0) {
+                for (int i = biens.size(); i <= evenementDto.getBiens().size() - 1; i++) {
+                    evenementDto.getBiens().get(i).setEvenement(e);
+                    evenementDto.getBiens().get(i).setTotaleqteDonnee(biens.get(i).getTotaleqteDonnee());
+                }
+                bienDao.saveAllDao(evenementDto.getBiens());
+
+            }
+        }
+        else if (biens.size() == 0) {
+            for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
+
+                evenementDto.getBiens().get(i).setEvenement(e);
+                evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
+            }
+            bienDao.saveAllDao(evenementDto.getBiens());
+
+        }
+        List<Mission> missions = missionDao.findAllMissionByEventDao(e.getId());
+        if (missions.size() > 0) {
+            for (int i = 0; i <= missions.size() - 1; i++) {
+                evenementDto.getMissions().get(i).setEvenement(e);
+
+                evenementDto.getMissions().get(i).setId(missions.get(i).getId());
+            }
+            missionDao.saveAllMissionDao(evenementDto.getMissions());
+            if (evenementDto.getMissions().size() > missions.size() || missions.size() == 0) {
+                for (int i = missions.size(); i <= evenementDto.getMissions().size() - 1; i++) {
+
+                    evenementDto.getMissions().get(i).setEvenement(e);
+
+                }
+                missionDao.saveAllMissionDao(evenementDto.getMissions());
+
+            }
+        }
+        else if(missions.size()==0){
+            for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
+
+
+                evenementDto.getMissions().get(i).setEvenement(e);
+
+            }
+
+            missionDao.saveAllMissionDao(evenementDto.getMissions());
+
+
+        }
+
+
 
     }
 
@@ -159,4 +248,6 @@ public class EvenementServiceImp implements EvenementService {
 
         return evenementDto;
     }
+
+
 }

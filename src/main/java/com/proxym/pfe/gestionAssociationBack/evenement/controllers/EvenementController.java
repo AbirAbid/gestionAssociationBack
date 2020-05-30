@@ -58,7 +58,7 @@ public class EvenementController {
             evenementDto.addMission(new Mission());
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 
-            String dateMin = format.format( new Date()   );
+            String dateMin = format.format(new Date());
 
             model.addAttribute("now", dateMin);
 
@@ -76,13 +76,13 @@ public class EvenementController {
     @PostMapping(value = "/save")
     public String AjouterEvent(@Valid EvenementDto evenementDto,
                                BindingResult bindingResult, Model model
-            , @RequestParam(name = "dateDebut", defaultValue = "2020-04-22") String dateDebut
-            , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin,
+            , @RequestParam(name = "dateDebut", defaultValue = "2020-06-05 00:00:00") String dateDebut
+            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06 00:00:00") String dateFin,
                                RedirectAttributes redirectAttributes) {
         try {
 
-       /*  Date dateD = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
-            Date dateF = new SimpleDateFormat("yyyy-MM-dd").parse(dateFin);
+            Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateDebut);
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateFin);
 
             if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
                 if (dateD.compareTo(dateF) > 0) {
@@ -96,7 +96,7 @@ public class EvenementController {
                 model.addAttribute("sponsors", sponsors);
 
                 return "evenement/add-event";
-            }*/
+            }
             /** Champs event form1 **/
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             model.addAttribute("sponsors", sponsors);
@@ -126,7 +126,7 @@ public class EvenementController {
             model.addAttribute("evenementDto", evenementService.formulaireUpdate(id));
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 
-            String dateMin = format.format( new Date()   );
+            String dateMin = format.format(new Date());
 
             model.addAttribute("now", dateMin);
 
@@ -140,14 +140,14 @@ public class EvenementController {
     @PostMapping(value = "/update")
     public String updateEvent(@Valid EvenementDto evenementDto,
                               BindingResult bindingResult, Model model
-            , @RequestParam(name = "dateDebut", defaultValue = "2020-04-22") String dateDebut
-            , @RequestParam(name = "dateFin", defaultValue = "2020-04-22") String dateFin,
+            , @RequestParam(name = "dateDebut", defaultValue = "2020-06-05 00:00:00") String dateDebut
+            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06 00:00:00") String dateFin,
                               RedirectAttributes redirectAttributes) {
         try {
             /*****************Controle Date ***************************/
 
-            Date dateD = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
-            Date dateF = new SimpleDateFormat("yyyy-MM-dd").parse(dateFin);
+            Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateDebut);
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateFin);
 
             if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
                 /*****************Controle Date ***************************/
@@ -167,8 +167,9 @@ public class EvenementController {
                 return "evenement/updateEvent";
             }
 
-            evenementService.AjouterEvent(evenementDto);
+//            evenementService.AjouterEvent(evenementDto);
 
+            evenementService.ModifierEvent(evenementDto);
 
             redirectAttributes.addFlashAttribute("messageUpdate", " Votre événement a été modifié avec succès ");
 
@@ -183,7 +184,7 @@ public class EvenementController {
     /*********************************Delete Event******************************/
     @RequestMapping(value = "/supprimer")
     public String supprimer(Long id, RedirectAttributes redirectAttributes) {
-        evenementService.suuprimerEvent(id);
+        evenementService.supprimerEvent(id);
         redirectAttributes.addFlashAttribute("messageDelete", " Votre événement a été supprimé avec succès .");
 
         return "redirect:/evenement/list";
@@ -207,8 +208,8 @@ public class EvenementController {
             }
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 
-            String dateMin = format.format( new Date() );
-            Date date1=new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateMin);
+            String dateMin = format.format(new Date());
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateMin);
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
