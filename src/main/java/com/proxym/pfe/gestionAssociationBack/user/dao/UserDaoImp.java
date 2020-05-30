@@ -43,16 +43,17 @@ public class UserDaoImp implements UserDao {
         return userRepository.existsByUsername(username);
     }
 
-  /*  @Override
-    public Boolean existsByEmailDao(String email) {
-        return userRepository.existsByEmail(email);
-    }
-*/
+    /*  @Override
+      public Boolean existsByEmailDao(String email) {
+          return userRepository.existsByEmail(email);
+      }
+  */
     @Override
     public User saveUserDao(User user) {
         user.setTauxEchange(calculTauxParticipation(user) * 100);
         return userRepository.save(user);
     }
+
     @Override
     public User saveUserDaoSinUp(User user) {
         return userRepository.save(user);
@@ -85,7 +86,7 @@ public class UserDaoImp implements UserDao {
         }
         /*supprimer les doublons*/
         // Créer une liste de contenu unique basée sur les éléments de ArrayList
-        Set<Evenement> mySet = new HashSet<Evenement>(evenements);
+        Set<Evenement> mySet = new HashSet<>(evenements);
 
         // Créer une Nouvelle ArrayList à partir de Set
         List<Evenement> UserlistEvent = new ArrayList<>(mySet);

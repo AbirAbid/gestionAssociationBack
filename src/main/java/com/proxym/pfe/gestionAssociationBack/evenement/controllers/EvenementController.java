@@ -80,14 +80,12 @@ public class EvenementController {
             , @RequestParam(name = "dateFin", defaultValue = "2020-06-06 00:00:00") String dateFin,
                                RedirectAttributes redirectAttributes) {
         try {
-
             Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateDebut);
             Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateFin);
 
             if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
                 if (dateD.compareTo(dateF) > 0) {
 
-                    System.out.println("dateD  apres dateF");
 
                     model.addAttribute("errorDate", "Verifier vos dates");
                 }

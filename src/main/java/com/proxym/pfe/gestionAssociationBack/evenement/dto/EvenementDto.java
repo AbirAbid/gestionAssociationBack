@@ -22,11 +22,11 @@ public class EvenementDto {
     @NotBlank(message = " Veuillez remplir ce champs ! ")
     private String description;
 
-    @NotNull(message = " Veuillez remplir ce champs ! ")
+   @NotNull(message = " Veuillez remplir ce champs ! ")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private Date dateDebut;
 
-    @NotNull(message = " Veuillez remplir ce champs ! ")
+   @NotNull(message = " Veuillez remplir ce champs ! ")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private Date dateFin;
 
