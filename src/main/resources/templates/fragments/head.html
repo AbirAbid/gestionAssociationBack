@@ -54,7 +54,9 @@
                             '<td>' + sponsor.idSponsor + '</td>' +
                             '<td>' + sponsor.titreSponsor + '</td>' +
                             '<td>' + sponsor.emailSponsor + '</td>' +
-
+                            '<td><button class="btn btn-primary" ' +
+                            '               ng-click="update(sponsor)">Modifier</button></td>' +
+                            '<td><button class="btn btn-danger">Supprimer</button></td>' +
                             '</tr>';
 
                         $('#customerTable tbody').append(customerRow);

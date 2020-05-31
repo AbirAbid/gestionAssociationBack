@@ -68,9 +68,7 @@ public class BienRestController {
 
 
     /***Donner Bien***/
-
     @RequestMapping(value = "/donnerBien/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-
     public void donnerBien(@RequestBody ParticiperBienFormDto participerBienFormDto,
                            @PathVariable String username) {
         try {
