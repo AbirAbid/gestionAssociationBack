@@ -40,10 +40,9 @@ public class UserServiceImpl implements UserService {
     RoleDao roleDao;
 
 
-
     @Override
     public ResponseEntity<?> signup(SignUpForm signUpRequest) {
-        System.out.println("****************signup***************"+signUpRequest);
+        System.out.println("****************signup***************" + signUpRequest);
         try {
             if (userDao.existsByUsernameDao(signUpRequest.getUsername())) {
                 return new ResponseEntity<>(new ResponseMessage("Probléme -> Ce mail d'utilisateur existe déjà"),
@@ -57,14 +56,15 @@ public class UserServiceImpl implements UserService {
             // Creating user's account
             User user = new User(signUpRequest.getNom(),
                     signUpRequest.getUsername(),
-                  //  signUpRequest.getEmail(),
+                    //  signUpRequest.getEmail(),
                     encoder.encode(signUpRequest.getPassword()),
                     signUpRequest.getPrenom(),
                     signUpRequest.getDateNaissance(),
                     signUpRequest.getTelephone(),
                     signUpRequest.getGouvernoratRes(),
                     signUpRequest.getOccupation(),
-                    signUpRequest.getGenre()
+                    signUpRequest.getGenre(),
+                    signUpRequest.getIsAdmin()
             );
 
             Set<String> strRoles = signUpRequest.getRole();
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
                 }
             });
             user.setRoles(roles);
-            System.out.println("****************signup*****user**********"+user);
+            System.out.println("****************signup*****user**********" + user);
             userDao.saveUserDaoSinUp(user);
             System.out.println("********User registered successfully!");
 

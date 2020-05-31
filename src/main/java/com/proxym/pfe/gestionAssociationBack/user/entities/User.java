@@ -97,7 +97,7 @@ public class User  {
 
     public User(String nom, String username, String password, String prenom,
                 Date dateNaissance, String telephone, String gouvernoratRes, String occupation,
-                String genre) {
+                String genre,int isAdmin) {
         this.nom = nom;
         this.username = username;
         //   this.email = email;
@@ -108,6 +108,8 @@ public class User  {
         this.gouvernoratRes = gouvernoratRes;
         this.occupation = occupation;
         this.genre = genre;
+        this.isAdmin=isAdmin;
+
 
     }
 

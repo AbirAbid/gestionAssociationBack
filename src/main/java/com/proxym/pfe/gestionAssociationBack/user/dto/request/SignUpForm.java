@@ -54,4 +54,5 @@ public class SignUpForm {
     @NotBlank
 
     private String genre;
+    private int isAdmin;
 }
