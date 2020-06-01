@@ -4,19 +4,19 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserController {
 
     @GetMapping("/")
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String root() {
         System.out.println("index sans Auth");
         return "index";
     }
 
     @GetMapping("/login")
-    // @PreAuthorize("hasRole('ADMIN')")
 
     public String login(Model model) {
         try {
@@ -30,5 +30,11 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public String accessDenied(Model model) {
+
+
+        return "pagesError/403";
+    }
 
 }

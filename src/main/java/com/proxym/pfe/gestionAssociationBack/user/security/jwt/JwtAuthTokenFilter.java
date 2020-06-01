@@ -1,6 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.user.security.jwt;
 
 import com.proxym.pfe.gestionAssociationBack.user.services.UserDetailsServiceImpl;
+import com.proxym.pfe.gestionAssociationBack.user.services.UserDetailsServiceRestImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+   // private UserDetailsServiceRestImp userDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
     //En JwtAuthTokenFilterclasse, la doFilterInternalméthode fera:

@@ -39,7 +39,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/auth/")
 
 public class AuthRestAPIs {
     @Autowired
@@ -64,7 +64,9 @@ public class AuthRestAPIs {
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtProvider.generateJwtToken(authentication);
+
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
@@ -124,8 +126,7 @@ public class AuthRestAPIs {
             user.setDateNaissance(updateProfileForm.getDateNaissance());
 
 
-
-                return userRepository.saveAndFlush(user);
+            return userRepository.saveAndFlush(user);
         } catch (Exception e) {
 
             return null;
