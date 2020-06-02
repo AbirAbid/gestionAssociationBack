@@ -176,10 +176,10 @@ public class WebSecurityConfig /*extends WebSecurityConfigurerAdapter */ {
                     .headers()
                     .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
             http.cors().and().csrf().disable()
-                    .antMatcher("/api0/**")
+                    .antMatcher("/apiMembreAuthoriser/**")
                     .authorizeRequests()
                     .antMatchers(
-                            "/api/auth/**").permitAll()
+                            "/api/auth/**","/api/biens/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

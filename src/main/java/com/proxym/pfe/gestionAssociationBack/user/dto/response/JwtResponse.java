@@ -1,19 +1,25 @@
 package com.proxym.pfe.gestionAssociationBack.user.dto.response;
 
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
+import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
 public class JwtResponse {
+
     private String token;
     private String type = "Bearer";
     private String username;
+    private User user;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public JwtResponse(String accessToken, String username, Collection<? extends GrantedAuthority> authorities) {
+    public JwtResponse(String accessToken, String username, Collection<? extends GrantedAuthority> authorities,User user) {
         this.token = accessToken;
         this.username = username;
         this.authorities = authorities;
+        this.user =user;
     }
 
     public String getAccessToken() {
@@ -42,5 +48,36 @@ public class JwtResponse {
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+
+
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }

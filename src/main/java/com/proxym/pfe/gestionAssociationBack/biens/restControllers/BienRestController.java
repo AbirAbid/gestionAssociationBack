@@ -17,6 +17,8 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
+//@RequestMapping("/api/biens/")
+
 public class BienRestController {
     @Autowired
     BienService bienService;
@@ -68,7 +70,7 @@ public class BienRestController {
 
 
     /***Donner Bien***/
-    @RequestMapping(value = "/donnerBien/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/apiMembreAuthoriser/donnerBien/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void donnerBien(@RequestBody ParticiperBienFormDto participerBienFormDto,
                            @PathVariable String username) {
         try {
@@ -80,7 +82,7 @@ public class BienRestController {
 
     /****  Get list Bien by user *****/
 
-    @RequestMapping(value = "/listBienByUser/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/apiMembreAuthoriser/listBienByUser/{username}", method = RequestMethod.GET)
     public List<UserBien> getListBienByUser(@PathVariable("username") String username) {
         try {
 

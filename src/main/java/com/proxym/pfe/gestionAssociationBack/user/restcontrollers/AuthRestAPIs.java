@@ -1,26 +1,15 @@
 package com.proxym.pfe.gestionAssociationBack.user.restcontrollers;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.DeserializationConfig;
-import com.fasterxml.jackson.databind.InjectableValues;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.user.dao.RoleDao;
-import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
 import com.proxym.pfe.gestionAssociationBack.user.dto.UpdateProfileForm;
 import com.proxym.pfe.gestionAssociationBack.user.dto.request.LoginForm;
 import com.proxym.pfe.gestionAssociationBack.user.dto.response.JwtResponse;
-import com.proxym.pfe.gestionAssociationBack.user.entities.Role;
-import com.proxym.pfe.gestionAssociationBack.user.entities.RoleName;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import com.proxym.pfe.gestionAssociationBack.user.security.jwt.JwtProvider;
 import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
 import com.proxym.pfe.gestionAssociationBack.user.dto.request.SignUpForm;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,15 +20,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.io.Serializable;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/auth/")
+//@RequestMapping("/api/auth/")
 
 public class AuthRestAPIs {
     @Autowired
@@ -67,7 +51,7 @@ public class AuthRestAPIs {
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), userService.findUserByUsernameService(userDetails.getUsername())));
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;
@@ -95,7 +79,7 @@ public class AuthRestAPIs {
         }
     }
 
-    @GetMapping("/getUser/{username}")
+    @GetMapping("/apiMembreAuthoriser/getUser/{username}")
     public User getUserByUsername(@PathVariable String username) {
         try {
             System.out.println("**************AuthRestAPIs-getUser*****************");
@@ -108,7 +92,7 @@ public class AuthRestAPIs {
 
     }
 
-    @PostMapping(value = "/updateProfile")
+    @PostMapping(value = "/apiMembreAuthoriser/updateProfile")
     public User updateprofile(@Valid @RequestBody UpdateProfileForm updateProfileForm) {
 
         try {

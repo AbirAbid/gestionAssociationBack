@@ -55,26 +55,6 @@ public class MissionBenevoleRestControllers {
         }
     }
 
-    /**
-     * Participer mission Api
-     **/
-
-
-    @RequestMapping(value = "/participerMission/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-
-    public void participerMission(@RequestBody ParticiperMissionDto participerMissionDto,
-                                  @PathVariable String username) {
-        try {
-
-            User user = userService.findUserByUsernameService(username);
-
-            missionService.participerMissionRest(participerMissionDto, user);
-        } catch (Exception ex) {
-            System.out.println("Exception " + ex.getMessage());
-        }
-    }
-
-
     @RequestMapping(value = "/listMission", method = RequestMethod.GET)
     public List<Mission> getallMission() {
         try {
@@ -96,7 +76,30 @@ public class MissionBenevoleRestControllers {
         }
     }
 
-    @RequestMapping(value = "/listMissionByUser/{username}", method = RequestMethod.GET)
+
+    /**
+     * Participer mission Api
+     **/
+
+   @RequestMapping(value = "/apiMembreAuthoriser/participerMission/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+
+    public void participerMission(@RequestBody ParticiperMissionDto participerMissionDto,
+                                  @PathVariable String username) {
+        try {
+
+            User user = userService.findUserByUsernameService(username);
+
+            missionService.participerMissionRest(participerMissionDto, user);
+        } catch (Exception ex) {
+            System.out.println("Exception " + ex.getMessage());
+        }
+    }
+
+    /**
+     * list mission by username Api
+     **/
+
+    @RequestMapping(value = "/apiMembreAuthoriser/listMissionByUser/{username}", method = RequestMethod.GET)
     public List<UserMission> getallMissionUser(@PathVariable String username) {
         try {
 
@@ -108,8 +111,10 @@ public class MissionBenevoleRestControllers {
         }
     }
 
-
-    @RequestMapping(value = "/listMissionDisplay/{username}/{id}", method = RequestMethod.GET)
+    /**
+     * list mission by username  and event id Api
+     ***/
+    @RequestMapping(value = "/apiMembreAuthoriser/listMissionDisplay/{username}/{id}", method = RequestMethod.GET)
     public List<MissionUserDisplay> getallMissionDisplayUser(@PathVariable String username, @PathVariable Long id) {
         try {
 
@@ -121,8 +126,12 @@ public class MissionBenevoleRestControllers {
         }
     }
 
+    /**
+     * delete participation mission
+     **/
 
-    @RequestMapping(value = "/annulerDemande/{username}", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/apiMembreAuthoriser/annulerDemande/{username}", method = RequestMethod.POST)
     public void libererMission(@PathVariable String username, @RequestBody Long id) {
 
         missionService.libererMissionRest(username, id);
