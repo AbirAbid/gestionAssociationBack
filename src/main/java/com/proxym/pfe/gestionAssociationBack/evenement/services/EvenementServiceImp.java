@@ -75,7 +75,7 @@ public class EvenementServiceImp implements EvenementService {
     public void AjouterEvent(@Valid EvenementDto evenementDto) {
 
         Evenement event = new Evenement();
-        event.setId(evenementDto.getId());
+    /*  event.setId(evenementDto.getId());
 
         event.setTitre(evenementDto.getTitre());
         event.setDescription(evenementDto.getDescription());
@@ -86,7 +86,10 @@ public class EvenementServiceImp implements EvenementService {
         event.setVille(evenementDto.getVille());
         event.setFrais(evenementDto.getFrais());
         event.setActive(evenementDto.getActive());
+        event.setCategorie(evenementDto.getCategorie());
 
+*/
+        event = eventFromEventDto(evenementDto);
         Evenement e = evenementDao.addEventDao(event);
         /** for Affect  Sponsor ***/
         List<Sponsor> sponsors = event.getSponsors();
@@ -123,25 +126,24 @@ public class EvenementServiceImp implements EvenementService {
     public void ModifierEvent(@Valid EvenementDto evenementDto) {
         System.out.println("ModifierEvent::::::");
         Evenement event = new Evenement();
-        event.setId(evenementDto.getId());
+       /* event.setId(evenementDto.getId());
 
         event.setTitre(evenementDto.getTitre());
         event.setDescription(evenementDto.getDescription());
         event.setAdresse(evenementDto.getAdresse());
 
         event.setDateDebut(evenementDto.getDateDebut());
-        System.out.println("event.getDateDebut()::::::" + event.getDateDebut());
 
         event.setDateFin(evenementDto.getDateFin());
-        System.out.println("event.getDateDebut()::::::" + event.getDateFin());
 
         event.setSponsors(evenementDto.getSponsors());
         event.setVille(evenementDto.getVille());
         event.setFrais(evenementDto.getFrais());
-        event.setActive(evenementDto.getActive());
+        event.setActive(evenementDto.getActive());*/
+        event = eventFromEventDto(evenementDto);
 
         Evenement e = evenementDao.addEventDao(event);
-/** for Affect  Sponsor ***/
+        /** for Affect  Sponsor ***/
         List<Sponsor> sponsors = event.getSponsors();
 
         for (int i = 0; i <= sponsors.size() - 1; i++) {
@@ -209,7 +211,6 @@ public class EvenementServiceImp implements EvenementService {
 
         }
 
-
     }
 
     @Override
@@ -217,18 +218,18 @@ public class EvenementServiceImp implements EvenementService {
         System.out.println(" formulaireUpdate:::::");
 
         Evenement e = evenementDao.getEventDaoById(id);
-     //   System.out.println(" Evenement:::::" + e);
+        //   System.out.println(" Evenement:::::" + e);
 
         EvenementDto evenementDto = new EvenementDto();
 
-       // System.out.println(" e.getSponsors()    " + e.getSponsors());
+        // System.out.println(" e.getSponsors()    " + e.getSponsors());
 
         evenementDto.affectToEventDto(e);
-       // System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
+        // System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
 
         List<Bien> biens = bienDao.findAllByEventDao(id);
         List<Mission> missions = missionDao.findAllMissionByEventDao(id);
-      //  System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
+        //  System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
         if (biens.size() != 0) {
             for (int i = 0; i <= biens.size() - 1; i++) {
                 evenementDto.addBien(biens.get(i));
@@ -256,5 +257,25 @@ public class EvenementServiceImp implements EvenementService {
         return evenementDto;
     }
 
+    Evenement eventFromEventDto(EvenementDto evenementDto) {
+        Evenement event = new Evenement();
+        event.setId(evenementDto.getId());
 
+        event.setTitre(evenementDto.getTitre());
+        event.setDescription(evenementDto.getDescription());
+        event.setAdresse(evenementDto.getAdresse());
+
+        event.setDateDebut(evenementDto.getDateDebut());
+
+        event.setDateFin(evenementDto.getDateFin());
+
+        event.setSponsors(evenementDto.getSponsors());
+        event.setVille(evenementDto.getVille());
+        event.setFrais(evenementDto.getFrais());
+        event.setActive(evenementDto.getActive());
+        event.setCategorie(evenementDto.getCategorie());
+
+        return event;
+
+    }
 }

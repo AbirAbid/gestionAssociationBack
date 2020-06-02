@@ -48,6 +48,7 @@ public class Evenement {
 
     @Column(name = "frais")
     private Double frais;
+    private String categorie;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "evenemet_sponsor",
@@ -55,7 +56,6 @@ public class Evenement {
             inverseJoinColumns = @JoinColumn(name = "id_sponsor"))
     private List<Sponsor> sponsors;
 
-    private String categorie;
 
 
 }

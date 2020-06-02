@@ -101,6 +101,7 @@ public class EvenementController {
             /** Champs event form1 **/
             List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
             model.addAttribute("sponsors", sponsors);
+            System.out.println("evenementDto::::" + evenementDto);
             evenementService.AjouterEvent(evenementDto);
 
 
@@ -210,12 +211,12 @@ public class EvenementController {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
             String dateMin = format.format(new Date());
-          //  Date date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(dateMin);
+            //  Date date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(dateMin);
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
-          //  model.addAttribute("dateJour", date1);
+            //  model.addAttribute("dateJour", date1);
             model.addAttribute("evenements", evenements);
             return "evenement/list-event";
         } catch (Exception e) {
