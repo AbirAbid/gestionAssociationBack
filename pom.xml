@@ -113,10 +113,15 @@
             <artifactId>bootstrap</artifactId>
             <version>4.3.1</version>
         </dependency>
+        <!--  <dependency>
+              <groupId>org.webjars</groupId>
+              <artifactId>jquery</artifactId>
+              <version>3.2.0</version>
+          </dependency>-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.bower</groupId>
@@ -133,7 +138,22 @@
             <artifactId>select2</artifactId>
             <version>4.0.6</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>1.10.7</version>
+        </dependency>
+        <!--  Bower va vous permettre d'installer, de mettre à jour ou de désinstaller toutes les dépendances qui vous semblent nécessaires à vos projets. -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>html5shiv</artifactId>
+            <version>3.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.0.13</version>
+        </dependency>
         <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>wysihtml5</artifactId>
@@ -148,8 +168,25 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <!--Stat-->
 
-        
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>nvd3</artifactId>
+            <version>1.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>d3</artifactId>
+            <version>3.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-nvd3</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>

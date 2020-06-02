@@ -23,12 +23,13 @@
 
         <div class="login-box card">
             <div class="card-body">
-                <form class="form-horizontal form-material" id="loginform" th:action="@{/j_spring_security_check}" method="post">
+                <form class="form-horizontal form-material" id="loginform" th:action="@{/j_spring_security_check}"
+                      method="post">
                     <h3 class="box-title mb-3">Page d'Authentification</h3>
 
                     <div class="alert alert-danger alert-dismissible fade show" role="alert"
                          th:if="${param.error}">
-                        <strong > Vérifiez votre login et mot de passe</strong>
+                        <strong> Vérifiez votre login et mot de passe</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -36,7 +37,7 @@
 
                     <div class="alert alert-info alert-dismissible fade show" role="alert"
                          th:if="${param.logout}">
-                        <strong > Déconnexion !</strong>
+                        <strong> Déconnexion !</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -44,30 +45,38 @@
 
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <label for="password">Nom d'utilisateur</label>
+                            <label for="username">Nom d'utilisateur</label>
 
-                            <input type="text" id="username" name="username" class="form-control"
+                            <input type="text" id="username" name="username" class="form-control" value=" "
                                    autofocus="autofocus">
                         </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="password">Mot de passe</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="password">Mot de passe</label>
 
-                                <input type="password" id="password" name="password" class="form-control"
-                                >
-                            </div>
-
-                            <div class="form-group text-center mt-3">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
-                                            type="submit">Se
-                                        connecter
-                                    </button>
-                                </div>
-                            </div>
-
+                            <input type="password" id="password" name="password" class="form-control" value=" "
+                            >
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox checkbox-primary float-left pt-0">
+                                <input id="checkbox-signup" type="checkbox" name="remember-me">
+                                <label for="checkbox-signup"> Remember me </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center mt-3">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                                    type="submit">Se
+                                connecter
+                            </button>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div>

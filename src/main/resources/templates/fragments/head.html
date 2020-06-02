@@ -14,88 +14,15 @@
     <link href="/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="/css/colors/blue.css" id="theme" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
+-->
+    <link rel="stylesheet" href="/webjars/font-awesome/5.0.13/web-fonts-with-css/css/fontawesome-all.css">
     <link href="/webjars/select2/4.0.6/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/bootstrap_wysihtml5.css" rel="stylesheet">
-   <!-- <link href="/webjars/bootstrap3-wysihtml5-bower/0.3.0/dist/bootstrap3-wysihtml5.css" rel="stylesheet"
-          type="text/css"/>
 
-    <link href="/webjars/bootstrap3-wysihtml5-bower/0.3.0/dist/bootstrap3-wysihtml5.min.css" rel="stylesheet"
-          type="text/css"/>
--->
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="/webjars/nvd3/1.8.1/build/nv.d3.min.css"/>
 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-            crossorigin="anonymous"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js">
-
-    </script>
-
-    <script>
-
-
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "/listSponsors",
-                success: function (result) {
-                    $("#customerTable tbody").empty();
-
-                    $.each(result, function (i, sponsor) {
-                        var customerRow = '<tr>' +
-                            '<td>' + sponsor.idSponsor + '</td>' +
-                            '<td>' + sponsor.titreSponsor + '</td>' +
-                            '<td>' + sponsor.emailSponsor + '</td>' +
-                            '<td><button class="btn btn-primary" ' +
-                            '               ng-click="update(sponsor)">Modifier</button></td>' +
-                            '<td><button class="btn btn-danger">Supprimer</button></td>' +
-                            '</tr>';
-
-                        $('#customerTable tbody').append(customerRow);
-
-                    });
-                    $('#customerTable tfoot th').each(function () {
-                        var title = $(this).text();
-                        $(this).html('<input type="text" placeholder="Rechercher ' + title + '" />');
-                    });
-
-
-                    // DataTables est un plug-in jQuery open-source permettant de dynamiser un tableau HTML
-                    var otable = $('#customerTable').DataTable();
-
-                    // Apply the search
-                    otable.columns().every(function () {
-
-                        var that = this;
-                        $('input', this.footer()).on('keyup change', function () {
-                            if (that.search() !== this.value) {
-                                that
-                                    .search(this.value)
-                                    .draw();
-                            }
-                        });
-                    });
-
-                },
-                error: function (e) {
-                    alert("ERROR: ", e);
-                    console.log("ERROR: ", e);
-                }
-            });
-
-
-        });
-
-
-    </script>
 
     <style>  tfoot {
         display: table-header-group;

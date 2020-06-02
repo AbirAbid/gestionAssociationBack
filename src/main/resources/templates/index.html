@@ -51,29 +51,39 @@
     <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
 
 
-    <div class="page-wrapper">
+    <div class="page-wrapper" ng-app="plunker">
         <!-- ============================================================== -->
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
+            <div class="card ">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div ng-controller="MainCtrl">
+
+                    <nvd3 options="options" data="data"></nvd3>
+
+                    <br><a href="http://krispo.github.io/angular-nvd3/" target="_blank" style="float: right;">See
+                    more</a>
+                </div>
+            </div>
 
 
+            <footer class="footer">
+                © 2020
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
         </div>
-        <footer class="footer">
-            © 2020
-        </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
     </div>
 
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/statistic.js|"></script>
 
 
 </body>
