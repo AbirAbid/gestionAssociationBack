@@ -22,12 +22,12 @@ public class EvenementDto {
     @NotBlank(message = " Veuillez remplir ce champs ! ")
     private String description;
 
-   @NotNull(message = " Veuillez remplir ce champs ! ")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    @NotNull(message = " Veuillez remplir ce champs ! ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateDebut;
 
-   @NotNull(message = " Veuillez remplir ce champs ! ")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    @NotNull(message = " Veuillez remplir ce champs ! ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date dateFin;
 
     @NotBlank(message = " Veuillez remplir ce champs ! ")
@@ -37,10 +37,10 @@ public class EvenementDto {
     private String adresse;
 
     private Double frais;
+    private String categorie;
 
 
     private List<Sponsor> sponsors;
-    private String categorie;
 
     private List<Bien> biens;
     //   private List<MissionBenevole> missionBenevoles;
@@ -81,7 +81,7 @@ public class EvenementDto {
         adresse = e.getAdresse();
         frais = e.getFrais();
         sponsors = e.getSponsors();
-        active=e.getActive();
+        active = e.getActive();
         categorie = e.getCategorie();
     }
 

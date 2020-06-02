@@ -56,7 +56,7 @@ public class EvenementController {
             EvenementDto evenementDto = new EvenementDto();
             evenementDto.addBien(new Bien());
             evenementDto.addMission(new Mission());
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
             String dateMin = format.format(new Date());
 
@@ -76,12 +76,15 @@ public class EvenementController {
     @PostMapping(value = "/save")
     public String AjouterEvent(@Valid EvenementDto evenementDto,
                                BindingResult bindingResult, Model model
-            , @RequestParam(name = "dateDebut", defaultValue = "2020-06-05 00:00:00") String dateDebut
-            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06 00:00:00") String dateFin,
+            , @RequestParam(name = "dateDebut", defaultValue = "2020-06-05T23:45") String dateDebut
+            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06T12:12") String dateFin,
                                RedirectAttributes redirectAttributes) {
         try {
-            Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateDebut);
-            Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateFin);
+
+
+            Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateDebut);
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateFin);
+
 
             if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
                 if (dateD.compareTo(dateF) > 0) {
@@ -122,7 +125,7 @@ public class EvenementController {
             model.addAttribute("sponsors", sponsors);
 
             model.addAttribute("evenementDto", evenementService.formulaireUpdate(id));
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
             String dateMin = format.format(new Date());
 
@@ -138,14 +141,14 @@ public class EvenementController {
     @PostMapping(value = "/update")
     public String updateEvent(@Valid EvenementDto evenementDto,
                               BindingResult bindingResult, Model model
-            , @RequestParam(name = "dateDebut", defaultValue = "2020-06-05 00:00:00") String dateDebut
-            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06 00:00:00") String dateFin,
+            , @RequestParam(name = "dateDebut", defaultValue = "2020-06-05T23:45") String dateDebut
+            , @RequestParam(name = "dateFin", defaultValue = "2020-06-07T23:45") String dateFin,
                               RedirectAttributes redirectAttributes) {
         try {
             /*****************Controle Date ***************************/
 
-            Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateDebut);
-            Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateFin);
+            Date dateD = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateDebut);
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateFin);
 
             if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
                 /*****************Controle Date ***************************/
@@ -165,7 +168,7 @@ public class EvenementController {
                 return "evenement/updateEvent";
             }
 
-//            evenementService.AjouterEvent(evenementDto);
+//          evenementService.AjouterEvent(evenementDto);
 
             evenementService.ModifierEvent(evenementDto);
 
@@ -204,15 +207,15 @@ public class EvenementController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
             String dateMin = format.format(new Date());
-            Date date1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(dateMin);
+          //  Date date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(dateMin);
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
-            model.addAttribute("dateJour", date1);
+          //  model.addAttribute("dateJour", date1);
             model.addAttribute("evenements", evenements);
             return "evenement/list-event";
         } catch (Exception e) {

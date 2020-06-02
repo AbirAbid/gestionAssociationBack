@@ -121,15 +121,20 @@ public class EvenementServiceImp implements EvenementService {
 
     @Override
     public void ModifierEvent(@Valid EvenementDto evenementDto) {
-
+        System.out.println("ModifierEvent::::::");
         Evenement event = new Evenement();
         event.setId(evenementDto.getId());
 
         event.setTitre(evenementDto.getTitre());
         event.setDescription(evenementDto.getDescription());
         event.setAdresse(evenementDto.getAdresse());
+
         event.setDateDebut(evenementDto.getDateDebut());
+        System.out.println("event.getDateDebut()::::::" + event.getDateDebut());
+
         event.setDateFin(evenementDto.getDateFin());
+        System.out.println("event.getDateDebut()::::::" + event.getDateFin());
+
         event.setSponsors(evenementDto.getSponsors());
         event.setVille(evenementDto.getVille());
         event.setFrais(evenementDto.getFrais());
@@ -157,7 +162,7 @@ public class EvenementServiceImp implements EvenementService {
                 evenementDto.getBiens().get(i).setId(biens.get(i).getId());
             }
             bienDao.saveAllDao(evenementDto.getBiens());
-            if (evenementDto.getBiens().size() > biens.size() ) {
+            if (evenementDto.getBiens().size() > biens.size()) {
                 for (int i = biens.size(); i <= evenementDto.getBiens().size() - 1; i++) {
                     evenementDto.getBiens().get(i).setEvenement(e);
                     evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
@@ -165,8 +170,7 @@ public class EvenementServiceImp implements EvenementService {
                 bienDao.saveAllDao(evenementDto.getBiens());
 
             }
-        }
-        else if (biens.size() == 0) {
+        } else if (biens.size() == 0) {
             for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
 
                 evenementDto.getBiens().get(i).setEvenement(e);
@@ -183,7 +187,7 @@ public class EvenementServiceImp implements EvenementService {
                 evenementDto.getMissions().get(i).setId(missions.get(i).getId());
             }
             missionDao.saveAllMissionDao(evenementDto.getMissions());
-            if (evenementDto.getMissions().size() > missions.size() ) {
+            if (evenementDto.getMissions().size() > missions.size()) {
                 for (int i = missions.size(); i <= evenementDto.getMissions().size() - 1; i++) {
 
                     evenementDto.getMissions().get(i).setEvenement(e);
@@ -192,8 +196,7 @@ public class EvenementServiceImp implements EvenementService {
                 missionDao.saveAllMissionDao(evenementDto.getMissions());
 
             }
-        }
-        else if(missions.size()==0){
+        } else if (missions.size() == 0) {
             for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
 
 
@@ -207,23 +210,25 @@ public class EvenementServiceImp implements EvenementService {
         }
 
 
-
     }
 
     @Override
     public EvenementDto formulaireUpdate(Long id) {
+        System.out.println(" formulaireUpdate:::::");
+
         Evenement e = evenementDao.getEventDaoById(id);
+     //   System.out.println(" Evenement:::::" + e);
 
         EvenementDto evenementDto = new EvenementDto();
 
-        System.out.println(" e.getSponsors()    " + e.getSponsors());
+       // System.out.println(" e.getSponsors()    " + e.getSponsors());
 
         evenementDto.affectToEventDto(e);
-        System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
+       // System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
 
         List<Bien> biens = bienDao.findAllByEventDao(id);
         List<Mission> missions = missionDao.findAllMissionByEventDao(id);
-        System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
+      //  System.out.println("******biens.isEmpty()*****" + biens.isEmpty());
         if (biens.size() != 0) {
             for (int i = 0; i <= biens.size() - 1; i++) {
                 evenementDto.addBien(biens.get(i));
@@ -236,7 +241,7 @@ public class EvenementServiceImp implements EvenementService {
         if (missions.size() != 0) {
             for (int i = 0; i <= missions.size() - 1; i++) {
                 evenementDto.addMission(missions.get(i));
-                System.out.println("missionBenevoles.get(i)*******" + missions.get(i).getId());
+                //System.out.println("missionBenevoles.get(i)*******" + missions.get(i).getId());
 
 
             }
@@ -246,6 +251,7 @@ public class EvenementServiceImp implements EvenementService {
 
         }
 
+        System.out.println(" evenementDto.getDateDebut():::::" + evenementDto.getDateDebut());
 
         return evenementDto;
     }
