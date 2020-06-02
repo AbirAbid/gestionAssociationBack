@@ -89,6 +89,7 @@ public class EvenementServiceImp implements EvenementService {
         event.setCategorie(evenementDto.getCategorie());
 
 */
+        event.setFrais((double) 0);
         event = eventFromEventDto(evenementDto);
         Evenement e = evenementDao.addEventDao(event);
         /** for Affect  Sponsor ***/

@@ -118,13 +118,13 @@
                                                                     d'inscription</label>
                                                             </div>
                                                             <div class="col-md-8 col-6 "
-                                                                 th:if="${evenement.frais != null}"
+                                                                 th:if="${evenement.frais != 0}"
                                                                  th:text="${evenement.frais}">
 
                                                             </div>
 
                                                             <div class="col-md-8 col-6 "
-                                                                 th:if="${evenement.frais == null}">
+                                                                 th:if="${evenement.frais == 0}">
                                                                 <span class="badge badge-pill badge-danger">
                                                                     Événement gratuit </span>
 
