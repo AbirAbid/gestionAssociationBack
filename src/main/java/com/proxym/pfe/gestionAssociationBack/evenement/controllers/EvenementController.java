@@ -208,15 +208,16 @@ public class EvenementController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
-            String dateMin = format.format(new Date());
-            //  Date date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(dateMin);
+            String dateJourString = format.format(new Date());
+            Date dateJour = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateJourString);
+
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", evenements.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
-            //  model.addAttribute("dateJour", date1);
+            model.addAttribute("dateJour", dateJour);
             model.addAttribute("evenements", evenements);
             return "evenement/list-event";
         } catch (Exception e) {
@@ -290,6 +291,11 @@ public class EvenementController {
             model.addAttribute("userBiens", userBiensEvent);
             model.addAttribute("missions", missions);
             model.addAttribute("userMission", userMissionsEvent);
+
+            model.addAttribute("nbbiens", biens.size());
+            model.addAttribute("nbdonneurs", userBiensEvent.size());
+            model.addAttribute("nbmissions", missions.size());
+            model.addAttribute("nbbenevoles", userMissionsEvent.size());
 
 
             return "evenement/evenementDetail";

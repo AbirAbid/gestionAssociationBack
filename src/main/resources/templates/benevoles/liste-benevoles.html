@@ -42,7 +42,8 @@
                                     La liste des bénévoles est vide!!
                                 </div>
                             </div>
-                            <div th:if="${not #lists.isEmpty(userMissions)}">
+                            <div th:if="${nb!=0}">
+
                                 <div class="alert alert-success alert-dismissible fade show" role="alert"
                                      th:if="${message}">
                                     <strong th:text="${message}"></strong>
