@@ -151,17 +151,13 @@
                                             <div class="alert alert-danger alert-dismissible fade show"
                                                  role="alert">
                                                 La liste des missions est vide!!
-                                                <button type="button" class="close"
-                                                        data-dismiss="alert"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+
                                             </div>
 
 
                                         </div>
-                                        <div th:if="${not #lists.isEmpty(userMissions)}">
-                                            <table class="table table-active border">
+                                        <div th:if="${not #lists.isEmpty(userMissions)}" class="card">
+                                            <table class="table table-active border" id="tab1">
                                                 <thead>
                                                 <tr>
                                                     <th scope="col">Titre Mission</th>
@@ -200,32 +196,34 @@
                                             </div>
 
                                         </div>
-                                        <div th:if="${not #lists.isEmpty(userBiens)}">
-                                            <table class="table table-active border">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Titre Bien</th>
-                                                    <th scope="col">Quantité données</th>
-                                                    <th scope="col">Événement</th>
+                                        <div th:if="${not #lists.isEmpty(userBiens)}" class="card">
 
-                                                    <th scope="col">Date participation</th>
-                                                </tr>
-                                                </thead>
+                                                <table class="table table-active border" id="tab2">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Titre Bien</th>
+                                                        <th scope="col">Quantité données</th>
+                                                        <th scope="col">Événement</th>
 
-
-                                                <tbody th:each="p : ${userBiens}">
-
-                                                <tr>
-                                                    <td th:text="${p.bien.titreBien}"></td>
-                                                    <td th:text="${p.qteDonnee}"></td>
-                                                    <td th:text="${p.bien.evenement.titre}"></td>
-                                                    <td th:text="${p.dateParticipation}"></td>
+                                                        <th scope="col">Date participation</th>
+                                                    </tr>
+                                                    </thead>
 
 
-                                                </tr>
+                                                    <tbody >
 
-                                                </tbody>
-                                            </table>
+                                                    <tr th:each="p : ${userBiens}">
+                                                        <td th:text="${p.bien.titreBien}"></td>
+                                                        <td th:text="${p.qteDonnee}"></td>
+                                                        <td th:text="${p.bien.evenement.titre}"></td>
+                                                        <td th:text="${p.dateParticipation}"></td>
+
+
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+
                                         </div>
                                     </div>
                                 </div>
@@ -237,12 +235,13 @@
         </div>
 
 
-        <footer class="footer"> © 2020</footer>
+        <div th:insert="fragments/footer.html :: footerPage"></div>
 
     </div>
 
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/search_filter.js|"></script>
 
 </body>
 

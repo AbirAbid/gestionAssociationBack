@@ -165,14 +165,15 @@
                                         <div id="collapse2" class="collapse" aria-labelledby="headingTwo"
                                              data-parent="#accordian-3">
 
-                                            <div class="card-body pl-0" >
+                                            <div class="card-body pl-0">
                                                 <div th:if="${nbbiens==0}">
                                                     <div class="alert alert-danger" role="alert">
                                                         Cet événement ne contient pas des biens.
                                                     </div>
                                                 </div>
-                                                <table class="tablesaw  table-bordered table-hover table" th:if="${nbbiens!=0}"
-                                                       data-tablesaw-mode="stack">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       th:if="${nbbiens!=0}"
+                                                       data-tablesaw-mode="stack" id="tab1">
 
 
                                                     <thead>
@@ -248,14 +249,15 @@
                                         <div id="collapse3" class="collapse" aria-labelledby="headingThree"
                                              data-parent="#accordian-3">
 
-                                            <div class="card-body pl-0" >
+                                            <div class="card-body pl-0">
                                                 <div th:if="${nbmissions==0}">
                                                     <div class="alert alert-danger" role="alert">
                                                         Cet événement ne contient pas des missions bénévoles.
                                                     </div>
                                                 </div>
-                                                <table class="tablesaw  table-bordered table-hover table" th:if="${nbmissions!=0}"
-                                                       data-tablesaw-mode="stack">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       th:if="${nbmissions!=0}"
+                                                       data-tablesaw-mode="stack" id="tab2">
 
 
                                                     <thead>
@@ -310,8 +312,9 @@
                                                         Cet événement ne contient pas des donneurs.
                                                     </div>
                                                 </div>
-                                                <table class="tablesaw  table-bordered table-hover table"  th:if="${nbdonneurs!=0}"
-                                                       data-tablesaw-mode="stack">
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       th:if="${nbdonneurs!=0}"
+                                                       data-tablesaw-mode="stack" id="tab3">
 
 
                                                     <thead>
@@ -364,12 +367,13 @@
                                              data-parent="#accordian-3">
 
                                             <div class="card-body pl-0">
-                                                <div >
-                                                    <div class="alert alert-danger" role="alert">
+                                                <div>
+                                                    <div th:if="${nbbenevoles==0}"  class="alert alert-danger" role="alert">
                                                         Cet événement ne contient pas des bénévoles.
                                                     </div>
                                                 </div>
-                                                <table class="tablesaw  table-bordered table-hover table"  th:if="${nbbenevoles!=0}"
+                                                <table class="tablesaw  table-bordered table-hover table"
+                                                       th:if="${nbbenevoles!=0}" id="tab4"
                                                        data-tablesaw-mode="stack">
 
 
@@ -412,13 +416,15 @@
 
         </div>
 
-        <footer class="footer"> © 2020</footer>
+        <div th:insert="fragments/footer.html :: footerPage"></div>
 
     </div>
 
 
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/search_filter.js|"></script>
+
 </body>
 
 

@@ -309,7 +309,7 @@ $(document).ready(function () {
 /**Recherche **/
 $(document).ready(function () {
 
-    $('#example').DataTable({
+    $('#tab1').DataTable({
         "pagingType": "simple_numbers",
         "language": {
             "paginate": {
@@ -327,5 +327,60 @@ $(document).ready(function () {
             oSettings.oLanguage.sZeroRecords = "<center><span class=\"alert alert-warning\" >Désolé, votre recherche n'a retourné aucun résultat.</span> </center>"
         }
     });
+    $('#tab2').DataTable({
+        "pagingType": "simple_numbers",
+        "language": {
+            "paginate": {
+                "next": "Suivant",
+                "previous": "Précédent"
+            },
+            "search": "<strong> Rechercher </strong>",
+        },
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+
+        "fnInitComplete": function (oSettings) {
+            oSettings.oLanguage.sZeroRecords = "<center><span class=\"alert alert-warning\" >Désolé, votre recherche n'a retourné aucun résultat.</span> </center>"
+        }
+    });
+    $('#tab3').DataTable({
+        "pagingType": "simple_numbers",
+        "language": {
+            "paginate": {
+                "next": "Suivant",
+                "previous": "Précédent"
+            },
+            "search": "<strong> Rechercher </strong>",
+        },
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+
+        "fnInitComplete": function (oSettings) {
+            oSettings.oLanguage.sZeroRecords = "<center><span class=\"alert alert-warning\" >Désolé, votre recherche n'a retourné aucun résultat.</span> </center>"
+        }
+    });
+    $('#tab4').DataTable({
+        "pagingType": "simple_numbers",
+        "language": {
+            "paginate": {
+                "next": "Suivant",
+                "previous": "Précédent"
+            },
+            "search": "<strong> Rechercher </strong>",
+        },
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+
+        "fnInitComplete": function (oSettings) {
+            oSettings.oLanguage.sZeroRecords = "<center><span class=\"alert alert-warning\" >Désolé, votre recherche n'a retourné aucun résultat.</span> </center>"
+        }
+    });
+
 
 });
