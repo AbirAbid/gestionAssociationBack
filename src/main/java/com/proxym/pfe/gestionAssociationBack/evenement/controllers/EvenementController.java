@@ -200,7 +200,7 @@ public class EvenementController {
                            @RequestParam(name = "motCle", defaultValue = "") String mc) {
         try {
             Page<Evenement> evenements = evenementService.rehercherPageEvenementService("%" + mc + "%", new PageRequest(page, 5));
-
+List<Evenement>evenementsList =evenementService.listEventService();
             int pagesCount = evenements.getTotalPages();
             int[] pages = new int[pagesCount];
 
@@ -218,7 +218,7 @@ public class EvenementController {
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
             model.addAttribute("dateJour", dateJour);
-            model.addAttribute("evenements", evenements);
+            model.addAttribute("evenements", evenementsList);
             return "evenement/list-event";
         } catch (Exception e) {
             System.out.println(e);

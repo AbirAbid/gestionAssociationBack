@@ -61,29 +61,8 @@
                                 </button>
                             </div>
 
-                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
-                                <form th:action="@{list}" method="get">
-                                    <div class="md-form active-purple-2 mb-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
-                                                   placeholder="Rechercher">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary" type="submit">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                            <table  id="listevent" class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
 
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                     th:if="${ #lists.isEmpty(pageContent)}">
-                                    Aucun résultat pour <strong th:text="${mc}"></strong>
-                                    <a type="button" class="close" data-dismiss="alert"
-                                       aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </a>
-                                </div>
 
                                 <thead>
                                 <tr>
@@ -100,14 +79,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="event : ${evenements.content}">
+                                <tr th:each="event : ${evenements}">
                                     <td th:text="${event.id}"></td>
                                     <td>
                                         <th:block>
 
 
                                             <p th:text="${event.titre}" style="display: inline"></p>
-                                           <div th:if="${event.dateFin.before(dateJour)}" style="display: inline">
+                                            <div th:if="${event.dateFin.before(dateJour)}" style="display: inline">
                                                                 <span class="badge badge-dark">Passé
                                                                 </span>
                                             </div>
@@ -185,19 +164,22 @@
                                     </td>
                                 </tr>
                                 </tbody>
-                            </table>
-                            <center>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item" th:each="p : ${pages}"
-                                            th:class="${p==pageCourante}? 'page-item active': ''">
-                                            <!-- $ acceder model -->
-                                            <a class="page-link" th:text="${p}" th:href="@{list(page=${p})}"></a>
-                                        </li>
+                                <tfoot>
+                                <tr>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">ID</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Titre
 
-                                    </ul>
-                                </nav>
-                            </center>
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Date début</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Date fin</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Detail</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Modifier</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Supprimer</th>
+
+                                </tr>
+                                </tfoot>
+                            </table>
+
                         </div>
                     </div>
 
@@ -207,7 +189,7 @@
 
         </div>
 
-        <footer class="footer"> © 2020</footer>
+        <div th:insert="fragments/footer.html :: footerPage"></div>
 
     </div>
 
@@ -215,6 +197,7 @@
 </div>
 
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/search_filter.js|"></script>
 
 </body>
 
