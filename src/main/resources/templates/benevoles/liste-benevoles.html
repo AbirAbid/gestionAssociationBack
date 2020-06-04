@@ -58,7 +58,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
+                                <table id="tableBenevole" class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack" >
                                     <thead>
                                     <tr>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
@@ -80,9 +80,9 @@
                                     </thead>
 
 
-                                    <tbody th:each="p : ${userMissions}">
+                                    <tbody>
 
-                                    <tr>
+                                    <tr th:each="p : ${userMissions}">
                                         <td th:text="${p.user.nom}"></td>
                                         <td th:text="${p.user.prenom}"></td>
                                         <td th:text="${p.user.telephone}"></td>
@@ -119,20 +119,32 @@
                                     </tr>
 
                                     </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Tél</th>
+
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Titre Mission
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
+
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date
+                                            participation
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Affecter
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Libérer
+                                        </th>
+
+
+                                    </tr>
+                                    </tfoot>
                                 </table>
 
 
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item" th:each="p : ${pages}"
-                                            th:class="${p==pageCourante}? 'page-item active': ''">
-                                            <!-- $ acceder model -->
-                                            <a class="page-link" th:text="${p}"
-                                               th:href="@{listbenevoles(page=${p})}"></a>
-                                        </li>
-
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
 
@@ -142,14 +154,14 @@
 
             </div>
 
-            <footer class="footer"> © 2020</footer>
+            <div th:insert="fragments/footer.html :: footerPage"></div>
 
         </div>
 
     </div>
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
-
+<script th:src="|../js_files/search_filter.js|"></script>
 </body>
 
 
