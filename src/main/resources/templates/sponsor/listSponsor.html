@@ -55,109 +55,109 @@
                             <!--   <table name="customerTable" id="customerTable"
                                       class="display tablesaw  table-bordered table-hover table "
                                       data-tablesaw-mode="stack" width="100%" cellspacing="0">-->
-<!--
-                            <table name="customerTable" id="customerTable" class="display" width="100%" cellspacing="0">
+                            <!--
+                                                        <table name="customerTable" id="customerTable" class="display" width="100%" cellspacing="0">
 
-                                <thead>
-                                <tr>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de
-                                        l'entreprise
-                                    </th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
-                                   <th scope="col" data-tablesaw-priority="persist" class="border">Photo</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
-
-
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                   <th scope="col" data-tablesaw-priority="persist" class="border">Id
-                                    </th>
-
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de
-                                        l'entreprise
-                                    </th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col" data-tablesaw-priority="persist" class="border">Nom de
+                                                                    l'entreprise
+                                                                </th>
+                                                                <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
+                                                               <th scope="col" data-tablesaw-priority="persist" class="border">Photo</th>
+                                                                <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
+                                                                <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
 
 
-                                </tr>
+                                                            </tr>
+                                                            </thead>
+                                                            <tfoot>
+                                                            <tr>
+                                                               <th scope="col" data-tablesaw-priority="persist" class="border">Id
+                                                                </th>
 
-                                </tfoot>
-                                <tbody>
-                                &lt;!&ndash; <tr th:each="sponsor : ${sponsorlist}">
-
-                                     <td th:text="${sponsor.titreSponsor}"></td>
-                                     <td th:text="${sponsor.emailSponsor}"></td>
-                                     <td>
-                                         <img th:src="@{getPhoto(id=${sponsor.idSponsor})}" width="100" height="100">
-
-                                     </td>
-                                     <td>
-                                         <center><a class="btn btn-circle btn-info" title="Modifier"
-                                                    th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
-                                                 class="fas fa-edit"></i></a>
-                                         </center>
-                                     </td>
-                                     <td>
-                                         <center><a  class="btn btn-circle btn-danger" title="supprimer"
-                                                     onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
-                                                     th:href="@{supprimer(id=${sponsor.idSponsor})}"
-                                                     th:if="${sponsor.affecte == 0}"> <i
-                                                 class="fas fa-trash-alt"></i></a>
-                                                   <center>
+                                                                <th scope="col" data-tablesaw-priority="persist" class="border">Nom de
+                                                                    l'entreprise
+                                                                </th>
+                                                                <th scope="col" data-tablesaw-priority="persist" class="border"> Email</th>
 
 
-                                            <button type="button"   th:if="${sponsor.affecte == 0}"
-                                                    class="btn btn-circle btn-danger" data-toggle="modal"
-                                                    data-target="#exampleModal">
-                                                <i class="fas fa-trash-alt"></i></button>
-                                        </center>
+                                                            </tr>
 
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Effacer
-                                                            Cotisation</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Êtes-vous sûr de supprimer le sponsor ?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Fermer
-                                                        </button>
-                                                        <a type="button"
-                                                           class="btn  btn-danger" title="supprimer"
-                                                      th:href="@{supprimer(id=${sponsor.idSponsor})}">
-                                                            Supprimer</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                            </tfoot>
+                                                            <tbody>
+                                                            &lt;!&ndash; <tr th:each="sponsor : ${sponsorlist}">
 
-                                         </center>
+                                                                 <td th:text="${sponsor.titreSponsor}"></td>
+                                                                 <td th:text="${sponsor.emailSponsor}"></td>
+                                                                 <td>
+                                                                     <img th:src="@{getPhoto(id=${sponsor.idSponsor})}" width="100" height="100">
 
-                                         <center>
-                                         <a th:if="${sponsor.affecte == 1}" class="btn btn-circle btn-danger disabled"
-                                         ><i
-                                                 class="fas fa-trash-alt"></i></a>
-                                         </center>
-                                     </td>
+                                                                 </td>
+                                                                 <td>
+                                                                     <center><a class="btn btn-circle btn-info" title="Modifier"
+                                                                                th:href="@{formulaireUpdate(id=${sponsor.idSponsor})}"> <i
+                                                                             class="fas fa-edit"></i></a>
+                                                                     </center>
+                                                                 </td>
+                                                                 <td>
+                                                                     <center><a  class="btn btn-circle btn-danger" title="supprimer"
+                                                                                 onclick="return confirm('Êtes-vous sûr  de supprimer le sponsor?')"
+                                                                                 th:href="@{supprimer(id=${sponsor.idSponsor})}"
+                                                                                 th:if="${sponsor.affecte == 0}"> <i
+                                                                             class="fas fa-trash-alt"></i></a>
+                                                                               <center>
 
 
-                                 </tr>&ndash;&gt;
+                                                                        <button type="button"   th:if="${sponsor.affecte == 0}"
+                                                                                class="btn btn-circle btn-danger" data-toggle="modal"
+                                                                                data-target="#exampleModal">
+                                                                            <i class="fas fa-trash-alt"></i></button>
+                                                                    </center>
 
-                                </tbody>
-                            </table>
--->
+                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">Effacer
+                                                                                        Cotisation</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                                            aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    Êtes-vous sûr de supprimer le sponsor ?
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary"
+                                                                                            data-dismiss="modal">Fermer
+                                                                                    </button>
+                                                                                    <a type="button"
+                                                                                       class="btn  btn-danger" title="supprimer"
+                                                                                  th:href="@{supprimer(id=${sponsor.idSponsor})}">
+                                                                                        Supprimer</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                     </center>
+
+                                                                     <center>
+                                                                     <a th:if="${sponsor.affecte == 1}" class="btn btn-circle btn-danger disabled"
+                                                                     ><i
+                                                                             class="fas fa-trash-alt"></i></a>
+                                                                     </center>
+                                                                 </td>
+
+
+                                                             </tr>&ndash;&gt;
+
+                                                            </tbody>
+                                                        </table>
+                            -->
 
                             <table name="customerTable" id="customerTable" class="display" width="100%" cellspacing="0">
                                 <thead>
@@ -165,6 +165,9 @@
                                     <th>Id</th>
                                     <th>titre</th>
                                     <th>email</th>
+                                    <th>titre</th>
+                                    <th>email</th>
+
 
                                 </tr>
                                 </thead>
@@ -242,7 +245,62 @@
     display: table-header-group;
 }</style>-->
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script>
 
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/listSponsors",
+            success: function (result) {
+                $("#customerTable tbody").empty();
+
+                $.each(result, function (i, sponsor) {
+                    var customerRow = '<tr>' +
+                        '<td>' + sponsor.idSponsor + '</td>' +
+                        '<td>' + sponsor.titreSponsor + '</td>' +
+                        '<td>' + sponsor.emailSponsor + '</td>' +
+                        '<td><button class="btn btn-primary" Modifier</button></td>' +
+                        '<td> <button type="button"   th:if="${sponsor.affecte == 0}"class="btn btn-circle btn-danger" data-toggle="modal"data-target="#exampleModal"> <i class="fas fa-trash-alt"></i></button></td>' +
+                        '</tr>';
+
+                    $('#customerTable tbody').append(customerRow);
+
+                });
+                $('#customerTable tfoot th').each(function () {
+                    var title = $(this).text();
+                    $(this).html('<input type="text" placeholder="Rechercher ' + title + '" />');
+                });
+
+
+                // DataTables est un plug-in jQuery open-source permettant de dynamiser un tableau HTML
+                var otable = $('#customerTable').DataTable();
+
+                // Apply the search
+                otable.columns().every(function () {
+
+                    var that = this;
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+
+            },
+            error: function (e) {
+                alert("ERROR: ", e);
+                console.log("ERROR: ", e);
+            }
+        });
+
+
+    });
+
+
+</script>
 </body>
 
 

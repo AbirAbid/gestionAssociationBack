@@ -49,4 +49,9 @@ public class MembreDaoImp implements MembreDao {
         return userRepository.findByUsername(id);
     }
 
+    @Override
+    public List<User> getAllMembreDao() {
+        return userRepository.getMembreList();
+    }
+
 }

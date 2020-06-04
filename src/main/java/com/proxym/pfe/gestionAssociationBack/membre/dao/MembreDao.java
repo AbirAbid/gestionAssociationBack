@@ -20,4 +20,6 @@ public interface MembreDao {
   //  User getOneMembreDao(Long id);
     User getOneMembreDao(String id);
 
+    List<User> getAllMembreDao();
+
 }

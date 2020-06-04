@@ -17,7 +17,7 @@ public class MembreServiceImp implements MembreService {
 
     @Override
     public List<User> getAllMembreService() {
-        return membreDao.getAllUserDao();
+        return membreDao.getAllMembreDao();
     }
 
     @Override

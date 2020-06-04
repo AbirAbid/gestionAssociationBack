@@ -9,14 +9,12 @@
 
     <script src="/webjars/html5shiv/3.7.0/html5shiv.min.js"></script>
 
-    <!--<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-            crossorigin="anonymous"></script>-->
-    <script defer src="/webjars/font-awesome/5.0.13/svg-with-js/js/fontawesome-all.js"></script>
+      <script defer src="/webjars/font-awesome/5.0.13/svg-with-js/js/fontawesome-all.js"></script>
     <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
 
 
     <script src="/webjars/datatables/1.10.7/js/jquery.dataTables.min.js">
+
 
     </script>
     <script>
@@ -52,63 +50,7 @@
             });
         });
     </script>
-    <script>
 
-
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "/listSponsors",
-                success: function (result) {
-                    $("#customerTable tbody").empty();
-
-                    $.each(result, function (i, sponsor) {
-                        var customerRow = '<tr>' +
-                            '<td>' + sponsor.idSponsor + '</td>' +
-                            '<td>' + sponsor.titreSponsor + '</td>' +
-                            '<td>' + sponsor.emailSponsor + '</td>' +
-                            '<td><button class="btn btn-primary" ' +
-                            '               ng-click="update(sponsor)">Modifier</button></td>' +
-                            '<td><button class="btn btn-danger">Supprimer</button></td>' +
-                            '</tr>';
-
-                        $('#customerTable tbody').append(customerRow);
-
-                    });
-                    $('#customerTable tfoot th').each(function () {
-                        var title = $(this).text();
-                        $(this).html('<input type="text" placeholder="Rechercher ' + title + '" />');
-                    });
-
-
-                    // DataTables est un plug-in jQuery open-source permettant de dynamiser un tableau HTML
-                    var otable = $('#customerTable').DataTable();
-
-                    // Apply the search
-                    otable.columns().every(function () {
-
-                        var that = this;
-                        $('input', this.footer()).on('keyup change', function () {
-                            if (that.search() !== this.value) {
-                                that
-                                    .search(this.value)
-                                    .draw();
-                            }
-                        });
-                    });
-
-                },
-                error: function (e) {
-                    alert("ERROR: ", e);
-                    console.log("ERROR: ", e);
-                }
-            });
-
-
-        });
-
-
-    </script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
@@ -121,11 +63,6 @@
     <script src="/webjars/sticky-kit/1.1.2/jquery.sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="/js/custom.min.js"></script>
-
-    <!--Script Email -->
-
-    <!--<script src="/webjars/bootstrap3-wysihtml5-bower/0.3.0/dist/bootstrap3-wysihtml5.js"></script>
-    <script src="/webjars/bootstrap3-wysihtml5-bower/0.3.0/dist/bootstrap3-wysihtml5.all.js"></script>-->
 
 
 </div>

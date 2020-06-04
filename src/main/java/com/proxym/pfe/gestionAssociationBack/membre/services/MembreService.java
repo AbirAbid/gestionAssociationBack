@@ -18,4 +18,6 @@ public interface MembreService {
     void modifierMembreService(User user);
 
     User getOneMembreService(String id);
+//    List<User> getAllMembreService();
+
 }

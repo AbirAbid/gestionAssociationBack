@@ -45,43 +45,26 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
-                                <form th:action="@{listeMembres}" method="get">
-                                    <div class="md-form active-purple-2 mb-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
-                                                   placeholder="Rechercher">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary" type="submit">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
 
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                     th:if="${ #lists.isEmpty(pageContent)}">
-                                    Aucun résultat pour <strong th:text="${mc}"></strong>
-                                    <a type="button" class="close" data-dismiss="alert"
-                                       aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </a>
-                                </div>
+                            <table id="tableau" class="tablesaw  table-bordered table-hover table"
+                                   data-tablesaw-mode="stack">
+
                                 <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th> Prénom</th>
-                                    <th> Adhérent</th>
-                                    <th> Téléphone</th>
-                                <th> Email</th>
-                                    <th> Statut</th>
-                                    <th>Envoyer Email</th>
-                                    <th>Profil</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Prénom</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Adhérent</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Téléphone</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Email</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Statut</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Envoyer Email</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Profil</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
-                                <tr th:each="membre : ${pagesMembres.content}">
+
+                                <tr th:each="membre : ${pagesMembres}">
                                     <td th:text="${membre.nom}"></td>
                                     <td th:text="${membre.prenom}"></td>
                                     <td> Adhérent</td>
@@ -94,7 +77,8 @@
                                                 <div class="progress-bar bg-danger wow animated progress-animated"
                                                      th:style="'width:'+@{${membre.tauxEchange}}+'%; height:15px;'"
                                                      role="progressbar">
-                                                    <span style="color: #000000" th:text="${{membre.tauxEchange}}"></span>
+                                                    <span style="color: #000000"
+                                                          th:text="${{membre.tauxEchange}}"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,24 +90,35 @@
                                         </center>
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-secondary"
+                                        <center><a class="btn btn-circle btn-success"
                                                    th:href="@{membreDetailUrl(id=${membre.username})}">
-                                            <i class="fas fa-portrait"></i></a></center>
+                                            <i class="fas fa-eye"></i></a></center>
                                     </td>
                                 </tr>
                                 </tbody>
-                            </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item" th:each="p : ${pages}"
-                                        th:class="${p==pageCourante}? 'page-item active': ''">
-                                        <!-- $ acceder model -->
-                                        <a class="page-link" th:text="${p}"
-                                           th:href="@{listeMembres(page=${p})}"></a>
-                                    </li>
+                                <tfoot>
+                                <tr>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Adhérent</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Téléphone</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Email</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Statut
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Envoyer Email
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Profil
+                                    </th>
 
-                                </ul>
-                            </nav>
+
+                                </tr>
+
+                                </tfoot>
+                            </table>
+
                         </div>
                     </div>
 
@@ -137,9 +132,8 @@
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- footer -->
-        <!-- ============================================================== -->
-        <footer class="footer"> © 2020</footer>
-        <!-- ============================================================== -->
+        <div th:insert="fragments/footer.html :: footerPage"></div>
+
         <!-- End footer -->
         <!-- ============================================================== -->
     </div>
@@ -148,8 +142,8 @@
     <!-- ============================================================== -->
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/search_filter.js|"></script>
 
 </body>
-
 
 </html>

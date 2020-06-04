@@ -37,7 +37,7 @@ public class MembreController {
     public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "motCle", defaultValue = "") String mc) {
         try {
-            Page<User> pagesMembresRech = membreService.rehercherPageMembreService("%" + mc + "%", new PageRequest(page, 5));
+            Page<User> pagesMembresRech = membreService.rehercherPageMembreService("%" + mc + "%", new PageRequest(page, 2));
             //Page<User> pagesMembres = membreService.findAllMembreService(new PageRequest(page, 5));
             //pour compter nombre des pages************
             int pagesCount = pagesMembresRech.getTotalPages();
@@ -47,13 +47,17 @@ public class MembreController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
+            List<User>users=membreService.getAllMembreService();
 
             //**********************
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", pagesMembresRech.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
-            model.addAttribute("pagesMembres", pagesMembresRech);
+          //  model.addAttribute("pagesMembres", pagesMembresRech);
+            model.addAttribute("pagesMembres", users);
+
+
 
             return "membres/membresListe";
         } catch (Exception e) {
