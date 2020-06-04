@@ -41,52 +41,62 @@
                                 </div>
                             </div>
                             <div th:if="${nb!=0}">
-                                <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
+                                <table id="tableDonneurs" class="tablesaw  table-bordered table-hover table"
+                                       data-tablesaw-mode="stack">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Titre bien</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
+
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date
+                                            participation
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Quantité
+                                            données
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+
+                                    <tbody>
+
+                                    <tr th:each="p : ${userBiens}">
+                                        <td th:text="${p.user.nom}"></td>
+                                        <td th:text="${p.user.prenom}"></td>
+                                        <td th:text="${p.bien.titreBien}"></td>
+                                        <td th:text="${p.bien.evenement.titre}"></td>
+
+
+                                        <td th:text="${p.dateParticipation}"></td>
+                                        <td style="text-align:center"><span class="label label-rounded label-danger"
+                                                                            th:text="${p.qteDonnee}"></span></td>
+
+                                    </tr>
+
+                                    </tbody>
+                                    <tfoot>
 
                                     <tr>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Titre bien</th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Quantité
-                                            données
-                                        </th>
-
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Date
                                             participation
                                         </th>
-                                    </tr>
-
-
-
-                                    <tbody th:each="p : ${userBiens}">
-
-                                    <tr>
-                                        <td th:text="${p.user.nom}"></td>
-                                        <td th:text="${p.user.prenom}"></td>
-                                        <td th:text="${p.bien.titreBien}"></td>
-                                        <td th:text="${p.bien.evenement.titre}"></td>
-
-                                        <td style="text-align:center"><span class="label label-rounded label-danger" th:text="${p.qteDonnee}" ></span></td>
-                                        <td th:text="${p.dateParticipation}"></td>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Quantité
+                                            données
+                                        </th>
 
 
                                     </tr>
-
-                                    </tbody>
+                                    </tfoot>
                                 </table>
 
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item" th:each="p : ${pages}"
-                                            th:class="${p==pageCourante}? 'page-item active': ''">
-                                            <!-- $ acceder model -->
-                                            <a class="page-link" th:text="${p}"
-                                               th:href="@{listDonneurs(page=${p})}"></a>
-                                        </li>
 
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
 
@@ -96,14 +106,14 @@
 
             </div>
 
-            <footer class="footer"> © 2020 </footer>
-
+            <div th:insert="fragments/footer.html :: footerPage"></div>
         </div>
 
     </div>
 </div>
 
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/search_filter.js|"></script>
 
 </body>
 
