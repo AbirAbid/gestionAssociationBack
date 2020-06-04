@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/cotisations/")
@@ -85,8 +86,10 @@ public class CotisationController {
             pages[i] = i;
             System.out.println(" pages[i] " + pages[i]);
         }
+         List<Cotisation> cotisationList = cotisationService.listCotisationServ();
+
         model.addAttribute("pages", pages);
-        model.addAttribute("pagesCotisations", pagesCotisations);
+        model.addAttribute("pagesCotisations", cotisationList);
         model.addAttribute("pageCourante", page);
         model.addAttribute("pageContent", pagesCotisations.getContent());
         model.addAttribute("mc", mc);

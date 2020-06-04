@@ -58,31 +58,9 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <table class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
-
-                                <form th:action="@{listCotisation}" method="get">
-                                    <div class="md-form active-purple-2 mb-3">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="motCle" th:value="${mc}"
-                                                   placeholder="Rechercher">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-secondary" type="submit">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </form>
-
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                     th:if="${ #lists.isEmpty(pageContent)}">
-                                    Aucun résultat pour <strong th:text="${mc}"></strong>
-                                    <a type="button" class="close" data-dismiss="alert"
-                                       aria-label="Close" href="/membres/listeMembres">
-                                        <span aria-hidden="true">&times;</span>
-                                    </a>
-                                </div>
+                            <table id="tableCotisation" class="tablesaw  table-bordered table-hover table"
+                                   data-tablesaw-mode="stack">
+                                <thead>
                                 <tr>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Nom de la
                                         cotisation
@@ -93,10 +71,10 @@
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
                                 </tr>
-
+                                </thead>
                                 <tbody>
 
-                                <tr th:each="cotisation : ${pagesCotisations.content}">
+                                <tr th:each="cotisation : ${pagesCotisations}">
 
                                     <td th:text="${cotisation.cotisationName}"></td>
                                     <td th:text="${cotisation.montant}"></td>
@@ -111,7 +89,7 @@
                                     </td>
                                     <td>
 
-                                        <button type="button"  class="btn btn-circle btn-danger" data-toggle="modal"
+                                        <button type="button" class="btn btn-circle btn-danger" data-toggle="modal"
                                                 data-target="#exampleModal">
                                             <i class="fas fa-trash-alt"></i></button>
 
@@ -121,7 +99,8 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Effacer Cotisation</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Effacer
+                                                            Cotisation</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -148,18 +127,20 @@
 
                                 </tr>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de la
+                                        cotisation
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Montant</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Date Début</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Date Fin</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Modifier</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Supprimer</th>
+                                </tr>
+                                </tfoot>
                             </table>
 
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item" th:each="p : ${pages}"
-                                        th:class="${p==pageCourante}? 'page-item active': ''">
-                                        <!-- $ acceder model -->
-                                        <a class="page-link" th:text="${p}" th:href="@{listCotisation(page=${p})}"></a>
-                                    </li>
-
-                                </ul>
-                            </nav>
                         </div>
                     </div>
 
@@ -175,6 +156,7 @@
 
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+<script th:src="|../js_files/search_filter.js|"></script>
 
 </body>
 

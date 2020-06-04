@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+
 <head th:insert="fragments/head :: head_part">
 
 <body class="logo-center card-no-border fix-sidebar">
@@ -8,6 +10,7 @@
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>
 </div>
+
 
 <div id="main-wrapper">
 
@@ -61,7 +64,8 @@
                                 </button>
                             </div>
 
-                            <table  id="listevent" class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack">
+                            <table id="listevent" class="tablesaw  table-bordered table-hover table"
+                                   data-tablesaw-mode="stack">
 
 
                                 <thead>
@@ -172,9 +176,15 @@
                                     </th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date début</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date fin</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Detail</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Modifier</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">Supprimer</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Detail
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Modifier
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Supprimer
+                                    </th>
 
                                 </tr>
                                 </tfoot>
@@ -194,7 +204,7 @@
     </div>
 
 </div>
-</div>
+
 
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 <script th:src="|../js_files/search_filter.js|"></script>
