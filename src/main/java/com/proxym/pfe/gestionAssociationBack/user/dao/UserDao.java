@@ -29,6 +29,7 @@ public interface UserDao {
     List<User> getAllDonneursDao();
     List<User> getAllBenevolesDao();
 
+    Long UserCountDao();
 
 
 

@@ -11,7 +11,9 @@ public interface EvenementDao {
     Evenement addEventDao(Evenement event);
 
     List<Evenement> listEventDao();
+
     Optional<Evenement> findEventDaoById(Long id);
+
     Evenement getEventDaoById(Long id);
 
     void supprimerEventDao(Long id);

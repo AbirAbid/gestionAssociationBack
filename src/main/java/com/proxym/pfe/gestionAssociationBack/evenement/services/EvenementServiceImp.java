@@ -4,11 +4,14 @@ import com.proxym.pfe.gestionAssociationBack.biens.dao.BienDao;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
+import com.proxym.pfe.gestionAssociationBack.membre.dao.MembreDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.sponsors.dao.SponsorDao;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
+import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +32,8 @@ public class EvenementServiceImp implements EvenementService {
     MissionDao missionDao;
     @Autowired
     SponsorDao sponsorDao;
+    @Autowired
+    MembreDao membreDao;
 
 
     @Override
@@ -75,20 +80,7 @@ public class EvenementServiceImp implements EvenementService {
     public void AjouterEvent(@Valid EvenementDto evenementDto) {
 
         Evenement event = new Evenement();
-    /*  event.setId(evenementDto.getId());
 
-        event.setTitre(evenementDto.getTitre());
-        event.setDescription(evenementDto.getDescription());
-        event.setAdresse(evenementDto.getAdresse());
-        event.setDateDebut(evenementDto.getDateDebut());
-        event.setDateFin(evenementDto.getDateFin());
-        event.setSponsors(evenementDto.getSponsors());
-        event.setVille(evenementDto.getVille());
-        event.setFrais(evenementDto.getFrais());
-        event.setActive(evenementDto.getActive());
-        event.setCategorie(evenementDto.getCategorie());
-
-*/
         event.setFrais((double) 0);
         event = eventFromEventDto(evenementDto);
         Evenement e = evenementDao.addEventDao(event);
@@ -125,23 +117,7 @@ public class EvenementServiceImp implements EvenementService {
 
     @Override
     public void ModifierEvent(@Valid EvenementDto evenementDto) {
-        System.out.println("ModifierEvent::::::");
-        Evenement event = new Evenement();
-       /* event.setId(evenementDto.getId());
-
-        event.setTitre(evenementDto.getTitre());
-        event.setDescription(evenementDto.getDescription());
-        event.setAdresse(evenementDto.getAdresse());
-
-        event.setDateDebut(evenementDto.getDateDebut());
-
-        event.setDateFin(evenementDto.getDateFin());
-
-        event.setSponsors(evenementDto.getSponsors());
-        event.setVille(evenementDto.getVille());
-        event.setFrais(evenementDto.getFrais());
-        event.setActive(evenementDto.getActive());*/
-        event = eventFromEventDto(evenementDto);
+        Evenement event = eventFromEventDto(evenementDto);
 
         Evenement e = evenementDao.addEventDao(event);
         /** for Affect  Sponsor ***/
@@ -215,19 +191,28 @@ public class EvenementServiceImp implements EvenementService {
     }
 
     @Override
+    public EventCountElmtsDto getElementNumber() {
+        try {
+            EventCountElmtsDto eventCountElmtsDto = new EventCountElmtsDto();
+            eventCountElmtsDto.setNombreEvents(evenementDao.listEventDao().size());
+            eventCountElmtsDto.setNombreMissions(missionDao.findAllMissionDao().size());
+            eventCountElmtsDto.setNombreSponsors(sponsorDao.findAllSponsorDao().size());
+            eventCountElmtsDto.setNombreMembres(membreDao.getAllMembreDao().size());
+
+            return eventCountElmtsDto;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+
+    }
+
+    @Override
     public EvenementDto formulaireUpdate(Long id) {
-        System.out.println(" formulaireUpdate:::::");
-
         Evenement e = evenementDao.getEventDaoById(id);
-        //   System.out.println(" Evenement:::::" + e);
-
         EvenementDto evenementDto = new EvenementDto();
-
-        // System.out.println(" e.getSponsors()    " + e.getSponsors());
-
         evenementDto.affectToEventDto(e);
-        // System.out.println(" evenementDto().getSponsors()    " + evenementDto.getSponsors());
-
         List<Bien> biens = bienDao.findAllByEventDao(id);
         List<Mission> missions = missionDao.findAllMissionByEventDao(id);
         //  System.out.println("******biens.isEmpty()*****" + biens.isEmpty());

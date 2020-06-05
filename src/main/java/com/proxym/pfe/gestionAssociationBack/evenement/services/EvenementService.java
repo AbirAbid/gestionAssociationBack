@@ -1,6 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.services;
 
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,9 +25,13 @@ public interface EvenementService {
     Page<Evenement> rehercherPageEvenementService(String mc, PageRequest pageRequest);
 
     Optional<Evenement> findEventByIdService(Long id);
+
     void AjouterEvent(@Valid EvenementDto evenementDto);
+
     EvenementDto formulaireUpdate(Long id);
+
     void ModifierEvent(@Valid EvenementDto evenementDto);
 
+    EventCountElmtsDto getElementNumber();
 
 }

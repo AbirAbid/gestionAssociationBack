@@ -21,5 +21,4 @@ public interface SponsorDao {
 
     Sponsor getOneDao(Long id);
 
-
 }

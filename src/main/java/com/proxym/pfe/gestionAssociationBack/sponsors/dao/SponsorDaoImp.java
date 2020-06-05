@@ -51,4 +51,6 @@ public class SponsorDaoImp implements SponsorDao {
     public Sponsor getOneDao(Long id) {
         return sponsorRepository.getOne(id);
     }
+
+
 }

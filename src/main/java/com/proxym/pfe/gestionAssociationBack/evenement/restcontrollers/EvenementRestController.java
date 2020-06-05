@@ -1,5 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.restcontrollers;
 
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,16 @@ public class EvenementRestController {
     public Optional<Evenement> getEventById(@PathVariable("id") long id) {
         try {
             return evenementService.findEventByIdService(id);
+        } catch (Exception ex) {
+            System.out.println("Exception " + ex.getMessage());
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/countElements", method = RequestMethod.GET)
+    public EventCountElmtsDto getCount() {
+        try {
+            return evenementService.getElementNumber();
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;

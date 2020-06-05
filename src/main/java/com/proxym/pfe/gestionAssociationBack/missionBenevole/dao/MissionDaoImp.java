@@ -49,4 +49,5 @@ public class MissionDaoImp implements MissionDao {
     public Mission findMissionByIdDao(Long id) {
         return missionRepository.getOne(id);
     }
+
 }

@@ -43,11 +43,7 @@ public class UserDaoImp implements UserDao {
         return userRepository.existsByUsername(username);
     }
 
-    /*  @Override
-      public Boolean existsByEmailDao(String email) {
-          return userRepository.existsByEmail(email);
-      }
-  */
+
     @Override
     public User saveUserDao(User user) {
         user.setTauxEchange(calculTauxParticipation(user) * 100);
@@ -67,6 +63,12 @@ public class UserDaoImp implements UserDao {
     @Override
     public List<User> getAllBenevolesDao() {
         return userRepository.findAllByUserMissionsIsNotNull();
+    }
+
+    @Override
+    public Long UserCountDao() {
+     //   return userRepository.countAllById();
+        return null;
     }
 
     /******calcul taux de participaion**********/
