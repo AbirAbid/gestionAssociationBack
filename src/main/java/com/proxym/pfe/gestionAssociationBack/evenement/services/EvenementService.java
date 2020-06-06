@@ -33,5 +33,6 @@ public interface EvenementService {
     void ModifierEvent(@Valid EvenementDto evenementDto);
 
     EventCountElmtsDto getElementNumber();
+    void TauxEchangeForAllUser();
 
 }

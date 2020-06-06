@@ -12,6 +12,7 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.sponsors.dao.SponsorDao;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,11 +35,15 @@ public class EvenementServiceImp implements EvenementService {
     SponsorDao sponsorDao;
     @Autowired
     MembreDao membreDao;
+    @Autowired
+    UserDao userDao;
 
 
     @Override
     public Evenement addEventService(Evenement evenement) {
+
         return evenementDao.addEventDao(evenement);
+
     }
 
     @Override
@@ -241,6 +246,14 @@ public class EvenementServiceImp implements EvenementService {
         System.out.println(" evenementDto.getDateDebut():::::" + evenementDto.getDateDebut());
 
         return evenementDto;
+    }
+
+    @Override
+    public void TauxEchangeForAllUser() {
+        List<User> users = membreDao.getAllMembreDao();
+        for (int i = 0; i < users.size(); i++) {
+            userDao.saveUserDao(users.get(i));
+        }
     }
 
     Evenement eventFromEventDto(EvenementDto evenementDto) {

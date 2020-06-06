@@ -104,7 +104,7 @@ public class EvenementController {
             System.out.println("evenementDto::::" + evenementDto);
             evenementService.AjouterEvent(evenementDto);
 
-
+            evenementService.TauxEchangeForAllUser();
             redirectAttributes.addFlashAttribute("message", " Votre événement a été ajouté avec succès ");
 
             return "redirect:list";
@@ -196,27 +196,16 @@ public class EvenementController {
     /*********************************List Page  Event****************************/
 
     @GetMapping(value = "/list")
-    public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                           @RequestParam(name = "motCle", defaultValue = "") String mc) {
+    public String showList(Model model) {
         try {
-            Page<Evenement> evenements = evenementService.rehercherPageEvenementService("%" + mc + "%", new PageRequest(page, 5));
-List<Evenement>evenementsList =evenementService.listEventService();
-            int pagesCount = evenements.getTotalPages();
-            int[] pages = new int[pagesCount];
+            List<Evenement> evenementsList = evenementService.listEventService();
 
-            for (int i = 0; i < pagesCount; i++) {
-                pages[i] = i;
-                System.out.println(" pages[i] " + pages[i]);
-            }
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
             String dateJourString = format.format(new Date());
             Date dateJour = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateJourString);
 
-            model.addAttribute("pageCourante", page);
-            model.addAttribute("pageContent", evenements.getContent());
-            model.addAttribute("mc", mc);
-            model.addAttribute("pages", pages);
+
             model.addAttribute("dateJour", dateJour);
             model.addAttribute("evenements", evenementsList);
             return "evenement/list-event";
