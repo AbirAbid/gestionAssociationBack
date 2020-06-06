@@ -2,8 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.user.dao;
 
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.repositories.EventRepositories;
-import com.proxym.pfe.gestionAssociationBack.staticPackage.TauxEngagementDao;
-import com.proxym.pfe.gestionAssociationBack.staticPackage.TauxEngagementDaoImp;
+
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,7 @@ public class UserDaoImp implements UserDao {
     UserRepository userRepository;
     @Autowired
     EventRepositories eventRepositories;
-    @Autowired
-    TauxEngagementDao tauxEngagementDao;
+
 
     @Override
     public User signinDao(String username) {
