@@ -72,29 +72,13 @@ public class SponsorController {
     public String listsponsor(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                         @RequestParam(name = "motCle", defaultValue = "") String mc) {
         List<Sponsor>  sponsorList=sponsorService.findAllSponsorServ();
-        //cherche moi un paam page à dispa servlet initialement page0
-       /* Page<Sponsor> pagesSponsors = sponsorService.rehercherPageSponsorSrv("%" + mc + "%", new PageRequest(page, 5));
-        System.out.println("pagesSponsors" + pagesSponsors.getContent());
 
-        int pagesCount = pagesSponsors.getTotalPages();
-        int[] pages = new int[pagesCount];
-
-        for (int i = 0; i < pagesCount; i++) {
-            pages[i] = i;
-            System.out.println(" pages[i] " + pages[i]);
-        }
-        model.addAttribute("pages", pages);
-        model.addAttribute("pagesSponsors", pagesSponsors);
-        model.addAttribute("pageCourante", page);
-        model.addAttribute("pageContent", pagesSponsors.getContent());
-        model.addAttribute("mc", mc);*/
         model.addAttribute("sponsorlist", sponsorList);
 
         return "sponsor/listSponsor";
     }
 
     @RequestMapping(value = "/getPhoto", produces = MediaType.IMAGE_JPEG_VALUE)
-    //@ResponseBody resultat va etre envoyer corps de la reponse
     @ResponseBody
     public byte[] getPhoto(Long id) throws Exception {
         return sponsorService.getPhotoService(id);
@@ -121,7 +105,7 @@ public class SponsorController {
 
                 return "sponsor/modifierSponsor";
             }
-            // pou n'est pas ecraser le meme nom
+            // pour n'est pas ecraser the same name
 
 
             sponsorService.saveSponsorService(sponsor, file);
