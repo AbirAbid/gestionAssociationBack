@@ -1,5 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.controllers;
 
+import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
+import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
@@ -28,6 +30,8 @@ public class MissionController {
     UserService userService;
     @Autowired
     MissionService missionService;
+    @Autowired
+    MembreService membreService;
 
 
     @RequestMapping(value = "/listbenevoles")
@@ -42,7 +46,7 @@ public class MissionController {
         for (int i = 0; i < pagesCount; i++) {
             pages[i] = i;
             System.out.println(" pages[i] " + pages[i]);
-            System.out.println(" userMissions.getSize() " +userMissions.getSize());
+            System.out.println(" userMissions.getSize() " + userMissions.getSize());
 
         }
         model.addAttribute("pageCourante", page);
@@ -152,5 +156,36 @@ public class MissionController {
         return userMissions1;
     }
 
+    /***send email*****/
+    @RequestMapping(value = "/sendmailUrL")
+    public String sendMail(Model model, String id) {
+
+        try {
+            MailToSend mailToSend = new MailToSend();
+            mailToSend.setReceiver(id);
+            model.addAttribute("mailSend", mailToSend);
+
+            return "benevoles/benevolesSendMail";
+        } catch (Exception e) {
+            return "pagesError/error";
+        }
+
+
+    }
+
+    @RequestMapping(value = "/sendHtmlEmailUrl")
+    public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
+        try {
+
+            membreService.sendMailMembre(mailToSend);
+            redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
+
+            return "redirect:/mission/listbenevoles";
+        } catch (Exception e) {
+            System.out.println("Exception  " + e);
+            return "pagesError/error";
+        }
+
+    }
 
 }

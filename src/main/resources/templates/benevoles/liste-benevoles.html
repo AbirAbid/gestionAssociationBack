@@ -37,6 +37,13 @@
                         </div>
 
                         <div class="card-body  text-black">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${sendMailMessage}">
+                                <strong th:text="${sendMailMessage}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div th:if="${nb==0}">
                                 <div class="alert alert-danger" role="alert">
                                     La liste des bénévoles est vide!!
@@ -72,6 +79,9 @@
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Date
                                             participation
                                         </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                            Envoyer Email
+                                        </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Affecter</th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Libérer</th>
 
@@ -92,14 +102,20 @@
 
                                         <td th:text="${p.demandeDate}"></td>
                                         <td>
+                                            <center><a class="btn btn-circle btn-info"
+                                                       th:href="@{sendmailUrL(id=${p.user.username})}">
+                                                <i class="far fa-envelope"></i></a>
+                                            </center>
+                                        </td>
+                                        <td>
 
-                                            <a th:if="${p.affected == 0}" class="btn btn-circle btn-info"
+                                            <a th:if="${p.affected == 0}" class="btn btn-circle btn-success"
                                                title="affecter"
                                                th:href="@{affectMissionUrl(username=${p.user.username},id=${p.mission.id})}">
                                                 <i class="far fa-check-circle"></i></a>
 
 
-                                            <a th:if="${p.affected == 1}" class="btn btn-circle btn-info disabled"
+                                            <a th:if="${p.affected == 1}" class="btn btn-circle btn-success disabled"
                                                title="affecter"
                                             >
                                                 <i class="far fa-check-circle"></i></a>
@@ -131,6 +147,9 @@
 
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Date
                                             participation
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Envoyer Email
                                         </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
                                             Affecter

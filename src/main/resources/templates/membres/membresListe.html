@@ -17,14 +17,9 @@
     <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
 
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="row page-titles">
+              <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
                     <h3 class="text-themecolor mb-0 mt-0">Ma communauté</h3>
 
@@ -68,7 +63,7 @@
                                 <tr th:each="membre : ${pagesMembres}">
                                     <td th:text="${membre.nom}"></td>
                                     <td th:text="${membre.prenom}"></td>
-                                    <td> Adhérent</td>
+                                    <td><center> <span class=" fas fa-star" style="color: #ff0020"></span></center></td>
                                     <td th:text="${membre.telephone}"></td>
                                     <td th:text="${membre.username}"></td>
                                     <td>

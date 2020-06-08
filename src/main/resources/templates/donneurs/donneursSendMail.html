@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head_part">
+
+<body class="logo-center card-no-border fix-sidebar">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
+
+<div id="main-wrapper">
+
+    <div th:insert="fragments/top_bar.html :: topbar"></div>
+
+    <div th:insert="fragments/sidebar.html :: left_sidebar"></div>
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="text-themecolor mb-0 mt-0">Envoyer Email</h3>
+                    <ol class="breadcrumb">
+                        <li><a href="/bien/listDonneurs">Liste des donneurs  <span class=" fas fa-angle-right"></span>
+                        </a></li>
+                        <li> &nbsp; Envoyer Email </li>
+                    </ol>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- Card -->
+                    <form th:action="@{/bien/sendHtmlEmailUrl}"
+                          th:object="${mailSend}"
+                          method="post">
+
+                        <div class="card ">
+                            <div class="card-header text-center">
+                                <h4 class="card-title"><span class="far fa-envelope"></span> Envoyer Email</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <h3 class="card-title">Nouveau message</h3>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="À:" th:field="*{receiver}">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Objet:" th:field="*{object}">
+                                </div>
+                                <div class="form-group">
+                                <textarea class="textarea_editor form-control" rows="15" th:field="*{textToSend}"
+                                          placeholder="Entrer text ..."></textarea>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-rounded btn-info">Envoyer
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer"> © 2020</footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
+<div th:insert="fragments/script_footer.html ::scriptFooter"></div>
+
+<script src="/webjars/wysihtml5/0.3.0/dist/wysihtml5-0.3.0.js"></script>
+<script th:src="|../js_files/bootstrap_wysihtml5.js|"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('.textarea_editor').wysihtml5();
+
+    });
+</script>
+
+</body>
+
+
+</html>

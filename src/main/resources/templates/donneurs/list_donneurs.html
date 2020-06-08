@@ -34,7 +34,13 @@
                             <h4 class="card-title"><span class="fas fa-gift"></span> Liste des donneurs</h4>
                         </div>
                         <div class="card-body  text-black">
-
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${sendMailMessage}">
+                                <strong th:text="${sendMailMessage}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div th:if="${nb==0}">
                                 <div class="alert alert-danger" role="alert">
                                     La liste des dons est vide!!
@@ -56,6 +62,9 @@
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Quantité
                                             données
                                         </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                            Envoyer Email
+                                        </th>
                                     </tr>
                                     </thead>
 
@@ -72,6 +81,12 @@
                                         <td th:text="${p.dateParticipation}"></td>
                                         <td style="text-align:center"><span class="label label-rounded label-danger"
                                                                             th:text="${p.qteDonnee}"></span></td>
+                                        <td>
+                                            <center><a class="btn btn-circle btn-info"
+                                                       th:href="@{sendmailUrL(id=${p.user.username})}">
+                                                <i class="far fa-envelope"></i></a>
+                                            </center>
+                                        </td>
 
                                     </tr>
 
@@ -89,6 +104,9 @@
                                         <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
                                             Quantité
                                             données
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Envoyer Email
                                         </th>
 
 

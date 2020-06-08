@@ -1,9 +1,11 @@
 package com.proxym.pfe.gestionAssociationBack.membre.services;
 
+import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 public interface MembreService {
@@ -18,6 +20,6 @@ public interface MembreService {
     void modifierMembreService(User user);
 
     User getOneMembreService(String id);
-//    List<User> getAllMembreService();
 
+    void sendMailMembre(MailToSend mailToSend) throws MessagingException;
 }

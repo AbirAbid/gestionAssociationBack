@@ -32,7 +32,7 @@ public class MembreController {
     @Autowired
     public JavaMailSender emailSender;
 
-   // @RequestMapping(value = "/membres/", method = RequestMethod.GET)
+    // @RequestMapping(value = "/membres/", method = RequestMethod.GET)
     @GetMapping(value = "listeMembres")
     public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "motCle", defaultValue = "") String mc) {
@@ -47,16 +47,15 @@ public class MembreController {
                 pages[i] = i;
                 System.out.println(" pages[i] " + pages[i]);
             }
-            List<User>users=membreService.getAllMembreService();
+            List<User> users = membreService.getAllMembreService();
 
             //**********************
             model.addAttribute("pageCourante", page);
             model.addAttribute("pageContent", pagesMembresRech.getContent());
             model.addAttribute("mc", mc);
             model.addAttribute("pages", pages);
-          //  model.addAttribute("pagesMembres", pagesMembresRech);
+            //  model.addAttribute("pagesMembres", pagesMembresRech);
             model.addAttribute("pagesMembres", users);
-
 
 
             return "membres/membresListe";
@@ -108,26 +107,10 @@ public class MembreController {
     }
 
 
-   // @ResponseBody
     @RequestMapping(value = "/sendHtmlEmailUrl")
-    public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) throws MessagingException {
+    public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
-            System.out.println("mailToSend  " + mailToSend);
-            MimeMessage message = emailSender.createMimeMessage();
-
-            boolean multipart = true;
-
-            MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-
-            String htmlMsg = mailToSend.getTextToSend();
-
-            message.setContent(htmlMsg, "text/html");
-            message.setSubject(mailToSend.getObject());
-
-            helper.setTo(mailToSend.getReceiver());
-
-
-            this.emailSender.send(message);
+            membreService.sendMailMembre(mailToSend);
             redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
 
             return "redirect:/membres/listeMembres";

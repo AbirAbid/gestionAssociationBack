@@ -1,6 +1,8 @@
 package com.proxym.pfe.gestionAssociationBack.biens.controllers;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
+import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
+import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,6 +29,8 @@ public class BienController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MembreService membreService;
 
     @RequestMapping(value = "/listDonneurs")
     public String listDonneurs(Model model, @RequestParam(name = "page", defaultValue = "0") int page) {
@@ -89,5 +94,37 @@ public class BienController {
         Page<UserBien> userBiens1 = new PageImpl<>(userBiens.subList(startIndex, endIndex), pageable, userBiens.size());
         return userBiens1;
     }
+
+    @RequestMapping(value = "/sendmailUrL")
+    public String sendMail(Model model, String id) {
+
+        try {
+            MailToSend mailToSend = new MailToSend();
+            mailToSend.setReceiver(id);
+            model.addAttribute("mailSend", mailToSend);
+
+            return "donneurs/donneursSendMail";
+        } catch (Exception e) {
+            return "pagesError/error";
+        }
+
+
+    }
+
+    @RequestMapping(value = "/sendHtmlEmailUrl")
+    public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
+        try {
+
+            membreService.sendMailMembre(mailToSend);
+            redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
+
+            return "redirect:/bien/listDonneurs";
+        } catch (Exception e) {
+            System.out.println("Exception  " + e);
+            return "pagesError/error";
+        }
+
+    }
+
 
 }
