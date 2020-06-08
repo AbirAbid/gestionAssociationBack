@@ -1,27 +1,18 @@
 package com.proxym.pfe.gestionAssociationBack.membre.controllers;
 
-import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
-import com.proxym.pfe.gestionAssociationBack.membre.contenu.MyConstants;
 import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
-import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,29 +23,12 @@ public class MembreController {
     @Autowired
     public JavaMailSender emailSender;
 
-    // @RequestMapping(value = "/membres/", method = RequestMethod.GET)
     @GetMapping(value = "listeMembres")
-    public String showList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                           @RequestParam(name = "motCle", defaultValue = "") String mc) {
+    public String showList(Model model) {
         try {
-            Page<User> pagesMembresRech = membreService.rehercherPageMembreService("%" + mc + "%", new PageRequest(page, 2));
-            //Page<User> pagesMembres = membreService.findAllMembreService(new PageRequest(page, 5));
-            //pour compter nombre des pages************
-            int pagesCount = pagesMembresRech.getTotalPages();
-            int[] pages = new int[pagesCount];
 
-            for (int i = 0; i < pagesCount; i++) {
-                pages[i] = i;
-                System.out.println(" pages[i] " + pages[i]);
-            }
             List<User> users = membreService.getAllMembreService();
 
-            //**********************
-            model.addAttribute("pageCourante", page);
-            model.addAttribute("pageContent", pagesMembresRech.getContent());
-            model.addAttribute("mc", mc);
-            model.addAttribute("pages", pages);
-            //  model.addAttribute("pagesMembres", pagesMembresRech);
             model.addAttribute("pagesMembres", users);
 
 
@@ -67,7 +41,7 @@ public class MembreController {
 
     }
 
-    @RequestMapping(value = "/membreDetailUrl")
+    @RequestMapping(value = "/membreDetailUrl",method = RequestMethod.GET)
     public String membreDetail(Model model, String id) {
 
         try {
@@ -90,7 +64,7 @@ public class MembreController {
 
     /***Send mail***/
 
-    @RequestMapping(value = "/sendmailUrL")
+    @RequestMapping(value = "/sendmailUrL",method = RequestMethod.GET)
     public String sendMail(Model model, String id) {
 
         try {
@@ -107,7 +81,7 @@ public class MembreController {
     }
 
 
-    @RequestMapping(value = "/sendHtmlEmailUrl")
+    @RequestMapping(value = "/sendHtmlEmailUrl",method = RequestMethod.POST)
     public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
             membreService.sendMailMembre(mailToSend);

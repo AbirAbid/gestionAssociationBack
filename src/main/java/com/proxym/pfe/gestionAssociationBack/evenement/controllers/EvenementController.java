@@ -116,7 +116,7 @@ public class EvenementController {
 
 
     /*********************************Update Event****************************/
-    @RequestMapping(value = "/formulaireUpdateEvent")
+    @RequestMapping(value = "/formulaireUpdateEvent",method = RequestMethod.GET)
 
     public String formulaireUpdate(Model model, Long id) {
         try {
@@ -169,7 +169,6 @@ public class EvenementController {
                 return "evenement/updateEvent";
             }
 
-//          evenementService.AjouterEvent(evenementDto);
 
             evenementService.ModifierEvent(evenementDto);
 

@@ -3,7 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.membre.mailConfig;
 
 import java.util.Properties;
 
-import com.proxym.pfe.gestionAssociationBack.membre.contenu.MyConstants;
+import com.proxym.pfe.gestionAssociationBack.membre.mailInformation.MyConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;

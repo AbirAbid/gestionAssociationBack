@@ -30,6 +30,8 @@ public interface MissionService {
 
     void participerMissionRest(ParticiperMissionDto participerMissionDto, User user);
 
+    List<UserMission> getListMissionUser();
+
     List<UserMission> getListMissionUserRest(String username) throws IOException;
 
     List<UserMission> getUserMissionByEventRest(String username, Long id) throws IOException;
@@ -37,7 +39,6 @@ public interface MissionService {
     List<MissionUserDisplay> getListMissionUserDisplayRest(String username, Long id) throws IOException;
 
     void libererMissionRest(String username, Long id);
-
 
 
 }
