@@ -1,4 +1,4 @@
-package com.proxym.pfe.gestionAssociationBack.configs;
+package com.proxym.pfe.gestionAssociationBack.configswagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;

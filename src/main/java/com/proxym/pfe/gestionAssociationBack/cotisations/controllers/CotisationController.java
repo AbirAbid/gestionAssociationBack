@@ -9,10 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -26,7 +23,7 @@ public class CotisationController {
     @Autowired
     CotisationService cotisationService;
 
-    /*********************************add cotisation******************************/
+    /*********************************add cotisation formulaire******************************/
     @GetMapping(value = "formulaire")
     public String formulaireAddCotisation(Model model) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -39,25 +36,20 @@ public class CotisationController {
 
         return "cotisation/add-cotisation";
     }
+    /*********************************add cotisation save action******************************/
 
     @PostMapping(value = "/save")
-    //  public String saveCotisation(@Valid Cotisation cotisation,
-    public String saveCotisation(Model model, @Valid CotisationDto cotisationDto,
+    public String saveCotisation( @Valid CotisationDto cotisationDto,
                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         try {
             if (bindingResult.hasErrors()) {
                 System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
                 System.out.println("bindingResult   " + bindingResult);
-                // model.addAttribute("cotisation", cotisation);
 
                 return "cotisation/add-cotisation";
             }
-            Cotisation cotisation1 = new Cotisation();
-            cotisation1.setCotisationName(cotisationDto.getCotisationName());
-            cotisation1.setDateDebut(cotisationDto.getDateDebut());
-            cotisation1.setMontant(cotisationDto.getMontant());
-            cotisation1.setDateFin(cotisationDto.getDateFin());
-            cotisationService.addCotisationServ(cotisation1);
+
+            cotisationService.addCotisationServ(cotisationDto);
             redirectAttributes.addFlashAttribute("messageAdd", " Votre cotisation a été ajouté avec succès ");
 
             return "redirect:/cotisations/listCotisation";
@@ -71,29 +63,11 @@ public class CotisationController {
 
     /*********************************list cotisations******************************/
 
-    @RequestMapping(value = "/listCotisation")
-    public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
-                        @RequestParam(name = "motCle", defaultValue = "") String mc) {
-        //cherche moi un paam page à dispa servlet initialement page0
-        //pour connaitre page
-        Page<Cotisation> pagesCotisations = cotisationService.rehercherPageCotisationServ("%" + mc + "%", new PageRequest(page, 5));
-        System.out.println("pagesSponsors" + pagesCotisations.getContent());
-
-        int pagesCount = pagesCotisations.getTotalPages();
-        int[] pages = new int[pagesCount];
-
-        for (int i = 0; i < pagesCount; i++) {
-            pages[i] = i;
-            System.out.println(" pages[i] " + pages[i]);
-        }
+    @RequestMapping(value = "/listCotisation",method = RequestMethod.GET)
+    public String index(Model model) {
          List<Cotisation> cotisationList = cotisationService.listCotisationServ();
 
-        model.addAttribute("pages", pages);
         model.addAttribute("pagesCotisations", cotisationList);
-        model.addAttribute("pageCourante", page);
-        model.addAttribute("pageContent", pagesCotisations.getContent());
-        model.addAttribute("mc", mc);
-        //model.addAttribute("motCle", mc);
         return "cotisation/list-cotisation";
     }
 
@@ -109,7 +83,7 @@ public class CotisationController {
 
     /*********************************update cotisation******************************/
 
-    @RequestMapping(value = "/formulaireUpdate")
+    @RequestMapping(value = "/formulaireUpdate",method = RequestMethod.GET)
 
     public String formulaireUpdate(Model model, Long id) {
         Cotisation cotisation = cotisationService.getOneServ(id);
@@ -134,9 +108,8 @@ public class CotisationController {
             }
             // pou n'est pas ecraser le meme nom
 
-            cotisationService.addCotisationServ(cotisation);
+            cotisationService.updateCotisationServ(cotisation);
 
-            System.out.println("update cotisation");
             redirectAttributes.addFlashAttribute("messageUpdate", " Votre cotisation a été modifié avec succès ");
 
             return "redirect:/cotisations/listCotisation";

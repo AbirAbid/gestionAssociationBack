@@ -19,7 +19,7 @@
     <div class="page-wrapper">
 
         <div class="container-fluid">
-              <div class="row page-titles">
+            <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
                     <h3 class="text-themecolor mb-0 mt-0">Ma communauté</h3>
 
@@ -49,9 +49,10 @@
                                 <tr>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border"> Prénom</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Adhérent</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Téléphone</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Email</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Adhérent</th>
+
                                     <th scope="col" data-tablesaw-priority="persist" class="border"> Statut</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Envoyer Email</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Profil</th>
@@ -63,9 +64,12 @@
                                 <tr th:each="membre : ${pagesMembres}">
                                     <td th:text="${membre.nom}"></td>
                                     <td th:text="${membre.prenom}"></td>
-                                    <td><center> <span class=" fas fa-star" style="color: #ff0020"></span></center></td>
                                     <td th:text="${membre.telephone}"></td>
                                     <td th:text="${membre.username}"></td>
+                                    <td>
+                                        <center><span class=" fas fa-star" style="color: #ff0020"></span></center>
+                                    </td>
+
                                     <td>
                                         <div class="progress mt-3">
                                             <div class="progress ">
@@ -96,9 +100,12 @@
                                 <tr>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Adhérent</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Téléphone</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Email</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Adhérent
+                                    </th>
+
                                     <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
                                         Statut
                                     </th>

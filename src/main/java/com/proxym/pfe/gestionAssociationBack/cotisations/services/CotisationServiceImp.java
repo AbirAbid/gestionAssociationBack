@@ -1,6 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.cotisations.services;
 
 import com.proxym.pfe.gestionAssociationBack.cotisations.dao.CotisationDao;
+import com.proxym.pfe.gestionAssociationBack.cotisations.dto.CotisationDto;
 import com.proxym.pfe.gestionAssociationBack.cotisations.entities.Cotisation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,18 @@ public class CotisationServiceImp implements CotisationService {
     CotisationDao cotisationDao;
 
     @Override
-    public Cotisation addCotisationServ(Cotisation cotisation) {
+    public Cotisation addCotisationServ(CotisationDto cotisationDto) {
+        Cotisation cotisation1 = new Cotisation();
+        cotisation1.setCotisationName(cotisationDto.getCotisationName());
+        cotisation1.setDateDebut(cotisationDto.getDateDebut());
+        cotisation1.setMontant(cotisationDto.getMontant());
+        cotisation1.setDateFin(cotisationDto.getDateFin());
+        cotisationDao.addCotisationDao(cotisation1);
+        return cotisationDao.addCotisationDao(cotisation1);
+    }
+
+    @Override
+    public Cotisation updateCotisationServ(Cotisation cotisation) {
         return cotisationDao.addCotisationDao(cotisation);
     }
 

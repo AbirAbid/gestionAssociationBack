@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class BienController {
     @Autowired
     BienService bienService;
 
-    @RequestMapping(value = "/listDonneurs")
+    @RequestMapping(value = "/listDonneurs",method = RequestMethod.GET)
     public String listDonneurs(Model model) {
 
         try {
@@ -38,7 +39,7 @@ public class BienController {
     }
 
 
-    @RequestMapping(value = "/sendmailUrL")
+    @RequestMapping(value = "/sendmailUrL",method = RequestMethod.GET)
     public String sendMail(Model model, String id) {
 
         try {
@@ -54,7 +55,7 @@ public class BienController {
 
     }
 
-    @RequestMapping(value = "/sendHtmlEmailUrl")
+    @RequestMapping(value = "/sendHtmlEmailUrl",method = RequestMethod.GET)
     public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
 
