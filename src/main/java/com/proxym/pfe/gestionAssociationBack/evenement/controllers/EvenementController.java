@@ -185,7 +185,8 @@ public class EvenementController {
 
     /*********************************Delete Event******************************/
     @RequestMapping(value = "/supprimer")
-    public String supprimer(Long id, RedirectAttributes redirectAttributes) {
+    public String supprimer( RedirectAttributes redirectAttributes,Long id) {
+        System.out.println("id event controller:::"+id);
         evenementService.supprimerEvent(id);
         redirectAttributes.addFlashAttribute("messageDelete", " Votre événement a été supprimé avec succès .");
 

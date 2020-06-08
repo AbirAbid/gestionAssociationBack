@@ -11,11 +11,10 @@ import java.util.Optional;
 
 public interface BienService {
 
-    List<Bien> findAllService();
+    List<Bien> findAllBienService();
 
     void saveAllService(List<Bien> biens);
 
-    void editAllService(List<Bien> biens);
     List<Bien>  findAllByEventService(Long id);
     List<Bien> findAllByEventServiceRest(Long id) throws IOException;
 
@@ -27,10 +26,10 @@ public interface BienService {
 
     void donnerBienSerice(ParticiperBienFormDto participerBienFormDto, String username);
 
-    public List<Bien> getBienByRegionRest(String ville) throws IOException;
+     List<Bien> getBienByRegionRest(String ville) throws IOException;
 
     List<UserBien> getListBienByUserRest(String username) throws IOException;
 
-    List<UserBien> getListUserBienRest();
+    List<UserBien> getListUserBien();
 
 }

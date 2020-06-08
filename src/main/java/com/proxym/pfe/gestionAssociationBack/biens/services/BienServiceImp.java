@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BienServiceImp implements BienService {
@@ -28,7 +26,7 @@ public class BienServiceImp implements BienService {
 
 
     @Override
-    public List<Bien> findAllService() {
+    public List<Bien> findAllBienService() {
         try {
             return bienDao.findAllDao();
         } catch (Exception e) {
@@ -49,10 +47,6 @@ public class BienServiceImp implements BienService {
 
     }
 
-    @Override
-    public void editAllService(List<Bien> biens) {
-
-    }
 
     @Override
     public List<Bien> findAllByEventService(Long id) {
@@ -67,6 +61,9 @@ public class BienServiceImp implements BienService {
 
     }
 
+    /**
+     * List bien by région de l'event
+     **/
     @Override
     public List<Bien> findAllByEvenement_VilleService(String ville) {
         return bienDao.findAllByEvenement_VilleDao(ville);
@@ -86,6 +83,9 @@ public class BienServiceImp implements BienService {
         return ConvertListBienToJson(biens);
     }
 
+    /**
+     * Participation par don
+     **/
     @Override
     public void donnerBienSerice(ParticiperBienFormDto participerBienFormDto, String username) {
         User user = userDao.findByUsernameDao(username);
@@ -138,11 +138,9 @@ public class BienServiceImp implements BienService {
         User user = userDao.findByUsernameDao(username);
         List<UserBien> userBiens = user.getUserBiens();
         ObjectMapper mapper = new ObjectMapper();
-        String jsonInString;
 
         List<UserBien> userBiens1 = new ArrayList<>();
         for (int i = 0; i < userBiens.size(); i++) {
-            jsonInString = mapper.writeValueAsString(userBiens.get(i).getBien());
 
             //get Bien sous forme json
             UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
@@ -153,9 +151,18 @@ public class BienServiceImp implements BienService {
 
     }
 
+    /**
+     * la liste all donneurs
+     **/
     @Override
-    public List<UserBien> getListUserBienRest() {
+    public List<UserBien> getListUserBien() {
         List<User> users = userDao.getAllDonneursDao();
+        //    System.out.println("users with duplicate  "+ users);
+        //eliminer les doublons
+        Set<User> set = new HashSet<>(users);
+        users.clear();
+        users.addAll(set);
+
         List<UserBien> userBiens = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
@@ -165,7 +172,7 @@ public class BienServiceImp implements BienService {
         return userBiens;
     }
 
-
+    /**************** ConvertListBienToJson ***********/
     public List<Bien> ConvertListBienToJson(List<Bien> biens) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -174,7 +181,6 @@ public class BienServiceImp implements BienService {
 
         for (int i = 0; i < biens.size(); i++) {
             jsonInString = mapper.writeValueAsString(biens.get(i));
-            System.out.println("jsonInString" + jsonInString);
             Bien bien = mapper.readValue(jsonInString, Bien.class);
 
             System.out.println(mapper.writeValueAsString(biens.get(i).getId()));

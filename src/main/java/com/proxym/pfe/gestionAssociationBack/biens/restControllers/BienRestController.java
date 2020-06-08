@@ -97,7 +97,7 @@ public class BienRestController {
     }
 
 
-    @RequestMapping(value = "/listUser", method = RequestMethod.GET)
+ /*   @RequestMapping(value = "/listUser", method = RequestMethod.GET)
     public List<User> getListUser() {
         try {
             return userRepository.findAll();
@@ -105,9 +105,9 @@ public class BienRestController {
             System.out.println("Exception " + ex.getMessage());
             return null;
         }
-    }
+    }*/
 
-    @RequestMapping(value = "/listUserBien", method = RequestMethod.GET)
+ /*   @RequestMapping(value = "/listUserBien", method = RequestMethod.GET)
     public List<UserBien> getListUserBien() {
         try {
             return bienService.getListUserBienRest();
@@ -115,7 +115,7 @@ public class BienRestController {
             System.out.println("Exception " + ex.getMessage());
             return null;
         }
-    }
+    }*/
 
 
 }
