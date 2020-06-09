@@ -66,7 +66,10 @@ public class EvenementDaoImp implements EvenementDao {
         return eventRepositories.chercherEvenement(mc, pageRequest);
     }
 
-
+    @Override
+    public List<Evenement> findAllByCategorieDao(String categorie) {
+        return eventRepositories.findAllByCategorie(categorie);
+    }
 
 
 }

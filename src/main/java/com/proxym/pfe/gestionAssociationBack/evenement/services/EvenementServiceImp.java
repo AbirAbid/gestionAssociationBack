@@ -4,6 +4,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.dao.BienDao;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.membre.dao.MembreDao;
@@ -214,6 +215,11 @@ public class EvenementServiceImp implements EvenementService {
     }
 
     @Override
+    public List<Evenement> findAllByCategorieService(String categorie) {
+        return evenementDao.findAllByCategorieDao(categorie);
+    }
+
+    @Override
     public EvenementDto formulaireUpdate(Long id) {
         Evenement e = evenementDao.getEventDaoById(id);
         EvenementDto evenementDto = new EvenementDto();
@@ -254,6 +260,29 @@ public class EvenementServiceImp implements EvenementService {
         for (int i = 0; i < users.size(); i++) {
             userDao.saveUserDao(users.get(i));
         }
+    }
+
+    @Override
+    public List<EventCountCategories> countCategEvent() {
+
+            List<EventCountCategories> eventCountCategories = new ArrayList<>();
+            List<Evenement> evenements = evenementDao.listEventDao();
+            eventCountCategories.add(new EventCountCategories("aide-humanitaire", 0));
+            eventCountCategories.add(new EventCountCategories("aide-handicapes", 0));
+            eventCountCategories.add(new EventCountCategories("sante", 0));
+            eventCountCategories.add(new EventCountCategories("education", 0));
+            for (int i = 0; i <= evenements.size()-1; i++) {
+                for (int j = 0; j <= eventCountCategories.size()-1; j++) {
+                    if (evenements.get(i).getCategorie().equals(eventCountCategories.get(j).getCategorie())) {
+                        eventCountCategories.get(j).setCount(eventCountCategories.get(j).getCount() + 1);
+                    }
+
+                }
+            }
+
+
+            return eventCountCategories;
+
     }
 
     Evenement eventFromEventDto(EvenementDto evenementDto) {

@@ -21,6 +21,7 @@ public interface EvenementDao {
     Page<Evenement> findAllPageEvenementDao(PageRequest pageRequest);
 
     Page<Evenement> rehercherPageEvenementDao(String mc, PageRequest pageRequest);
+    List<Evenement> findAllByCategorieDao(String categorie);
 
 
 }
