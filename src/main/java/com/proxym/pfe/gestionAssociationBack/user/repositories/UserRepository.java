@@ -34,7 +34,6 @@ public interface UserRepository extends JpaRepository<User, Long > {
 
     @Query("select  u from User u  where  u.isAdmin = 0")
     List<User> getMembreList();
-   // Long countAllById();
 
 
 

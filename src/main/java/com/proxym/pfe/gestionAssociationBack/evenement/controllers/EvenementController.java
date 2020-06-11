@@ -228,7 +228,6 @@ public class EvenementController {
             Evenement e = evenementService.getOneEventByIdservice(id);
 
             List<Bien> biens = bienService.findAllByEventService(id);
-            System.out.println("************************okok*********************");
 
             List<Mission> missions = missionService.findAllMissionByEventService(id);
 

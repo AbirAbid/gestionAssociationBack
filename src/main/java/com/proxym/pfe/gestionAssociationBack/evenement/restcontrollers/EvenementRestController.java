@@ -6,6 +6,8 @@ import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.repositories.EventRepositories;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,8 @@ public class EvenementRestController {
     @Autowired
     EvenementService evenementService;
 
-
+    @Autowired
+    MissionService missionService;
     @RequestMapping(value = "/listEvent", method = RequestMethod.GET)
     public List<Evenement> getListEvent() {
         try {
@@ -61,6 +64,7 @@ public class EvenementRestController {
             return null;
         }
     }
+
     /***List Events by categorie***/
 
     @RequestMapping(value = "/eventByCatg/{categorie}", method = RequestMethod.GET)
@@ -75,5 +79,19 @@ public class EvenementRestController {
         }
     }
 
+    /***get nb prticipants par categorie event**/
+    @RequestMapping(value = "/countEventCategories", method = RequestMethod.GET)
+    public List<EventCountCategories> getCountPartByCateg() {
+        try {
+            List<UserMission> userMissions = missionService.getListMissionUser();
+
+            List<EventCountCategories> eventCountCategories = evenementService.countCategEvent();
+
+            return eventCountCategories;
+        } catch (Exception ex) {
+            System.out.println("Exception " + ex.getMessage());
+            return null;
+        }
+    }
 
 }
