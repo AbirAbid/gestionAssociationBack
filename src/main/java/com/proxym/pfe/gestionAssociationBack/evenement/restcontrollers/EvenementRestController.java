@@ -3,6 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.evenement.restcontrollers;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventParticipCount;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.repositories.EventRepositories;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
@@ -23,6 +24,7 @@ public class EvenementRestController {
 
     @Autowired
     MissionService missionService;
+
     @RequestMapping(value = "/listEvent", method = RequestMethod.GET)
     public List<Evenement> getListEvent() {
         try {
@@ -81,13 +83,13 @@ public class EvenementRestController {
 
     /***get nb prticipants par categorie event**/
     @RequestMapping(value = "/countEventCategories", method = RequestMethod.GET)
-    public List<EventCountCategories> getCountPartByCateg() {
+    public List<EventParticipCount> countPartByEvent() {
         try {
             List<UserMission> userMissions = missionService.getListMissionUser();
 
-            List<EventCountCategories> eventCountCategories = evenementService.countCategEvent();
+            List<EventParticipCount> eventParticipCounts = evenementService.countPartByEvent();
 
-            return eventCountCategories;
+            return eventParticipCounts;
         } catch (Exception ex) {
             System.out.println("Exception " + ex.getMessage());
             return null;

@@ -3,6 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.evenement.services;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventParticipCount;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,5 +41,5 @@ public interface EvenementService {
     void TauxEchangeForAllUser();
 
     List<EventCountCategories> countCategEvent();
-
+    List<EventParticipCount>countPartByEvent();
 }

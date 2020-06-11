@@ -6,6 +6,7 @@ import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
+import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventParticipCount;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.membre.dao.MembreDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
@@ -265,26 +266,35 @@ public class EvenementServiceImp implements EvenementService {
     @Override
     public List<EventCountCategories> countCategEvent() {
 
-            List<EventCountCategories> eventCountCategories = new ArrayList<>();
-            List<Evenement> evenements = evenementDao.listEventDao();
-            eventCountCategories.add(new EventCountCategories("aide-humanitaire", 0));
-            eventCountCategories.add(new EventCountCategories("aide-handicapes", 0));
-            eventCountCategories.add(new EventCountCategories("sante", 0));
-            eventCountCategories.add(new EventCountCategories("education", 0));
-            for (int i = 0; i <= evenements.size()-1; i++) {
-                for (int j = 0; j <= eventCountCategories.size()-1; j++) {
-                    if (evenements.get(i).getCategorie().equals(eventCountCategories.get(j).getCategorie())) {
-                        eventCountCategories.get(j).setCount(eventCountCategories.get(j).getCount() + 1);
-                    }
-
+        List<EventCountCategories> eventCountCategories = new ArrayList<>();
+        List<Evenement> evenements = evenementDao.listEventDao();
+        eventCountCategories.add(new EventCountCategories("aide-humanitaire", 0));
+        eventCountCategories.add(new EventCountCategories("aide-handicapes", 0));
+        eventCountCategories.add(new EventCountCategories("sante", 0));
+        eventCountCategories.add(new EventCountCategories("education", 0));
+        for (int i = 0; i <= evenements.size() - 1; i++) {
+            for (int j = 0; j <= eventCountCategories.size() - 1; j++) {
+                if (evenements.get(i).getCategorie().equals(eventCountCategories.get(j).getCategorie())) {
+                    eventCountCategories.get(j).setCount(eventCountCategories.get(j).getCount() + 1);
                 }
+
             }
+        }
 
 
-            return eventCountCategories;
+        return eventCountCategories;
 
     }
 
+    @Override
+    public List<EventParticipCount> countPartByEvent() {
+        List<EventParticipCount> eventParticipCounts = new ArrayList<>();
+
+        return eventParticipCounts;
+    }
+
+
+    /***********fonction get Event from EvenementDto********/
     Evenement eventFromEventDto(EvenementDto evenementDto) {
         Evenement event = new Evenement();
         event.setId(evenementDto.getId());
