@@ -193,7 +193,7 @@ public class EvenementController {
     }
 
 
-    /*********************************List Page  Event****************************/
+    /*********************************List   Event****************************/
 
     @GetMapping(value = "/list")
     public String showList(Model model) {

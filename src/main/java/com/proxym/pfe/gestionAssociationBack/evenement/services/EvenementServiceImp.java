@@ -339,6 +339,43 @@ public class EvenementServiceImp implements EvenementService {
     }
 
     @Override
+    public List<EventCountCategories> countPartByCategorieEvent() {
+        List<String> categorieEvent = new ArrayList<>();
+        categorieEvent.add("aide-humanitaire");
+        categorieEvent.add("aide-handicapes");
+        categorieEvent.add("sante");
+        categorieEvent.add("education");
+        List<EventCountCategories> eventCountParticpCategories = new ArrayList<>();
+        EventCountCategories eventCountCategories = new EventCountCategories();
+        for (int i = 0; i < categorieEvent.size(); i++) {
+            List<Evenement> evenements = evenementDao.findAllByCategorieDao(categorieEvent.get(i));
+            for (int k = 0; k < evenements.size(); k++) {
+                List<UserBien> userBiensEvent = getListDonneursByEvent(evenements.get(k));
+                List<UserMission> userMissionsEvent = getListBenevolesByEvent(evenements.get(k));
+                List<User> users = new ArrayList<>();
+
+                for (int j = 0; j < userBiensEvent.size(); j++) {
+
+                    users.add(userBiensEvent.get(j).getUser());
+
+                }
+                for (int j = 0; j < userMissionsEvent.size(); j++) {
+
+                    users.add(userMissionsEvent.get(j).getUser());
+
+                }
+                eventCountCategories = new EventCountCategories(categorieEvent.get(i), users.size());
+
+
+            }
+            eventCountParticpCategories.add(eventCountCategories);
+        }
+
+
+        return eventCountParticpCategories;
+    }
+
+    @Override
     public List<EventParticipCount> countPartByEvent() {
 
         List<EventParticipCount> eventParticipCounts = new ArrayList<>();
@@ -363,7 +400,7 @@ public class EvenementServiceImp implements EvenementService {
             /** pour éliminer redondance ***/
             Set<User> mySet1 = new HashSet<>(users);
             users = new ArrayList<>(mySet1);
-            EventParticipCount eventParticipCount=new EventParticipCount(evenements.get(i).getTitre(),users.size());
+            EventParticipCount eventParticipCount = new EventParticipCount(evenements.get(i).getTitre(), users.size());
             eventParticipCounts.add(eventParticipCount);
         }
 

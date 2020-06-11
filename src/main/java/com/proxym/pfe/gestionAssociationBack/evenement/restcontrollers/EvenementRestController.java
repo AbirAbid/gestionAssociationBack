@@ -81,7 +81,7 @@ public class EvenementRestController {
         }
     }
 
-    /***get nb prticipants par categorie event**/
+    /***get nb prticipants by  event**/
     @RequestMapping(value = "/countParticiByEvent", method = RequestMethod.GET)
     public List<EventParticipCount> countPartByEvent() {
         try {
@@ -94,5 +94,18 @@ public class EvenementRestController {
             return null;
         }
     }
+    /***get nb prticipants by categorie event**/
 
+    @RequestMapping(value = "/countParticiByCatEvent", method = RequestMethod.GET)
+    public List<EventCountCategories> countPartByCategorieEvent() {
+        try {
+
+            List<EventCountCategories> eventParticipCounts = evenementService.countPartByCategorieEvent();
+
+            return eventParticipCounts;
+        } catch (Exception ex) {
+            System.out.println("Exception " + ex.getMessage());
+            return null;
+        }
+    }
 }

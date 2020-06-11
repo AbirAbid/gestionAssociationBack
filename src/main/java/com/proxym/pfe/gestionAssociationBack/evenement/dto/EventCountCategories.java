@@ -11,4 +11,7 @@ public class EventCountCategories {
         categorie=s;
         count=i;
     }
+    public EventCountCategories() {
+
+    }
 }

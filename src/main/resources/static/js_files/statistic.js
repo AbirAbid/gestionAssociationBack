@@ -92,7 +92,7 @@ app.controller('MainCtrl2', ['$scope', 'services2', function ($scope, services) 
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'Catégorie événement'
+                    axisLabel: 'Titre de événement'
                 },
                 yAxis: {
                     axisLabel: 'Nombre des participants',
@@ -132,6 +132,69 @@ app.controller('MainCtrl2', ['$scope', 'services2', function ($scope, services) 
     var object = {};
     object.getData = function () {
         return $http.get('http://localhost:8080/countParticiByEvent');
+    };
+    return object;
+}]);
+
+
+app.controller('ParticipationByCateg', ['$scope', 'services3', function ($scope, services) {
+    $scope.options = {
+        chart: {
+            type: 'pieChart',
+            height: 450,
+            donut: true,
+            x: function (d) {
+                return d.key;
+            },
+            y: function (d) {
+                return d.y;
+            },
+            showLabels: true,
+
+            pie: {
+                startAngle: function (d) {
+                    return d.startAngle / 2 - Math.PI / 2
+                },
+                endAngle: function (d) {
+                    return d.endAngle / 2 - Math.PI / 2
+                }
+            },
+            duration: 500,
+            legend: {
+                margin: {
+                    top: 5,
+                    right: 70,
+                    bottom: 5,
+                    left: 0
+                }
+            }
+        }
+    };
+    services.getData().then(function successCb(data) {
+        $scope.values = new Array();
+
+        for (let i = 0; i < data.data.length; i++) {
+
+            console.log(' data ', data.data);
+            $scope.x = {
+                "key": data.data[i].categorie,
+                "y": data.data[i].count
+            };
+            $scope.values[i] = $scope.x;
+
+
+        }
+
+
+        $scope.data =$scope.values
+
+
+    });
+
+}]).factory('services3', ['$http', function ($http) {
+    var object = {};
+    object.getData = function () {
+        return $http.get('http://localhost:8080/countParticiByCatEvent');
     };
     return object;
 }]);

@@ -45,5 +45,6 @@ public interface EvenementService {
     void TauxEchangeForAllUser();
 
     List<EventCountCategories> countCategEvent();
+    List<EventCountCategories> countPartByCategorieEvent();
     List<EventParticipCount>countPartByEvent();
 }

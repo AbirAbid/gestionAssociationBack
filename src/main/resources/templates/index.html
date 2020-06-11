@@ -34,11 +34,49 @@
             </div>
             <div class="row">
                 <!-- Column -->
+                <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div class="card card-inverse "style="background-color: #2078B2">
+                        <div class="box text-center">
+                            <h1 class="font-light text-white" th:text="${nbMembre}"></h1>
+                            <h6 class="text-white">Membres </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div class="card  card-inverse" style="background-color: #AEC9E9">
+                        <div class="box text-center">
+                            <h1 class="font-light text-white" th:text="${nbEvent}"></h1>
+                            <h6 class="text-white">Événements</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div class="card  card-inverse" style="background-color: #FEBC78">
+                        <div class="box text-center">
+                            <h1 class="font-light text-white"th:text="${nbBenevole}"> ></h1>
+                            <h6 class="text-white">Bénévoles</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+
+                <!-- Column -->
+                <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div class="card card-inverse " style="background-color: #FD800E">
+                        <div class="box text-center">
+                            <h1 class="font-light text-white" th:text="${nbDonneur}">></h1>
+                            <h6 class="text-white"> Donneurs</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Total Revenue</h4>
+                            <h4 class="card-title">Partition des événements selon les catégories</h4>
 
                             <div ng-controller="MainCtrl">
                                 <nvd3 options="options" data="data"></nvd3>
@@ -46,79 +84,31 @@
                         </div>
                     </div>
                 </div>
-                <!-- Column -->
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
 
-                            <div class="row">
-                                <!-- Column -->
-                                <div class="col-sm-6">
-                                    <div class="card card-inverse card-info">
-                                        <div class="box bg-light-danger text-center">
-                                            <h1 class="font-light ">2,064</h1>
-                                            <h6>Sessions</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card card-inverse card-info">
-                                        <div class="box bg-light-danger text-center">
-                                            <h1 class="font-light ">2,064</h1>
-                                            <h6>Sessions</h6>
-                                        </div>
-                                    </div>
-                                </div>
+                            <h4 class="card-title">Partition des participants selon les catégories des événements</h4>
 
-                                <div class="col-sm-6">
-                                    <div class="card card-inverse card-info">
-                                        <div class="box bg-light-danger text-center">
-                                            <h1 class="font-light ">2,064</h1>
-                                            <h6>Sessions</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Column -->
-                                <div class="col-sm-6">
-                                    <div class="card card-inverse card-info">
-                                        <div class="box bg-light-danger text-center">
-                                            <h1 class="font-light ">2,064</h1>
-                                            <h6>Sessions</h6>
-                                        </div>
-                                    </div>
-                                </div>                        <!-- Column -->
-                                <div class="col-sm-6">
-                                    <div class="card card-inverse card-info">
-                                        <div class="box bg-light-danger text-center">
-                                            <h1 class="font-light ">2,064</h1>
-                                            <h6>Sessions</h6>
-                                        </div>
-                                    </div>
-                                </div>                        <!-- Column -->
-                                <div class="col-sm-6">
-                                    <div class="card card-inverse card-info">
-                                        <div class="box bg-light-danger text-center">
-                                            <h1 class="font-light ">2,064</h1>
-                                            <h6>Sessions</h6>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div ng-controller="ParticipationByCateg">
+                                <nvd3 options="options" data="data"></nvd3>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col-lg-12">
 
-                <!-- Card -->
-                <div class="card ">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Partition des participants selon les événements</h4>
 
-                    <div ng-controller="MainCtrl2">
+                        <div ng-controller="MainCtrl2">
 
-                        <nvd3 options="options" data="data"></nvd3>
+                            <nvd3 options="options" data="data"></nvd3>
 
 
+                        </div>
                     </div>
                 </div>
             </div>
