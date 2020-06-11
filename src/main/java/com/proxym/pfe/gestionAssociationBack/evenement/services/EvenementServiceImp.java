@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.evenement.services;
 
 import com.proxym.pfe.gestionAssociationBack.biens.dao.BienDao;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
@@ -11,6 +12,7 @@ import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.membre.dao.MembreDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.sponsors.dao.SponsorDao;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
@@ -218,6 +220,56 @@ public class EvenementServiceImp implements EvenementService {
     @Override
     public List<Evenement> findAllByCategorieService(String categorie) {
         return evenementDao.findAllByCategorieDao(categorie);
+    }
+
+    @Override
+    public List<UserBien> getListDonneursByEvent(Evenement evenement) {
+        /*************** pour avoir liste donneurs************************/
+        List<User> users = userDao.getAllDonneursDao();
+        List<UserBien> userBiens = new ArrayList<>();
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
+                userBiens.add(users.get(i).getUserBiens().get(j));
+            }
+        }
+        List<UserBien> userBiensEvent = new ArrayList<>();
+        for (int i = 0; i < userBiens.size(); i++) {
+            if (userBiens.get(i).getBien().getEvenement() == evenement) {
+                userBiensEvent.add(userBiens.get(i));
+            }
+        }
+        /** pour éliminer redondance ***/
+        Set<UserBien> mySet = new HashSet<>(userBiensEvent);
+        userBiensEvent = new ArrayList<>(mySet);
+        return userBiensEvent;
+    }
+
+    @Override
+    public List<UserMission> getListBenevolesByEvent(Evenement evenement) {
+
+        List<User> usersBenevole = userDao.getAllBenevolesDao();
+        List<UserMission> userMissions = new ArrayList<>();
+
+        for (int i = 0; i < usersBenevole.size(); i++) {
+            for (int j = 0; j < usersBenevole.get(i).getUserMissions().size(); j++) {
+
+                userMissions.add(usersBenevole.get(i).getUserMissions().get(j));
+
+            }
+
+        }
+
+        List<UserMission> userMissionsEvent = new ArrayList<>();
+        for (int i = 0; i < userMissions.size(); i++) {
+            if (userMissions.get(i).getMission().getEvenement() == evenement) {
+                userMissionsEvent.add(userMissions.get(i));
+            }
+        }
+        /** pour éliminer redondance ***/
+        Set<UserMission> mySet1 = new HashSet<>(userMissionsEvent);
+        userMissionsEvent = new ArrayList<>(mySet1);
+
+        return userMissionsEvent;
     }
 
     @Override

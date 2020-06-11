@@ -116,7 +116,7 @@ public class EvenementController {
 
 
     /*********************************Update Event****************************/
-    @RequestMapping(value = "/formulaireUpdateEvent",method = RequestMethod.GET)
+    @RequestMapping(value = "/formulaireUpdateEvent", method = RequestMethod.GET)
 
     public String formulaireUpdate(Model model, Long id) {
         try {
@@ -184,8 +184,8 @@ public class EvenementController {
 
     /*********************************Delete Event******************************/
     @RequestMapping(value = "/supprimer")
-    public String supprimer( RedirectAttributes redirectAttributes,Long id) {
-        System.out.println("id event controller:::"+id);
+    public String supprimer(RedirectAttributes redirectAttributes, Long id) {
+        System.out.println("id event controller:::" + id);
         evenementService.supprimerEvent(id);
         redirectAttributes.addFlashAttribute("messageDelete", " Votre événement a été supprimé avec succès .");
 
@@ -228,52 +228,11 @@ public class EvenementController {
             Evenement e = evenementService.getOneEventByIdservice(id);
 
             List<Bien> biens = bienService.findAllByEventService(id);
-
             List<Mission> missions = missionService.findAllMissionByEventService(id);
+            List<UserBien> userBiensEvent = evenementService.getListDonneursByEvent(e);
+            List<UserMission> userMissionsEvent = evenementService.getListBenevolesByEvent(e);
 
-            /*************** pour avoir liste donneurs************************/
-            List<User> users = userService.getAllDonneursService();
-            List<UserBien> userBiens = new ArrayList<>();
-            for (int i = 0; i < users.size(); i++) {
-                for (int j = 0; j < users.get(i).getUserBiens().size(); j++) {
-                    userBiens.add(users.get(i).getUserBiens().get(j));
-                }
-            }
-            List<UserBien> userBiensEvent = new ArrayList<>();
-            for (int i = 0; i < userBiens.size(); i++) {
-                if (userBiens.get(i).getBien().getEvenement() == e) {
-                    userBiensEvent.add(userBiens.get(i));
-                }
-            }
-            /** pour éliminer redondance ***/
-            Set<UserBien> mySet = new HashSet<>(userBiensEvent);
-            userBiensEvent = new ArrayList<>(mySet);
-
-            /*************** pour avoir liste missions*************************/
-
-            List<User> usersBenevole = userService.getAllBenevolesService();
-            List<UserMission> userMissions = new ArrayList<>();
-
-            for (int i = 0; i < usersBenevole.size(); i++) {
-                for (int j = 0; j < usersBenevole.get(i).getUserMissions().size(); j++) {
-
-                    userMissions.add(usersBenevole.get(i).getUserMissions().get(j));
-
-                }
-
-            }
-
-            List<UserMission> userMissionsEvent = new ArrayList<>();
-            for (int i = 0; i < userMissions.size(); i++) {
-                if (userMissions.get(i).getMission().getEvenement() == e) {
-                    userMissionsEvent.add(userMissions.get(i));
-                }
-            }
-            /** pour éliminer redondance ***/
-            Set<UserMission> mySet1 = new HashSet<>(userMissionsEvent);
-            userMissionsEvent = new ArrayList<>(mySet1);
-
-
+            
             model.addAttribute("evenement", e);
             model.addAttribute("biens", biens);
             model.addAttribute("userBiens", userBiensEvent);

@@ -1,10 +1,12 @@
 package com.proxym.pfe.gestionAssociationBack.evenement.services;
 
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EvenementDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventParticipCount;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -37,6 +39,8 @@ public interface EvenementService {
     EventCountElmtsDto getElementNumber();
     List<Evenement> findAllByCategorieService(String categorie);
 
+    List<UserBien> getListDonneursByEvent(Evenement evenement);
+    List<UserMission> getListBenevolesByEvent(Evenement evenement);
 
     void TauxEchangeForAllUser();
 

@@ -82,7 +82,7 @@ public class EvenementRestController {
     }
 
     /***get nb prticipants par categorie event**/
-    @RequestMapping(value = "/countEventCategories", method = RequestMethod.GET)
+    @RequestMapping(value = "/countParticiByEvent", method = RequestMethod.GET)
     public List<EventParticipCount> countPartByEvent() {
         try {
             List<UserMission> userMissions = missionService.getListMissionUser();
