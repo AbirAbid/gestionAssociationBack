@@ -232,7 +232,7 @@ public class EvenementController {
             List<UserBien> userBiensEvent = evenementService.getListDonneursByEvent(e);
             List<UserMission> userMissionsEvent = evenementService.getListBenevolesByEvent(e);
 
-            
+
             model.addAttribute("evenement", e);
             model.addAttribute("biens", biens);
             model.addAttribute("userBiens", userBiensEvent);

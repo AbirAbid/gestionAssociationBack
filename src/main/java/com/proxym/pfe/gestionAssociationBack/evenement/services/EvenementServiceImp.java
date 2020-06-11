@@ -340,7 +340,32 @@ public class EvenementServiceImp implements EvenementService {
 
     @Override
     public List<EventParticipCount> countPartByEvent() {
+
         List<EventParticipCount> eventParticipCounts = new ArrayList<>();
+        List<Evenement> evenements = evenementDao.listEventDao();
+
+        for (int i = 0; i < evenements.size(); i++) {
+
+            List<UserBien> userBiensEvent = getListDonneursByEvent(evenements.get(i));
+            List<UserMission> userMissionsEvent = getListBenevolesByEvent(evenements.get(i));
+            List<User> users = new ArrayList<>();
+
+            for (int j = 0; j < userBiensEvent.size(); j++) {
+
+                users.add(userBiensEvent.get(j).getUser());
+
+            }
+            for (int j = 0; j < userMissionsEvent.size(); j++) {
+
+                users.add(userMissionsEvent.get(j).getUser());
+
+            }
+            /** pour éliminer redondance ***/
+            Set<User> mySet1 = new HashSet<>(users);
+            users = new ArrayList<>(mySet1);
+            EventParticipCount eventParticipCount=new EventParticipCount(evenements.get(i).getTitre(),users.size());
+            eventParticipCounts.add(eventParticipCount);
+        }
 
         return eventParticipCounts;
     }
