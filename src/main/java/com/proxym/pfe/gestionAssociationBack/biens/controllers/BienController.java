@@ -4,7 +4,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
 import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
-import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
+import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

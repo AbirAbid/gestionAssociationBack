@@ -48,7 +48,7 @@
                             </div>
                             <div th:if="${nb!=0}">
                                 <table id="tableDonneurs" class="tablesaw  table-bordered table-hover table"
-                                       data-tablesaw-mode="stack">
+                                       data-tablesaw-mode="stack" style="text-align:center">
                                     <thead>
                                     <tr>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
@@ -79,13 +79,13 @@
 
 
                                         <td th:text="${p.dateParticipation}"></td>
-                                        <td style="text-align:center"><span class="label label-rounded label-danger"
+                                        <td ><span class="label label-rounded label-danger"
                                                                             th:text="${p.qteDonnee}"></span></td>
                                         <td>
-                                            <center><a class="btn btn-circle btn-info"
+                                            <a class="btn btn-circle btn-info"
                                                        th:href="@{sendmailUrL(id=${p.user.username})}">
                                                 <i class="far fa-envelope"></i></a>
-                                            </center>
+
                                         </td>
 
                                     </tr>

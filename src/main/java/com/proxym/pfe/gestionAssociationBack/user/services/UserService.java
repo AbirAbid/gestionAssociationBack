@@ -1,4 +1,4 @@
-package com.proxym.pfe.gestionAssociationBack.user.service;
+package com.proxym.pfe.gestionAssociationBack.user.services;
 
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.dto.request.SignUpForm;

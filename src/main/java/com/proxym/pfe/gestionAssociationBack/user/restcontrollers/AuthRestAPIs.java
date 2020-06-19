@@ -7,7 +7,7 @@ import com.proxym.pfe.gestionAssociationBack.user.dto.response.JwtResponse;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
 import com.proxym.pfe.gestionAssociationBack.user.security.jwt.JwtProvider;
-import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
+import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import com.proxym.pfe.gestionAssociationBack.user.dto.request.SignUpForm;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.ResponseEntity;

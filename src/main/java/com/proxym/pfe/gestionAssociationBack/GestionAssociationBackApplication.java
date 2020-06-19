@@ -188,6 +188,7 @@ public class GestionAssociationBackApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... strings) throws Exception {
+
         // create new
       /*  Book bookA = new Book("Book A");
         Publisher publisherA = new Publisher("Publisher A");

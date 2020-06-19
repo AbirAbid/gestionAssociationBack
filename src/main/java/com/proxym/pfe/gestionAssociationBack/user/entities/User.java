@@ -46,11 +46,7 @@ public class User  {
 
     private String username;
 
-  /*  @NaturalId
-    @NotBlank
-    @Size(max = 50)
-    @Email
-    private String email;*/
+
 
     @NotBlank
     @Size(min = 6, max = 100)
@@ -100,7 +96,6 @@ public class User  {
                 String genre,int isAdmin) {
         this.nom = nom;
         this.username = username;
-        //   this.email = email;
         this.password = password;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;

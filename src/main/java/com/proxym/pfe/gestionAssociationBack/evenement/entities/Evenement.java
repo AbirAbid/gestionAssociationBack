@@ -2,7 +2,6 @@ package com.proxym.pfe.gestionAssociationBack.evenement.entities;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
-import com.proxym.pfe.gestionAssociationBack.themeEvent.entities.ThemeEvent;
 import com.proxym.pfe.gestionAssociationBack.user.entities.Role;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import lombok.Data;

@@ -10,12 +10,11 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.repositories.Missio
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
-import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
+import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.*;
 
 @RestController

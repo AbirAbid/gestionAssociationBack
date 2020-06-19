@@ -1,7 +1,5 @@
-package com.proxym.pfe.gestionAssociationBack.user.service;
+package com.proxym.pfe.gestionAssociationBack.user.services;
 
-import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
-import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.user.dao.RoleDao;
 import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
 import com.proxym.pfe.gestionAssociationBack.user.dto.response.ResponseMessage;
@@ -17,7 +15,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

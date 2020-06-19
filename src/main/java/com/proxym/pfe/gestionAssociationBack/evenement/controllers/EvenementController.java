@@ -12,11 +12,8 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionSer
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
 import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
-import com.proxym.pfe.gestionAssociationBack.user.entities.User;
-import com.proxym.pfe.gestionAssociationBack.user.service.UserService;
+import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
