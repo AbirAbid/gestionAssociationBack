@@ -65,7 +65,8 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <table id="tableBenevole" class="tablesaw  table-bordered table-hover table" data-tablesaw-mode="stack"  style="text-align:center">
+                                <table id="tableBenevole" class="tablesaw  table-bordered table-hover table"
+                                       data-tablesaw-mode="stack" style="text-align:center">
                                     <thead>
                                     <tr>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
@@ -82,8 +83,7 @@
                                         <th scope="col" data-tablesaw-priority="persist" class="border">
                                             Envoyer Email
                                         </th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Affecter</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Libérer</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Actions</th>
 
 
                                     </tr>
@@ -98,38 +98,59 @@
                                         <td th:text="${p.user.telephone}"></td>
 
                                         <td th:text="${p.mission.titre}"></td>
-                                        <td th:text="${p.mission.evenement.titre}"></td>
+
+                                        <td>
+
+                                            <a th:href="@{eventDetail(id=${p.mission.evenement.id})}"
+                                               th:text="${p.mission.evenement.titre}">
+                                            </a>
+
+                                        </td>
 
                                         <td th:text="${p.demandeDate}"></td>
                                         <td>
-                                            <center><a class="btn btn-circle btn-info"
-                                                       th:href="@{sendmailUrL(id=${p.user.username})}">
+
+                                            <a class="btn btn-circle btn-info"
+                                               th:href="@{sendmailUrL(id=${p.user.username})}">
                                                 <i class="far fa-envelope"></i></a>
-                                            </center>
-                                        </td>
-                                        <td>
-
-                                            <a th:if="${p.affected == 0}" class="btn btn-circle btn-success"
-                                               title="affecter"
-                                               th:href="@{affectMissionUrl(username=${p.user.username},id=${p.mission.id})}">
-                                                <i class="far fa-check-circle"></i></a>
-
-
-                                            <a th:if="${p.affected == 1}" class="btn btn-circle btn-success disabled"
-                                               title="affecter"
-                                            >
-                                                <i class="far fa-check-circle"></i></a>
 
                                         </td>
-
                                         <td>
-                                            <a th:if="${p.affected == 1}" class="btn btn-circle btn-danger"
-                                               title="libérer"
-                                               th:href="@{libererMissionUrl(username=${p.user.username},id=${p.mission.id})}"><i
-                                                    class="fas fa-ban"></i></a>
-                                            <a th:if="${p.affected == 0}" class="btn btn-circle btn-danger disabled"
-                                               title="libérer"><i
-                                                    class="fas fa-ban"></i></a>
+                                            <th:block>
+
+
+                                                <div th:if="${p.mission.evenement.dateFin.before(dateJour)}"
+                                                >
+                                                                <span class="badge badge-dark">Passé
+                                                                </span>
+                                                </div>
+                                                <div th:if="${p.mission.evenement.dateFin.after(dateJour)}"
+                                                >
+
+                                                    <a th:if="${p.affected == 0}" class="btn btn-circle btn-success "
+                                                       title="affecter"
+                                                       th:href="@{affectMissionUrl(username=${p.user.username},id=${p.mission.id})}">
+                                                        <i class="far fa-check-circle"></i></a>
+
+
+                                                    <a th:if="${p.affected == 1}"
+                                                       class="btn btn-circle btn-success disabled "
+                                                       title="affecter"
+                                                    >
+                                                        <i class="far fa-check-circle"></i></a>
+
+
+                                                    <a th:if="${p.affected == 1}" class="btn btn-circle btn-danger"
+                                                       title="libérer"
+                                                       th:href="@{libererMissionUrl(username=${p.user.username},id=${p.mission.id})}"><i
+                                                            class="fas fa-ban"></i></a>
+                                                    <a th:if="${p.affected == 0}"
+                                                       class="btn btn-circle btn-danger disabled "
+                                                       title="libérer"><i
+                                                            class="fas fa-ban"></i></a>
+                                                </div>
+
+                                            </th:block>
                                         </td>
 
                                     </tr>
@@ -148,14 +169,13 @@
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Date
                                             participation
                                         </th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        <th scope="col" data-tablesaw-priority="persist" class="border"
+                                            style="visibility:collapse;">
                                             Envoyer Email
                                         </th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        <th scope="col" data-tablesaw-priority="persist" class="border"
+                                            style="visibility:collapse;">
                                             Affecter
-                                        </th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                            Libérer
                                         </th>
 
 

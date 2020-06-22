@@ -9,6 +9,7 @@ import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.ui.Model;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -47,4 +48,6 @@ public interface EvenementService {
     List<EventCountCategories> countCategEvent();
     List<EventCountCategories> countPartByCategorieEvent();
     List<EventParticipCount>countPartByEvent();
+    void eventDetailService(Model model, Long id);
+
 }

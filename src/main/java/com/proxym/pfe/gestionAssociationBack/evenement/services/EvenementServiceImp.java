@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -405,6 +406,29 @@ public class EvenementServiceImp implements EvenementService {
         }
 
         return eventParticipCounts;
+    }
+
+    @Override
+    public void eventDetailService(Model model, Long id) {
+        Evenement e = evenementDao.getEventDaoById(id);
+
+        List<Bien> biens = bienDao.findAllByEventDao(id);
+        List<Mission> missions = missionDao.findAllMissionByEventDao(id);
+        List<UserBien> userBiensEvent =getListDonneursByEvent(e);
+        List<UserMission> userMissionsEvent = getListBenevolesByEvent(e);
+
+
+        model.addAttribute("evenement", e);
+        model.addAttribute("biens", biens);
+        model.addAttribute("userBiens", userBiensEvent);
+        model.addAttribute("missions", missions);
+        model.addAttribute("userMission", userMissionsEvent);
+
+        model.addAttribute("nbbiens", biens.size());
+        model.addAttribute("nbdonneurs", userBiensEvent.size());
+        model.addAttribute("nbmissions", missions.size());
+        model.addAttribute("nbbenevoles", userMissionsEvent.size());
+
     }
 
 

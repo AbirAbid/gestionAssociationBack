@@ -75,7 +75,18 @@
                                         <td th:text="${p.user.nom}"></td>
                                         <td th:text="${p.user.prenom}"></td>
                                         <td th:text="${p.bien.titreBien}"></td>
-                                        <td th:text="${p.bien.evenement.titre}"></td>
+
+
+
+                                        <td>
+
+                                            <a th:href="@{eventDetail(id=${p.bien.evenement.id})}"
+                                               th:text="${p.bien.evenement.titre}">
+                                            </a>
+
+                                        </td>
+
+                                        </td>
 
 
                                         <td th:text="${p.dateParticipation}"></td>

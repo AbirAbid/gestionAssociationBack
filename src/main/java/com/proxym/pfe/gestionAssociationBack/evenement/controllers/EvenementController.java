@@ -221,25 +221,7 @@ public class EvenementController {
     public String eventDetail(Model model, Long id) {
         try {
 
-            Evenement e = evenementService.getOneEventByIdservice(id);
-
-            List<Bien> biens = bienService.findAllByEventService(id);
-            List<Mission> missions = missionService.findAllMissionByEventService(id);
-            List<UserBien> userBiensEvent = evenementService.getListDonneursByEvent(e);
-            List<UserMission> userMissionsEvent = evenementService.getListBenevolesByEvent(e);
-
-
-            model.addAttribute("evenement", e);
-            model.addAttribute("biens", biens);
-            model.addAttribute("userBiens", userBiensEvent);
-            model.addAttribute("missions", missions);
-            model.addAttribute("userMission", userMissionsEvent);
-
-            model.addAttribute("nbbiens", biens.size());
-            model.addAttribute("nbdonneurs", userBiensEvent.size());
-            model.addAttribute("nbmissions", missions.size());
-            model.addAttribute("nbbenevoles", userMissionsEvent.size());
-
+            evenementService.eventDetailService(model, id);
 
             return "evenement/evenementDetail";
         } catch (Exception e) {

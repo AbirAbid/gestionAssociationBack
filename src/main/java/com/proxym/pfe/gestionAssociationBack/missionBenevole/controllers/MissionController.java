@@ -1,20 +1,29 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.controllers;
 
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
+import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
+import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
+import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
+import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,13 +35,21 @@ public class MissionController {
     MissionService missionService;
     @Autowired
     MembreService membreService;
+    @Autowired
+    EvenementService evenementService;
 
 
     @RequestMapping(value = "/listbenevoles", method = RequestMethod.GET)
     public String listBenevoles(Model model) {
 
         try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
+            String dateJourString = format.format(new Date());
+            Date dateJour = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateJourString);
+
+
+            model.addAttribute("dateJour", dateJour);
             List<UserMission> userMissions = missionService.getListMissionUser();
             model.addAttribute("userMissions", userMissions);
 
@@ -84,7 +101,6 @@ public class MissionController {
     }
 
 
-
     /***send email*****/
     @RequestMapping(value = "/sendmailUrL")
     public String sendMail(Model model, String id) {
@@ -115,6 +131,24 @@ public class MissionController {
             return "pagesError/error";
         }
 
+    }
+
+
+    /*********************************Event Detail ****************************/
+
+    @GetMapping(value = "/eventDetail")
+
+    public String eventDetail(Model model, Long id) {
+        try {
+
+            evenementService.eventDetailService(model, id);
+
+
+            return "evenement/evenementDetail";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "pagesError/error";
+        }
     }
 
 }
