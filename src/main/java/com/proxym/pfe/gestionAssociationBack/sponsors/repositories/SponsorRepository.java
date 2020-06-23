@@ -1,6 +1,5 @@
 package com.proxym.pfe.gestionAssociationBack.sponsors.repositories;
 
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Etudiant.Etudiant;
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

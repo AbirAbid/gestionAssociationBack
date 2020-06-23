@@ -172,7 +172,12 @@
 
                                                 <tr>
                                                     <td th:text="${p.mission.titre}"></td>
-                                                    <td th:text="${p.mission.evenement.titre}"></td>
+                                                    <td >
+
+                                                        <a th:href="@{eventDetail(id=${p.mission.evenement.id})}"
+                                                           th:text="${p.mission.evenement.titre}">
+                                                        </a>
+                                                    </td>
                                                     <td th:text="${p.demandeDate}"></td>
 
 
@@ -213,7 +218,12 @@
                                                         <td><span class="label label-rounded label-danger"
                                                                                             th:text="${p.qteDonnee}"></span></td>
 
-                                                        <td th:text="${p.bien.evenement.titre}"></td>
+                                                        <td>
+
+                                                            <a th:href="@{eventDetail(id=${p.bien.evenement.id})}"
+                                                               th:text="${p.bien.evenement.titre}">
+                                                            </a>
+                                                        </td>
                                                         <td th:text="${p.dateParticipation}"></td>
 
 

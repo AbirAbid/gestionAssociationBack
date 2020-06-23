@@ -1,6 +1,8 @@
 package com.proxym.pfe.gestionAssociationBack.membre.controllers;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
+import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
+import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -22,6 +24,8 @@ public class MembreController {
     MembreService membreService;
     @Autowired
     public JavaMailSender emailSender;
+    @Autowired
+    EvenementService evenementService;
 
     @GetMapping(value = "listeMembres")
     public String showList(Model model) {
@@ -41,7 +45,7 @@ public class MembreController {
 
     }
 
-    @RequestMapping(value = "/membreDetailUrl",method = RequestMethod.GET)
+    @RequestMapping(value = "/membreDetailUrl", method = RequestMethod.GET)
     public String membreDetail(Model model, String id) {
 
         try {
@@ -64,7 +68,7 @@ public class MembreController {
 
     /***Send mail***/
 
-    @RequestMapping(value = "/sendmailUrL",method = RequestMethod.GET)
+    @RequestMapping(value = "/sendmailUrL", method = RequestMethod.GET)
     public String sendMail(Model model, String id) {
 
         try {
@@ -81,7 +85,7 @@ public class MembreController {
     }
 
 
-    @RequestMapping(value = "/sendHtmlEmailUrl",method = RequestMethod.POST)
+    @RequestMapping(value = "/sendHtmlEmailUrl", method = RequestMethod.POST)
     public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
             membreService.sendMailMembre(mailToSend);
@@ -95,5 +99,21 @@ public class MembreController {
 
     }
 
+    /*********************************Event Detail ****************************/
+
+    @GetMapping(value = "/eventDetail")
+
+    public String eventDetail(Model model, Long id) {
+        try {
+
+            evenementService.eventDetailService(model, id);
+
+
+            return "evenement/evenementDetail";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "pagesError/error";
+        }
+    }
 
 }

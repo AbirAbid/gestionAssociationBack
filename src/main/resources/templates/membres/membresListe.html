@@ -67,7 +67,7 @@
                                     <td th:text="${membre.telephone}"></td>
                                     <td th:text="${membre.username}"></td>
                                     <td>
-                                        <center><span class=" fas fa-star" style="color: #ff0020"></span></center>
+                                       <span class=" fas fa-star" style="color: #ff0020"></span>
                                     </td>
 
                                     <td>
@@ -84,16 +84,15 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-info"
+                                    <a class="btn btn-circle btn-info"
                                                    th:href="@{sendmailUrL(id=${membre.username})}">
                                             <i class="far fa-envelope"></i></a>
-                                        </center>
+
                                     </td>
                                     <td>
-                                        <center><a class="btn btn-circle btn-success"
+                                       <a class="btn btn-circle btn-success"
                                                    th:href="@{membreDetailUrl(id=${membre.username})}">
-                                            <i class="fas fa-eye"></i></a></center>
-                                    </td>
+                                            <i class="fas fa-eye"></i></a>
                                 </tr>
                                 </tbody>
                                 <tfoot>
@@ -130,19 +129,13 @@
 
 
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
+
         <!-- footer -->
         <div th:insert="fragments/footer.html :: footerPage"></div>
 
-        <!-- End footer -->
-        <!-- ============================================================== -->
+
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
+
 </div>
 <div th:insert="fragments/script_footer.html ::scriptFooter"></div>
 <script th:src="|../js_files/search_filter.js|"></script>

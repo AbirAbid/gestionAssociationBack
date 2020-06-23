@@ -33,6 +33,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                 th:if="${message}">
+                                <strong th:text="${message}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                                 th:if="${messageFree}">
+                                <strong th:text="${messageFree}"></strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <h4 class="card-title">Détail événement</h4>
                             <div id="accordian-part">
                                 <div id="accordian-3">
@@ -173,7 +187,7 @@
                                                 </div>
                                                 <table class="tablesaw  table-bordered table-hover table"
                                                        th:if="${nbbiens!=0}"
-                                                       data-tablesaw-mode="stack" id="tab1">
+                                                       data-tablesaw-mode="stack" id="tab1" style="text-align:center">
 
 
                                                     <thead>
@@ -257,7 +271,7 @@
                                                 </div>
                                                 <table class="tablesaw  table-bordered table-hover table"
                                                        th:if="${nbmissions!=0}"
-                                                       data-tablesaw-mode="stack" id="tab2">
+                                                       data-tablesaw-mode="stack" id="tab2" style="text-align:center">
 
 
                                                     <thead>
@@ -314,7 +328,7 @@
                                                 </div>
                                                 <table class="tablesaw  table-bordered table-hover table"
                                                        th:if="${nbdonneurs!=0}"
-                                                       data-tablesaw-mode="stack" id="tab3">
+                                                       data-tablesaw-mode="stack" id="tab3" style="text-align:center">
 
 
                                                     <thead>
@@ -372,9 +386,10 @@
                                                         Cet événement ne contient pas des bénévoles.
                                                     </div>
                                                 </div>
+
                                                 <table class="tablesaw  table-bordered table-hover table"
                                                        th:if="${nbbenevoles!=0}" id="tab4"
-                                                       data-tablesaw-mode="stack">
+                                                       data-tablesaw-mode="stack" style="text-align:center">
 
 
                                                     <thead>
@@ -384,6 +399,9 @@
                                                         </th>
                                                         <th scope="col" data-tablesaw-priority="persist" class="border">
                                                             Titre de la mission
+                                                        </th>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                                            Actions
                                                         </th>
 
 
@@ -397,6 +415,43 @@
                                                         </td>
                                                         <td th:text="${usermission.mission.titre}">
 
+                                                        </td>
+                                                        <td>
+                                                            <th:block>
+
+
+                                                                <div th:if="${usermission.mission.evenement.dateFin.before(dateJour)}"
+                                                                >
+                                                                <span class="badge badge-dark">Passé
+                                                                </span>
+                                                                </div>
+                                                                <div th:if="${usermission.mission.evenement.dateFin.after(dateJour)}"
+                                                                >
+
+                                                                    <a th:if="${usermission.affected == 0}" class="btn btn-circle btn-success "
+                                                                       title="affecter"
+                                                                       th:href="@{affectMissionUrl(username=${usermission.user.username},id=${usermission.mission.id})}">
+                                                                        <i class="far fa-check-circle"></i></a>
+
+
+                                                                    <a th:if="${usermission.affected == 1}"
+                                                                       class="btn btn-circle btn-success disabled "
+                                                                       title="affecter"
+                                                                    >
+                                                                        <i class="far fa-check-circle"></i></a>
+
+
+                                                                    <a th:if="${usermission.affected == 1}" class="btn btn-circle btn-danger"
+                                                                       title="libérer"
+                                                                       th:href="@{libererMissionUrl(username=${usermission.user.username},id=${usermission.mission.id})}"><i
+                                                                            class="fas fa-ban"></i></a>
+                                                                    <a th:if="${usermission.affected == 0}"
+                                                                       class="btn btn-circle btn-danger disabled "
+                                                                       title="libérer"><i
+                                                                            class="fas fa-ban"></i></a>
+                                                                </div>
+
+                                                            </th:block>
                                                         </td>
 
 

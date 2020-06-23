@@ -3,11 +3,9 @@ package com.proxym.pfe.gestionAssociationBack.biens.services;
 import com.proxym.pfe.gestionAssociationBack.biens.dto.ParticiperBienFormDto;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public interface BienService {
 

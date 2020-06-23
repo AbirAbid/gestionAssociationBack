@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,10 +25,6 @@ public interface EvenementService {
     Evenement getOneEventByIdservice(Long id);
 
     void supprimerEvent(Long id);
-
-    Page<Evenement> findAllPageEvenementService(PageRequest pageRequest);
-
-    Page<Evenement> rehercherPageEvenementService(String mc, PageRequest pageRequest);
 
     Optional<Evenement> findEventByIdService(Long id);
 
@@ -48,6 +45,6 @@ public interface EvenementService {
     List<EventCountCategories> countCategEvent();
     List<EventCountCategories> countPartByCategorieEvent();
     List<EventParticipCount>countPartByEvent();
-    void eventDetailService(Model model, Long id);
+    void eventDetailService(Model model, Long id) throws ParseException;
 
 }

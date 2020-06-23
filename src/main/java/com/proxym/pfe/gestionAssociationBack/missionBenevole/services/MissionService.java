@@ -24,9 +24,9 @@ public interface MissionService {
 
     Mission findMissionByIdService(Long id);
 
-    void affecterMission(User user, Mission mission);
+    void affecterMission(String username, Long id);
 
-    void libererMission(User user, Mission mission);
+    void libererMission(String username, Long id);
 
     void participerMissionRest(ParticiperMissionDto participerMissionDto, User user);
 

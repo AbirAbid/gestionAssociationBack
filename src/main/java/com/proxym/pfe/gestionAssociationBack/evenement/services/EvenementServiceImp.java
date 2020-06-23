@@ -24,6 +24,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -71,15 +73,6 @@ public class EvenementServiceImp implements EvenementService {
 
     }
 
-    @Override
-    public Page<Evenement> findAllPageEvenementService(PageRequest pageRequest) {
-        return evenementDao.findAllPageEvenementDao(pageRequest);
-    }
-
-    @Override
-    public Page<Evenement> rehercherPageEvenementService(String mc, PageRequest pageRequest) {
-        return evenementDao.rehercherPageEvenementDao(mc, pageRequest);
-    }
 
     @Override
     public Optional<Evenement> findEventByIdService(Long id) {
@@ -409,21 +402,25 @@ public class EvenementServiceImp implements EvenementService {
     }
 
     @Override
-    public void eventDetailService(Model model, Long id) {
+    public void eventDetailService(Model model, Long id) throws ParseException {
         Evenement e = evenementDao.getEventDaoById(id);
 
         List<Bien> biens = bienDao.findAllByEventDao(id);
         List<Mission> missions = missionDao.findAllMissionByEventDao(id);
-        List<UserBien> userBiensEvent =getListDonneursByEvent(e);
+        List<UserBien> userBiensEvent = getListDonneursByEvent(e);
         List<UserMission> userMissionsEvent = getListBenevolesByEvent(e);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+        String dateJourString = format.format(new Date());
+        Date dateJour = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateJourString);
 
 
+        model.addAttribute("dateJour", dateJour);
         model.addAttribute("evenement", e);
         model.addAttribute("biens", biens);
         model.addAttribute("userBiens", userBiensEvent);
         model.addAttribute("missions", missions);
         model.addAttribute("userMission", userMissionsEvent);
-
         model.addAttribute("nbbiens", biens.size());
         model.addAttribute("nbdonneurs", userBiensEvent.size());
         model.addAttribute("nbmissions", missions.size());

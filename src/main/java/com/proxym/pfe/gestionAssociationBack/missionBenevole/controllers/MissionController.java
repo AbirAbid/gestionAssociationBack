@@ -65,14 +65,13 @@ public class MissionController {
 
     @RequestMapping(value = "/affectMissionUrl", method = RequestMethod.GET)
 
-    public String affectMission(Model model, String username, Long id, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String affectMission(String username, Long id,
                                 RedirectAttributes redirectAttributes) {
         try {
+
+            missionService.affecterMission(username, id);
             User user = userService.findUserByUsernameService(username);
             Mission mission = missionService.findMissionByIdService(id);
-
-            missionService.affecterMission(user, mission);
-
             redirectAttributes.addFlashAttribute("message", "Vous avez affecter " + user.getNom() + " à " + mission.getTitre());
 
             return "redirect:/mission/listbenevoles";
@@ -84,13 +83,12 @@ public class MissionController {
     /******************************Liberer Missio *********************************************/
     @RequestMapping(value = "/libererMissionUrl", method = RequestMethod.GET)
 
-    public String libererMission(Model model, String username, Long id, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String libererMission( String username, Long id,
                                  RedirectAttributes redirectAttributes) {
         try {
 
             User user = userService.findUserByUsernameService(username);
-            Mission mission = missionService.findMissionByIdService(id);
-            missionService.libererMission(user, mission);
+            missionService.libererMission(username, id);
 
             redirectAttributes.addFlashAttribute("messageFree", "Vous avez libérer " + user.getNom());
 

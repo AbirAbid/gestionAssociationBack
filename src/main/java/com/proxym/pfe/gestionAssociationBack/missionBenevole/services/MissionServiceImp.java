@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class  MissionServiceImp implements MissionService {
+public class MissionServiceImp implements MissionService {
     @Autowired
     MissionDao missionDao;
     @Autowired
@@ -60,7 +60,10 @@ public class  MissionServiceImp implements MissionService {
     }
 
     @Override
-    public void affecterMission(User user, Mission mission) {
+    public void affecterMission(String username, Long id) {
+
+        User user = userDao.findByUsernameDao(username);
+        Mission mission = missionDao.findMissionByIdDao(id);
 
         int index = 0;
 
@@ -84,7 +87,11 @@ public class  MissionServiceImp implements MissionService {
     }
 
     @Override
-    public void libererMission(User user, Mission mission) {
+    public void libererMission(String username, Long id) {
+
+        User user = userDao.findByUsernameDao(username);
+        Mission mission = missionDao.findMissionByIdDao(id);
+
         int index = 0;
 
         List<UserMission> userMissions = user.getUserMissions();
@@ -201,7 +208,7 @@ public class  MissionServiceImp implements MissionService {
 
         List<MissionUserDisplay> missionUserDisplays = new ArrayList<>();
 
-//pour éliminer redondance
+        //pour éliminer redondance
         for (int i = 0; i < missions.size(); i++) {
             MissionUserDisplay missionUserDisplay = new MissionUserDisplay();
             missionUserDisplay.setMission(missions.get(i));
@@ -260,7 +267,6 @@ public class  MissionServiceImp implements MissionService {
         userMissions.remove(index);
         userDao.saveUserDao(user);
     }
-
 
 
 }

@@ -1,12 +1,5 @@
 package com.proxym.pfe.gestionAssociationBack;
 
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Book;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.BookRepositories;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.Publisher;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.manytomany.repositories.BookPublisher;
-import com.proxym.pfe.gestionAssociationBack.bookPackage.manytomany.repositories.PublisherRepository;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
-import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.repositories.MissionRepository;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;
@@ -18,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
 
 /*
 
@@ -171,11 +163,7 @@ public class GestionAssociationBackApplication {
 public class GestionAssociationBackApplication implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(GestionAssociationBackApplication.class);
 
-    @Autowired
-    private BookRepositories bookRepository;
 
-    @Autowired
-    private PublisherRepository publisherRepository;
     @Autowired
     UserRepository userRepository;
     @Autowired

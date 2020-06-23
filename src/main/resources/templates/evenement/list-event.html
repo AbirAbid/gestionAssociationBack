@@ -77,8 +77,7 @@
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date début</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date fin</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Detail</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Modifier</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Supprimer</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Actions</th>
 
                                 </tr>
                                 </thead>
@@ -106,10 +105,10 @@
                                     </td>
                                     <td th:text="${event.dateFin}"></td>
                                     <td>
-                                        <a class="btn btn-circle btn-secondary" title="Détail"
+                                        <a class="btn btn-circle btn-success"
+                                           title="Détail"
                                            th:href="@{eventDetail(id=${event.id})}">
-                                            <i class="fas fa-info"></i></a>
-
+                                            <i class="fas fa-eye"></i></a>
                                     </td>
 
 
@@ -118,10 +117,7 @@
                                            th:href="@{formulaireUpdateEvent(id=${event.id})}"> <i
                                                 class="fas fa-edit"></i></a>
 
-                                    </td>
 
-
-                                    <td>
                                         <!--    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog" role="document">
@@ -162,18 +158,16 @@
 
 
                                                   </center>-->
-                                        <center><a class="btn btn-circle btn-danger" title="supprimer"
+                                        <a class="btn btn-circle btn-danger" title="supprimer"
                                                    onclick="return confirm('Êtes-vous sûr  de supprimer l événement?')"
                                                    th:href="@{supprimer(id=${event.id})}"
                                                    th:if="${event.active == 0}"> <i
                                                 class="fas fa-trash-alt"></i></a>
-                                            <center>
-                                                <center>
+
                                                     <a th:if="${event.active == 1}"
                                                        class="btn btn-circle btn-danger disabled"
                                                     ><i
                                                             class="fas fa-trash-alt"></i></a>
-                                                </center>
                                     </td>
 
                                 </tr>
@@ -187,15 +181,13 @@
                                     </th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date début</th>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Date fin</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"  style="visibility:collapse;">
                                         Detail
                                     </th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                        Modifier
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"     style="visibility:collapse;">
+                                        Actions
                                     </th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                        Supprimer
-                                    </th>
+
 
                                 </tr>
                                 </tfoot>

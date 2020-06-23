@@ -12,6 +12,7 @@ import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionSer
 import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.sponsors.repositories.SponsorRepository;
 import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
+import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -217,17 +218,57 @@ public class EvenementController {
     /*********************************Event Detail ****************************/
 
     @GetMapping(value = "/eventDetail")
-
     public String eventDetail(Model model, Long id) {
         try {
-
             evenementService.eventDetailService(model, id);
-
             return "evenement/evenementDetail";
         } catch (Exception e) {
             System.out.println(e);
             return "pagesError/error";
         }
     }
+
+
+    /***********Affecter mission **********/
+    @RequestMapping(value = "/affectMissionUrl", method = RequestMethod.GET)
+
+    public String affectMission( String username, Long id, Long ide,
+                                RedirectAttributes redirectAttributes) {
+        try {
+
+            missionService.affecterMission(username, id);
+            User user = userService.findUserByUsernameService(username);
+            Mission mission = missionService.findMissionByIdService(id);
+            // evenementService.eventDetailService(model, ide);
+            Long idEvent = mission.getEvenement().getId();
+            redirectAttributes.addFlashAttribute("message", "Vous avez affecter " + user.getNom() + " à " + mission.getTitre());
+            return "redirect:/evenement/eventDetail?id=" + idEvent;
+        } catch (Exception e) {
+            return "pagesError/error";
+        }
+    }
+
+    /******************************Liberer Mission *********************************************/
+    @RequestMapping(value = "/libererMissionUrl", method = RequestMethod.GET)
+
+    public String libererMission(String username, Long id,
+                                 RedirectAttributes redirectAttributes) {
+        try {
+
+            User user = userService.findUserByUsernameService(username);
+            missionService.libererMission(username, id);
+            Mission mission = missionService.findMissionByIdService(id);
+
+            redirectAttributes.addFlashAttribute("messageFree", "Vous avez libérer " + user.getNom());
+            Long idEvent = mission.getEvenement().getId();
+
+            return "redirect:/evenement/eventDetail?id=" + idEvent;
+
+        } catch (Exception e) {
+            return "pagesError/error";
+        }
+    }
+
+
 }
 
