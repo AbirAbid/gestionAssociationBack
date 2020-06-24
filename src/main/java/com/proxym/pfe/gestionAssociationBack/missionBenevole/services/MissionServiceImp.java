@@ -130,6 +130,7 @@ public class MissionServiceImp implements MissionService {
         userMission.setAffected(0);
         userMission.setEnAttente(1);
         userMission.setDemandeDate(participerMissionDto.getDemandeDate());
+        userMission.setDateDisponibiliteList(participerMissionDto.getDateDisponibiliteList());
         System.out.println("******************** userMission *******************" + userMission);
         user.getUserMissions().add(userMission);
         System.out.println("**************  user.getUserMissions().size()**********" + user.getUserMissions().size());
@@ -149,13 +150,18 @@ public class MissionServiceImp implements MissionService {
         Set<User> set = new HashSet<>(users);
         users.clear();
         users.addAll(set);
-
+        String[] arrOfStr;
         List<UserMission> userMissions = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             for (int j = 0; j < users.get(i).getUserMissions().size(); j++) {
                 userMissions.add(users.get(i).getUserMissions().get(j));
+
             }
+           //
+             arrOfStr  = users.get(i).getUserMissions().get(i).getDateDisponibiliteList().split("/", -1);
+            System.out.println("arrOfStr::::" + arrOfStr.length);
         }
+
         return userMissions;
     }
 

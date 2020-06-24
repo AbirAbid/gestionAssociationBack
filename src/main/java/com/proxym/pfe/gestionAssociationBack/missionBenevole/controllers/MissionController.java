@@ -83,7 +83,7 @@ public class MissionController {
     /******************************Liberer Missio *********************************************/
     @RequestMapping(value = "/libererMissionUrl", method = RequestMethod.GET)
 
-    public String libererMission( String username, Long id,
+    public String libererMission(String username, Long id,
                                  RedirectAttributes redirectAttributes) {
         try {
 
@@ -141,8 +141,8 @@ public class MissionController {
 
             evenementService.eventDetailService(model, id);
 
+            return "redirect:/evenement/eventDetail?id="+id;
 
-            return "evenement/evenementDetail";
         } catch (Exception e) {
             System.out.println(e);
             return "pagesError/error";

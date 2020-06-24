@@ -430,7 +430,7 @@
 
                                                                     <a th:if="${usermission.affected == 0}" class="btn btn-circle btn-success "
                                                                        title="affecter"
-                                                                       th:href="@{affectMissionUrl(username=${usermission.user.username},id=${usermission.mission.id})}">
+                                                                       th:href="@{affectMissionUrlE(username=${usermission.user.username},id=${usermission.mission.id})}">
                                                                         <i class="far fa-check-circle"></i></a>
 
 
@@ -443,7 +443,7 @@
 
                                                                     <a th:if="${usermission.affected == 1}" class="btn btn-circle btn-danger"
                                                                        title="libérer"
-                                                                       th:href="@{libererMissionUrl(username=${usermission.user.username},id=${usermission.mission.id})}"><i
+                                                                       th:href="@{libererMissionUrlE(username=${usermission.user.username},id=${usermission.mission.id})}"><i
                                                                             class="fas fa-ban"></i></a>
                                                                     <a th:if="${usermission.affected == 0}"
                                                                        class="btn btn-circle btn-danger disabled "

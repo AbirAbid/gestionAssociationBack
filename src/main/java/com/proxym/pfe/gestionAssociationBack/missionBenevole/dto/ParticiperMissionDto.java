@@ -12,6 +12,15 @@ public class ParticiperMissionDto {
 
     private Mission mission;
     private Date demandeDate;
+    private String dateDisponibiliteList;
+
+    public String getDateDisponibiliteList() {
+        return dateDisponibiliteList;
+    }
+
+    public void setDateDisponibiliteList(String dateDisponibiliteList) {
+        this.dateDisponibiliteList = dateDisponibiliteList;
+    }
 
     public Mission getMission() {
         return mission;

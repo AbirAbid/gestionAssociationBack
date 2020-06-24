@@ -230,16 +230,13 @@ public class EvenementController {
 
 
     /***********Affecter mission **********/
-    @RequestMapping(value = "/affectMissionUrl", method = RequestMethod.GET)
-
-    public String affectMission( String username, Long id, Long ide,
+    @RequestMapping(value = "/affectMissionUrlE", method = RequestMethod.GET)
+    public String affectMission(String username, Long id,
                                 RedirectAttributes redirectAttributes) {
         try {
-
             missionService.affecterMission(username, id);
             User user = userService.findUserByUsernameService(username);
             Mission mission = missionService.findMissionByIdService(id);
-            // evenementService.eventDetailService(model, ide);
             Long idEvent = mission.getEvenement().getId();
             redirectAttributes.addFlashAttribute("message", "Vous avez affecter " + user.getNom() + " à " + mission.getTitre());
             return "redirect:/evenement/eventDetail?id=" + idEvent;
@@ -249,7 +246,7 @@ public class EvenementController {
     }
 
     /******************************Liberer Mission *********************************************/
-    @RequestMapping(value = "/libererMissionUrl", method = RequestMethod.GET)
+    @RequestMapping(value = "/libererMissionUrlE", method = RequestMethod.GET)
 
     public String libererMission(String username, Long id,
                                  RedirectAttributes redirectAttributes) {

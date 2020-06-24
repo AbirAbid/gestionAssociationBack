@@ -84,6 +84,7 @@
                                             Envoyer Email
                                         </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Actions</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date disponib</th>
 
 
                                     </tr>
@@ -152,7 +153,7 @@
 
                                             </th:block>
                                         </td>
-
+                                        <td th:text="${p.dateDisponibiliteList}"></td>
                                     </tr>
 
                                     </tbody>
@@ -177,7 +178,7 @@
                                             style="visibility:collapse;">
                                             Affecter
                                         </th>
-
+<th   style="visibility:collapse;"></th>
 
                                     </tr>
                                     </tfoot>
