@@ -81,10 +81,12 @@
                                             participation
                                         </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">
+                                            Disponibilités
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">
                                             Envoyer Email
                                         </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Actions</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date disponib</th>
 
 
                                     </tr>
@@ -109,6 +111,12 @@
                                         </td>
 
                                         <td th:text="${p.demandeDate}"></td>
+                                        <td th:text="${p.dateDisponibiliteList}">
+
+
+
+
+                                        </td>
                                         <td>
 
                                             <a class="btn btn-circle btn-info"
@@ -153,7 +161,7 @@
 
                                             </th:block>
                                         </td>
-                                        <td th:text="${p.dateDisponibiliteList}"></td>
+
                                     </tr>
 
                                     </tbody>
@@ -167,8 +175,12 @@
                                         </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
 
+
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Date
                                             participation
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">
+                                            Disponibilités
                                         </th>
                                         <th scope="col" data-tablesaw-priority="persist" class="border"
                                             style="visibility:collapse;">
@@ -178,7 +190,6 @@
                                             style="visibility:collapse;">
                                             Affecter
                                         </th>
-<th   style="visibility:collapse;"></th>
 
                                     </tr>
                                     </tfoot>

@@ -400,6 +400,8 @@
                                                         <th scope="col" data-tablesaw-priority="persist" class="border">
                                                             Titre de la mission
                                                         </th>
+                                                        <th scope="col" data-tablesaw-priority="persist" class="border">Disponibilités</th>
+
                                                         <th scope="col" data-tablesaw-priority="persist" class="border">
                                                             Actions
                                                         </th>
@@ -416,6 +418,8 @@
                                                         <td th:text="${usermission.mission.titre}">
 
                                                         </td>
+                                                        <td th:text="${usermission.dateDisponibiliteList}"></td>
+
                                                         <td>
                                                             <th:block>
 

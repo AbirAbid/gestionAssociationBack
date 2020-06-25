@@ -162,15 +162,15 @@
                                                 <tr>
                                                     <th scope="col">Titre Mission</th>
                                                     <th scope="col">Événement</th>
-
                                                     <th scope="col">Date Demande</th>
+                                                    <th scope="col">Disponibilités</th>
                                                 </tr>
                                                 </thead>
 
 
-                                                <tbody th:each="p : ${userMissions}">
+                                                <tbody >
 
-                                                <tr>
+                                                <tr th:each="p : ${userMissions}">
                                                     <td th:text="${p.mission.titre}"></td>
                                                     <td >
 
@@ -179,6 +179,8 @@
                                                         </a>
                                                     </td>
                                                     <td th:text="${p.demandeDate}"></td>
+                                                    <td th:text="${p.dateDisponibiliteList}"></td>
+
 
 
                                                 </tr>

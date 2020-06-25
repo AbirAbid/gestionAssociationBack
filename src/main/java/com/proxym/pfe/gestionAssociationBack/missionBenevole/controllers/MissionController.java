@@ -7,6 +7,7 @@ import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
 import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.UserMissionDto;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
@@ -51,6 +52,9 @@ public class MissionController {
 
             model.addAttribute("dateJour", dateJour);
             List<UserMission> userMissions = missionService.getListMissionUser();
+            List<UserMissionDto> userMissionDtos = missionService.getListMissionUserDto();
+            model.addAttribute("dateDispon", userMissionDtos);
+
             model.addAttribute("userMissions", userMissions);
 
 

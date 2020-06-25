@@ -1,6 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.services;
 
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.ParticiperMissionDto;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.UserMissionDto;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionUserDisplay;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -31,6 +32,7 @@ public interface MissionService {
     void participerMissionRest(ParticiperMissionDto participerMissionDto, User user);
 
     List<UserMission> getListMissionUser();
+    List<UserMissionDto> getListMissionUserDto();
 
     List<UserMission> getListMissionUserRest(String username) throws IOException;
 

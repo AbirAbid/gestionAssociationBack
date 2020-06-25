@@ -5,6 +5,7 @@ import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.ParticiperMissionDto;
+import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.UserMissionDto;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.MissionUserDisplay;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -14,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MissionServiceImp implements MissionService {
@@ -150,19 +148,67 @@ public class MissionServiceImp implements MissionService {
         Set<User> set = new HashSet<>(users);
         users.clear();
         users.addAll(set);
+
         String[] arrOfStr;
+        List<UserMissionDto> userMissionDtos = new ArrayList<>();
         List<UserMission> userMissions = new ArrayList<>();
+        List<String> dateDisponib = new ArrayList<>();
+
         for (int i = 0; i < users.size(); i++) {
             for (int j = 0; j < users.get(i).getUserMissions().size(); j++) {
+
                 userMissions.add(users.get(i).getUserMissions().get(j));
 
+                dateDisponib = Arrays.asList(users.get(i).getUserMissions().get(j).getDateDisponibiliteList().split("/", -1));
+
+                UserMissionDto userMissionDto=new UserMissionDto();
+                userMissionDto.setDateListDispon(dateDisponib);
+                userMissionDto.setUserMissions(userMissions);
+
+                userMissionDtos.add(userMissionDto);
+
+
             }
-           //
-             arrOfStr  = users.get(i).getUserMissions().get(i).getDateDisponibiliteList().split("/", -1);
-            System.out.println("arrOfStr::::" + arrOfStr.length);
+
         }
+        System.out.println("arrOfStr::::" + userMissionDtos.size());
 
         return userMissions;
+    }
+
+    @Override
+    public List<UserMissionDto> getListMissionUserDto() {
+        List<User> users = userDao.getAllBenevolesDao();
+        //    System.out.println("users with duplicate  "+ users);
+        //eliminer les doublons
+        Set<User> set = new HashSet<>(users);
+        users.clear();
+        users.addAll(set);
+
+        List<UserMissionDto> userMissionDtos = new ArrayList<>();
+        List<UserMission> userMissions = new ArrayList<>();
+        List<String> dateDisponib = new ArrayList<>();
+
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = 0; j < users.get(i).getUserMissions().size(); j++) {
+
+                userMissions.add(users.get(i).getUserMissions().get(j));
+
+                dateDisponib = Arrays.asList(users.get(i).getUserMissions().get(j).getDateDisponibiliteList().split("/", -1));
+
+                UserMissionDto userMissionDto=new UserMissionDto();
+                userMissionDto.setDateListDispon(dateDisponib);
+                userMissionDto.setUserMissions(userMissions);
+
+                userMissionDtos.add(userMissionDto);
+
+
+            }
+
+        }
+        System.out.println("arrOfStr::::" + userMissionDtos.size());
+
+        return userMissionDtos;
     }
 
     /***methode get allParicipation By user****/

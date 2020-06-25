@@ -233,8 +233,8 @@ $(document).ready(function () {
             oSettings.oLanguage.sZeroRecords = "<center><span class=\"alert alert-secondary\" >Désolé, votre recherche n'a retourné aucun résultat.</span> </center>"
         },
         "columnDefs": [
-            {"orderable": false, "targets": 6},
-            {"orderable": false, "targets": 7}
+            {"orderable": false, "targets": 7},
+            {"orderable": false, "targets": 8}
 
 
         ]
