@@ -1,6 +1,5 @@
-package com.proxym.pfe.gestionAssociationBack.user.services;
+package com.proxym.pfe.gestionAssociationBack.user.services.auth_services;
 
-import com.proxym.pfe.gestionAssociationBack.user.dao.RoleDao;
 import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.repositories.UserRepository;

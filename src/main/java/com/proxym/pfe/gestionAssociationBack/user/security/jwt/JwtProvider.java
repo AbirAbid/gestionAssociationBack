@@ -1,6 +1,6 @@
 package com.proxym.pfe.gestionAssociationBack.user.security.jwt;
 
-import com.proxym.pfe.gestionAssociationBack.user.services.UserPrinciple;
+import com.proxym.pfe.gestionAssociationBack.user.services.auth_services.UserPrinciple;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

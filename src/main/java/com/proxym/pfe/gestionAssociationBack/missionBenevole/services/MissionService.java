@@ -17,9 +17,9 @@ public interface MissionService {
 
     Mission saveMissionService(Mission mission);
 
-    List<Mission> findAllMissionService();
+    List<Mission> findAllMissionService() throws IOException;
 
-    List<Mission> findAllMissionByEventService(Long id);
+    List<Mission> findAllMissionByEventService(Long id) throws IOException;
 
     List<Mission> findAllByEvenement_VilleService(String ville);
 

@@ -1,4 +1,4 @@
-package com.proxym.pfe.gestionAssociationBack.membre.entities;
+package com.proxym.pfe.gestionAssociationBack.user.dto;
 
 import lombok.Data;
 

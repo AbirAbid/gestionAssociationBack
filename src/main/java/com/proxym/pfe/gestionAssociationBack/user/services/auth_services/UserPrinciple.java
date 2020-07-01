@@ -1,4 +1,4 @@
-package com.proxym.pfe.gestionAssociationBack.user.services;
+package com.proxym.pfe.gestionAssociationBack.user.services.auth_services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;

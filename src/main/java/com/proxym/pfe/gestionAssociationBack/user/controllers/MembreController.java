@@ -1,18 +1,18 @@
-package com.proxym.pfe.gestionAssociationBack.membre.controllers;
+package com.proxym.pfe.gestionAssociationBack.user.controllers;
 
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
-import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
-import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
-import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
+import com.proxym.pfe.gestionAssociationBack.user.dto.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
+import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,18 +20,20 @@ import java.util.List;
 @Controller
 @RequestMapping("/membres/")
 public class MembreController {
+
     @Autowired
-    MembreService membreService;
+    UserService userService;
     @Autowired
     public JavaMailSender emailSender;
     @Autowired
     EvenementService evenementService;
 
+
     @GetMapping(value = "listeMembres")
     public String showList(Model model) {
         try {
 
-            List<User> users = membreService.getAllMembreService();
+            List<User> users = userService.getAllMembreService();
 
             model.addAttribute("pagesMembres", users);
 
@@ -49,7 +51,7 @@ public class MembreController {
     public String membreDetail(Model model, String id) {
 
         try {
-            User user = membreService.getOneMembreService(id);
+            User user = userService.getOneMembreService(id);
             List<UserBien> userBiens = user.getUserBiens();
             List<UserMission> userMissions = user.getUserMissions();
 
@@ -88,7 +90,7 @@ public class MembreController {
     @RequestMapping(value = "/sendHtmlEmailUrl", method = RequestMethod.POST)
     public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
-            membreService.sendMailMembre(mailToSend);
+            userService.sendMailMembre(mailToSend);
             redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
 
             return "redirect:/membres/listeMembres";

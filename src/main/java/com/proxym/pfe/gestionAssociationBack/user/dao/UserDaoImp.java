@@ -22,12 +22,6 @@ public class UserDaoImp implements UserDao {
     EventRepositories eventRepositories;
 
 
-    @Override
-    public User signinDao(String username) {
-
-        System.out.println("Dao" + userRepository.findByUsername(username));
-        return userRepository.findByUsername(username);
-    }
 
     @Override
     public User findByUsernameDao(String username) {
@@ -43,7 +37,6 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User saveUserDao(User user) {
-        //user.setTauxEchange(tauxEngagementDao.calculTauxParticipation(user));
         user.setTauxEchange( calculTauxParticipation(user)* 100);
         return userRepository.save(user);
     }
@@ -64,10 +57,15 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public Long UserCountDao() {
-        //   return userRepository.countAllById();
-        return null;
+    public User getOneMembreDao(String id) {
+        return userRepository.findByUsername(id);
     }
+
+    @Override
+    public List<User> getAllMembreDao() {
+        return userRepository.getMembreList();
+    }
+
 
     /******calcul taux de participaion**********/
 

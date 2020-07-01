@@ -1,4 +1,4 @@
-package com.proxym.pfe.gestionAssociationBack.membre.mailInformation;
+package com.proxym.pfe.gestionAssociationBack.user.mailConfig;
 
 public class MyConstants {
 

@@ -1,31 +1,23 @@
 package com.proxym.pfe.gestionAssociationBack.user.services;
 
+import com.proxym.pfe.gestionAssociationBack.user.dto.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.dto.request.SignUpForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @Service
 public interface UserService {
     ResponseEntity<?> signup(SignUpForm signUpForm);
-
-    User saveUserService(User user);
-
     User findUserByUsernameService(String username);
 
+    List<User> getAllMembreService();
 
-    SignUpForm findUserByEmail(String email);
+    User getOneMembreService(String id);
 
-    SignUpForm updateProfile(SignUpForm signUpForm);
-
-
-    SignUpForm changePassword(SignUpForm signUpForm, String newPassword);
-
-    List<User> getAllDonneursService();
-
-    List<User> getAllBenevolesService();
-
+    void sendMailMembre(MailToSend mailToSend) throws MessagingException;
 
 }

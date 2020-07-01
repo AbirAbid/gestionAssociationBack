@@ -3,8 +3,7 @@ package com.proxym.pfe.gestionAssociationBack.biens.controllers;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
-import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
-import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
+import com.proxym.pfe.gestionAssociationBack.user.dto.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +21,7 @@ public class BienController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    MembreService membreService;
+
     @Autowired
     BienService bienService;
     @Autowired
@@ -63,7 +61,7 @@ public class BienController {
     public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
 
-            membreService.sendMailMembre(mailToSend);
+            userService.sendMailMembre(mailToSend);
             redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
 
             return "redirect:/bien/listDonneurs";

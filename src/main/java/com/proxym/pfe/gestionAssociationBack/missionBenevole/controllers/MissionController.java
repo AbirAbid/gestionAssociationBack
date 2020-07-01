@@ -1,17 +1,11 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.controllers;
 
-import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
-import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
-import com.proxym.pfe.gestionAssociationBack.biens.services.BienService;
-import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
 import com.proxym.pfe.gestionAssociationBack.evenement.services.EvenementService;
-import com.proxym.pfe.gestionAssociationBack.membre.entities.MailToSend;
-import com.proxym.pfe.gestionAssociationBack.membre.services.MembreService;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dto.UserMissionDto;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.services.MissionService;
-import com.proxym.pfe.gestionAssociationBack.sponsors.services.SponsorService;
+import com.proxym.pfe.gestionAssociationBack.user.dto.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import com.proxym.pfe.gestionAssociationBack.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
@@ -34,8 +27,7 @@ public class MissionController {
     UserService userService;
     @Autowired
     MissionService missionService;
-    @Autowired
-    MembreService membreService;
+
     @Autowired
     EvenementService evenementService;
 
@@ -124,7 +116,7 @@ public class MissionController {
     public String sendHtmlEmail(MailToSend mailToSend, RedirectAttributes redirectAttributes) {
         try {
 
-            membreService.sendMailMembre(mailToSend);
+            userService.sendMailMembre(mailToSend);
             redirectAttributes.addFlashAttribute("sendMailMessage", " Votre message a été envoyé avec succès ");
 
             return "redirect:/mission/listbenevoles";

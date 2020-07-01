@@ -1,6 +1,7 @@
 package com.proxym.pfe.gestionAssociationBack.missionBenevole.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proxym.pfe.gestionAssociationBack.biens.entities.Bien;
 import com.proxym.pfe.gestionAssociationBack.biens.entities.UserBien;
 import com.proxym.pfe.gestionAssociationBack.evenement.dao.EvenementDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
@@ -37,13 +38,17 @@ public class MissionServiceImp implements MissionService {
     }
 
     @Override
-    public List<Mission> findAllMissionService() {
-        return missionDao.findAllMissionDao();
+    public List<Mission> findAllMissionService() throws IOException {
+
+
+        return ConvertLisMissionToJson( missionDao.findAllMissionDao());
     }
 
     @Override
-    public List<Mission> findAllMissionByEventService(Long id) {
-        return missionDao.findAllMissionByEventDao(id);
+    public List<Mission> findAllMissionByEventService(Long id) throws IOException {
+
+
+        return ConvertLisMissionToJson(missionDao.findAllMissionByEventDao(id));
     }
 
     @Override
@@ -321,4 +326,20 @@ public class MissionServiceImp implements MissionService {
     }
 
 
+    /**************** ConvertListBienToJson ***********/
+    public List<Mission> ConvertLisMissionToJson(List<Mission> missions) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<Mission> missions1 = new ArrayList<>();
+        String jsonInString;
+
+        for (int i = 0; i < missions.size(); i++) {
+            jsonInString = mapper.writeValueAsString(missions.get(i));
+            Mission mission = mapper.readValue(jsonInString, Mission.class);
+
+            System.out.println(mapper.writeValueAsString(missions.get(i).getId()));
+            missions1.add(mission);
+        }
+        return missions1;
+    }
 }

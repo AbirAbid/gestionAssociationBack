@@ -23,7 +23,6 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-//@RequestMapping("/api/auth/")
 
 public class AuthRestAPIs {
     @Autowired

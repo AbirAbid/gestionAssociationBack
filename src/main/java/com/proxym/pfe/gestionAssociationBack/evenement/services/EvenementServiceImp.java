@@ -9,7 +9,6 @@ import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountCategories;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventCountElmtsDto;
 import com.proxym.pfe.gestionAssociationBack.evenement.dto.EventParticipCount;
 import com.proxym.pfe.gestionAssociationBack.evenement.entities.Evenement;
-import com.proxym.pfe.gestionAssociationBack.membre.dao.MembreDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.dao.MissionDao;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.Mission;
 import com.proxym.pfe.gestionAssociationBack.missionBenevole.entities.UserMission;
@@ -18,8 +17,7 @@ import com.proxym.pfe.gestionAssociationBack.sponsors.entities.Sponsor;
 import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
 import com.proxym.pfe.gestionAssociationBack.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -40,8 +38,6 @@ public class EvenementServiceImp implements EvenementService {
     MissionDao missionDao;
     @Autowired
     SponsorDao sponsorDao;
-    @Autowired
-    MembreDao membreDao;
     @Autowired
     UserDao userDao;
 
@@ -200,7 +196,7 @@ public class EvenementServiceImp implements EvenementService {
             eventCountElmtsDto.setNombreEvents(evenementDao.listEventDao().size());
             eventCountElmtsDto.setNombreMissions(missionDao.findAllMissionDao().size());
             eventCountElmtsDto.setNombreSponsors(sponsorDao.findAllSponsorDao().size());
-            eventCountElmtsDto.setNombreMembres(membreDao.getAllMembreDao().size());
+            eventCountElmtsDto.setNombreMembres(userDao.getAllMembreDao().size());
 
             return eventCountElmtsDto;
         } catch (Exception e) {
@@ -303,7 +299,7 @@ public class EvenementServiceImp implements EvenementService {
 
     @Override
     public void TauxEchangeForAllUser() {
-        List<User> users = membreDao.getAllMembreDao();
+        List<User> users = userDao.getAllMembreDao();
         for (int i = 0; i < users.size(); i++) {
             userDao.saveUserDao(users.get(i));
         }

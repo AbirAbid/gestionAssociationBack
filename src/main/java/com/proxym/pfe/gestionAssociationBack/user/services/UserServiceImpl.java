@@ -2,6 +2,7 @@ package com.proxym.pfe.gestionAssociationBack.user.services;
 
 import com.proxym.pfe.gestionAssociationBack.user.dao.RoleDao;
 import com.proxym.pfe.gestionAssociationBack.user.dao.UserDao;
+import com.proxym.pfe.gestionAssociationBack.user.dto.MailToSend;
 import com.proxym.pfe.gestionAssociationBack.user.dto.response.ResponseMessage;
 import com.proxym.pfe.gestionAssociationBack.user.entities.Role;
 import com.proxym.pfe.gestionAssociationBack.user.entities.RoleName;
@@ -11,10 +12,14 @@ import com.proxym.pfe.gestionAssociationBack.user.dto.request.SignUpForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +40,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     RoleDao roleDao;
+    @Autowired
+    public JavaMailSender emailSender;
 
 
     @Override
@@ -96,30 +103,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public User saveUserService(User user) {
-        return userDao.saveUserDao(user);
-    }
 
-    @Override
-    public SignUpForm findUserByEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public SignUpForm changePassword(SignUpForm signUpForm, String newPassword) {
-        return null;
-    }
-
-    @Override
-    public List<User> getAllDonneursService() {
-        return userDao.getAllDonneursDao();
-    }
-
-    @Override
-    public List<User> getAllBenevolesService() {
-        return userDao.getAllBenevolesDao();
-    }
 
     @Override
     public User findUserByUsernameService(String username) {
@@ -128,8 +112,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SignUpForm updateProfile(SignUpForm signUpForm) {
-        return null;
+    public List<User> getAllMembreService() {
+        return userDao.getAllMembreDao();
+    }
+
+
+    @Override
+    public User getOneMembreService(String id) {
+        return userDao.findByUsernameDao(id);
+    }
+
+    @Override
+    public void sendMailMembre(MailToSend mailToSend) throws MessagingException {
+        System.out.println("mailToSend  " + mailToSend);
+        MimeMessage message = emailSender.createMimeMessage();
+
+        boolean multipart = true;
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+
+        String htmlMsg = mailToSend.getTextToSend();
+
+        message.setContent(htmlMsg, "text/html");
+        message.setSubject(mailToSend.getObject());
+
+        helper.setTo(mailToSend.getReceiver());
+
+
+        this.emailSender.send(message);
     }
 
 
