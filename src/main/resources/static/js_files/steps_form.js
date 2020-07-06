@@ -12,7 +12,7 @@ $(document).ready(function () {
             $item = $(this);
 
         if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-secondary').addClass('btn-default');
+            navListItems.removeClass('btn-secondary').addClass('btn-info');
             $item.addClass('btn-secondary');
             allWells.hide();
             $target.show();

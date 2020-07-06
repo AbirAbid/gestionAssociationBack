@@ -1,7 +1,7 @@
 package com.proxym.pfe.association.gestion_evenements.services;
 
 import com.proxym.pfe.association.gestion_evenements.dto.EventParticipCount;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
 import com.proxym.pfe.association.gestion_evenements.dto.EvenementDto;
 import com.proxym.pfe.association.gestion_evenements.dto.EventCountCategories;
 import com.proxym.pfe.association.gestion_evenements.dto.EventCountElmtsDto;
@@ -16,11 +16,9 @@ import java.util.Optional;
 
 
 public interface EvenementService {
-    Evenement addEventService(Evenement evenement);
 
     List<Evenement> listEventService();
 
-    Evenement getOneEventByIdservice(Long id);
 
     void supprimerEvent(Long id);
 

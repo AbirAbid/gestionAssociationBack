@@ -1,6 +1,6 @@
-package com.proxym.pfe.association.gestion_biens.repositories;
+package com.proxym.pfe.association.gestion_biens.models.repositories;
 
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

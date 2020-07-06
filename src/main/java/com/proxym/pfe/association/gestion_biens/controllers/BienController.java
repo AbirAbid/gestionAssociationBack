@@ -2,8 +2,8 @@ package com.proxym.pfe.association.gestion_biens.controllers;
 
 import com.proxym.pfe.association.gestion_evenements.services.EvenementService;
 import com.proxym.pfe.association.gestion_utilisateurs.dto.MailToSend;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
-import com.proxym.pfe.association.gestion_biens.services.BienService;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.services.BienService;
 import com.proxym.pfe.association.gestion_utilisateurs.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

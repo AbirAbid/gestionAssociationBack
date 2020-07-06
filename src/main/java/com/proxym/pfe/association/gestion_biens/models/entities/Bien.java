@@ -1,4 +1,4 @@
-package com.proxym.pfe.association.gestion_biens.entities;
+package com.proxym.pfe.association.gestion_biens.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

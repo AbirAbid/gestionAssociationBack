@@ -15,13 +15,8 @@ public interface CotisationService {
     List<Cotisation> listCotisationServ();
 
 
-    Page<Cotisation> findAllPageCotisationServ(PageRequest pageRequest);
-
-    Page<Cotisation> rehercherPageCotisationServ(String mc, PageRequest pageRequest);
-
     void supprimerCotisationServ(Long id);
 
-    void modifierCotisationServ(Cotisation cotisation);
 
     Cotisation getOneServ(Long id);
 }

@@ -1,8 +1,8 @@
 package com.proxym.pfe.association.gestion_evenements.controllers;
 
 import com.proxym.pfe.association.gestion_missions.services.MissionService;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
-import com.proxym.pfe.association.gestion_biens.services.BienService;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.services.BienService;
 import com.proxym.pfe.association.gestion_evenements.dto.EvenementDto;
 import com.proxym.pfe.association.gestion_evenements.entities.Evenement;
 import com.proxym.pfe.association.gestion_evenements.services.EvenementService;
@@ -43,7 +43,6 @@ public class EvenementController {
 
     /*********************************add Event****************************/
 
-
     @GetMapping(value = "formulaire")
     public String formulaireAddEvent(Model model) {
         try {
@@ -52,13 +51,12 @@ public class EvenementController {
             evenementDto.addBien(new Bien());
             evenementDto.addMission(new Mission());
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-
             String dateMin = format.format(new Date());
 
             model.addAttribute("now", dateMin);
-
             model.addAttribute("evenementDto", evenementDto);
             model.addAttribute("sponsors", sponsors);
+
             return "evenement/add-event";
         } catch (Exception e) {
             System.out.println(e);

@@ -56,10 +56,6 @@ public class UserDaoImp implements UserDao {
         return userRepository.findAllByUserMissionsIsNotNull();
     }
 
-    @Override
-    public User getOneMembreDao(String id) {
-        return userRepository.findByUsername(id);
-    }
 
     @Override
     public List<User> getAllMembreDao() {

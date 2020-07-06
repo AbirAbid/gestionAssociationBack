@@ -12,10 +12,6 @@ import java.util.List;
 
 @Repository
 public interface EventRepositories extends JpaRepository<Evenement, Long> {
-    List<Evenement> findByTitre(String titre);
-
-    @Query("select  e from Evenement e  where e.titre like :x")
-    Page<Evenement> chercherEvenement(@Param("x") String mc, Pageable pageable);
 
     List<Evenement> findAllByCategorie(String categorie);
 

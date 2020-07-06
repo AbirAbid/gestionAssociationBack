@@ -4,8 +4,6 @@ import com.proxym.pfe.association.gestion_cotisations.dao.CotisationDao;
 import com.proxym.pfe.association.gestion_cotisations.dto.CotisationDto;
 import com.proxym.pfe.association.gestion_cotisations.entities.Cotisation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,25 +34,13 @@ public class CotisationServiceImp implements CotisationService {
         return cotisationDao.listCotisationDao();
     }
 
-    @Override
-    public Page<Cotisation> findAllPageCotisationServ(PageRequest pageRequest) {
-        return cotisationDao.findAllPageCotisationDao(pageRequest);
-    }
 
-    @Override
-    public Page<Cotisation> rehercherPageCotisationServ(String mc, PageRequest pageRequest) {
-        return cotisationDao.rehercherPageCotisationDao(mc, pageRequest);
-    }
 
     @Override
     public void supprimerCotisationServ(Long id) {
         cotisationDao.supprimerCotisation(id);
     }
 
-    @Override
-    public void modifierCotisationServ(Cotisation cotisation) {
-        cotisationDao.modifierCotisation(cotisation);
-    }
 
     @Override
     public Cotisation getOneServ(Long id) {

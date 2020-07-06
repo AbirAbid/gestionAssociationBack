@@ -55,16 +55,6 @@ public class EvenementDaoImp implements EvenementDao {
         eventRepositories.deleteById(id);
     }
 
-    @Override
-    public Page<Evenement> findAllPageEvenementDao(PageRequest pageRequest) {
-
-        return eventRepositories.findAll(pageRequest);
-    }
-
-    @Override
-    public Page<Evenement> rehercherPageEvenementDao(String mc, PageRequest pageRequest) {
-        return eventRepositories.chercherEvenement(mc, pageRequest);
-    }
 
     @Override
     public List<Evenement> findAllByCategorieDao(String categorie) {

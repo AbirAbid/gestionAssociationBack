@@ -67,7 +67,7 @@ function removeRowBien(r) {
 
 }
 
-let addRowMission = function () {
+/*let addRowMission = function () {
     let listName = 'missions';
     let fieldsNames = ['titre', 'description', 'button'];
     let rowIndex = document.querySelectorAll('.m').length;
@@ -113,7 +113,7 @@ let addRowMission = function () {
     });
 
     document.getElementById('missionList').appendChild(row);
-};
+};*/
 
 function removeRowMission(r) {
     r = document.getElementById('id' + r.id);
@@ -122,7 +122,53 @@ function removeRowMission(r) {
 
 }
 
+let addRowMission = function () {
+    let listName = 'missions';
+    let fieldsNames = ['titre', 'button'];
+    let rowIndex = document.querySelectorAll('.m').length;
 
+    let row = document.createElement('div');
+    row.classList.add('row', 'm');
+    row.setAttribute('id', 'idm' + rowIndex);
+
+    fieldsNames.forEach((fieldName) => {
+        let col = document.createElement('div');
+        col.classList.add('col', 'form-group');
+
+
+        let input = document.createElement('input');
+
+        if (fieldName === 'button') {
+            input.type = 'button';
+            input.id = 'm' + rowIndex;
+            console.log(input.id);
+
+            input.setAttribute('type', 'button');
+            input.setAttribute('value', 'Effacer');
+
+            // add button's "onclick" event.
+            input.setAttribute('onclick', 'removeRowMission(this)');
+            input.classList.add('btn', 'btn-danger');
+
+
+        } else {
+            input.type = 'text';
+            input.classList.add('form-control');
+            input.id = listName + rowIndex + '.' + fieldName;
+            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+            input.setAttribute('required', 'required');
+
+            input.classList.add('form-control');
+
+        }
+
+
+        col.appendChild(input);
+        row.appendChild(col);
+    });
+
+    document.getElementById('missionList').appendChild(row);
+};
 /*
 let removeRow = function (oButton) {
     console.log("oButton", oButton)

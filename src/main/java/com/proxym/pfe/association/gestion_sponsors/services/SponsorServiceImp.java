@@ -52,15 +52,7 @@ public class SponsorServiceImp implements SponsorService {
         return sponsorDao.findAllSponsorDao();
     }
 
-    @Override
-    public Page<Sponsor> findAllPageSponsorServ(PageRequest pageRequest) {
-        return sponsorDao.findAllPageSponsorDao(pageRequest);
-    }
 
-    @Override
-    public Page<Sponsor> rehercherPageSponsorSrv(String mc, PageRequest pageRequest) {
-        return sponsorDao.rehercherPageSponsorDao(mc, pageRequest);
-    }
 
     @Override
     public byte[] getPhotoService(Long id) throws Exception {
@@ -76,11 +68,6 @@ public class SponsorServiceImp implements SponsorService {
     @Override
     public Sponsor getOneService(Long id) {
         return sponsorDao.getOneDao(id);
-    }
-
-    @Override
-    public void updateSponsorService(Sponsor s) {
-        sponsorDao.modifierSponsor(s);
     }
 
 

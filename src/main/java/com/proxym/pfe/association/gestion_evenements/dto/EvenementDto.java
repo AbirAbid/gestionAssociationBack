@@ -1,7 +1,7 @@
 package com.proxym.pfe.association.gestion_evenements.dto;
 
 import com.proxym.pfe.association.gestion_evenements.entities.Evenement;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
 import com.proxym.pfe.association.gestion_missions.entities.Mission;
 import com.proxym.pfe.association.gestion_sponsors.entities.Sponsor;
 import lombok.Data;

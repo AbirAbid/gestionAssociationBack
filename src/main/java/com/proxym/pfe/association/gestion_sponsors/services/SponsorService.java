@@ -12,9 +12,6 @@ public interface SponsorService {
 
     List<Sponsor> findAllSponsorServ();
 
-    Page<Sponsor> findAllPageSponsorServ(PageRequest pageRequest);
-
-    Page<Sponsor> rehercherPageSponsorSrv(String mc, PageRequest pageRequest);
 
     byte[] getPhotoService(Long id) throws Exception;
 
@@ -22,5 +19,5 @@ public interface SponsorService {
 
     Sponsor getOneService(Long id);
 
-    void updateSponsorService(Sponsor s);
+
 }

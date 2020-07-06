@@ -1,7 +1,7 @@
 package com.proxym.pfe.association.gestion_utilisateurs.controllers;
 
 import com.proxym.pfe.association.gestion_evenements.services.EvenementService;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
 import com.proxym.pfe.association.gestion_missions.entities.UserMission;
 import com.proxym.pfe.association.gestion_utilisateurs.dto.MailToSend;
 import com.proxym.pfe.association.gestion_utilisateurs.entities.User;

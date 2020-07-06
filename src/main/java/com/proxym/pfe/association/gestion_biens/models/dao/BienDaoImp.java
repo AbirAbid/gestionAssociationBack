@@ -1,7 +1,7 @@
-package com.proxym.pfe.association.gestion_biens.dao;
+package com.proxym.pfe.association.gestion_biens.models.dao;
 
-import com.proxym.pfe.association.gestion_biens.repositories.BienRepositories;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.repositories.BienRepositories;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,12 +53,6 @@ public class BienDaoImp implements BienDao {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-    }
-
-    @Override
-    public void editAllDao(List<Bien> biens) {
-        bienRepositories.saveAll(biens.stream().collect(Collectors.toList()));
 
     }
 

@@ -1,9 +1,9 @@
 package com.proxym.pfe.association.gestion_evenements.services;
 
 import com.proxym.pfe.association.gestion_evenements.dto.EventParticipCount;
-import com.proxym.pfe.association.gestion_biens.dao.BienDao;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.dao.BienDao;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
 import com.proxym.pfe.association.gestion_evenements.dao.EvenementDao;
 import com.proxym.pfe.association.gestion_evenements.dto.EvenementDto;
 import com.proxym.pfe.association.gestion_evenements.dto.EventCountCategories;
@@ -44,23 +44,13 @@ public class EvenementServiceImp implements EvenementService {
     UserDao userDao;
 
 
-    @Override
-    public Evenement addEventService(Evenement evenement) {
 
-        return evenementDao.addEventDao(evenement);
-
-    }
 
     @Override
     public List<Evenement> listEventService() {
         System.out.println("***********we are in serv evt*********");
 
         return evenementDao.listEventDao();
-    }
-
-    @Override
-    public Evenement getOneEventByIdservice(Long id) {
-        return evenementDao.getEventDaoById(id);
     }
 
     @Override
@@ -79,9 +69,7 @@ public class EvenementServiceImp implements EvenementService {
 
     @Override
     public void AjouterEvent(@Valid EvenementDto evenementDto) {
-
         Evenement event = new Evenement();
-
         event.setFrais((double) 0);
         event = eventFromEventDto(evenementDto);
         Evenement e = evenementDao.addEventDao(event);
@@ -92,22 +80,17 @@ public class EvenementServiceImp implements EvenementService {
             Sponsor s = sponsors.get(i);
             s.setAffecte(1);
             sponsorDao.modifierSponsor(s);
-
         }
         /** End Champs event form1 **/
 
 
         for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
-
             evenementDto.getBiens().get(i).setEvenement(e);
             evenementDto.getBiens().get(i).setTotaleqteDonnee(0);
         }
 
         for (int i = 0; i <= evenementDto.getMissions().size() - 1; i++) {
-
-
             evenementDto.getMissions().get(i).setEvenement(e);
-
         }
 
 

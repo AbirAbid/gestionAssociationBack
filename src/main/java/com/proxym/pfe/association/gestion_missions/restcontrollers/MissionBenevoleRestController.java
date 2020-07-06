@@ -2,7 +2,7 @@ package com.proxym.pfe.association.gestion_missions.restcontrollers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proxym.pfe.association.gestion_evenements.services.EvenementService;
-import com.proxym.pfe.association.gestion_missions.entities.MissionUserDisplay;
+import com.proxym.pfe.association.gestion_missions.dto.MissionUserDisplay;
 import com.proxym.pfe.association.gestion_missions.services.MissionService;
 import com.proxym.pfe.association.gestion_utilisateurs.entities.User;
 import com.proxym.pfe.association.gestion_utilisateurs.repositories.UserRepository;
@@ -10,7 +10,7 @@ import com.proxym.pfe.association.gestion_utilisateurs.services.UserService;
 import com.proxym.pfe.association.gestion_missions.dto.ParticiperMissionDto;
 import com.proxym.pfe.association.gestion_missions.entities.Mission;
 import com.proxym.pfe.association.gestion_missions.entities.UserMission;
-import com.proxym.pfe.association.gestion_missions.repositories.MissionRepository;
+import com.proxym.pfe.association.gestion_missions.repositories.MissionRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class MissionBenevoleRestControllers {
+public class MissionBenevoleRestController {
 
     @Autowired
     UserService userService;
@@ -29,7 +29,7 @@ public class MissionBenevoleRestControllers {
     @Autowired
     MissionService missionService;
     @Autowired
-    MissionRepository missionRepository;
+    MissionRepositories missionRepositories;
     @Autowired
     EvenementService evenementService;
 

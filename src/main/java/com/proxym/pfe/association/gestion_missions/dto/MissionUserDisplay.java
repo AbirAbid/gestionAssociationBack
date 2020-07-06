@@ -1,5 +1,6 @@
-package com.proxym.pfe.association.gestion_missions.entities;
+package com.proxym.pfe.association.gestion_missions.dto;
 
+import com.proxym.pfe.association.gestion_missions.entities.Mission;
 import lombok.Data;
 
 @Data

@@ -1,8 +1,8 @@
-package com.proxym.pfe.association.gestion_biens.dto;
+package com.proxym.pfe.association.gestion_biens.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
 
 import java.util.Date;
 

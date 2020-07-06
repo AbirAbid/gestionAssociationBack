@@ -10,6 +10,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CotisationRepository extends JpaRepository<Cotisation, Long> {
-    @Query("select  c from Cotisation c  where c.cotisationName like :x")
-    Page<Cotisation> chercherCotisation(@Param("x") String mc, Pageable pageable);
 }

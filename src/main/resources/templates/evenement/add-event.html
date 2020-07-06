@@ -40,7 +40,8 @@
                             <div class="stepwizard ">
                                 <div class="stepwizard-row setup-panel">
                                     <div class="stepwizard-step">
-                                        <a href="#step-1" type="button"
+
+                                   <a href="#step-1" type="button"
                                            class="btn btn-secondary btn-circle">1</a>
                                         <p>Information événement</p>
                                     </div>
@@ -130,9 +131,12 @@
                                                     <div class="col-10">
                                                         <select name="categorie" th:field="*{categorie}"
                                                                 class="form-control">
-                                                            <option th:value="aide-humanitaire" selected>Aide humanitaire</option>
-                                                            <option th:value="aide-handicapes">Aide aux handicapés</option>
-                                                            <option th:value="sante">Santé </option>
+                                                            <option th:value="aide-humanitaire" selected>Aide
+                                                                humanitaire
+                                                            </option>
+                                                            <option th:value="aide-handicapes">Aide aux handicapés
+                                                            </option>
+                                                            <option th:value="sante">Santé</option>
                                                             <option th:value="education">Éducation</option>
 
                                                         </select>
@@ -175,7 +179,8 @@
                                                     <label class="col-2 col-form-label">Date Début</label>
                                                     <div class="col-10">
 
-                                                        <input type="datetime-local" class="form-control" name="dateDebut"
+                                                        <input type="datetime-local" class="form-control"
+                                                               name="dateDebut"
                                                                th:field="*{dateDebut}" th:value="${dateDebut}"
                                                                th:min="${now}"
                                                         />
@@ -187,7 +192,8 @@
                                                     <label class="col-2 col-form-label">Date Fin</label>
                                                     <div class="col-10">
                                                         <input type="datetime-local" class="form-control" name="dateFin"
-                                                               th:field="*{dateFin}" th:value="${dateFin}"  th:min="${now}"/>
+                                                               th:field="*{dateFin}" th:value="${dateFin}"
+                                                               th:min="${now}"/>
                                                         <p th:errors="*{dateFin}" class="text-danger"></p>
 
                                                     </div>
@@ -355,15 +361,15 @@
                                                     <div class="col form-group"><label class="control-label">Titre
                                                         de la mission</label>
                                                     </div>
-                                                    <div class="col form-group"><label class="control-label">Déscription
-                                                        de la mission</label>
-                                                    </div>
+                                                    <!--   <div class="col form-group"><label class="control-label">Déscription
+                                                           de la mission</label>
+                                                       </div>-->
 
                                                 </div>
                                                 <div class="row item m" th:each="mission, item : *{missions}" id="idm0">
 
 
-                                                    <div class="col form-group">
+                                                    <div class="col form-group col-sm-6">
                                                         <input
 
                                                                 th:field="*{missions[__${item.index}__].titre}"
@@ -371,12 +377,12 @@
                                                                 class="form-control" required="required">
                                                     </div>
 
-                                                    <div class="col form-group">
-                                                        <input
-                                                                th:field="*{missions[__${item.index}__].description}"
-                                                                type="text"
-                                                                class="form-control" required="required">
-                                                    </div>
+                                                    <!--    <div class="col form-group">
+                                                         <input
+                                                                    th:field="*{missions[__${item.index}__].description}"
+                                                                    type="text"
+                                                                    class="form-control" required="required">
+                                                    </div>-->
                                                     <div class="col form-group">
                                                         <input
                                                                 type="button" value="Effacer" id="m0"

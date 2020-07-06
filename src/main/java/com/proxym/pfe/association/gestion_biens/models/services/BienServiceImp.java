@@ -1,12 +1,12 @@
-package com.proxym.pfe.association.gestion_biens.services;
+package com.proxym.pfe.association.gestion_biens.models.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proxym.pfe.association.gestion_biens.dto.ParticiperBienFormDto;
+import com.proxym.pfe.association.gestion_biens.models.dto.ParticiperBienFormDto;
 import com.proxym.pfe.association.gestion_evenements.dao.EvenementDao;
 import com.proxym.pfe.association.gestion_utilisateurs.dao.UserDao;
-import com.proxym.pfe.association.gestion_biens.dao.BienDao;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.dao.BienDao;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
 import com.proxym.pfe.association.gestion_utilisateurs.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,33 +25,7 @@ public class BienServiceImp implements BienService {
     EvenementDao evenementDao;
 
 
-    @Override
-    public List<Bien> findAllBienService() {
-        try {
-            return bienDao.findAllDao();
-        } catch (Exception e) {
 
-            System.out.println("exc Serv" + e);
-            return null;
-        }
-    }
-
-    @Override
-    public void saveAllService(List<Bien> biens) {
-        try {
-            System.out.println("biensService" + biens);
-            bienDao.saveAllDao(biens);
-        } catch (Exception e) {
-            System.out.println("exc Serv" + e);
-        }
-
-    }
-
-
-    @Override
-    public List<Bien> findAllByEventService(Long id) {
-        return bienDao.findAllByEventDao(id);
-    }
 
     @Override
     public List<Bien> findAllByEventServiceRest(Long id) throws IOException {
@@ -61,18 +35,7 @@ public class BienServiceImp implements BienService {
 
     }
 
-    /**
-     * List bien by région de l'event
-     **/
-    @Override
-    public List<Bien> findAllByEvenement_VilleService(String ville) {
-        return bienDao.findAllByEvenement_VilleDao(ville);
-    }
 
-    @Override
-    public Bien saveBienService(Bien bien) {
-        return bienDao.saveBienDao(bien);
-    }
 
     @Override
     public List<Bien> getListBien() throws IOException {

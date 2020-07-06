@@ -1,12 +1,11 @@
 package com.proxym.pfe.association.gestion_biens.restControllers;
 
-import com.proxym.pfe.association.gestion_biens.dto.ParticiperBienFormDto;
-import com.proxym.pfe.association.gestion_biens.entities.Bien;
-import com.proxym.pfe.association.gestion_biens.repositories.BienRepositories;
-import com.proxym.pfe.association.gestion_biens.services.BienService;
+import com.proxym.pfe.association.gestion_biens.models.dto.ParticiperBienFormDto;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
+import com.proxym.pfe.association.gestion_biens.models.services.BienService;
 import com.proxym.pfe.association.gestion_evenements.services.EvenementService;
 import com.proxym.pfe.association.gestion_utilisateurs.repositories.UserRepository;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
 import com.proxym.pfe.association.gestion_utilisateurs.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,8 +24,7 @@ public class BienRestController {
     UserService userService;
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    BienRepositories bienRepositories;
+
     @Autowired
     EvenementService evenementService;
 

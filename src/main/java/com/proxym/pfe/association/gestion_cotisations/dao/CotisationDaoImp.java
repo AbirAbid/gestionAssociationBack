@@ -24,15 +24,6 @@ public class CotisationDaoImp implements CotisationDao {
         return cotisationRepository.findAll();
     }
 
-    @Override
-    public Page<Cotisation> findAllPageCotisationDao(PageRequest pageRequest) {
-        return cotisationRepository.findAll(pageRequest);
-    }
-
-    @Override
-    public Page<Cotisation> rehercherPageCotisationDao(String mc, PageRequest pageRequest) {
-        return cotisationRepository.chercherCotisation(mc, pageRequest);
-    }
 
     @Override
     public void supprimerCotisation(Long id) {
@@ -40,10 +31,6 @@ public class CotisationDaoImp implements CotisationDao {
 
     }
 
-    @Override
-    public void modifierCotisation(Cotisation cotisation) {
-        cotisationRepository.save(cotisation);
-    }
 
     @Override
     public Cotisation getOneDao(Long id) {

@@ -25,15 +25,8 @@ public class SponsorDaoImp implements SponsorDao {
         return sponsorRepository.findAll();
     }
 
-    @Override
-    public Page<Sponsor> findAllPageSponsorDao(PageRequest pageRequest) {
-        return sponsorRepository.findAll(pageRequest);
-    }
 
-    @Override
-    public Page<Sponsor> rehercherPageSponsorDao(String mc, PageRequest pageRequest) {
-        return sponsorRepository.chercherSponsor(mc, pageRequest);
-    }
+
 
     @Override
     public void supprimerSponsor(Long id) {

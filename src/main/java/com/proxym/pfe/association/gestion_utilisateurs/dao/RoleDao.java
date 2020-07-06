@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface RoleDao {
     Optional<Role> findByNameDao(RoleName nomRole);
-    Optional<List<Role> >findByNameDaoList(RoleName nomRole);
+    Optional<List<Role>>findByNameDaoList(RoleName nomRole);
 
 
 }

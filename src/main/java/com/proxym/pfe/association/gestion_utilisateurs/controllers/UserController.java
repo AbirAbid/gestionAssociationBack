@@ -1,12 +1,12 @@
 package com.proxym.pfe.association.gestion_utilisateurs.controllers;
 
-import com.proxym.pfe.association.gestion_biens.services.BienService;
+import com.proxym.pfe.association.gestion_biens.models.services.BienService;
 import com.proxym.pfe.association.gestion_evenements.entities.Evenement;
 import com.proxym.pfe.association.gestion_evenements.services.EvenementService;
 import com.proxym.pfe.association.gestion_missions.services.MissionService;
 import com.proxym.pfe.association.gestion_utilisateurs.entities.User;
 import com.proxym.pfe.association.gestion_utilisateurs.services.UserService;
-import com.proxym.pfe.association.gestion_biens.entities.UserBien;
+import com.proxym.pfe.association.gestion_biens.models.entities.UserBien;
 import com.proxym.pfe.association.gestion_missions.entities.UserMission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +49,7 @@ public class UserController {
 
     @GetMapping("/login")
 
-    public String login(Model model) {
+    public String login() {
         try {
 
             return "authAdmin/login";
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String accessDenied(Model model) {
+    public String accessDenied() {
 
 
         return "pagesError/403";

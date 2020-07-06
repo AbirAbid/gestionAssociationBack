@@ -1,7 +1,7 @@
 package com.proxym.pfe.association.gestion_missions.dao;
 
 import com.proxym.pfe.association.gestion_missions.entities.Mission;
-import com.proxym.pfe.association.gestion_missions.repositories.MissionRepository;
+import com.proxym.pfe.association.gestion_missions.repositories.MissionRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,43 +11,43 @@ import java.util.stream.Collectors;
 @Component
 public class MissionDaoImp implements MissionDao {
     @Autowired
-    MissionRepository missionRepository;
+    MissionRepositories missionRepositories;
 
     @Override
     public void saveAllMissionDao(List<Mission> missions) {
 
-        missionRepository.saveAll(missions.stream().collect(Collectors.toList()));
+        missionRepositories.saveAll(missions.stream().collect(Collectors.toList()));
     }
 
     @Override
     public List<Mission> findAllMissionDao() {
-        return missionRepository.findAll();
+        return missionRepositories.findAll();
     }
 
     @Override
     public void deleteMissionDao(Long id) {
 
-        missionRepository.deleteAll(missionRepository.findAllByEvenement_Id(id));
+        missionRepositories.deleteAll(missionRepositories.findAllByEvenement_Id(id));
     }
 
     @Override
     public List<Mission> findAllMissionByEventDao(Long id) {
-        return missionRepository.findAllByEvenement_Id(id);
+        return missionRepositories.findAllByEvenement_Id(id);
     }
 
     @Override
     public List<Mission> findAllByEvenement_VilleDao(String ville) {
-        return missionRepository.findAllByEvenement_Ville(ville);
+        return missionRepositories.findAllByEvenement_Ville(ville);
     }
 
     @Override
     public Mission saveMissionDao(Mission mission) {
-        return missionRepository.save(mission);
+        return missionRepositories.save(mission);
     }
 
     @Override
     public Mission findMissionByIdDao(Long id) {
-        return missionRepository.getOne(id);
+        return missionRepositories.getOne(id);
     }
 
 }

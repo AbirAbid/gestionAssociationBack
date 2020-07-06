@@ -10,11 +10,6 @@ public interface SponsorDao {
     void saveSponsorDao(Sponsor s);
 
     List<Sponsor> findAllSponsorDao();
-
-    Page<Sponsor> findAllPageSponsorDao(PageRequest pageRequest);
-
-    Page<Sponsor> rehercherPageSponsorDao(String mc, PageRequest pageRequest);
-
     void supprimerSponsor(Long id);
 
     void modifierSponsor(Sponsor sp);
