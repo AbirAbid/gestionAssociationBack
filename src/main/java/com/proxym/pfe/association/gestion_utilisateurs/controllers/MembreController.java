@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -51,6 +53,13 @@ public class MembreController {
     public String membreDetail(Model model, String id) {
 
         try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+            String dateJourString = format.format(new Date());
+            Date dateJour = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateJourString);
+
+
+            model.addAttribute("dateJour", dateJour);
             User user = userService.getOneMembreService(id);
             List<UserBien> userBiens = user.getUserBiens();
             List<UserMission> userMissions = user.getUserMissions();

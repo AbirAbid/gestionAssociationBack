@@ -1,6 +1,7 @@
 package com.proxym.pfe.association.gestion_missions.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proxym.pfe.association.gestion_biens.models.entities.Bien;
 import com.proxym.pfe.association.gestion_evenements.dao.EvenementDao;
 import com.proxym.pfe.association.gestion_missions.dao.MissionDao;
 import com.proxym.pfe.association.gestion_missions.dto.ParticiperMissionDto;
@@ -209,13 +210,16 @@ public class MissionServiceImp implements MissionService {
         User user = userDao.findByUsernameDao(username);
         List<UserMission> userMissions = user.getUserMissions();
         ObjectMapper mapper = new ObjectMapper();
-
+        String jsonInString2;
         List<UserMission> userMissions1 = new ArrayList<>();
         for (int i = 0; i < userMissions.size(); i++) {
             System.out.println("userMissions" + userMissions.get(i).getMission().getTitre());
 
             UserMission userMission = mapper.readValue(mapper.writeValueAsString(userMissions.get(i)), UserMission.class);
+            jsonInString2 = mapper.writeValueAsString(userMissions.get(i).getMission());
 
+            Mission mission = mapper.readValue(jsonInString2, Mission.class);
+            userMission.setMission(mission);
             userMissions1.add(userMission);
 
 

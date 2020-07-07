@@ -80,8 +80,8 @@ $(document).ready(function () {
             oSettings.oLanguage.sZeroRecords = "<center><span class=\"alert alert-secondary\" >Désolé, votre recherche n'a retourné aucun résultat.</span> </center>"
         },
         "columnDefs": [
+            {"orderable": false, "targets": 3},
             {"orderable": false, "targets": 4},
-            {"orderable": false, "targets": 5},
 
 
         ]

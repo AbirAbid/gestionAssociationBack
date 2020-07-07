@@ -177,6 +177,10 @@
                                                         <a th:href="@{eventDetail(id=${p.mission.evenement.id})}"
                                                            th:text="${p.mission.evenement.titre}">
                                                         </a>
+                                                        <div th:if="${p.mission.evenement.dateFin.before(dateJour)}" style="display: inline">
+                                                                <span class="badge badge-dark">Passé
+                                                                </span>
+                                                        </div>
                                                     </td>
                                                     <td th:text="${p.demandeDate}"></td>
                                                     <td th:text="${p.dateDisponibiliteList}"></td>
@@ -225,6 +229,10 @@
                                                             <a th:href="@{eventDetail(id=${p.bien.evenement.id})}"
                                                                th:text="${p.bien.evenement.titre}">
                                                             </a>
+                                                            <div th:if="${p.bien.evenement.dateFin.before(dateJour)}" style="display: inline">
+                                                                <span class="badge badge-dark">Passé
+                                                                </span>
+                                                            </div>
                                                         </td>
                                                         <td th:text="${p.dateParticipation}"></td>
 

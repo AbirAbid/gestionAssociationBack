@@ -100,16 +100,32 @@ public class BienServiceImp implements BienService {
     public List<UserBien> getListBienByUserRest(String username) throws IOException {
         User user = userDao.findByUsernameDao(username);
         List<UserBien> userBiens = user.getUserBiens();
+
         ObjectMapper mapper = new ObjectMapper();
 
         List<UserBien> userBiens1 = new ArrayList<>();
+        String jsonInString;
+        String jsonInString2;
+
+        for (int i = 0; i < userBiens.size(); i++) {
+            jsonInString = mapper.writeValueAsString(userBiens.get(i));
+            UserBien userBien = mapper.readValue(jsonInString, UserBien.class);
+            jsonInString2 = mapper.writeValueAsString(userBiens.get(i).getBien());
+
+            Bien bien = mapper.readValue(jsonInString2, Bien.class);
+            userBien.setBien(bien);
+            userBiens1.add(userBien);
+        }
+
+      /*  ObjectMapper mapper = new ObjectMapper();
+
         for (int i = 0; i < userBiens.size(); i++) {
 
             //get Bien sous forme json
             UserBien userBien = mapper.readValue(mapper.writeValueAsString(userBiens.get(i)), UserBien.class);
 
             userBiens1.add(userBien);
-        }
+        }*/
         return userBiens1;
 
     }
