@@ -68,7 +68,7 @@ public class MissionController {
             missionService.affecterMission(username, id);
             User user = userService.findUserByUsernameService(username);
             Mission mission = missionService.findMissionByIdService(id);
-            redirectAttributes.addFlashAttribute("message", "Vous avez affecter " + user.getNom() + " à " + mission.getTitre());
+            redirectAttributes.addFlashAttribute("message", "Vous avez affecté " + user.getNom() + " à " + mission.getTitre());
 
             return "redirect:/mission/listbenevoles";
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class MissionController {
             User user = userService.findUserByUsernameService(username);
             missionService.libererMission(username, id);
 
-            redirectAttributes.addFlashAttribute("messageFree", "Vous avez libérer " + user.getNom());
+            redirectAttributes.addFlashAttribute("messageFree", "Vous avez libéré " + user.getNom());
 
             return "redirect:/mission/listbenevoles";
         } catch (Exception e) {

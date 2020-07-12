@@ -41,7 +41,7 @@ public class EvenementDto {
 
 
     private List<Sponsor> sponsors;
-
+    @NotNull(message = " Veuillez remplir ce champs ! ")
     private List<Bien> biens;
     //   private List<MissionBenevole> missionBenevoles;
     private List<Mission> missions;

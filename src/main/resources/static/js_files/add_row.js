@@ -19,6 +19,9 @@ let addRowBien = function () {
             console.log('  input.id', input.id);
             input.setAttribute('id', input.id);
             input.setAttribute('required', 'required');
+            input.setAttribute('min', '1');
+            input.setAttribute('onkeypress', 'return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57');
+
 
             input.setAttribute('name', listNameB + '[' + rowIndexB + '].' + fieldName);
             input.classList.add('form-control');

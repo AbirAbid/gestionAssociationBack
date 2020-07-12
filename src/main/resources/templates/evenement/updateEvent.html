@@ -314,7 +314,9 @@
 
                                                     <div class="col form-group">
                                                         <input th:field="*{biens[__${itemStat.index}__].qte}"
-                                                               type="number" required="required"
+                                                               type="number" required="required"  min="1"
+                                                               onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+
                                                                class="form-control">
 
                                                     </div>
@@ -344,6 +346,8 @@
                                     </button>
 
                                 </div>
+
+
                                 <div class=" setup-content text-black" id="step-3">
 
                                     <div class="row">
@@ -374,7 +378,7 @@
                                                 <div class="row item m" th:each="mission, item : *{missions}" id="idm0">
 
 
-                                                    <div class="col form-group">
+                                                    <div class="col form-group col-sm-6">
                                                         <input
 
                                                                 th:field="*{missions[__${item.index}__].titre}"
@@ -382,12 +386,14 @@
                                                                 class="form-control" required="required">
                                                     </div>
 
+<!--
                                                     <div class="col form-group">
                                                         <input
                                                                 th:field="*{missions[__${item.index}__].description}"
                                                                 type="text"
                                                                 class="form-control" required="required">
                                                     </div>
+-->
                                                     <div class="col form-group">
                                                         <input
                                                                 type="button" value="Effacer" id="m0"

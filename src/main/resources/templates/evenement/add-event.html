@@ -305,12 +305,16 @@
                                                                 th:field="*{biens[__${itemStat.index}__].titreBien}"
                                                                 type="text" required="required"
                                                                 class="form-control">
+
                                                     </div>
 
                                                     <div class="col form-group">
                                                         <input th:field="*{biens[__${itemStat.index}__].qte}"
                                                                type="number" required="required"
-                                                               class="form-control">
+                                                               min="1"
+                                                               onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+
+                                                        class="form-control">
 
                                                     </div>
                                                     <div class="col form-group">

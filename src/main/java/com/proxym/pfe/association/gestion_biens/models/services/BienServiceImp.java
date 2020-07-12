@@ -76,7 +76,7 @@ public class BienServiceImp implements BienService {
             bien.getEvenement().setActive(1);
             userBien.setUser(user);
             userBien.setBien(bien);
-            userBien.setQteDonnee(5);
+            userBien.setQteDonnee(qteDonnee);
             userBien.setDateParticipation(new Date());
             user.getUserBiens().add(userBien);
             bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
