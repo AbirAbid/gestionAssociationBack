@@ -25,8 +25,6 @@ public class BienServiceImp implements BienService {
     EvenementDao evenementDao;
 
 
-
-
     @Override
     public List<Bien> findAllByEventServiceRest(Long id) throws IOException {
         List<Bien> biens = bienDao.findAllByEventDao(id);
@@ -34,7 +32,6 @@ public class BienServiceImp implements BienService {
         return ConvertListBienToJson(biens);
 
     }
-
 
 
     @Override
@@ -49,6 +46,7 @@ public class BienServiceImp implements BienService {
     /**
      * Participation par don
      **/
+
     @Override
     public void donnerBienSerice(ParticiperBienFormDto participerBienFormDto, String username) {
         User user = userDao.findByUsernameDao(username);
@@ -73,6 +71,7 @@ public class BienServiceImp implements BienService {
             bienDao.saveBienDao(bien);
             userDao.saveUserDao(user);
         } else {
+            // pour rendre event affected
             bien.getEvenement().setActive(1);
             userBien.setUser(user);
             userBien.setBien(bien);
@@ -80,7 +79,10 @@ public class BienServiceImp implements BienService {
             userBien.setDateParticipation(new Date());
             user.getUserBiens().add(userBien);
             bien.setTotaleqteDonnee(bien.getTotaleqteDonnee() + qteDonnee);
+            // pour rendre event affected
             evenementDao.addEventDao(bien.getEvenement());
+
+
             bienDao.saveBienDao(bien);
             userDao.saveUserDao(user);
 
@@ -130,14 +132,19 @@ public class BienServiceImp implements BienService {
 
     }
 
-    /**
+    /*****
      * la liste all donneurs
-     **/
+     ******/
+
     @Override
     public List<UserBien> getListUserBien() {
+        //la liste de tous les utilisateurs, qui sont participé par  des biens.
         List<User> users = userDao.getAllDonneursDao();
-        //    System.out.println("users with duplicate  "+ users);
+        //System.out.println("users with duplicate  "+ users);
+
         //eliminer les doublons
+        //pour chaque user list not null
+
         Set<User> set = new HashSet<>(users);
         users.clear();
         users.addAll(set);
@@ -152,6 +159,7 @@ public class BienServiceImp implements BienService {
     }
 
     /**************** ConvertListBienToJson ***********/
+
     public List<Bien> ConvertListBienToJson(List<Bien> biens) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -161,7 +169,6 @@ public class BienServiceImp implements BienService {
         for (int i = 0; i < biens.size(); i++) {
             jsonInString = mapper.writeValueAsString(biens.get(i));
             Bien bien = mapper.readValue(jsonInString, Bien.class);
-
             System.out.println(mapper.writeValueAsString(biens.get(i).getId()));
             biens1.add(bien);
         }

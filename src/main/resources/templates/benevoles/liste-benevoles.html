@@ -103,11 +103,9 @@
                                         <td th:text="${p.mission.titre}"></td>
 
                                         <td>
-
                                             <a th:href="@{eventDetail(id=${p.mission.evenement.id})}"
                                                th:text="${p.mission.evenement.titre}">
                                             </a>
-
                                         </td>
 
                                         <td th:text="${p.demandeDate}"></td>
@@ -118,7 +116,6 @@
 
                                         </td>
                                         <td>
-
                                             <a class="btn btn-circle btn-info"
                                                th:href="@{sendmailUrL(id=${p.user.username})}">
                                                 <i class="far fa-envelope"></i></a>

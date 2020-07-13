@@ -81,8 +81,9 @@ public class BienController {
 
             evenementService.eventDetailService(model, id);
 
+            return "redirect:/evenement/eventDetail?id="+id;
 
-            return "evenement/evenementDetail";
+            //return "evenement/evenementDetail";
         } catch (Exception e) {
             System.out.println(e);
             return "pagesError/error";

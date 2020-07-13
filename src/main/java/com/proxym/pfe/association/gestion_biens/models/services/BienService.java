@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.List;
 
 public interface BienService {
-
-
     List<Bien> findAllByEventServiceRest(Long id) throws IOException;
 
     List<Bien> getListBien() throws IOException;
@@ -21,5 +19,4 @@ public interface BienService {
     List<UserBien> getListBienByUserRest(String username) throws IOException;
 
     List<UserBien> getListUserBien();
-
 }

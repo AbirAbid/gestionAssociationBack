@@ -97,6 +97,15 @@ public class EvenementServiceImp implements EvenementService {
         bienDao.saveAllDao(evenementDto.getBiens());
         missionDao.saveAllMissionDao(evenementDto.getMissions());
 
+        /*en cas ou l'association bidirect
+        bienDao.saveAllDao(evenementDto.getBiens());
+        event.setBiens(evenementDto.getBiens());
+
+        for (int i = 0; i <= evenementDto.getBiens().size() - 1; i++) {
+            evenementDto.getBiens().get(i).setEvenement(event);
+        }
+        evenementDao.addEventDao(event);*/
+
     }
 
     @Override
