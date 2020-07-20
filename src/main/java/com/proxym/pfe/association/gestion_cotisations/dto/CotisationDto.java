@@ -20,6 +20,8 @@ public class CotisationDto {
     @NotNull(message = " Veuillez remplir ce champs ! ")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateDebut;
+
+    @NotNull(message = " Veuillez remplir ce champs ! ")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFin;
 

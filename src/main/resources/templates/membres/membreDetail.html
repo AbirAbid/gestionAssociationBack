@@ -66,9 +66,11 @@
                                     <div class="tab-pane active" id="profile" role="tabpanel">
                                         <div class="p-3">
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Email</label>
+                                                <div class="col-sm-3  col-5">
+
+                                                    <label style="font-weight:bold;">Email :</label>
                                                 </div>
+                                                <span class="fas fa-envelope"></span>
                                                 <div class="col-md-8 col-6"
                                                      th:text="${membre.username}">
 
@@ -76,10 +78,13 @@
                                             </div>
                                             <hr/>
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
+                                                <div class="col-sm-3  col-5">
+
+
                                                     <label style="font-weight:bold;">Date de
-                                                        naissance </label>
+                                                        naissance : </label>
                                                 </div>
+                                                <span class="fas fa-calendar-alt"></span>
                                                 <div class="col-md-8 col-6"
                                                      th:text="${membre.dateNaissance}">
 
@@ -87,19 +92,23 @@
                                             </div>
                                             <hr/>
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
+                                                <div class="col-sm-3  col-5">
                                                     <label style="font-weight:bold;">Gouvernerat de
-                                                        residance</label>
+                                                        residance : </label>
                                                 </div>
+                                                <span class="fas fa-map-marker-alt"></span>
+
                                                 <div class="col-md-8 col-6"
                                                      th:text="${membre.gouvernoratRes}">
                                                 </div>
                                             </div>
                                             <hr/>
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Occupation</label>
+                                                <div class="col-sm-3  col-5">
+                                                    <label style="font-weight:bold;">Occupation :</label>
                                                 </div>
+                                                <span class="fas fa-clipboard"></span>
+
                                                 <div class="col-md-8 col-6"
                                                      th:text="${membre.occupation}">
 
@@ -107,9 +116,11 @@
                                             </div>
                                             <hr/>
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Genre</label>
+                                                <div class="col-sm-3  col-5">
+                                                    <label style="font-weight:bold;">Genre :</label>
                                                 </div>
+                                                <span class="fas fa-transgender"></span>
+
                                                 <div class="col-md-8 col-6"
                                                      th:text="${membre.genre} ">
 
@@ -117,9 +128,11 @@
                                             </div>
                                             <hr/>
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Télèphone</label>
+                                                <div class="col-sm-3 col-5">
+                                                    <label style="font-weight:bold;">Télèphone : </label>
                                                 </div>
+                                                <span class="fas fa-phone-square"></span>
+
                                                 <div class="col-md-8 col-6"
                                                      th:text="${membre.telephone} ">
 
@@ -128,9 +141,11 @@
                                             <hr/>
 
                                             <div class="row">
-                                                <div class="col-sm-3 col-md-2 col-5">
-                                                    <label style="font-weight:bold;">Taux d'engagement </label>
+                                                <div class="col-sm-3  col-5">
+                                                    <label style="font-weight:bold;">Taux d'engagement :</label>
                                                 </div>
+                                                <span class="fas fa-chart-line"></span>
+
                                                 <div class="col-md-8 col-6">
                                                     <div class="progress ">
 

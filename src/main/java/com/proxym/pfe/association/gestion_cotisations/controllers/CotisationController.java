@@ -26,7 +26,7 @@ public class CotisationController {
     public String formulaireAddCotisation(Model model) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        String dateMin = format.format( new Date()   );
+        String dateMin = format.format(new Date());
 
         model.addAttribute("now", dateMin);
 
@@ -34,15 +34,24 @@ public class CotisationController {
 
         return "cotisation/add-cotisation";
     }
+
     /*********************************add cotisation save action******************************/
 
     @PostMapping(value = "/save")
-    public String saveCotisation( @Valid CotisationDto cotisationDto,
-                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String saveCotisation(@Valid CotisationDto cotisationDto,
+                                 BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+                                 @RequestParam(name = "dateDebut", defaultValue = "2020-06-05") String dateDebut
+            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06") String dateFin) {
         try {
-            if (bindingResult.hasErrors()) {
-                System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
-                System.out.println("bindingResult   " + bindingResult);
+            Date dateD = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd").parse(dateFin);
+            if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
+
+                if (dateD.compareTo(dateF) > 0) {
+
+
+                    model.addAttribute("errorDate", "La date saisie est incorrect, la date fin doit etre ultèrieur à la date début");
+                }
 
                 return "cotisation/add-cotisation";
             }
@@ -61,9 +70,9 @@ public class CotisationController {
 
     /*********************************list cotisations******************************/
 
-    @RequestMapping(value = "/listCotisation",method = RequestMethod.GET)
+    @RequestMapping(value = "/listCotisation", method = RequestMethod.GET)
     public String index(Model model) {
-         List<Cotisation> cotisationList = cotisationService.listCotisationServ();
+        List<Cotisation> cotisationList = cotisationService.listCotisationServ();
 
         model.addAttribute("pagesCotisations", cotisationList);
         return "cotisation/list-cotisation";
@@ -72,7 +81,7 @@ public class CotisationController {
     /*********************************delete cotisation******************************/
 
     @RequestMapping(value = "/supprimer")
-    public String supprimer(Long id,RedirectAttributes redirectAttributes) {
+    public String supprimer(Long id, RedirectAttributes redirectAttributes) {
         cotisationService.supprimerCotisationServ(id);
         redirectAttributes.addFlashAttribute("messageDelete", " Votre cotisation a été supprimé avec succès ");
 
@@ -81,13 +90,13 @@ public class CotisationController {
 
     /*********************************update cotisation******************************/
 
-    @RequestMapping(value = "/formulaireUpdate",method = RequestMethod.GET)
+    @RequestMapping(value = "/formulaireUpdate", method = RequestMethod.GET)
 
     public String formulaireUpdate(Model model, Long id) {
         Cotisation cotisation = cotisationService.getOneServ(id);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-        String dateMin = format.format( new Date()   );
+        String dateMin = format.format(new Date());
 
         model.addAttribute("now", dateMin);
         model.addAttribute("cotisation", cotisation);
@@ -97,14 +106,27 @@ public class CotisationController {
     }
 
     @PostMapping(value = "/modifierCotisation")
-    public String modifierSponsor(@Valid Cotisation cotisation, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+    public String modifierSponsor(@Valid Cotisation cotisation, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, @RequestParam(name = "dateDebut", defaultValue = "2020-06-05") String dateDebut
+            , @RequestParam(name = "dateFin", defaultValue = "2020-06-06") String dateFin) {
         try {
-            if (bindingResult.hasErrors()) {
+            Date dateD = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebut);
+            Date dateF = new SimpleDateFormat("yyyy-MM-dd").parse(dateFin);
+
+
+            if (bindingResult.hasErrors() || dateD.compareTo(dateF) > 0) {
+
+
+                if (dateD.compareTo(dateF) > 0) {
+
+
+                    model.addAttribute("errorDate", "La date saisie est incorrect, la date fin doit etre ultèrieur à la date début");
+                }
+
                 System.out.println("bindingResult.hasErrors()" + bindingResult.hasErrors());
 
                 return "cotisation/modifier-cotisation";
             }
-            // pou n'est pas ecraser le meme nom
+
 
             cotisationService.updateCotisationServ(cotisation);
 

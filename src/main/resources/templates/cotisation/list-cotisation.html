@@ -60,6 +60,22 @@
                             </div>
                             <table id="tableCotisation" class="tablesaw  table-bordered table-hover table"
                                    data-tablesaw-mode="stack" style="text-align:center">
+                                <tfoot>
+                                <tr>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de la cotisation
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Montant</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Date Début</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Date Fin</th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Modifier
+                                    </th>
+                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                        Supprimer
+                                    </th>
+                                </tr>
+                                </tfoot>
+
                                 <thead>
                                 <tr>
                                     <th scope="col" data-tablesaw-priority="persist" class="border">Nom de la
@@ -89,38 +105,7 @@
                                     </td>
                                     <td>
 
-                                        <!--  <button type="button" class="btn btn-circle btn-danger" data-toggle="modal"
-                                                  data-target="#exampleModal">
-                                              <i class="fas fa-trash-alt"></i></button>
 
-
-                                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                               aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                              <div class="modal-dialog" role="document">
-                                                  <div class="modal-content">
-                                                      <div class="modal-header">
-                                                          <h5 class="modal-title" id="exampleModalLabel">Effacer
-                                                              Cotisation</h5>
-                                                          <button type="button" class="close" data-dismiss="modal"
-                                                                  aria-label="Close">
-                                                              <span aria-hidden="true">&times;</span>
-                                                          </button>
-                                                      </div>
-                                                      <div class="modal-body">
-                                                          Êtes-vous sûr de supprimer la cotisation?
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                          <button type="button" class="btn btn-secondary"
-                                                                  data-dismiss="modal">Fermer
-                                                          </button>
-                                                          <a type="button"
-                                                             class="btn  btn-danger" title="supprimer"
-                                                             th:href="@{supprimer(id=${cotisation.id})}">
-                                                              Supprimer</a>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>-->
                                         <center><a class="btn btn-circle btn-danger" title="supprimer"
                                                    onclick="return confirm('Êtes-vous sûr  de supprimer la cotisation?')"
                                                    th:href="@{supprimer(id=${cotisation.id})}">
@@ -132,22 +117,7 @@
 
                                 </tr>
                                 </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border">Nom de la
-                                        cotisation
-                                    </th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Montant</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Date Début</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border"> Date Fin</th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                        Modifier
-                                    </th>
-                                    <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                        Supprimer
-                                    </th>
-                                </tr>
-                                </tfoot>
+
                             </table>
 
                         </div>

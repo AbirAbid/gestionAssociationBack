@@ -58,7 +58,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label>Nom de l'entreprise </label>
+                                        <label>Nom de l'entreprise :  <span style="color:red;">*</span></label>
                                         <input type="text" th:field="*{titreSponsor}" class="form-control"
                                         />
                                         <span th:errors="*{titreSponsor}" class="text-danger"> </span>
@@ -66,7 +66,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Email de l'entreprise </label>
+                                        <label>Email de l'entreprise  :  <span style="color:red;">*</span></label>
                                         <input type="text" th:field="*{emailSponsor}" class="form-control"
                                         />
                                         <span th:errors="*{emailSponsor}" class="text-danger"> </span>
@@ -85,7 +85,10 @@
                                         sponsor
                                     </button>
                                 </form>
-                            </div>
+                            <br>
+                            <div style="color:red;">* champs obligatoires</div>
+
+                        </div>
                         </div>
                     </div>
                 </div>

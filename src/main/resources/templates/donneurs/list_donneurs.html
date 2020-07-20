@@ -49,6 +49,27 @@
                             <div th:if="${nb!=0}">
                                 <table id="tableDonneurs" class="tablesaw  table-bordered table-hover table"
                                        data-tablesaw-mode="stack" style="text-align:center">
+                                    <tfoot>
+
+                                    <tr>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Titre bien</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date
+                                            participation
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Quantité
+                                            données
+                                        </th>
+                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
+                                            Envoyer Email
+                                        </th>
+
+
+                                    </tr>
+                                    </tfoot>
                                     <thead>
                                     <tr>
                                         <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
@@ -102,27 +123,7 @@
                                     </tr>
 
                                     </tbody>
-                                    <tfoot>
 
-                                    <tr>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Nom</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Prénom</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Titre bien</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Événement</th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border">Date
-                                            participation
-                                        </th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                            Quantité
-                                            données
-                                        </th>
-                                        <th scope="col" data-tablesaw-priority="persist" class="border" hidden="hidden">
-                                            Envoyer Email
-                                        </th>
-
-
-                                    </tr>
-                                    </tfoot>
                                 </table>
 
 

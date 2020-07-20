@@ -83,7 +83,7 @@ public class EvenementController {
                 if (dateD.compareTo(dateF) > 0) {
 
 
-                    model.addAttribute("errorDate", "Verifier vos dates");
+                    model.addAttribute("errorDate", "La date saisie est incorrect, la date fin doit etre ultèrieur à la date début");
                 }
 
                 List<Sponsor> sponsors = sponsorService.findAllSponsorServ();
@@ -148,9 +148,9 @@ public class EvenementController {
                 /*****************Controle Date ***************************/
                 if (dateD.compareTo(dateF) > 0) {
 
-                    System.out.println("dateD  après dateF");
 
-                    model.addAttribute("errorDate", "Verifier vos dates");
+
+                    model.addAttribute("errorDate", "La date saisie est incorrect, la date fin doit etre ultèrieur à la date début");
                 }
                 /** End Controle Date **/
 

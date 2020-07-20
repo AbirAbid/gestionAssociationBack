@@ -41,7 +41,7 @@
                                 <div class="stepwizard-row setup-panel">
                                     <div class="stepwizard-step">
 
-                                   <a href="#step-1" type="button"
+                                        <a href="#step-1" type="button"
                                            class="btn btn-secondary btn-circle">1</a>
                                         <p>Information événement</p>
                                     </div>
@@ -67,11 +67,11 @@
                                         <div class="col-sm-12">
                                             <div class="card">
 
-                                                <h4 class="card-title">Information événement</h4>
+                                                <h4 class="card-title">Information d'un événement </h4>
 
 
                                                 <div class="form-group mt-5 row">
-                                                    <label class="col-2 col-form-label">Titre</label>
+                                                    <label class="col-2 col-form-label">Titre :  <span style="color:red;">*</span></label>
                                                     <div class="col-10">
                                                         <input type="text" th:field="*{titre}"
                                                                class="form-control" placeholder="Titre"
@@ -146,7 +146,7 @@
                                                 </div>
 
                                                 <div class="form-group mt-5 row">
-                                                    <label class="col-2 col-form-label">Adresse</label>
+                                                    <label class="col-2 col-form-label">Adresse :<span style="color:red;">*</span></label>
                                                     <div class="col-10">
                                                         <input
                                                                 type="text" th:field="*{adresse}"
@@ -160,7 +160,7 @@
 
 
                                                 <div class="form-group mt-5 row">
-                                                    <label class="col-2 col-form-label">Déscription</label>
+                                                    <label class="col-2 col-form-label">Déscription :  <span style="color:red;">*</span></label>
                                                     <div class="col-10">
                                                         <textarea th:field="*{description}" class="form-control"
                                                                   rows="5" placeholder="Déscription">
@@ -172,11 +172,11 @@
 
                                                 <div class="md-form">
 
-                                                    <p th:text="${errorDate}" class="text-danger"></p>
+
 
                                                 </div>
                                                 <div class="form-group mt-5 row">
-                                                    <label class="col-2 col-form-label">Date Début</label>
+                                                    <label class="col-2 col-form-label">Date Début :  <span style="color:red;">*</span></label>
                                                     <div class="col-10">
 
                                                         <input type="datetime-local" class="form-control"
@@ -189,12 +189,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group mt-5 row">
-                                                    <label class="col-2 col-form-label">Date Fin</label>
+                                                    <label class="col-2 col-form-label">Date Fin : <span style="color:red;">*</span></label>
                                                     <div class="col-10">
                                                         <input type="datetime-local" class="form-control" name="dateFin"
                                                                th:field="*{dateFin}" th:value="${dateFin}"
                                                                th:min="${now}"/>
                                                         <p th:errors="*{dateFin}" class="text-danger"></p>
+                                                        <p th:text="${errorDate}" class="text-danger"></p>
 
                                                     </div>
                                                 </div>
@@ -240,7 +241,9 @@
 
                                                                     <input type="number" class="form-control"
                                                                            name="frais"
-                                                                           th:field="*{frais}" min="0">
+                                                                           th:field="*{frais}"
+                                                                           onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                                                    >
 
                                                                 </div>
                                                                 <div class=" col-sm-4"><strong>Dt</strong>
@@ -257,6 +260,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
+                                    <div style="color:red;">* champs obligatoires</div>
+
                                     <button type="button"
                                             class="btn btn-rounded btn-info nextBtn  float-right ">
                                         Continuer
@@ -314,7 +320,7 @@
                                                                min="1"
                                                                onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
 
-                                                        class="form-control">
+                                                               class="form-control">
 
                                                     </div>
                                                     <div class="col form-group">
