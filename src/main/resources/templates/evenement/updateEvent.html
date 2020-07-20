@@ -187,7 +187,7 @@
 
                                                         <input type="datetime-local" class="form-control" name="dateDebut"
                                                                th:field="*{dateDebut}" th:value="${dateDebut}"
-                                                               th:min="${now}" required/>
+                                                               required/>
                                                         <p th:errors="*{dateDebut}" class="text-danger"></p>
 
                                                     </div>
@@ -196,7 +196,7 @@
                                                     <label class="col-2 col-form-label">Date Fin :  <span style="color:red;">*</span></label>
                                                     <div class="col-10">
                                                         <input type="datetime-local" class="form-control" name="dateFin"
-                                                               th:field="*{dateFin}" th:value="${dateFin}"  th:min="${now}" required/>
+                                                               th:field="*{dateFin}" th:value="${dateFin}"  required/>
                                                         <p th:errors="*{dateFin}" class="text-danger"></p>
                                                         <p th:text="${errorDate}" class="text-danger"></p>
 
